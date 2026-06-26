@@ -330,7 +330,7 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
   </div>
 </div>
 
-<!-- ══════════════ PAGE 5: PRICING ══════════════ -->
+<!-- ══════════════ PAGE 5: REGISTRATION DEEP DIVE ══════════════ -->
 <div class="page">
   <div class="page-header">
     <div class="page-header-brand">Olink Technologies</div>
@@ -338,6 +338,131 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
   </div>
   <div class="page-body">
     <div class="sec-label">04</div>
+    <div class="sec-title">Registration System &mdash; In Detail</div>
+
+    <p class="text-body">
+      The registration system is the core of the platform. It handles the entire participant journey from first visit to confirmed registration, collecting all necessary race data and processing payment securely through <strong>Stripe</strong>. Here is exactly how it works:
+    </p>
+
+    <div class="sec-subtitle">Step 1: Participant Arrives at Registration Page</div>
+    <p class="text-sm">A dedicated <strong style="color:#fff;">/register</strong> page with a professional dark hero banner showing race stats (5K distance, Oct 3 date, 500 spots). Below, the participant sees three pricing tiers displayed as selectable cards. Clicking a tier instantly highlights it and updates the price badge on the form.</p>
+
+    <div class="sec-subtitle">Step 2: Tier Selection</div>
+    <p class="text-sm">The system automatically determines which tier is active based on today's date. If the participant visits before Aug 15, Early Bird ($25) is pre-selected. After Aug 16, Standard ($35) becomes the default. After Sep 26, Race Week ($45) activates. The participant can override this and select any available tier.</p>
+
+    <div class="sec-subtitle">Step 3: Registration Form</div>
+    <p class="text-body">The form collects all data needed for race operations:</p>
+    <div class="feature-grid">
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Personal Info</span>
+        <div class="feat-desc">First name, last name, email address, phone number &mdash; used for bib printing and race-day communications</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Race Details</span>
+        <div class="feat-desc">Age (for age-group placement), gender (for M/F awards categories), t-shirt size (for packet preparation)</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Emergency Contact</span>
+        <div class="feat-desc">Name and phone of emergency contact &mdash; required for all road race events per USA Track & Field guidelines</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Selected Tier</span>
+        <div class="feat-desc">Displays as a locked badge showing tier name and price, so the participant confirms what they are paying before checkout</div>
+      </div>
+    </div>
+
+    <div class="sec-subtitle">Step 4: Secure Payment via Stripe</div>
+    <p class="text-body">
+      When the participant clicks <strong>"Proceed to Payment"</strong>, the system performs three actions in sequence:
+    </p>
+    <div style="margin:8px 0;">
+      <div class="flow-step"><div class="flow-num">A</div><div class="flow-text"><strong>Data Saved</strong> &mdash; Registration data is saved to the server immediately (before payment), ensuring no data loss even if payment is abandoned</div></div>
+      <div class="flow-step"><div class="flow-num">B</div><div class="flow-text"><strong>Stripe Session Created</strong> &mdash; A Stripe Checkout session is created with the tier price, participant name, email, and t-shirt size embedded as metadata</div></div>
+      <div class="flow-step"><div class="flow-num">C</div><div class="flow-text"><strong>Redirect to Stripe</strong> &mdash; Participant is redirected to Stripe's PCI-compliant hosted checkout page where they enter card details. Olink/Gada Global never sees or stores card numbers</div></div>
+    </div>
+
+    <div class="sec-subtitle">Step 5: Confirmation</div>
+    <p class="text-sm">After successful payment, Stripe redirects the participant to a branded <strong style="color:#fff;">/success</strong> page showing: confirmation message with their name, a "What's Next" checklist (check email, mark calendar for Oct 3, packet pickup at 6 AM, t-shirt in packet), and links to browse merchandise or return home. Simultaneously, Stripe sends a webhook to the server confirming the payment was completed.</p>
+  </div>
+  <div class="page-footer-bar">
+    <div class="page-footer-text">Olink Technologies &mdash; Confidential</div>
+    <div class="page-num">05</div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE 6: MERCH STORE DEEP DIVE ══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-brand">Olink Technologies</div>
+    <div class="page-header-date">Gada Global 5K &mdash; June 2026</div>
+  </div>
+  <div class="page-body">
+    <div class="sec-label">05</div>
+    <div class="sec-title">Merchandise Store &mdash; In Detail</div>
+
+    <p class="text-body">
+      The merchandise store is a fully functional e-commerce page that allows participants and supporters to purchase branded Gada Global 5K gear. The store is designed to generate additional revenue for the organization while building brand identity and community pride.
+    </p>
+
+    <div class="sec-subtitle">Product Catalog</div>
+    <p class="text-body">Three carefully designed products launch with the platform, each tied to Oromo cultural identity:</p>
+    <table class="data-table">
+      <tr><th>Product</th><th>Material</th><th>Design Details</th><th>Price</th></tr>
+      <tr><td><strong style="color:#fff;">Official Race Tee</strong></td><td>Moisture-wicking performance</td><td>Front: Gada Global 5K logo. Back: Irrecha artwork with event date</td><td class="price">$28</td></tr>
+      <tr><td><strong style="color:#fff;">Irrecha Gold Edition</strong></td><td>Premium cotton blend</td><td>Golden Irrecha sunrise design, Oromo proverb on left sleeve</td><td class="price">$35</td></tr>
+      <tr><td><strong style="color:#fff;">Gada Heritage Hoodie</strong></td><td>Heavyweight fleece</td><td>Odaa tree emblem on chest, "GADA GLOBAL 5K" across back</td><td class="price">$55</td></tr>
+    </table>
+
+    <div class="sec-subtitle">Shopping Experience</div>
+    <div class="feature-grid">
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Size Selection</span>
+        <div class="feat-desc">Visual size buttons (XS through XXL) on each product. Selected size highlights in gold. Cannot add to cart without choosing a size</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Add to Cart</span>
+        <div class="feat-desc">Instant "Added" confirmation feedback. Same product in different sizes treated as separate line items. Cart persists across pages</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Cart Management</span>
+        <div class="feat-desc">Full cart summary with +/- quantity buttons, per-item subtotals, running grand total, and remove item option</div>
+      </div>
+      <div class="feat-card">
+        <span class="feat-dot"></span><span class="feat-name">Cart Badge</span>
+        <div class="feat-desc">Navbar cart icon shows live item count. Visible on every page so the shopper always knows their cart status</div>
+      </div>
+    </div>
+
+    <div class="sec-subtitle">Checkout &amp; Fulfillment Flow</div>
+    <div style="margin:10px 0;">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>Cart Review</strong> &mdash; Shopper reviews all items, sizes, quantities, and total price in the cart summary panel</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>Checkout</strong> &mdash; Clicking "Checkout" sends all cart items to the server, which creates a Stripe Checkout session with each product as a line item</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>Shipping Address</strong> &mdash; Stripe collects the shipping address (US only) on the checkout page &mdash; no shipping form needed on our site</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>Payment</strong> &mdash; Card payment processed by Stripe. Supports all major cards, Apple Pay, and Google Pay</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-text"><strong>Order Confirmation</strong> &mdash; Redirected to branded success page. Stripe webhook logs the order server-side for fulfillment</div></div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hl-title">Revenue Potential</div>
+      <div class="hl-text">
+        With 500 participants and an estimated 60% merch purchase rate, the store can generate <strong style="color:var(--gold);">$4,200 &mdash; $8,400+</strong> in additional revenue beyond registration fees. T-shirts can also be sold to non-participants (friends, family, community members) through the public shop page.
+      </div>
+    </div>
+  </div>
+  <div class="page-footer-bar">
+    <div class="page-footer-text">Olink Technologies &mdash; Confidential</div>
+    <div class="page-num">06</div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGE 7: PRICING ══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-brand">Olink Technologies</div>
+    <div class="page-header-date">Gada Global 5K &mdash; June 2026</div>
+  </div>
+  <div class="page-body">
+    <div class="sec-label">06</div>
     <div class="sec-title">Pricing &amp; Investment</div>
 
     <div class="sec-subtitle">Phase 1 &mdash; Complete Event Platform</div>
@@ -384,18 +509,18 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
   </div>
   <div class="page-footer-bar">
     <div class="page-footer-text">Olink Technologies &mdash; Confidential</div>
-    <div class="page-num">05</div>
+    <div class="page-num">07</div>
   </div>
 </div>
 
-<!-- ══════════════ PAGE 6: TIMELINE + TERMS + SIGNATURE ══════════════ -->
+<!-- ══════════════ PAGE 8: TIMELINE + TERMS + SIGNATURE ══════════════ -->
 <div class="page">
   <div class="page-header">
     <div class="page-header-brand">Olink Technologies</div>
     <div class="page-header-date">Gada Global 5K &mdash; June 2026</div>
   </div>
   <div class="page-body">
-    <div class="sec-label">05</div>
+    <div class="sec-label">07</div>
     <div class="sec-title">Timeline &amp; Terms</div>
 
     <div class="sec-subtitle">Project Timeline</div>
@@ -437,7 +562,7 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
   </div>
   <div class="page-footer-bar">
     <div class="page-footer-text">Olink Technologies &mdash; Confidential</div>
-    <div class="page-num">06</div>
+    <div class="page-num">08</div>
   </div>
 </div>
 
