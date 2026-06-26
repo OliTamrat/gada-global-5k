@@ -205,9 +205,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
-              { img: "https://images.unsplash.com/photo-1585108358264-bc01b931420e?w=600&q=80", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The race follows the paved parkway through the heart of this urban wilderness.", stat: "1,754 acres" },
-              { img: "https://images.unsplash.com/photo-1617581629397-a72507c3de9e?w=600&q=80", title: "Washington Monument", desc: "The iconic 555-foot obelisk stands as a beacon visible from the course. Runners pass through parkland just miles from this national treasure.", stat: "555 ft tall" },
-              { img: "https://images.unsplash.com/photo-1569700801292-e6c56c6a9b7e?w=600&q=80", title: "Lincoln Memorial", desc: "Abraham Lincoln's memorial sits at the western end of the National Mall, a short distance from where Rock Creek meets the Potomac River.", stat: "Est. 1922" },
+              { img: "https://images.unsplash.com/photo-1558216824-1d3e763e7f96?w=600&q=80", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The race follows the paved parkway through the heart of this urban wilderness.", stat: "1,754 acres" },
+              { img: "https://images.unsplash.com/photo-1501466044931-62695aada8e9?w=600&q=80", title: "Washington Monument", desc: "The iconic 555-foot obelisk stands as a beacon visible from the course. Runners pass through parkland just miles from this national treasure.", stat: "555 ft tall" },
+              { img: "https://images.unsplash.com/photo-1585108358264-bc01b931420e?w=600&q=80", title: "Lincoln Memorial", desc: "Abraham Lincoln\u2019s memorial sits at the western end of the National Mall, a short distance from where Rock Creek meets the Potomac River.", stat: "Est. 1922" },
             ].map((landmark) => (
               <ScrollReveal key={landmark.title}>
                 <div className="rounded-2xl overflow-hidden bg-white border border-charcoal/5 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all">
@@ -318,6 +318,81 @@ export default function Home() {
             ))}
           </div>
         </ScrollReveal>
+      </section>
+
+      {/* ══ COMMUNITY — ALL ARE WELCOME ══ */}
+      <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal className="text-center mb-16">
+            <span className="text-[10px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Everyone is Welcome</span>
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
+              One Race, Every Community
+            </h2>
+            <p className="text-[15px] leading-[1.85] text-charcoal/75 max-w-[560px] mx-auto">
+              The Gada Global 5K is open to all runners, walkers, and supporters regardless of background. While we celebrate Oromo heritage, this event is designed to bring together the full diversity of Washington DC &mdash; because running has no borders.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            {[
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
+                title: "DC Running Community",
+                desc: "Partner with local running clubs like DC Road Runners, Pacers, and Georgetown Running Company to bring experienced runners of all backgrounds to the course."
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>,
+                title: "Local Neighborhoods",
+                desc: "Engage Adams Morgan, Columbia Heights, Dupont Circle, and Georgetown communities through flyers, local business partnerships, and neighborhood outreach."
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+                title: "Schools & Universities",
+                desc: "Invite cross-country teams and student organizations from Howard University, Georgetown, GW, and local high schools. Student discount registration available."
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>,
+                title: "African Diaspora Communities",
+                desc: "Connect with Ethiopian, Eritrean, Somali, Kenyan, and broader African community organizations across the DMV area for cross-cultural participation."
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>,
+                title: "Social Media & Influencers",
+                desc: "Partner with DC fitness influencers, running bloggers, and community pages across Instagram, TikTok, and Facebook to reach 50,000+ local followers."
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>,
+                title: "Corporate & Charity Partners",
+                desc: "Offer corporate team registration packages and partner with local nonprofits. Companies can sponsor bibs, water stations, or the cultural festival stage."
+              },
+            ].map((item) => (
+              <ScrollReveal key={item.title}>
+                <div className="bg-white rounded-2xl p-6 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
+                  <div className="w-12 h-12 rounded-xl bg-yellow/12 flex items-center justify-center text-gold-dim mb-4">{item.icon}</div>
+                  <h4 className="font-[family-name:var(--font-heading)] text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
+                  <p className="text-[13px] text-charcoal/65 leading-relaxed">{item.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal>
+            <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white text-center">
+              <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Bring Your Crew</h3>
+              <p className="text-[14px] text-white/70 leading-relaxed max-w-[520px] mx-auto mb-6">
+                Group registration discounts available for teams of 10+. Running clubs, church groups, corporate teams, and school organizations are all welcome. The post-race Irrecha festival is free and open to spectators &mdash; bring your family and friends.
+              </p>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                  Register Your Team
+                </Link>
+                <a href="mailto:info@gadaglobal5k.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
+                  Partnership Inquiry
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* ══ CTA ══ */}
