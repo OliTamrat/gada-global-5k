@@ -14,116 +14,117 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
 
 @media screen{
   html,body{width:100%;min-height:100vh;}
-  body{display:flex;flex-direction:column;align-items:center;padding:24px 0;gap:20px;background:#060606;}
-  .page{width:min(210mm,100vw);min-height:unset;page-break-after:unset;}
+  body{display:flex;flex-direction:column;align-items:center;padding:32px 0;gap:28px;background:#050505;}
+  .page{width:min(210mm,100vw);min-height:297mm;page-break-after:unset;box-shadow:0 8px 60px rgba(0,0,0,0.6);border:1px solid #1a1a1a;}
 }
 
-/* ── Colors ── */
-:root{--gold:#E8B930;--gold-dim:#C49B20;--gold-bg:rgba(232,185,48,0.08);--gold-border:rgba(232,185,48,0.2);--dark:#0A0A0A;--surface:#111;--card:#141210;--border:#1e1e1e;--gray:#888;--light-gray:#ccc;--yellow:#F5C842;}
+:root{--gold:#E8B930;--gold-dim:#C49B20;--gold-bg:rgba(232,185,48,0.08);--gold-border:rgba(232,185,48,0.2);--border:#222;--surface:#131313;--yellow:#F5C842;}
 
-/* ── COVER ── */
+/* ══ COVER ══ */
 .cover{justify-content:space-between;}
-.cover-glow{position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,185,48,0.1) 0%,transparent 65%);pointer-events:none;}
-.cover-glow2{position:absolute;bottom:-60px;left:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(232,185,48,0.04) 0%,transparent 65%);pointer-events:none;}
-.cover-top-line{height:3px;background:linear-gradient(90deg,var(--gold) 0%,rgba(232,185,48,0.15) 100%);flex-shrink:0;}
-.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 72px;}
-.cover-bar{width:56px;height:3px;background:var(--gold);margin-bottom:48px;}
-.cover-brand{font-family:'DM Sans',sans-serif;font-size:72px;font-weight:900;letter-spacing:2px;color:var(--gold);line-height:0.9;text-transform:uppercase;}
-.cover-brand-sub{font-family:'DM Sans',sans-serif;font-size:72px;font-weight:900;letter-spacing:2px;color:#fff;line-height:0.9;text-transform:uppercase;}
-.cover-sub{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:400;letter-spacing:12px;color:#666;text-transform:uppercase;margin-top:14px;}
-.cover-tagline{font-size:11px;letter-spacing:5px;color:#444;text-transform:uppercase;margin-top:20px;}
-.cover-divider{width:100%;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.08),transparent);margin:44px 0 36px;}
-.cover-badge{display:inline-flex;align-items:center;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:4px;padding:9px 18px;margin-bottom:18px;}
-.cover-badge span{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;}
-.cover-meta{font-size:13px;color:#555;letter-spacing:0.5px;line-height:1.8;}
-.cover-footer{padding:24px 72px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
-.cover-footer-l{font-size:9px;color:#333;letter-spacing:3px;text-transform:uppercase;}
-.cover-footer-r{font-size:11px;color:#444;}
+.cover-glow{position:absolute;top:-100px;right:-100px;width:550px;height:550px;background:radial-gradient(circle,rgba(232,185,48,0.12) 0%,transparent 60%);pointer-events:none;}
+.cover-glow2{position:absolute;bottom:-80px;left:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(232,185,48,0.05) 0%,transparent 60%);pointer-events:none;}
+.cover-top-line{height:4px;background:linear-gradient(90deg,var(--gold) 0%,rgba(232,185,48,0.1) 100%);flex-shrink:0;}
+.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 80px;}
+.cover-bar{width:60px;height:4px;background:var(--gold);margin-bottom:56px;}
+.cover-brand{font-family:'DM Sans',sans-serif;font-size:88px;font-weight:900;letter-spacing:3px;color:var(--gold);line-height:0.88;text-transform:uppercase;}
+.cover-brand-sub{font-family:'DM Sans',sans-serif;font-size:88px;font-weight:900;letter-spacing:3px;color:#fff;line-height:0.88;text-transform:uppercase;margin-top:4px;}
+.cover-sub{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:500;letter-spacing:14px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-top:24px;}
+.cover-tagline{font-size:13px;letter-spacing:6px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-top:16px;}
+.cover-divider{width:100%;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.1),transparent);margin:56px 0 40px;}
+.cover-badge{display:inline-flex;align-items:center;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:4px;padding:10px 22px;margin-bottom:24px;}
+.cover-badge span{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;font-weight:600;}
+.cover-meta{font-size:14px;color:rgba(255,255,255,0.55);letter-spacing:0.3px;line-height:2;}
+.cover-meta strong{color:rgba(255,255,255,0.85);}
+.cover-meta .brand-gold{color:var(--gold);}
+.cover-footer{padding:28px 80px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.cover-footer-l{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase;}
+.cover-footer-r{font-size:12px;color:rgba(255,255,255,0.4);}
 .cover-footer-r span{color:var(--gold);}
 
-/* ── CONTENT PAGES ── */
-.page-header{padding:32px 60px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:1px solid var(--border);padding-bottom:20px;}
-.page-header-brand{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:5px;color:#333;text-transform:uppercase;font-weight:700;}
-.page-header-date{font-size:10px;color:#333;letter-spacing:2px;}
-.page-body{flex:1;padding:40px 60px 40px;}
-.page-footer-bar{padding:16px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;margin-top:auto;}
-.page-footer-text{font-size:9px;color:#333;letter-spacing:2px;text-transform:uppercase;}
-.page-num{font-size:10px;color:var(--gold);letter-spacing:1px;}
+/* ══ CONTENT PAGES ══ */
+.page-header{padding:28px 60px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:1px solid var(--border);padding-bottom:18px;}
+.page-header-brand{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:5px;color:rgba(255,255,255,0.4);text-transform:uppercase;font-weight:700;}
+.page-header-date{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;}
+.page-body{flex:1;padding:36px 60px 36px;}
+.page-footer-bar{padding:18px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;margin-top:auto;}
+.page-footer-text{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;}
+.page-num{font-size:11px;color:var(--gold);letter-spacing:1px;font-weight:600;}
 
-/* ── SECTION HEADER ── */
-.sec-label{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:600;}
-.sec-title{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:800;letter-spacing:1px;color:#fff;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:28px;line-height:1.2;}
-.sec-subtitle{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;margin-top:24px;letter-spacing:0.5px;}
+/* ══ SECTIONS ══ */
+.sec-label{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:600;}
+.sec-title{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:800;letter-spacing:1px;color:#fff;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:24px;line-height:1.2;}
+.sec-subtitle{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;margin-top:22px;letter-spacing:0.3px;}
 
-/* ── TEXT BLOCKS ── */
-.text-body{font-size:12px;color:#777;line-height:1.85;margin-bottom:16px;}
-.text-body strong{color:#ccc;font-weight:600;}
-.text-sm{font-size:11px;color:#666;line-height:1.7;}
+/* ══ TEXT ══ */
+.text-body{font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.9;margin-bottom:14px;}
+.text-body strong{color:rgba(255,255,255,0.9);font-weight:600;}
+.text-sm{font-size:11.5px;color:rgba(255,255,255,0.55);line-height:1.75;}
 
-/* ── TABLE ── */
-.data-table{width:100%;border-collapse:collapse;margin:16px 0;}
+/* ══ TABLE ══ */
+.data-table{width:100%;border-collapse:collapse;margin:14px 0;}
 .data-table th{text-align:left;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);font-weight:600;}
-.data-table td{font-size:11.5px;color:#aaa;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.data-table td{font-size:12px;color:rgba(255,255,255,0.7);padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.04);}
 .data-table tr:last-child td{border-bottom:none;}
 .data-table .price{color:var(--gold);font-weight:700;font-size:13px;}
 .data-table .total-row td{border-top:2px solid var(--gold-border);color:#fff;font-weight:700;font-size:13px;}
 
-/* ── FEATURE CARDS ── */
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+/* ══ FEATURE CARDS ══ */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
 .feat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 14px;}
 .feat-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;display:inline-block;margin-right:8px;}
 .feat-name{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:#fff;display:inline;letter-spacing:0.3px;}
-.feat-desc{font-size:10.5px;color:#555;line-height:1.6;margin-top:6px;}
+.feat-desc{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-top:6px;}
 
-/* ── THREE COL ── */
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0;}
+/* ══ FLOW ══ */
+.flow-step{display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;}
+.flow-num{width:24px;height:24px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#000;flex-shrink:0;}
+.flow-text{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;padding-top:2px;}
+.flow-text strong{color:rgba(255,255,255,0.9);}
 
-/* ── FLOW DIAGRAM ── */
-.flow-step{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px;}
-.flow-num{width:22px;height:22px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#000;flex-shrink:0;}
-.flow-text{font-size:11px;color:#888;line-height:1.6;padding-top:2px;}
-.flow-text strong{color:#ccc;}
-.flow-arrow{text-align:center;color:#333;font-size:10px;margin:2px 0 2px 4px;}
-
-/* ── CHECKLIST ── */
-.check-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+/* ══ CHECKLIST ══ */
+.check-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
 .check-row:last-child{border-bottom:none;}
-.check-dot{width:16px;height:16px;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:9px;font-weight:700;}
-.check-text{font-size:11.5px;color:#999;}
+.check-dot{width:18px;height:18px;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:10px;font-weight:700;}
+.check-text{font-size:12px;color:rgba(255,255,255,0.7);}
 
-/* ── TIMELINE ── */
-.tl-row{display:flex;gap:16px;margin-bottom:10px;}
-.tl-date{min-width:100px;font-size:11px;color:var(--gold);font-weight:600;text-align:right;padding-top:2px;}
+/* ══ TIMELINE ══ */
+.tl-row{display:flex;gap:16px;margin-bottom:12px;}
+.tl-date{min-width:100px;font-size:11.5px;color:var(--gold);font-weight:600;text-align:right;padding-top:2px;}
 .tl-line{width:2px;background:var(--border);position:relative;flex-shrink:0;}
 .tl-line::before{content:'';position:absolute;top:4px;left:-3px;width:8px;height:8px;background:var(--gold);border-radius:50%;}
-.tl-content{font-size:11.5px;color:#999;padding-top:1px;flex:1;}
+.tl-content{font-size:12px;color:rgba(255,255,255,0.65);padding-top:1px;flex:1;}
 .tl-content strong{color:#fff;font-weight:600;}
 
-/* ── SIGNATURE ── */
-.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px;}
-.sig-box{border-top:1px solid var(--border);padding-top:16px;}
-.sig-line{width:100%;height:1px;background:var(--border);margin-bottom:10px;margin-top:40px;}
-.sig-name{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;}
-.sig-role{font-size:10px;color:#555;letter-spacing:1px;}
-.sig-date{font-size:10px;color:#444;margin-top:8px;}
+/* ══ SIGNATURE ══ */
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px;}
+.sig-box{}
+.sig-line{width:100%;height:1px;background:rgba(255,255,255,0.15);margin-bottom:12px;margin-top:48px;}
+.sig-name{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;}
+.sig-role{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.5px;margin-top:2px;}
+.sig-date{font-size:11px;color:rgba(255,255,255,0.35);margin-top:10px;}
 
-/* ── COLOR SWATCHES ── */
-.swatch-row{display:flex;gap:8px;margin:16px 0;}
+/* ══ SWATCHES ══ */
+.swatch-row{display:flex;gap:8px;margin:14px 0;}
 .swatch{flex:1;border-radius:6px;overflow:hidden;}
 .swatch-color{height:32px;}
 .swatch-info{background:var(--surface);border:1px solid var(--border);border-top:none;padding:6px 8px;}
-.swatch-name{font-size:8px;letter-spacing:2px;color:#555;text-transform:uppercase;}
+.swatch-name{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;}
 .swatch-hex{font-size:10px;color:var(--gold);font-family:monospace;}
 
-/* ── HIGHLIGHT BOX ── */
-.highlight-box{background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;padding:16px 20px;margin:16px 0;}
+/* ══ HIGHLIGHT BOX ══ */
+.highlight-box{background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;padding:18px 22px;margin:16px 0;}
 .highlight-box .hl-title{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:8px;}
-.highlight-box .hl-text{font-size:12px;color:#999;line-height:1.7;}
+.highlight-box .hl-text{font-size:12.5px;color:rgba(255,255,255,0.7);line-height:1.75;}
 
-/* ── TECH STACK PILLS ── */
+/* ══ TECH PILLS ══ */
 .tech-pills{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;}
-.tech-pill{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:10px;color:#999;letter-spacing:0.5px;}
+.tech-pill{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:10.5px;color:rgba(255,255,255,0.6);letter-spacing:0.5px;}
 .tech-pill.primary{border-color:var(--gold-border);color:var(--gold);background:var(--gold-bg);}
+
+/* ══ TERMS ══ */
+.terms-text{font-size:12px;color:rgba(255,255,255,0.55);line-height:2;margin:8px 0 24px;}
+.terms-text strong{color:rgba(255,255,255,0.85);font-weight:600;}
 </style>
 </head>
 <body>
@@ -142,10 +143,10 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
     <div class="cover-divider"></div>
     <div class="cover-badge"><span>Event Management Platform</span></div>
     <div class="cover-meta">
-      Prepared for: <strong style="color:#ccc;">Gada Global Organization</strong><br>
-      Prepared by: <strong style="color:var(--gold);">Olink Technologies LLC</strong><br>
-      Date: June 26, 2026 &nbsp; | &nbsp; Validity: 30 Days<br>
-      Event Date: <strong style="color:#ccc;">October 3, 2026 &mdash; Rock Creek Parkway, Washington DC</strong>
+      Prepared for: <strong>Gada Global Organization</strong><br>
+      Prepared by: <strong class="brand-gold">Olink Technologies LLC</strong><br>
+      Date: June 26, 2026 &nbsp;&bull;&nbsp; Validity: 30 Days<br>
+      Event: <strong>October 3, 2026 &mdash; Rock Creek Parkway, Washington DC</strong>
     </div>
   </div>
   <div class="cover-footer">
@@ -298,7 +299,7 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
     </table>
 
     <div class="sec-subtitle">What Every Registration Includes</div>
-    <div style="margin:10px 0;">
+    <div style="margin:8px 0;">
       <div class="check-row"><div class="check-dot">+</div><div class="check-text">Official race bib with timing chip</div></div>
       <div class="check-row"><div class="check-dot">+</div><div class="check-text">Gada Global 5K finisher medal</div></div>
       <div class="check-row"><div class="check-dot">+</div><div class="check-text">Official race t-shirt (size selected during registration)</div></div>
@@ -349,7 +350,7 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
       <tr><td>API Layer</td><td>Registration, checkout, webhook endpoints</td><td>Included</td></tr>
       <tr><td>Design System</td><td>Custom sports design, responsive, SVG icons</td><td>Included</td></tr>
       <tr><td>Deployment Setup</td><td>Vercel config, env vars, Stripe guidance</td><td>Included</td></tr>
-      <tr class="total-row"><td colspan="2"><strong>Phase 1 Total</strong></td><td class="price" style="font-size:16px;">$3,500</td></tr>
+      <tr class="total-row"><td colspan="2"><strong>Phase 1 Total</strong></td><td class="price" style="font-size:18px;">$4,000</td></tr>
     </table>
 
     <div class="sec-subtitle">Phase 2 &mdash; Admin &amp; Operations (Quoted Separately)</div>
@@ -366,7 +367,7 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
     <div class="highlight-box" style="margin-top:20px;">
       <div class="hl-title">Hosting &amp; Infrastructure</div>
       <div class="hl-text">
-        Website Hosting: Vercel ($0-20/month) &nbsp; | &nbsp; Payments: Stripe (2.9% + $0.30/txn) &nbsp; | &nbsp; Domain: ~$12/year<br>
+        Website Hosting: Vercel ($0-20/month) &nbsp;&bull;&nbsp; Payments: Stripe (2.9% + $0.30/txn) &nbsp;&bull;&nbsp; Domain: ~$12/year<br>
         <strong style="color:var(--gold);">Estimated monthly cost: $0-20 + Stripe fees</strong>
       </div>
     </div>
@@ -408,15 +409,15 @@ body{background:#0A0A0A;color:#fff;font-family:'Inter',sans-serif;-webkit-print-
     </div>
 
     <div class="sec-subtitle">Terms &amp; Conditions</div>
-    <div class="text-sm" style="margin:8px 0 24px;line-height:1.9;">
-      <strong style="color:#ccc;">1. Payment:</strong> 50% deposit before development. Remaining 50% upon delivery and approval.<br>
-      <strong style="color:#ccc;">2. Revisions:</strong> Up to 2 rounds of design revisions included. Additional quoted separately.<br>
-      <strong style="color:#ccc;">3. Hosting:</strong> Client responsible for Vercel hosting ($0-20/mo) and Stripe transaction fees.<br>
-      <strong style="color:#ccc;">4. Stripe:</strong> Client creates own Stripe account. Olink provides setup guidance.<br>
-      <strong style="color:#ccc;">5. Content:</strong> Client provides event photos, video, and final copy. Olink provides placeholders.<br>
-      <strong style="color:#ccc;">6. IP:</strong> Upon full payment, all source code and assets become property of Gada Global.<br>
-      <strong style="color:#ccc;">7. Confidentiality:</strong> Both parties agree to keep terms confidential.<br>
-      <strong style="color:#ccc;">8. Annual Reuse:</strong> Platform designed for reuse at future events with minimal reconfiguration.
+    <div class="terms-text">
+      <strong>1. Payment:</strong> 50% deposit before development. Remaining 50% upon delivery and approval.<br>
+      <strong>2. Revisions:</strong> Up to 2 rounds of design revisions included. Additional quoted separately.<br>
+      <strong>3. Hosting:</strong> Client responsible for Vercel hosting ($0-20/mo) and Stripe transaction fees.<br>
+      <strong>4. Stripe:</strong> Client creates own Stripe account. Olink provides setup guidance.<br>
+      <strong>5. Content:</strong> Client provides event photos, video, and final copy. Olink provides placeholders.<br>
+      <strong>6. IP:</strong> Upon full payment, all source code and assets become property of Gada Global.<br>
+      <strong>7. Confidentiality:</strong> Both parties agree to keep terms confidential.<br>
+      <strong>8. Annual Reuse:</strong> Platform designed for reuse at future events with minimal reconfiguration.
     </div>
 
     <div class="sig-grid">
