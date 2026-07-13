@@ -21,6 +21,9 @@ export function WordRotator({
   const [displayed, setDisplayed] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Find the longest word to reserve space
+  const longestWord = words.reduce((a, b) => (a.length > b.length ? a : b), "");
+
   useEffect(() => {
     const word = words[wordIndex];
 
@@ -52,9 +55,16 @@ export function WordRotator({
   }, [displayed, isDeleting, wordIndex, words, holdDuration, typeSpeed, deleteSpeed]);
 
   return (
-    <span className={`inline-block ${className}`}>
-      {displayed}
-      <span className="inline-block w-[3px] h-[0.85em] bg-yellow ml-0.5 align-middle animate-[blink_1s_step-end_infinite]" />
+    <span className={`inline-grid ${className}`}>
+      {/* Invisible longest word to reserve width — prevents layout shift */}
+      <span className="col-start-1 row-start-1 invisible" aria-hidden="true">
+        {longestWord}
+      </span>
+      {/* Visible typed text */}
+      <span className="col-start-1 row-start-1">
+        {displayed}
+        <span className="inline-block w-[3px] h-[0.85em] bg-yellow ml-0.5 align-middle animate-[blink_1s_step-end_infinite]" />
+      </span>
     </span>
   );
 }

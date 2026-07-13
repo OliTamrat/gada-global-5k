@@ -56,10 +56,15 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
   return (
     <ScrollReveal>
       <div className="rounded-3xl overflow-hidden dark-card hover:-translate-y-1.5 hover:border-yellow/20 transition-all">
-        <div className={`h-[260px] relative flex items-center justify-center text-6xl bg-gradient-to-br ${product.color}`}>
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60"><path d="M20.38 3.46L16 2 12 5 8 2 3.62 3.46a2 2 0 00-1.34 1.63l-.38 3.42L5 11v10h14V11l3.1-2.49-.38-3.42a2 2 0 00-1.34-1.63z"/></svg>
+        <div className={`h-[300px] relative overflow-hidden bg-gradient-to-br ${product.color}`}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: product.imagePosition || "center" }}
+          />
           {product.tag && (
-            <span className="absolute top-4 right-4 yellow-card px-3.5 py-1 rounded-lg text-[10px] font-black tracking-wider uppercase">
+            <span className="absolute top-4 right-4 yellow-card px-3.5 py-1 rounded-lg text-[10px] font-black tracking-wider uppercase z-10">
               {product.tag}
             </span>
           )}
@@ -154,8 +159,8 @@ function CartSummary() {
               key={`${item.id}-${item.size}`}
               className="flex items-center gap-4 bg-white/3 rounded-xl p-4"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 flex items-center justify-center text-xl shrink-0">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60"><path d="M20.38 3.46L16 2 12 5 8 2 3.62 3.46a2 2 0 00-1.34 1.63l-.38 3.42L5 11v10h14V11l3.1-2.49-.38-3.42a2 2 0 00-1.34-1.63z"/></svg>
+              <div className="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-br from-yellow/15 to-yellow/5 shrink-0">
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-[13px] font-bold text-white truncate">{item.name}</div>

@@ -28,7 +28,7 @@ export function Navbar() {
     { href: "/#event", label: "Event" },
     { href: "/register", label: "Register" },
     { href: "/shop", label: "Shop" },
-    { href: "/#schedule", label: "Schedule" },
+    { href: "/race", label: "Live Results" },
   ];
 
   return (

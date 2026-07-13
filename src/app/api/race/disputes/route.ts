@@ -1,0 +1,44 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getDisputes, createDispute, resolveDispute } from "@/lib/race";
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  return NextResponse.json({ disputes: getDisputes() });
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { action } = body;
+
+    if (action === "create") {
+      const { bib, reason, evidence } = body;
+      if (!bib || !reason) {
+        return NextResponse.json({ error: "Missing bib or reason" }, { status: 400 });
+      }
+      const result = createDispute({ bib: Number(bib), reason, evidence });
+      if (!result.success) {
+        return NextResponse.json({ error: result.error }, { status: 400 });
+      }
+      return NextResponse.json({ success: true, dispute: result.dispute });
+    }
+
+    if (action === "resolve") {
+      const { disputeId, status, resolution, adjustedMs } = body;
+      if (!disputeId || !status || !resolution) {
+        return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+      }
+      const result = resolveDispute(disputeId, status, resolution, adjustedMs);
+      if (!result.success) {
+        return NextResponse.json({ error: result.error }, { status: 400 });
+      }
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+  } catch (error) {
+    console.error("Dispute error:", error);
+    return NextResponse.json({ error: "Failed" }, { status: 500 });
+  }
+}

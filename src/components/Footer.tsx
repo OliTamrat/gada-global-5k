@@ -1,5 +1,37 @@
 import Link from "next/link";
 
+const socials = [
+  {
+    label: "Facebook",
+    href: "#",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "#",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "X",
+    href: "#",
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+];
+
 export function Footer() {
   return (
     <footer className="bg-charcoal text-white px-6 md:px-16 lg:px-20 py-16">
@@ -27,9 +59,9 @@ export function Footer() {
             {
               title: "Shop",
               links: [
-                { href: "/shop", label: "Race Tee" },
-                { href: "/shop", label: "Gold Edition" },
-                { href: "/shop", label: "Heritage Hoodie" },
+                { href: "/shop", label: "Heritage Tee" },
+                { href: "/shop", label: "Black & Gold Tee" },
+                { href: "/shop", label: "Race Day Combo" },
               ],
             },
             {
@@ -41,11 +73,11 @@ export function Footer() {
             },
           ].map((col) => (
             <div key={col.title}>
-              <h4 className="text-[10px] font-bold tracking-[3px] uppercase text-white/80 mb-5">{col.title}</h4>
+              <h4 className="text-[11px] font-bold tracking-[3px] uppercase text-white/80 mb-5">{col.title}</h4>
               <ul className="list-none space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-white/60 text-[13px] hover:text-yellow transition-colors no-underline">
+                    <Link href={link.href} className="text-white/55 text-[13px] hover:text-yellow transition-colors no-underline">
                       {link.label}
                     </Link>
                   </li>
@@ -55,16 +87,17 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/50">
-          <span>&copy; 2026 Gada Global. All rights reserved.</span>
+        <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] text-white/50">
+          <span>&copy; 2026 Gada Global Inc. All rights reserved.</span>
           <div className="flex gap-3">
-            {["f", "IG", "X"].map((icon) => (
+            {socials.map((s) => (
               <a
-                key={icon}
-                href="#"
-                className="w-8 h-8 rounded-lg bg-white/8 text-white/50 flex items-center justify-center hover:bg-yellow hover:text-charcoal transition-all no-underline text-xs font-bold"
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="w-9 h-9 rounded-lg bg-white/8 text-white/50 flex items-center justify-center hover:bg-yellow hover:text-charcoal transition-all no-underline"
               >
-                {icon}
+                {s.icon}
               </a>
             ))}
           </div>

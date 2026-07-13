@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { tiers, type RegistrationData } from "@/lib/registration";
 import fs from "fs/promises";
 import path from "path";
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     await saveRegistration(data);
 
     // Create Stripe Checkout session
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       payment_method_types: ["card"],
       customer_email: data.email,
       line_items: [

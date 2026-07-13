@@ -2,11 +2,8 @@
 
 import { useRef, useEffect, useState } from "react";
 
-// Video sources — browser fetches these directly (CDN allows <video> src but blocks CLI curl)
-// First source that loads wins. Drop a local file at /video/hero-run.mp4 to override.
 const VIDEO_SOURCES = [
   "/video/hero-run.mp4",
-  "https://videos.pexels.com/video-files/3209828/3209828-sd_640_360_25fps.mp4",
 ];
 
 const FALLBACK_IMAGE =
@@ -15,7 +12,6 @@ const FALLBACK_IMAGE =
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [srcIndex, setSrcIndex] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -23,29 +19,12 @@ export function HeroVideo() {
 
     const handleCanPlay = () => {
       setVideoLoaded(true);
-      video.play().catch(() => setVideoLoaded(false));
-    };
-
-    const handleError = () => {
-      // Try next source
-      if (srcIndex < VIDEO_SOURCES.length - 1) {
-        setSrcIndex((i) => i + 1);
-      } else {
-        setVideoLoaded(false);
-      }
+      video.play().catch(() => {});
     };
 
     video.addEventListener("canplaythrough", handleCanPlay);
-    video.addEventListener("error", handleError);
-
-    // Reset and load new source
-    video.load();
-
-    return () => {
-      video.removeEventListener("canplaythrough", handleCanPlay);
-      video.removeEventListener("error", handleError);
-    };
-  }, [srcIndex]);
+    return () => video.removeEventListener("canplaythrough", handleCanPlay);
+  }, []);
 
   return (
     <>
@@ -59,11 +38,14 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
+        autoPlay
       >
-        <source src={VIDEO_SOURCES[srcIndex]} type="video/mp4" />
+        {VIDEO_SOURCES.map((src) => (
+          <source key={src} src={src} type="video/mp4" />
+        ))}
       </video>
 
-      {/* Fallback image */}
+      {/* Fallback image — always visible until video loads */}
       <div
         className={`absolute inset-0 transition-opacity duration-1000 ${
           videoLoaded ? "opacity-0" : "opacity-30"
