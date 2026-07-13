@@ -313,9 +313,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
-              { img: "https://images.unsplash.com/photo-1565791380713-1756b9a05343?w=600&q=80", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The race follows the paved parkway through the heart of this urban wilderness.", stat: "1,754 acres" },
-              { img: "https://images.unsplash.com/photo-1501466044931-62695aada8e9?w=600&q=80", title: "Washington Monument", desc: "The iconic 555-foot obelisk stands as a beacon visible from the course. Runners pass through parkland just miles from this national treasure.", stat: "555 ft tall" },
-              { img: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=600&q=80", title: "Lincoln Memorial", desc: "Abraham Lincoln\u2019s memorial sits at the western end of the National Mall, a short distance from where Rock Creek meets the Potomac River.", stat: "Est. 1922" },
+              { img: "/images/course/rock-creek.jpg", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The race follows the paved parkway through the heart of this urban wilderness.", stat: "1,754 acres" },
+              { img: "/images/course/washington-monument.jpg", title: "Washington Monument", desc: "The iconic 555-foot obelisk stands as a beacon visible from the course. Runners pass through parkland just miles from this national treasure.", stat: "555 ft tall" },
+              { img: "/images/course/lincoln-memorial.jpg", title: "Lincoln Memorial", desc: "Abraham Lincoln\u2019s memorial sits at the western end of the National Mall, a short distance from where Rock Creek meets the Potomac River.", stat: "Est. 1922" },
             ].map((landmark) => (
               <ScrollReveal key={landmark.title}>
                 <div className="rounded-2xl overflow-hidden dark-card hover:-translate-y-1 hover:border-yellow/15 transition-all">
