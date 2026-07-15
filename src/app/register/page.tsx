@@ -249,8 +249,6 @@ export default function RegisterPage() {
                         <option value="" disabled>Select</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="nonbinary">Non-binary</option>
-                        <option value="prefer-not">Prefer not to say</option>
                       </select>
                     </div>
                   </div>
