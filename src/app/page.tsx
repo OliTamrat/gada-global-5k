@@ -6,6 +6,7 @@ import { HeroVideo } from "@/components/HeroVideo";
 import { WordRotator } from "@/components/WordRotator";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { InteractiveSchedule } from "@/components/InteractiveSchedule";
+import { FAQ } from "@/components/FAQ";
 
 const Icons = {
   barChart: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10M6 20V4M18 20v-6"/></svg>,
@@ -27,35 +28,13 @@ const Icons = {
   tag: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>,
 };
 
-const athletes = [
-  {
-    name: "Abebe Bikila",
-    achievement: "1960 & 1964 Olympic Marathon Gold",
-    story: "The barefoot champion from Jato, Oromia who stunned the world in Rome and became the first African Olympic gold medalist in history.",
-    year: "1960",
-    image: "/athletes/abebe-bikila.jpg",
-  },
-  {
-    name: "Derartu Tulu",
-    achievement: "1992 & 2000 Olympic 10,000m Gold",
-    story: "First Black African woman to win Olympic gold. Her victory lap with Elana Meyer became one of sport\u2019s most iconic moments of unity.",
-    year: "1992",
-    image: "/athletes/derartu-tulu.jpg",
-  },
-  {
-    name: "Kenenisa Bekele",
-    achievement: "3x Olympic Gold, 5K & 10K WR",
-    story: "Born in Bekoji, Oromia. Widely regarded as the greatest distance runner ever with 17 World Championship and Olympic medals.",
-    year: "2004",
-    image: "/athletes/kenenisa-bekele.jpg",
-  },
-  {
-    name: "Tirunesh Dibaba",
-    achievement: "3x Olympic Gold, 5K & 10K",
-    story: "The \u2018Baby Faced Destroyer\u2019 from Bekoji who dominated distance running and became Ethiopia\u2019s most decorated female Olympian.",
-    year: "2008",
-    image: "/athletes/tirunesh-dibaba.jpg",
-  },
+const eventPortfolio = [
+  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. October 3, 2026 at Rock Creek Parkway, DC.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg> },
+  { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> },
+  { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg> },
+  { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> },
+  { badge: "WOMEN", title: "Women Empowerment Run", desc: "Supporting women's health, leadership, and empowerment through a dedicated running event that uplifts and inspires.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> },
+  { badge: "CHARITY", title: "Charity Run for Education & Health", desc: "Raising funds for community causes. Every mile run contributes to education and health initiatives that make a real difference.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
 ];
 
 export default function Home() {
@@ -252,33 +231,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ OROMO ATHLETES LEGACY ══ */}
+      {/* ══ OUR EVENTS — BEYOND THE 5K ══ */}
       <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">A Legacy of Champions</span>
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">
-              The Oromo Running Tradition
+          <ScrollReveal className="text-center mb-16">
+            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Beyond the 5K</span>
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
+              Our Event Portfolio
             </h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[600px] mb-16">
-              For decades, Oromo athletes have dominated the world stage in distance running, carrying the Ethiopian flag to Olympic glory. The Gada Global 5K honors this extraordinary legacy and inspires the next generation.
+            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[560px] mx-auto">
+              The Gada Global 5K is just the beginning. Gada Global Run organizes events that bring people together and promote healthy living across all communities.
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {athletes.map((athlete) => (
-              <ScrollReveal key={athlete.name}>
-                <div className="bg-white border border-charcoal/8 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] transition-all h-full flex flex-col">
-                  <div className="h-[200px] relative overflow-hidden bg-charcoal/5">
-                    <Image src={athlete.image} alt={athlete.name} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 25vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <span className="absolute bottom-3 left-4 text-[10px] font-bold tracking-[3px] uppercase text-yellow bg-charcoal/70 backdrop-blur-sm px-2.5 py-1 rounded-md">{athlete.year}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            {eventPortfolio.map((ev, i) => (
+              <ScrollReveal key={ev.title}>
+                <div className={`rounded-2xl p-6 h-full hover:-translate-y-1 transition-all ${i === 0 ? 'yellow-card' : 'bg-white border border-charcoal/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)]'}`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${i === 0 ? 'bg-charcoal text-yellow' : 'bg-yellow/12 text-gold-dim'}`}>
+                    {ev.icon}
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold tracking-tight mb-1">{athlete.name}</h3>
-                    <p className="text-[14px] md:text-[12px] text-gold-dim font-semibold tracking-wide mb-3">{athlete.achievement}</p>
-                    <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed flex-1">{athlete.story}</p>
-                  </div>
+                  <span className={`inline-block text-[9px] font-black tracking-[2px] uppercase px-2.5 py-1 rounded-md mb-3 ${i === 0 ? 'bg-charcoal/15 text-charcoal' : 'bg-yellow/10 text-gold-dim'}`}>{ev.badge}</span>
+                  <h4 className="font-[family-name:var(--font-heading)] text-[15px] font-bold mb-2 tracking-tight">{ev.title}</h4>
+                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{ev.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -287,13 +262,13 @@ export default function Home() {
           <ScrollReveal>
             <div className="bg-charcoal rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 text-white">
               <div className="flex-1">
-                <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
+                <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Start With the 5K</h3>
                 <p className="text-[15px] md:text-[14px] text-white/70 leading-relaxed max-w-[480px]">
-                  From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. The Gada Global 5K brings this spirit to Rock Creek Parkway &mdash; whether you&apos;re chasing a personal record or running your very first 5K.
+                  The inaugural Gada Global 5K on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
-                Join the Race
+                Register Now
               </Link>
             </div>
           </ScrollReveal>
@@ -348,60 +323,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ EVENT DETAILS — World Marathon style ══ */}
-      <section id="event" className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Event Details</span>
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">Race Day at a Glance</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/65 max-w-[540px] mb-16">Everything you need to know about the Gada Global 5K experience.</p>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <div className="relative rounded-2xl overflow-hidden mb-16">
-              <div className="min-h-[480px] md:min-h-[560px] flex" style={{ background: `linear-gradient(to right, rgba(20,18,16,0.75) 0%, rgba(20,18,16,0.3) 60%, transparent 100%), url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }}>
-                <div className="flex-1 p-8 md:p-14 flex flex-col justify-end">
-                  <div className="text-[11px] font-bold tracking-[4px] uppercase text-yellow/80 mb-3">01.</div>
-                  <h3 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold tracking-tight mb-3 text-white">Rock Creek<br />Parkway</h3>
-                  <p className="text-[14px] text-white/70 max-w-[320px] leading-relaxed mb-8">Washington DC&apos;s most scenic running route. A paved, gently rolling course through lush parkland along the historic creek.</p>
-                  <div className="flex gap-10">
-                    {[{ val: "60-72", unit: "\u00B0F", label: "Temperature" }, { val: "7:30", unit: "AM", label: "Start Time" }, { val: "45", unit: "M", label: "Elevation" }].map((s) => (
-                      <div key={s.label}><div className="text-2xl md:text-3xl font-black tracking-tight text-white">{s.val}<span className="text-base align-top ml-0.5">{s.unit}</span></div><div className="text-[11px] font-semibold tracking-[3px] uppercase text-yellow/80 mt-1">{s.label}</div></div>
-                    ))}
-                  </div>
-                </div>
-                <div className="hidden md:flex flex-col justify-center items-end pr-14 gap-2">
-                  {["WASHINGTON", "ROCK CREEK", "PARKWAY", "GEORGETOWN", "DUPONT"].map((city, i) => (
-                    <span key={city} className={`font-[family-name:var(--font-heading)] font-bold tracking-tight transition-all ${i === 0 ? "text-5xl lg:text-6xl text-yellow" : "text-3xl lg:text-4xl text-white/20 hover:text-white/40"}`}>{city}</span>
-                  ))}
-                </div>
-              </div>
-              <svg className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-20" viewBox="0 0 1200 560" fill="none"><path d="M600 50 C650 120, 750 180, 700 280 S620 380, 680 450 S780 500, 850 480" stroke="#F5C842" strokeWidth="2" strokeDasharray="8 6" fill="none"/></svg>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-              {[
-                { icon: Icons.clock, label: "Start Time", value: "7:30 AM ET" },
-                { icon: Icons.sprout, label: "Terrain", value: "Paved, Flat" },
-                { icon: Icons.users, label: "Capacity", value: "500 Runners" },
-                { icon: Icons.trophy, label: "Awards", value: "Top 3 M/F" },
-                { icon: Icons.mapPin, label: "Location", value: "Rock Creek, DC" },
-              ].map((item) => (
-                <div key={item.label} className="bg-white rounded-2xl p-5 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
-                  <div className="text-gold-dim mb-3">{item.icon}</div>
-                  <div className="text-[11px] font-semibold text-charcoal/45 uppercase tracking-wider mb-1">{item.label}</div>
-                  <div className="text-sm font-bold text-charcoal">{item.value}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* ══ FAQ ══ */}
+      <FAQ />
 
       {/* ══ INTERACTIVE SCHEDULE ══ */}
-      <section id="schedule" className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section id="event" className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <InteractiveSchedule />
       </section>
 
@@ -486,17 +412,33 @@ export default function Home() {
           </div>
 
           <ScrollReveal>
-            <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white text-center">
-              <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Bring Your Crew</h3>
-              <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed max-w-[520px] mx-auto mb-6">
-                Group registration discounts available for teams of 10+. Running clubs, church groups, corporate teams, and school organizations are all welcome. The post-race Irrecha festival is free and open to spectators &mdash; bring your family and friends.
-              </p>
+            <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white">
+              <div className="text-center mb-8">
+                <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Partner With Us</span>
+                <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Become a Sponsor</h3>
+                <p className="text-[15px] md:text-[14px] text-white/55 leading-relaxed max-w-[520px] mx-auto">
+                  Connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+                {[
+                  { tier: "Title Sponsor", style: "yellow-card text-charcoal" },
+                  { tier: "Platinum", style: "bg-white/10 border border-white/20 text-white" },
+                  { tier: "Gold", style: "bg-yellow/15 border border-yellow/25 text-yellow" },
+                  { tier: "Silver", style: "bg-white/5 border border-white/10 text-white/70" },
+                  { tier: "Community Partner", style: "bg-green-deep/30 border border-green-light/20 text-green-light" },
+                ].map((s) => (
+                  <div key={s.tier} className={`${s.style} rounded-xl py-4 px-3 text-center font-bold text-[13px] tracking-tight`}>
+                    {s.tier}
+                  </div>
+                ))}
+              </div>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                   Register Your Team
                 </Link>
                 <a href="mailto:info@gadaglobal5k.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
-                  Partnership Inquiry
+                  Sponsorship Inquiry
                 </a>
               </div>
             </div>

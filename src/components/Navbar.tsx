@@ -24,7 +24,7 @@ export function Navbar() {
   const showSolid = !isHome || scrolled;
 
   const links = [
-    { href: "/#about", label: "About" },
+    { href: "/about", label: "About" },
     { href: "/#event", label: "Event" },
     { href: "/register", label: "Register" },
     { href: "/shop", label: "Shop" },
