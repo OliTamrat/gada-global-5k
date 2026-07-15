@@ -17,7 +17,7 @@ export default function ShopPage() {
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-4 tracking-tight">
             Race Day Gear
           </h1>
-          <p className="text-[15px] leading-[1.85] text-white/35 max-w-[480px] mx-auto">
+          <p className="text-base md:text-[15px] leading-[1.85] text-white/35 max-w-[480px] mx-auto">
             Rep your Oromo pride with our limited-edition Gada Global 5K
             collection. All proceeds support the event.
           </p>
@@ -72,7 +72,7 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
 
         <div className="p-6">
           <h4 className="text-[15px] font-bold text-white mb-1 tracking-tight">{product.name}</h4>
-          <p className="text-[12px] text-white/35 mb-5 leading-relaxed">
+          <p className="text-[14px] md:text-[12px] text-white/35 mb-5 leading-relaxed">
             {product.description}
           </p>
 

@@ -25,7 +25,7 @@ function SuccessContent() {
           {isRegistration ? "You\u2019re Registered!" : "Order Confirmed!"}
         </h1>
 
-        <p className="text-[15px] leading-[1.85] text-charcoal/45 mb-6">
+        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/45 mb-6">
           {isRegistration ? (
             <>
               Welcome to the Gada Global 5K{name ? `, ${name}` : ""}! You&apos;ll
@@ -41,8 +41,8 @@ function SuccessContent() {
 
         {isRegistration && (
           <div className="bg-white rounded-2xl p-6 border border-charcoal/5 mb-8 text-left">
-            <h3 className="font-bold text-[13px] mb-3 tracking-tight">What&apos;s Next?</h3>
-            <ul className="space-y-2.5 text-[13px] text-charcoal/45">
+            <h3 className="font-bold text-[15px] md:text-[13px] mb-3 tracking-tight">What&apos;s Next?</h3>
+            <ul className="space-y-2.5 text-[15px] md:text-[13px] text-charcoal/45">
               <li className="flex items-start gap-2">
                 <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-0.5 shrink-0"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
                 Check your email for the confirmation and race waiver

@@ -61,7 +61,7 @@ export function InteractiveSchedule() {
       <ScrollReveal className="text-center mb-14">
         <span className="text-[10px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Race Day Schedule</span>
         <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">October 3, 2026</h2>
-        <p className="text-[15px] leading-[1.85] text-charcoal/70 max-w-[480px] mx-auto">A full day of running, culture, and community. Click any event to explore details.</p>
+        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[480px] mx-auto">A full day of running, culture, and community. Click any event to explore details.</p>
       </ScrollReveal>
 
       <ScrollReveal>
@@ -113,7 +113,7 @@ export function InteractiveSchedule() {
               </div>
             </div>
 
-            <p className="text-[15px] text-white/80 leading-relaxed mb-8">{active.desc}</p>
+            <p className="text-base md:text-[15px] text-white/80 leading-relaxed mb-8">{active.desc}</p>
 
             <div className="flex-1">
               <div className="text-[10px] font-bold tracking-[3px] uppercase text-white/40 mb-4">What to Expect</div>
@@ -123,7 +123,7 @@ export function InteractiveSchedule() {
                     <div className="w-5 h-5 rounded-md yellow-card flex items-center justify-center shrink-0 mt-0.5">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                     </div>
-                    <span className="text-[13px] text-white/75 leading-relaxed">{detail}</span>
+                    <span className="text-[15px] md:text-[13px] text-white/75 leading-relaxed">{detail}</span>
                   </div>
                 ))}
               </div>

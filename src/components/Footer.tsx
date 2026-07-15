@@ -41,7 +41,7 @@ export function Footer() {
             <Link href="/" className="font-black text-base tracking-[3px] text-yellow no-underline inline-block mb-5">
               GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
             </Link>
-            <p className="text-[13px] leading-[1.85] max-w-[280px] text-white/65">
+            <p className="text-[15px] md:text-[13px] leading-[1.85] max-w-[280px] text-white/65">
               Celebrating Oromo heritage through the power of running. October 3, 2026 at Rock Creek Parkway, Washington DC.
             </p>
           </div>
@@ -77,7 +77,7 @@ export function Footer() {
               <ul className="list-none space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-white/55 text-[13px] hover:text-yellow transition-colors no-underline">
+                    <Link href={link.href} className="text-white/55 text-[15px] md:text-[13px] hover:text-yellow transition-colors no-underline">
                       {link.label}
                     </Link>
                   </li>

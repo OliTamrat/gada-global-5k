@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gada Global 5K — Business Proposal | Olink Technologies</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --yellow: #F5C842;
+    --gold: #E8B930;
+    --charcoal: #141210;
+    --charcoal-light: #1e1b18;
+    --warm: #2a2520;
+    --cream: #FAF6EE;
+    --green: #1B5E20;
+    --green-light: #4CAF50;
+  }
+
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+  }
+
+  /* ═══════════════════════════════════════════
+     PAGE CONTAINER — fixed height, forced breaks
+     ═══════════════════════════════════════════ */
+  .page {
+    width: 8.5in;
+    height: 11in;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* ═══════════════════════════════════════════
+     COVER PAGE
+     ═══════════════════════════════════════════ */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding: 1.5in 1.2in;
+  }
+
+  .cover .logo-line {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--yellow);
+    margin-bottom: 50px;
+  }
+
+  .cover h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 58px;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: white;
+    margin-bottom: 14px;
+  }
+
+  .cover h1 span { color: var(--yellow); }
+
+  .cover .subtitle {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 8px;
+  }
+
+  .cover .subtitle2 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 10px;
+  }
+
+  .cover .subtitle3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 50px;
+  }
+
+  .cover .meta {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 2.1;
+  }
+
+  .cover .meta strong { color: rgba(255,255,255,0.65); }
+
+  .cover .footer-line {
+    position: absolute;
+    bottom: 50px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .cover .confidential {
+    position: absolute;
+    bottom: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ═══════════════════════════════════════════
+     CONTENT PAGES — DARK THEME
+     ═══════════════════════════════════════════ */
+  .content-page {
+    padding: 0.55in 0.85in 0.6in 0.85in;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .page-header .brand {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+
+  .page-header .doc-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .section-number {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: rgba(255,255,255,0.06);
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    margin-bottom: 12px;
+    color: white;
+  }
+
+  .section-intro {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .section-intro strong { color: rgba(255,255,255,0.85); }
+
+  .subsection-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 6px;
+    color: white;
+  }
+
+  .body-text {
+    font-size: 12px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  table th {
+    text-align: left;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    opacity: 0.6;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.65);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  table td:last-child { text-align: right; font-weight: 600; color: rgba(255,255,255,0.8); }
+  table td strong { color: white; font-weight: 700; }
+
+  .total-row td {
+    border-top: 2px solid var(--yellow);
+    border-bottom: none;
+    font-weight: 800;
+    color: var(--yellow);
+    font-size: 15px;
+    padding-top: 14px;
+  }
+
+  .discount-row td {
+    color: var(--green-light);
+    font-style: italic;
+    border-bottom: 1px dashed rgba(255,255,255,0.06);
+  }
+
+  .market-row td {
+    color: rgba(255,255,255,0.25);
+    text-decoration: line-through;
+    font-size: 11px;
+  }
+
+  /* ── Feature grid ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .feature-card {
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .feature-card h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: white;
+  }
+
+  .feature-card p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.55;
+  }
+
+  /* ── Tech Stack pills ── */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  .tech-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ── Color swatches ── */
+  .color-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .swatch { text-align: center; }
+
+  .swatch-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    margin: 0 auto 5px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .swatch-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .swatch-hex {
+    font-size: 9px;
+    color: rgba(255,255,255,0.2);
+    font-family: monospace;
+  }
+
+  /* ── Included list ── */
+  .included-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .included-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .included-list li::before {
+    content: "+";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    background: var(--yellow);
+    color: var(--charcoal);
+    font-weight: 900;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Timeline ── */
+  .timeline { margin-bottom: 20px; }
+
+  .timeline-item {
+    display: flex;
+    gap: 18px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .timeline-date {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--yellow);
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  .timeline-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    flex: 1;
+  }
+
+  /* ── Highlight box ── */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--yellow), var(--gold));
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    color: var(--charcoal);
+  }
+
+  .highlight-box h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .highlight-box p {
+    font-size: 12px;
+    opacity: 0.7;
+    line-height: 1.7;
+  }
+
+  /* ── Contribution callout ── */
+  .contribution-box {
+    background: rgba(76,175,80,0.08);
+    border: 1px solid rgba(76,175,80,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+  }
+
+  .contribution-box h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--green-light);
+    margin-bottom: 5px;
+  }
+
+  .contribution-box p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  .contribution-box p strong { color: var(--green-light); }
+
+  /* ── Page footer ── */
+  .page-footer {
+    position: absolute;
+    bottom: 0.4in;
+    left: 0.85in;
+    right: 0.85in;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.12);
+  }
+
+  .page-footer .page-num {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: rgba(255,255,255,0.06);
+  }
+
+  /* ── Signature block ── */
+  .sig-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    margin-top: 30px;
+    padding-top: 16px;
+  }
+
+  .sig-card {
+    border-top: 2px solid rgba(255,255,255,0.15);
+    padding-top: 14px;
+  }
+
+  .sig-card .org {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 3px;
+  }
+
+  .sig-card .name {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 22px;
+  }
+
+  .sig-card .date-line {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 4px;
+  }
+
+  /* ── Terms ── */
+  .terms-text {
+    font-size: 12px;
+    line-height: 2;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .terms-text strong { color: rgba(255,255,255,0.7); }
+
+  /* ═══ Print overrides ═══ */
+  @media print {
+    body { background: var(--charcoal) !important; }
+    .page { background: var(--charcoal) !important; }
+    .feature-card { background: #1e1b18 !important; border-color: #2a2520 !important; }
+    .tech-pill { background: #1e1b18 !important; border-color: #2a2520 !important; }
+    .highlight-box { background: var(--yellow) !important; }
+    .contribution-box { background: #0d1f0d !important; border-color: #1B5E20 !important; }
+    .included-list li::before { background: var(--yellow) !important; }
+    .total-row td { border-top-color: var(--yellow) !important; }
+  }
+
+  @media screen {
+    body { background: #0a0908; }
+    .page { box-shadow: 0 2px 40px rgba(0,0,0,0.5); margin: 16px auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ PAGE 1: COVER ═══ -->
+<div class="page">
+  <div class="cover">
+    <div class="logo-line">OLINK TECHNOLOGIES</div>
+    <h1>GADA<br><span>GLOBAL 5K</span></h1>
+    <div class="subtitle">B U S I N E S S &nbsp; P R O P O S A L</div>
+    <div class="subtitle2">R U N &nbsp; F O R &nbsp; I R R E C H A , &nbsp; R U N &nbsp; F O R &nbsp; U N I T Y</div>
+    <div class="subtitle3">E V E N T &nbsp; M A N A G E M E N T &nbsp; P L A T F O R M</div>
+    <div class="meta">
+      <strong>Prepared for:</strong> Gada Global Organization<br>
+      <strong>Prepared by:</strong> Olink Technologies LLC<br>
+      <strong>Date:</strong> July 13, 2026 &mdash; <strong>Validity:</strong> 30 Days<br>
+      <strong>Event:</strong> October 3, 2026 &bull; Rock Creek Parkway, Washington DC
+    </div>
+    <div class="footer-line">Olink Technologies &bull; olinktechnologies.com</div>
+    <div class="confidential">C O N F I D E N T I A L</div>
+  </div>
+</div>
+
+<!-- ═══ PAGE 2: EXECUTIVE SUMMARY ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">01</div>
+    <div class="section-title">Executive Summary</div>
+    <p class="section-intro">
+      Olink Technologies is pleased to present this proposal for the <strong>Gada Global 5K</strong> &mdash; an annual community running event celebrating Oromo heritage and the Irrecha thanksgiving festival. Scheduled for October 3, 2026 at Rock Creek Parkway in Washington, DC, this inaugural event will bring together up to 500 runners and community members.
+    </p>
+    <p class="body-text">
+      This document outlines the complete digital platform built to power the event &mdash; from marketing and athlete registration to merchandise sales, live race results with AI-powered timing, and secure payment processing. The platform is designed as a reusable foundation for annual events going forward.
+    </p>
+
+    <div class="highlight-box">
+      <h4>What We Are Delivering</h4>
+      <p>A fully custom Next.js web application with athlete registration, 3-tier pricing, Stripe payment processing, e-commerce merch shop with cart, live race timing &amp; results, dispute resolution system, animated hero with video background, live countdown, and premium sports-inspired design &mdash; ready to launch and accept registrations.</p>
+    </div>
+
+    <div class="subsection-title">Platform Overview</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>Marketing Website</h4>
+        <p>8-section landing page with video hero, animated word rotator, countdown, athlete gallery, and cultural content</p>
+      </div>
+      <div class="feature-card">
+        <h4>Registration System</h4>
+        <p>3-tier pricing (Early Bird $25, Standard $35, Race Week $45) with Stripe Checkout</p>
+      </div>
+      <div class="feature-card">
+        <h4>Merchandise Store</h4>
+        <p>3 products with size selection, shopping cart, quantity controls, and Stripe payment</p>
+      </div>
+      <div class="feature-card">
+        <h4>Live Race Results</h4>
+        <p>Real-time leaderboard, bib lookup, QR code scanning, and timing dispute system</p>
+      </div>
+      <div class="feature-card">
+        <h4>Community Outreach</h4>
+        <p>DC running clubs, schools, African diaspora communities, corporate partners</p>
+      </div>
+      <div class="feature-card">
+        <h4>Responsive Design</h4>
+        <p>Mobile-first, DM Sans + Inter typography, SVG icons, scroll animations</p>
+      </div>
+    </div>
+
+    <div class="subsection-title">Technology Stack</div>
+    <div class="tech-stack">
+      <span class="tech-pill">Next.js 16</span>
+      <span class="tech-pill">TypeScript</span>
+      <span class="tech-pill">Stripe</span>
+      <span class="tech-pill">Tailwind CSS v4</span>
+      <span class="tech-pill">Vercel</span>
+      <span class="tech-pill">React Context</span>
+      <span class="tech-pill">DM Sans + Inter</span>
+      <span class="tech-pill">CSS Animations</span>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">02</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 3: EVENT MARKETING WEBSITE ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">02</div>
+    <div class="section-title">Event Marketing Website</div>
+    <p class="section-intro">
+      A premium, mobile-responsive web application inspired by world-class marathon platforms like ActiveDays and World Marathon. Built with Next.js App Router and Tailwind CSS for performance and visual impact.
+    </p>
+
+    <div class="subsection-title">Hero Section</div>
+    <p class="body-text">Cinematic full-screen video background with animated word rotator cycling through cultural keywords. Golden particle effects overlay. Two compact CTA cards for Register and Buy Merch. Four dashboard stat cards: Race Distance (5K), Elevation Gain (45m), Event Stats (animated bar chart), and Event Highlights.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>Live Countdown</h4>
+        <p>Real-time countdown to Oct 3, 2026 at 7:30 AM ET with branded yellow accent strip</p>
+      </div>
+      <div class="feature-card">
+        <h4>About / Culture</h4>
+        <p>Dual-image layout, Irrecha heritage, 4 feature cards with SVG icons</p>
+      </div>
+      <div class="feature-card">
+        <h4>Oromo Athletes Legacy</h4>
+        <p>4 champion athlete cards &mdash; Bikila, Tulu, Bekele, Dibaba &mdash; with photos and stories</p>
+      </div>
+      <div class="feature-card">
+        <h4>DC Course Showcase</h4>
+        <p>3 landmark cards (Rock Creek, Washington Monument, Lincoln Memorial) with course stats</p>
+      </div>
+      <div class="feature-card">
+        <h4>Interactive Schedule</h4>
+        <p>Clickable timeline from 6 AM to 2 PM with expanding detail panels</p>
+      </div>
+      <div class="feature-card">
+        <h4>Community Section</h4>
+        <p>6 outreach cards &mdash; running clubs, neighborhoods, schools, diaspora, social, corporate</p>
+      </div>
+      <div class="feature-card">
+        <h4>Irrecha Heritage</h4>
+        <p>Odaa Tree, Water Blessing, Global Diaspora &mdash; green overlay with cultural education</p>
+      </div>
+      <div class="feature-card">
+        <h4>Navbar + Footer</h4>
+        <p>Fixed dark nav with cart badge, active links. 4-column footer with socials</p>
+      </div>
+    </div>
+
+    <div class="subsection-title">Design System</div>
+    <div class="color-row">
+      <div class="swatch"><div class="swatch-circle" style="background:#F5C842"></div><div class="swatch-label">Yellow</div><div class="swatch-hex">#F5C842</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#E8B930"></div><div class="swatch-label">Gold</div><div class="swatch-hex">#E8B930</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#141210"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#141210</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#FAF6EE"></div><div class="swatch-label">Cream</div><div class="swatch-hex">#FAF6EE</div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#1B5E20"></div><div class="swatch-label">Green</div><div class="swatch-hex">#1B5E20</div></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">03</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 4: REGISTRATION ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">03</div>
+    <div class="section-title">Registration &amp; Merchandise</div>
+
+    <div class="subsection-title">Registration Tiers</div>
+    <table>
+      <thead><tr><th>Tier</th><th>Period</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Early Bird</strong></td><td>Until August 15, 2026</td><td>$25/person</td></tr>
+        <tr><td><strong>Standard</strong></td><td>Aug 16 &ndash; Sep 25, 2026</td><td>$35/person</td></tr>
+        <tr><td><strong>Race Week</strong></td><td>Sep 26 &ndash; Oct 2, 2026</td><td>$45/person</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-title">What Every Registration Includes</div>
+    <ul class="included-list">
+      <li>Official race bib with timing chip</li>
+      <li>Gada Global 5K finisher medal</li>
+      <li>Official race t-shirt (size selected during registration)</li>
+      <li>Post-race Irrecha cultural celebration access</li>
+      <li>Water stations on course + professional race photography</li>
+    </ul>
+
+    <div class="subsection-title">Merchandise Store</div>
+    <table>
+      <thead><tr><th>Product</th><th>Description</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Official Race Tee</strong></td><td>Moisture-wicking performance fabric, event logo + Irrecha artwork</td><td>$28</td></tr>
+        <tr><td><strong>Irrecha Gold Edition</strong></td><td>Premium cotton, golden sunrise design, Oromo proverb on sleeve</td><td>$35</td></tr>
+        <tr><td><strong>Gada Heritage Hoodie</strong></td><td>Heavyweight fleece hoodie with Odaa tree emblem</td><td>$55</td></tr>
+      </tbody>
+    </table>
+    <p class="body-text">All products include XS through XXL sizing. Full shopping cart with quantity controls, per-item totals, and Stripe Checkout with US shipping address collection.</p>
+
+    <div class="subsection-title">How the System Works</div>
+    <table>
+      <tbody>
+        <tr><td><strong>1. Register</strong></td><td style="text-align:left">Participant selects tier, fills form (name, email, age, gender, t-shirt size, emergency contact)</td><td></td></tr>
+        <tr><td><strong>2. Payment</strong></td><td style="text-align:left">Data saved server-side, Stripe Checkout session created, redirected to Stripe's secure page</td><td></td></tr>
+        <tr><td><strong>3. Confirmation</strong></td><td style="text-align:left">Payment completes, redirected to branded success page with next steps checklist</td><td></td></tr>
+        <tr><td><strong>4. Webhook</strong></td><td style="text-align:left">Stripe sends server-side confirmation event for fulfillment tracking</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">04</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 5: RACE RESULTS ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">04</div>
+    <div class="section-title">Live Race Results &amp; Timing</div>
+    <p class="section-intro">
+      A complete race-day results system that provides real-time leaderboard tracking, individual runner pages, QR code scanning at the finish line, and a dispute resolution workflow &mdash; features typically only available through expensive third-party race timing providers.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>Live Leaderboard</h4>
+        <p>Real-time results page showing all finishers ranked by time, with search and category filters (Overall, Male, Female)</p>
+      </div>
+      <div class="feature-card">
+        <h4>Individual Runner Pages</h4>
+        <p>Each runner gets a /race/[bib] page showing their name, finish time, pace, placement, and ranking</p>
+      </div>
+      <div class="feature-card">
+        <h4>QR Code Scanning</h4>
+        <p>Finish-line scanning page for race officials to record finish times by entering bib numbers</p>
+      </div>
+      <div class="feature-card">
+        <h4>Timing Disputes</h4>
+        <p>Structured dispute submission and review workflow with admin resolution for timing corrections</p>
+      </div>
+    </div>
+
+    <div class="subsection-title">Race Day Workflow</div>
+    <table>
+      <tbody>
+        <tr><td><strong>1. Pre-Race</strong></td><td style="text-align:left">Registered runners appear on the leaderboard page with "Waiting" status</td><td></td></tr>
+        <tr><td><strong>2. Finish Line</strong></td><td style="text-align:left">Race official enters bib numbers at /race/scan as runners cross the finish</td><td></td></tr>
+        <tr><td><strong>3. Results</strong></td><td style="text-align:left">Leaderboard updates in real-time. Runners can search their bib or name</td><td></td></tr>
+        <tr><td><strong>4. Disputes</strong></td><td style="text-align:left">Runners can flag timing issues via /race/disputes with photo evidence upload</td><td></td></tr>
+        <tr><td><strong>5. Resolution</strong></td><td style="text-align:left">Admin reviews disputes, applies corrections or rejects with explanation</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <h4>Revenue Potential</h4>
+      <p>With 500 participants and an estimated 60% merch purchase rate, the store can generate $4,200 &ndash; $8,400+ in additional revenue beyond registration fees. T-shirts can also be sold to non-participants through the public shop page.</p>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">05</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 6: PRICING ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">05</div>
+    <div class="section-title">Pricing &amp; Investment</div>
+    <p class="section-intro">
+      Olink Technologies is proud to support the Gada Global 5K mission. As a contribution to the organization and the Oromo community, we are offering this platform at a significantly reduced rate.
+    </p>
+
+    <div class="subsection-title">Complete Event Platform</div>
+    <table>
+      <thead><tr><th>Deliverable</th><th>Details</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Event Marketing Website</strong></td><td>8-section landing: hero, about, athletes, course, schedule, culture, community, CTA</td><td>Included</td></tr>
+        <tr><td><strong>Animated Hero</strong></td><td>Video background, word rotator, particle effects, stat dashboard cards</td><td>Included</td></tr>
+        <tr><td><strong>Registration System</strong></td><td>3-tier pricing, form validation, Stripe payment, success page</td><td>Included</td></tr>
+        <tr><td><strong>Merchandise Store</strong></td><td>3 products, size selection, cart with quantities, Stripe checkout + shipping</td><td>Included</td></tr>
+        <tr><td><strong>Live Race Results</strong></td><td>Leaderboard, individual bib pages, QR scan, timing disputes</td><td>Included</td></tr>
+        <tr><td><strong>API Layer</strong></td><td>Registration, checkout, webhook, race timing endpoints</td><td>Included</td></tr>
+        <tr><td><strong>Design System</strong></td><td>Custom sports design, responsive, SVG icons, scroll animations</td><td>Included</td></tr>
+        <tr><td><strong>Deployment Setup</strong></td><td>Vercel config, env vars, Stripe setup guidance</td><td>Included</td></tr>
+        <tr class="market-row"><td colspan="2"><strong>Market Value</strong></td><td>$4,500</td></tr>
+        <tr class="discount-row"><td colspan="2">Olink Community Contribution Discount</td><td>&ndash; $2,500</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Your Investment</strong></td><td>$2,000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="contribution-box">
+      <h4>Community Contribution</h4>
+      <p>As a fellow member of the Oromo diaspora community, Olink Technologies is contributing a <strong>$2,500 discount</strong> to the Gada Global 5K project. This reflects our commitment to supporting cultural events that celebrate and preserve Oromo heritage. The full platform &mdash; valued at $4,500 &mdash; is being delivered for $2,000.</p>
+    </div>
+
+    <div class="subsection-title">Additional Services (Quoted Separately)</div>
+    <table>
+      <thead><tr><th>Service</th><th>Description</th><th>Estimated</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Logo Design</strong></td><td>Custom Gada Global 5K logo with variations for print and digital</td><td>$300 &ndash; $500</td></tr>
+        <tr><td><strong>T-Shirt Design</strong></td><td>3 custom apparel designs (Race Tee, Gold Edition, Hoodie) print-ready</td><td>$250 &ndash; $400</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">06</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 7: MAINTENANCE + HOSTING ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">06</div>
+    <div class="section-title">Annual Maintenance &amp; Hosting</div>
+
+    <div class="subsection-title">Annual Website Maintenance</div>
+    <table>
+      <thead><tr><th>Item</th><th>Description</th><th>Annual Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Domain Renewal</strong></td><td>.com domain registration renewal (gadaglobal5k.com or similar)</td><td>$15/year</td></tr>
+        <tr><td><strong>Web Hosting</strong></td><td>Vercel hosting (Pro plan recommended for custom domain + analytics)</td><td>$240/year</td></tr>
+        <tr><td><strong>SSL Certificate</strong></td><td>Included with Vercel &mdash; automatic HTTPS</td><td>$0</td></tr>
+        <tr><td><strong>Annual Updates</strong></td><td>Update dates, pricing tiers, photos, and content for next year's event</td><td>$200 &ndash; $400</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Estimated Annual Maintenance</strong></td><td>$455 &ndash; $655/yr</td></tr>
+      </tbody>
+    </table>
+    <p class="body-text" style="font-size:11px; color: rgba(255,255,255,0.25);">
+      <em>Note: Stripe payment processing fees (2.9% + $0.30 per transaction) are charged directly by Stripe and are not included above.</em>
+    </p>
+
+    <div class="subsection-title">Hosting &amp; Infrastructure</div>
+    <table>
+      <thead><tr><th>Service</th><th>Provider</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Website Hosting</strong></td><td>Vercel (Pro recommended)</td><td>$0 &ndash; $20/month</td></tr>
+        <tr><td><strong>Payments</strong></td><td>Stripe</td><td>2.9% + $0.30/txn</td></tr>
+        <tr><td><strong>Domain</strong></td><td>Registrar (Namecheap, GoDaddy, etc.)</td><td>~$15/year</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-title">Included at No Extra Cost</div>
+    <ul class="included-list">
+      <li>Full source code ownership transfer</li>
+      <li>Stripe account setup guidance and testing</li>
+      <li>30 days of post-delivery support for bug fixes</li>
+      <li>Deployment documentation and design assets</li>
+      <li>One round of design revisions based on feedback</li>
+      <li>Reusable platform for future annual events</li>
+    </ul>
+
+    <div class="subsection-title">Project Timeline</div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-date">July 2026</div><div class="timeline-desc">Platform delivery &mdash; site, registration, merch, race results, Stripe, deploy</div></div>
+      <div class="timeline-item"><div class="timeline-date">Aug 1, 2026</div><div class="timeline-desc">Early Bird Opens &mdash; registration live at $25/person</div></div>
+      <div class="timeline-item"><div class="timeline-date">Aug 16, 2026</div><div class="timeline-desc">Standard registration period begins ($35)</div></div>
+      <div class="timeline-item"><div class="timeline-date">Sep 26, 2026</div><div class="timeline-desc">Race Week registration opens ($45)</div></div>
+      <div class="timeline-item"><div class="timeline-date">Oct 3, 2026</div><div class="timeline-desc">Race Day &mdash; Gada Global 5K at Rock Creek Parkway, DC</div></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">07</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE 8: TERMS & SIGNATURE ═══ -->
+<div class="page">
+  <div class="content-page">
+    <div class="page-header">
+      <div class="brand">OLINK TECHNOLOGIES</div>
+      <div class="doc-title">Gada Global 5K &bull; July 2026</div>
+    </div>
+
+    <div class="section-number">07</div>
+    <div class="section-title">Terms &amp; Conditions</div>
+
+    <div class="terms-text">
+      <strong>1. Payment:</strong> 50% deposit before development. Remaining 50% upon delivery and approval.<br>
+      <strong>2. Revisions:</strong> Up to 2 rounds of design revisions included. Additional quoted separately.<br>
+      <strong>3. Hosting:</strong> Client responsible for Vercel hosting and Stripe transaction fees (see Maintenance).<br>
+      <strong>4. Stripe:</strong> Client creates own Stripe account. Olink provides setup guidance.<br>
+      <strong>5. Content:</strong> Client provides event photos, video, and final copy. Olink provides placeholders.<br>
+      <strong>6. IP:</strong> Upon full payment, all source code and assets become property of Gada Global.<br>
+      <strong>7. Confidentiality:</strong> Both parties agree to keep financial terms confidential.<br>
+      <strong>8. Annual Reuse:</strong> Platform designed for reuse at future events with minimal reconfiguration.<br>
+      <strong>9. Maintenance:</strong> Annual maintenance (domain, hosting, content updates) billed separately.<br>
+      <strong>10. Logo &amp; Apparel Design:</strong> Quoted separately upon request. Not included in the base platform fee.
+    </div>
+
+    <div class="sig-block">
+      <div class="sig-card">
+        <div class="org">Gada Global Organization</div>
+        <div class="name">Authorized Representative</div>
+        <div class="date-line">Date: _______________</div>
+      </div>
+      <div class="sig-card">
+        <div class="org">Olink Technologies LLC</div>
+        <div class="name">Oli T. &mdash; Founder</div>
+        <div class="date-line">Date: _______________</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>OLINK TECHNOLOGIES &bull; CONFIDENTIAL</span>
+    <span class="page-num">08</span>
+  </div>
+</div>
+
+</body>
+</html>

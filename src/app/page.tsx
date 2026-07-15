@@ -142,7 +142,7 @@ export default function Home() {
           <ScrollReveal>
             <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">About the Event</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-6">Celebrating Oromo Heritage Through Movement</h2>
-            <p className="text-[15px] leading-[1.85] text-charcoal/75 max-w-[520px] mb-10">
+            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/75 max-w-[520px] mb-10">
               The Gada Global 5K is more than a race &mdash; it&apos;s a celebration of the Oromo people&apos;s rich cultural heritage, timed with the annual <strong className="text-charcoal">Irrecha</strong> thanksgiving festival. Experience the power of community as we run together through one of Washington DC&apos;s most beautiful parkways.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -154,8 +154,8 @@ export default function Home() {
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
                   <div className="w-10 h-10 rounded-xl bg-yellow/15 flex items-center justify-center text-gold-dim mb-3">{card.icon}</div>
-                  <h4 className="text-[14px] font-bold mb-1 tracking-tight">{card.title}</h4>
-                  <p className="text-[13px] text-charcoal/60 leading-relaxed">{card.desc}</p>
+                  <h4 className="text-[15px] md:text-[14px] font-bold mb-1 tracking-tight">{card.title}</h4>
+                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{card.desc}</p>
                 </div>
               ))}
             </div>
@@ -171,7 +171,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-4 tracking-tight">
               What&apos;s Included
             </h2>
-            <p className="text-[15px] leading-[1.85] text-white/60 max-w-[480px] mx-auto">
+            <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[480px] mx-auto">
               Every registered runner receives a complete race day package.
             </p>
           </ScrollReveal>
@@ -234,8 +234,8 @@ export default function Home() {
                 <div className="dark-card rounded-2xl p-5 h-full">
                   {item.visual}
                   <div className="text-yellow mb-3">{item.icon}</div>
-                  <h4 className="text-[14px] font-bold text-white mb-1.5 tracking-tight">{item.title}</h4>
-                  <p className="text-[13px] text-white/50 leading-relaxed">{item.desc}</p>
+                  <h4 className="text-[15px] md:text-[14px] font-bold text-white mb-1.5 tracking-tight">{item.title}</h4>
+                  <p className="text-[15px] md:text-[13px] text-white/50 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -260,7 +260,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">
               The Oromo Running Tradition
             </h2>
-            <p className="text-[15px] leading-[1.85] text-charcoal/70 max-w-[600px] mb-16">
+            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[600px] mb-16">
               For decades, Oromo athletes have dominated the world stage in distance running, carrying the Ethiopian flag to Olympic glory. The Gada Global 5K honors this extraordinary legacy and inspires the next generation.
             </p>
           </ScrollReveal>
@@ -276,8 +276,8 @@ export default function Home() {
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold tracking-tight mb-1">{athlete.name}</h3>
-                    <p className="text-[12px] text-gold-dim font-semibold tracking-wide mb-3">{athlete.achievement}</p>
-                    <p className="text-[13px] text-charcoal/60 leading-relaxed flex-1">{athlete.story}</p>
+                    <p className="text-[14px] md:text-[12px] text-gold-dim font-semibold tracking-wide mb-3">{athlete.achievement}</p>
+                    <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed flex-1">{athlete.story}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -288,7 +288,7 @@ export default function Home() {
             <div className="bg-charcoal rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 text-white">
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
-                <p className="text-[14px] text-white/70 leading-relaxed max-w-[480px]">
+                <p className="text-[15px] md:text-[14px] text-white/70 leading-relaxed max-w-[480px]">
                   From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. The Gada Global 5K brings this spirit to Rock Creek Parkway &mdash; whether you&apos;re chasing a personal record or running your very first 5K.
                 </p>
               </div>
@@ -306,7 +306,7 @@ export default function Home() {
           <ScrollReveal className="text-center mb-16">
             <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">The Course</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Run Through the Heart of DC</h2>
-            <p className="text-[15px] leading-[1.85] text-white/60 max-w-[520px] mx-auto">
+            <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[520px] mx-auto">
               Rock Creek Parkway winds through Washington DC&apos;s most beautiful green corridor, connecting iconic landmarks along the way.
             </p>
           </ScrollReveal>
@@ -326,7 +326,7 @@ export default function Home() {
                   </div>
                   <div className="p-6">
                     <h3 className="font-[family-name:var(--font-heading)] text-[15px] font-bold tracking-tight mb-2 text-white">{landmark.title}</h3>
-                    <p className="text-[13px] text-white/55 leading-relaxed">{landmark.desc}</p>
+                    <p className="text-[15px] md:text-[13px] text-white/55 leading-relaxed">{landmark.desc}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -341,7 +341,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="flex-1 md:border-l md:border-white/10 md:pl-8">
-                <p className="text-[14px] text-white/65 leading-relaxed">The course follows Rock Creek Parkway from the Nature Center south through the park, finishing near the Kennedy Center. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
+                <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed">The course follows Rock Creek Parkway from the Nature Center south through the park, finishing near the Kennedy Center. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
               </div>
             </div>
           </ScrollReveal>
@@ -354,7 +354,7 @@ export default function Home() {
           <ScrollReveal>
             <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Event Details</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">Race Day at a Glance</h2>
-            <p className="text-[15px] leading-[1.85] text-charcoal/65 max-w-[540px] mb-16">Everything you need to know about the Gada Global 5K experience.</p>
+            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/65 max-w-[540px] mb-16">Everything you need to know about the Gada Global 5K experience.</p>
           </ScrollReveal>
 
           <ScrollReveal>
@@ -410,7 +410,7 @@ export default function Home() {
         <ScrollReveal>
           <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Irrecha &amp; Oromo Heritage</span>
           <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white max-w-[600px] mx-auto mb-5 tracking-tight">More Than a Race,<br />It&apos;s a Celebration</h2>
-          <p className="text-[15px] leading-[1.85] text-white/75 max-w-[500px] mx-auto mb-14">Irrecha is the Oromo people&apos;s thanksgiving festival, honoring Waaqa (God) and the renewal of life.</p>
+          <p className="text-base md:text-[15px] leading-[1.85] text-white/75 max-w-[500px] mx-auto mb-14">Irrecha is the Oromo people&apos;s thanksgiving festival, honoring Waaqa (God) and the renewal of life.</p>
         </ScrollReveal>
         <ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[920px] mx-auto">
@@ -421,8 +421,8 @@ export default function Home() {
             ].map((item) => (
               <div key={item.title} className="p-8 rounded-2xl bg-white/8 border border-white/10 backdrop-blur-sm hover:bg-white/12 transition-colors">
                 <div className="text-yellow mb-5">{item.icon}</div>
-                <h4 className="text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
-                <p className="text-[13px] text-white/65 leading-relaxed">{item.desc}</p>
+                <h4 className="text-base md:text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
+                <p className="text-[15px] md:text-[13px] text-white/65 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -437,7 +437,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
               One Race, Every Community
             </h2>
-            <p className="text-[15px] leading-[1.85] text-charcoal/70 max-w-[560px] mx-auto">
+            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[560px] mx-auto">
               The Gada Global 5K is open to all runners, walkers, and supporters regardless of background. While we celebrate Oromo heritage, this event is designed to bring together the full diversity of Washington DC &mdash; because running has no borders.
             </p>
           </ScrollReveal>
@@ -478,8 +478,8 @@ export default function Home() {
               <ScrollReveal key={item.title}>
                 <div className="bg-white rounded-2xl p-6 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
                   <div className="w-12 h-12 rounded-xl bg-yellow/12 flex items-center justify-center text-gold-dim mb-4">{item.icon}</div>
-                  <h4 className="font-[family-name:var(--font-heading)] text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
-                  <p className="text-[13px] text-charcoal/60 leading-relaxed">{item.desc}</p>
+                  <h4 className="font-[family-name:var(--font-heading)] text-base md:text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
+                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -488,7 +488,7 @@ export default function Home() {
           <ScrollReveal>
             <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white text-center">
               <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Bring Your Crew</h3>
-              <p className="text-[14px] text-white/65 leading-relaxed max-w-[520px] mx-auto mb-6">
+              <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed max-w-[520px] mx-auto mb-6">
                 Group registration discounts available for teams of 10+. Running clubs, church groups, corporate teams, and school organizations are all welcome. The post-race Irrecha festival is free and open to spectators &mdash; bring your family and friends.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
@@ -512,7 +512,7 @@ export default function Home() {
           <ScrollReveal>
             <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Secure Your Spot Today</h2>
-            <p className="text-[15px] leading-[1.85] text-white/65 max-w-[440px] mx-auto mb-10">Registration includes bib, timing chip, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
+            <p className="text-base md:text-[15px] leading-[1.85] text-white/65 max-w-[440px] mx-auto mb-10">Registration includes bib, timing chip, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/register" className="inline-flex items-center gap-3 bg-yellow text-charcoal px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl hover:bg-gold-light hover:shadow-[0_8px_32px_rgba(245,200,66,0.25)] hover:-translate-y-0.5 transition-all no-underline">Register for 5K</Link>
               <Link href="/shop" className="inline-flex items-center gap-3 bg-white/8 text-white px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl border border-white/12 hover:border-yellow/40 hover:text-yellow hover:-translate-y-0.5 transition-all no-underline">Shop Merch</Link>

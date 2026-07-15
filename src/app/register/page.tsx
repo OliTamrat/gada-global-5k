@@ -138,7 +138,7 @@ export default function RegisterPage() {
                         </div>
                         <div className="flex-1">
                           <div className="font-bold text-[14px] tracking-tight text-charcoal">{t.name}</div>
-                          <div className="text-[12px] text-charcoal/35">{t.description}</div>
+                          <div className="text-[14px] md:text-[12px] text-charcoal/35">{t.description}</div>
                         </div>
                         <div className="text-2xl font-black text-charcoal tracking-tight">
                           ${t.price / 100}
@@ -160,7 +160,7 @@ export default function RegisterPage() {
                       "Water stations on course",
                       "Professional race photography",
                     ].map((item) => (
-                      <li key={item} className="flex items-center gap-3 text-[13px] text-charcoal/55">
+                      <li key={item} className="flex items-center gap-3 text-[15px] md:text-[13px] text-charcoal/55">
                         <span className="w-5 h-5 rounded-lg yellow-card flex items-center justify-center shrink-0">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                         </span>
@@ -200,7 +200,7 @@ export default function RegisterPage() {
                     <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold text-charcoal tracking-tight mb-1">
                       Registration Form
                     </h3>
-                    <p className="text-[13px] text-charcoal/35">
+                    <p className="text-[15px] md:text-[13px] text-charcoal/35">
                       Fill out your details to proceed
                     </p>
                   </div>
