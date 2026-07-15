@@ -162,11 +162,14 @@ export default function Home() {
                 title: "Race Bib & Number",
                 desc: "Personalized bib with your name and unique race number",
                 visual: (
-                  <div className="h-[140px] rounded-xl bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-5">
-                    <div className="bg-white rounded-lg px-6 py-4 text-center shadow-md">
-                      <div className="text-[9px] font-bold tracking-[3px] uppercase text-charcoal/50">Gada Global 5K</div>
-                      <div className="text-3xl font-black text-charcoal tracking-tight">0217</div>
-                      <div className="text-[10px] font-semibold text-charcoal/60">Washington, DC</div>
+                  <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5">
+                    <div className="bg-white rounded-xl px-5 py-3.5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-charcoal/5 relative">
+                      <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full yellow-card flex items-center justify-center">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                      </div>
+                      <div className="text-[8px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
+                      <div className="text-3xl font-black text-charcoal tracking-tight leading-none">0217</div>
+                      <div className="text-[9px] font-semibold text-charcoal/45 mt-1">Rock Creek &bull; Washington, DC</div>
                     </div>
                   </div>
                 ),
@@ -176,8 +179,8 @@ export default function Home() {
                 title: "Finisher Medal",
                 desc: "Custom Gada 5K medal celebrating heritage and Irrecha",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative">
-                    <Image src="/images/finisher-medal.jpg" alt="Finisher medal" fill className="object-contain p-2" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light">
+                    <Image src="/images/finisher-medal.jpg" alt="Finisher medal" fill className="object-contain p-4 drop-shadow-[0_4px_12px_rgba(245,200,66,0.3)]" />
                   </div>
                 ),
               },
@@ -186,8 +189,8 @@ export default function Home() {
                 title: "Official Race Tee",
                 desc: "Limited-edition heritage design with Oromo artwork",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative">
-                    <Image src="/products/heritage-tee.jpg" alt="Race tee" fill className="object-cover object-center" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/5 to-transparent">
+                    <Image src="/products/heritage-tee.jpg" alt="Race tee" fill className="object-contain object-center p-2" />
                   </div>
                 ),
               },
