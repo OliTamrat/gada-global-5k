@@ -1,3 +1,5 @@
+import { query, queryOne, transaction } from "@/lib/db";
+
 export interface RaceEntry {
   bib: number;
   firstName: string;
@@ -37,8 +39,94 @@ export interface RaceResult extends RaceEntry {
   position?: number;
 }
 
-// ── In-memory stores ──
-const demoRunners: Omit<RaceEntry, "scanLogs">[] = [
+// Unique violation — a volunteer scanning the same bib twice.
+const PG_UNIQUE_VIOLATION = "23505";
+
+function isUniqueViolation(err: unknown): boolean {
+  return (
+    typeof err === "object" &&
+    err !== null &&
+    (err as { code?: string }).code === PG_UNIQUE_VIOLATION
+  );
+}
+
+// ── Row shapes ───────────────────────────────────────────────────────────────
+interface EntryRow {
+  bib: number;
+  first_name: string;
+  last_name: string;
+  age: number;
+  gender: string;
+  start_time: number | null;
+  finish_time: number | null;
+  timing_confidence: "high" | "medium" | "low" | null;
+  scan_logs: ScanLog[];
+}
+
+interface DisputeRow {
+  id: string;
+  bib: number;
+  runner_name: string;
+  reason: string;
+  submitted_at: number;
+  status: "pending" | "accepted" | "rejected";
+  resolution: string | null;
+  resolved_at: number | null;
+  original_time: number | null;
+  adjusted_time: number | null;
+  evidence: string[];
+}
+
+function toEntry(row: EntryRow): RaceEntry {
+  return {
+    bib: row.bib,
+    firstName: row.first_name,
+    lastName: row.last_name,
+    age: row.age,
+    gender: row.gender,
+    startTime: row.start_time ?? undefined,
+    finishTime: row.finish_time ?? undefined,
+    timingConfidence: row.timing_confidence ?? undefined,
+    scanLogs: row.scan_logs ?? [],
+  };
+}
+
+function toDispute(row: DisputeRow): Dispute {
+  return {
+    id: row.id,
+    bib: row.bib,
+    runnerName: row.runner_name,
+    reason: row.reason,
+    submittedAt: row.submitted_at,
+    status: row.status,
+    resolution: row.resolution ?? undefined,
+    resolvedAt: row.resolved_at ?? undefined,
+    originalTime: row.original_time ?? undefined,
+    adjustedTime: row.adjusted_time ?? undefined,
+    evidence: row.evidence ?? [],
+  };
+}
+
+const ENTRY_SELECT = `
+  select
+    e.bib, e.first_name, e.last_name, e.age, e.gender,
+    e.start_time, e.finish_time, e.timing_confidence,
+    coalesce(
+      json_agg(
+        json_build_object(
+          'timestamp', s.timestamp_ms,
+          'type', s.type,
+          'volunteerId', s.volunteer_id
+        ) order by s.timestamp_ms
+      ) filter (where s.id is not null),
+      '[]'
+    ) as scan_logs
+  from race_entries e
+  left join scan_logs s on s.bib = e.bib
+`;
+
+// ── Seed demo ────────────────────────────────────────────────────────────────
+const demoRunners = [
   { bib: 1, firstName: "Lelisa", lastName: "Desisa", age: 28, gender: "Male" },
   { bib: 2, firstName: "Almaz", lastName: "Ayana", age: 25, gender: "Female" },
   { bib: 3, firstName: "Tamirat", lastName: "Tola", age: 30, gender: "Male" },
@@ -53,184 +141,292 @@ const demoRunners: Omit<RaceEntry, "scanLogs">[] = [
   { bib: 12, firstName: "Tsehay", lastName: "Gemechu", age: 23, gender: "Female" },
 ];
 
-let raceEntries: RaceEntry[] | null = null;
-let disputes: Dispute[] = [];
-
-function getEntries(): RaceEntry[] {
-  if (!raceEntries) raceEntries = [];
-  return raceEntries;
-}
-
-// ── Seed demo ──
-export function seedDemoData(): RaceEntry[] {
+/** Resets timing data to a demo race. Only touches the seeded bib range. */
+export async function seedDemoData(): Promise<RaceEntry[]> {
   const raceStart = Date.now() - 25 * 60 * 1000;
   const finishOffsets = [
     15 * 60 + 23, 17 * 60 + 45, 18 * 60 + 12, 19 * 60 + 8,
     20 * 60 + 33, 21 * 60 + 15, 23 * 60 + 48, 25 * 60 + 2,
   ];
+  const demoBibs = demoRunners.map((r) => r.bib);
 
-  raceEntries = demoRunners.map((r, i) => {
-    const entry: RaceEntry = { ...r, scanLogs: [], timingConfidence: "high" };
-    entry.startTime = raceStart;
-    entry.scanLogs.push({ timestamp: raceStart, type: "start", volunteerId: "demo" });
-    if (i < 8) {
-      const ft = raceStart + finishOffsets[i] * 1000;
-      entry.finishTime = ft;
-      // Simulate 2 volunteers for first 4 (high confidence), 1 for rest
-      entry.scanLogs.push({ timestamp: ft, type: "finish", volunteerId: "vol-1" });
-      if (i < 4) {
-        entry.scanLogs.push({ timestamp: ft + 300, type: "finish", volunteerId: "vol-2" });
-        entry.timingConfidence = "high";
-      } else {
-        entry.timingConfidence = "medium";
+  await transaction(async (client) => {
+    // scan_logs and disputes cascade from race_entries.
+    await client.query("delete from race_entries where bib = any($1::int[])", [demoBibs]);
+
+    for (const [i, runner] of demoRunners.entries()) {
+      const finished = i < 8;
+      const finishTime = finished ? raceStart + finishOffsets[i] * 1000 : null;
+      // First four get a second volunteer scan, so they reach high confidence.
+      const confidence = !finished ? "high" : i < 4 ? "high" : "medium";
+
+      await client.query(
+        `insert into race_entries
+           (bib, first_name, last_name, age, gender, start_time, finish_time, timing_confidence)
+         values ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [
+          runner.bib, runner.firstName, runner.lastName, runner.age,
+          runner.gender, raceStart, finishTime, confidence,
+        ]
+      );
+
+      await client.query(
+        `insert into scan_logs (bib, type, volunteer_id, timestamp_ms)
+         values ($1, 'start', 'demo', $2)`,
+        [runner.bib, raceStart]
+      );
+
+      if (finishTime !== null) {
+        await client.query(
+          `insert into scan_logs (bib, type, volunteer_id, timestamp_ms)
+           values ($1, 'finish', 'vol-1', $2)`,
+          [runner.bib, finishTime]
+        );
+        if (i < 4) {
+          await client.query(
+            `insert into scan_logs (bib, type, volunteer_id, timestamp_ms)
+             values ($1, 'finish', 'vol-2', $2)`,
+            [runner.bib, finishTime + 300]
+          );
+        }
       }
     }
-    return entry;
   });
 
-  disputes = [];
-  return raceEntries;
+  return getRaceEntries();
 }
 
-export function getRaceEntries(): RaceEntry[] {
-  return getEntries();
+export async function getRaceEntries(): Promise<RaceEntry[]> {
+  const rows = await query<EntryRow>(`${ENTRY_SELECT} group by e.bib order by e.bib`);
+  return rows.map(toEntry);
 }
 
-// ── Multi-volunteer consensus scan ──
-export function recordScan(
+export async function getRaceEntry(bib: number): Promise<RaceEntry | null> {
+  const row = await queryOne<EntryRow>(
+    `${ENTRY_SELECT} where e.bib = $1 group by e.bib`,
+    [bib]
+  );
+  return row ? toEntry(row) : null;
+}
+
+/** Adds a runner to the timing roster. Idempotent on bib. */
+export async function upsertRaceEntry(entry: {
+  bib: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+}): Promise<void> {
+  await query(
+    `insert into race_entries (bib, first_name, last_name, age, gender)
+     values ($1, $2, $3, $4, $5)
+     on conflict (bib) do update set
+       first_name = excluded.first_name,
+       last_name  = excluded.last_name,
+       age        = excluded.age,
+       gender     = excluded.gender`,
+    [entry.bib, entry.firstName, entry.lastName, entry.age, entry.gender]
+  );
+}
+
+// ── Multi-volunteer consensus scan ───────────────────────────────────────────
+export async function recordScan(
   bib: number,
   type: "start" | "finish",
   volunteerId: string = "vol-1"
-): { success: boolean; entry?: RaceEntry; error?: string; consensus?: string } {
-  const entries = getEntries();
-  const entry = entries.find((e) => e.bib === bib);
-
-  if (!entry) {
-    return { success: false, error: `Bib #${bib} not found` };
-  }
-
+): Promise<{ success: boolean; entry?: RaceEntry; error?: string; consensus?: string }> {
   const now = Date.now();
-  const log: ScanLog = { timestamp: now, type, volunteerId };
 
-  if (type === "start") {
-    if (entry.startTime) {
-      return { success: false, error: `Bib #${bib} already started` };
+  try {
+    return await transaction(async (client) => {
+      // Lock the row so two volunteers scanning at once cannot interleave
+      // the read-compute-write below.
+      const locked = await client.query<{ start_time: number | null }>(
+        "select start_time from race_entries where bib = $1 for update",
+        [bib]
+      );
+
+      if (locked.rowCount === 0) {
+        return { success: false, error: `Bib #${bib} not found` };
+      }
+
+      const startTime = locked.rows[0].start_time;
+
+      if (type === "start") {
+        if (startTime !== null) {
+          return { success: false, error: `Bib #${bib} already started` };
+        }
+        await client.query("update race_entries set start_time = $2 where bib = $1", [bib, now]);
+        await client.query(
+          `insert into scan_logs (bib, type, volunteer_id, timestamp_ms)
+           values ($1, 'start', $2, $3)`,
+          [bib, volunteerId, now]
+        );
+        const entry = await readEntry(client, bib);
+        return { success: true, entry };
+      }
+
+      // Finish scan — supports multiple volunteers.
+      if (startTime === null) {
+        return { success: false, error: `Bib #${bib} hasn't started yet` };
+      }
+
+      await client.query(
+        `insert into scan_logs (bib, type, volunteer_id, timestamp_ms)
+         values ($1, 'finish', $2, $3)`,
+        [bib, volunteerId, now]
+      );
+
+      const finishScans = await client.query<{ timestamp_ms: number }>(
+        "select timestamp_ms from scan_logs where bib = $1 and type = 'finish'",
+        [bib]
+      );
+      const timestamps = finishScans.rows.map((r) => r.timestamp_ms);
+
+      if (timestamps.length === 1) {
+        await client.query(
+          "update race_entries set finish_time = $2, timing_confidence = 'medium' where bib = $1",
+          [bib, now]
+        );
+        const entry = await readEntry(client, bib);
+        return { success: true, entry, consensus: "1 volunteer — medium confidence" };
+      }
+
+      const avg = Math.round(timestamps.reduce((a, b) => a + b, 0) / timestamps.length);
+      const maxDiff = Math.max(...timestamps) - Math.min(...timestamps);
+      const confidence = maxDiff > 3000 ? "low" : "high";
+
+      await client.query(
+        "update race_entries set finish_time = $2, timing_confidence = $3 where bib = $1",
+        [bib, avg, confidence]
+      );
+      const entry = await readEntry(client, bib);
+
+      return {
+        success: true,
+        entry,
+        consensus:
+          confidence === "low"
+            ? `${timestamps.length} volunteers — LOW confidence (${(maxDiff / 1000).toFixed(1)}s spread). Review recommended.`
+            : `${timestamps.length} volunteers — HIGH confidence (${(maxDiff / 1000).toFixed(1)}s spread)`,
+      };
+    });
+  } catch (err) {
+    if (isUniqueViolation(err)) {
+      return { success: false, error: `Volunteer ${volunteerId} already scanned Bib #${bib}` };
     }
-    entry.startTime = now;
-    entry.scanLogs.push(log);
-    return { success: true, entry };
+    throw err;
   }
+}
 
-  // Finish scan — support multi-volunteer
-  if (!entry.startTime) {
-    return { success: false, error: `Bib #${bib} hasn't started yet` };
-  }
-
-  // Check if this volunteer already scanned this bib's finish
-  const alreadyScanned = entry.scanLogs.some(
-    (l) => l.type === "finish" && l.volunteerId === volunteerId
+async function readEntry(
+  client: import("pg").PoolClient,
+  bib: number
+): Promise<RaceEntry | undefined> {
+  const result = await client.query<EntryRow>(
+    `${ENTRY_SELECT} where e.bib = $1 group by e.bib`,
+    [bib]
   );
-  if (alreadyScanned) {
-    return { success: false, error: `Volunteer ${volunteerId} already scanned Bib #${bib}` };
-  }
-
-  entry.scanLogs.push(log);
-
-  const finishScans = entry.scanLogs.filter((l) => l.type === "finish");
-
-  if (finishScans.length === 1) {
-    // First scan — set finish time
-    entry.finishTime = now;
-    entry.timingConfidence = "medium";
-    return { success: true, entry, consensus: "1 volunteer — medium confidence" };
-  }
-
-  // Multiple scans — compute consensus
-  const timestamps = finishScans.map((l) => l.timestamp);
-  const avg = Math.round(timestamps.reduce((a, b) => a + b, 0) / timestamps.length);
-  const maxDiff = Math.max(...timestamps) - Math.min(...timestamps);
-
-  entry.finishTime = avg;
-
-  if (maxDiff > 3000) {
-    entry.timingConfidence = "low";
-    return {
-      success: true,
-      entry,
-      consensus: `${finishScans.length} volunteers — LOW confidence (${(maxDiff / 1000).toFixed(1)}s spread). Review recommended.`,
-    };
-  } else if (finishScans.length >= 2) {
-    entry.timingConfidence = "high";
-    return {
-      success: true,
-      entry,
-      consensus: `${finishScans.length} volunteers — HIGH confidence (${(maxDiff / 1000).toFixed(1)}s spread)`,
-    };
-  }
-
-  entry.timingConfidence = "medium";
-  return { success: true, entry, consensus: `${finishScans.length} volunteers — medium confidence` };
+  return result.rows[0] ? toEntry(result.rows[0]) : undefined;
 }
 
-// ── Disputes ──
-export function getDisputes(): Dispute[] {
-  return disputes;
+// ── Disputes ─────────────────────────────────────────────────────────────────
+export async function getDisputes(): Promise<Dispute[]> {
+  const rows = await query<DisputeRow>("select * from disputes order by submitted_at desc");
+  return rows.map(toDispute);
 }
 
-export function createDispute(d: {
+export async function createDispute(d: {
   bib: number;
   reason: string;
   evidence?: string[];
-}): { success: boolean; dispute?: Dispute; error?: string } {
-  const entries = getEntries();
-  const entry = entries.find((e) => e.bib === d.bib);
+}): Promise<{ success: boolean; dispute?: Dispute; error?: string }> {
+  const entry = await queryOne<{
+    first_name: string;
+    last_name: string;
+    start_time: number | null;
+    finish_time: number | null;
+  }>(
+    "select first_name, last_name, start_time, finish_time from race_entries where bib = $1",
+    [d.bib]
+  );
+
   if (!entry) return { success: false, error: "Runner not found" };
 
-  const existing = disputes.find((x) => x.bib === d.bib && x.status === "pending");
-  if (existing) return { success: false, error: "A dispute is already pending for this bib" };
+  const originalTime =
+    entry.finish_time !== null && entry.start_time !== null
+      ? entry.finish_time - entry.start_time
+      : null;
 
-  const dispute: Dispute = {
-    id: `DSP-${Date.now()}`,
-    bib: d.bib,
-    runnerName: `${entry.firstName} ${entry.lastName}`,
-    reason: d.reason,
-    submittedAt: Date.now(),
-    status: "pending",
-    originalTime: entry.finishTime && entry.startTime ? entry.finishTime - entry.startTime : undefined,
-    evidence: d.evidence || [],
-  };
-
-  disputes.push(dispute);
-  return { success: true, dispute };
+  try {
+    const row = await queryOne<DisputeRow>(
+      `insert into disputes
+         (id, bib, runner_name, reason, submitted_at, status, original_time, evidence)
+       values ($1, $2, $3, $4, $5, 'pending', $6, $7::jsonb)
+       returning *`,
+      [
+        `DSP-${Date.now()}`,
+        d.bib,
+        `${entry.first_name} ${entry.last_name}`,
+        d.reason,
+        Date.now(),
+        originalTime,
+        // Must be stringified: node-postgres would otherwise send a JS array
+        // as a Postgres array literal, which jsonb rejects.
+        JSON.stringify(d.evidence ?? []),
+      ]
+    );
+    return { success: true, dispute: row ? toDispute(row) : undefined };
+  } catch (err) {
+    // The partial unique index on (bib) where status = 'pending'.
+    if (isUniqueViolation(err)) {
+      return { success: false, error: "A dispute is already pending for this bib" };
+    }
+    throw err;
+  }
 }
 
-export function resolveDispute(
+export async function resolveDispute(
   disputeId: string,
   action: "accepted" | "rejected",
   resolution: string,
   adjustedMs?: number
-): { success: boolean; error?: string } {
-  const dispute = disputes.find((d) => d.id === disputeId);
-  if (!dispute) return { success: false, error: "Dispute not found" };
-  if (dispute.status !== "pending") return { success: false, error: "Dispute already resolved" };
+): Promise<{ success: boolean; error?: string }> {
+  return transaction(async (client) => {
+    const found = await client.query<{ bib: number; status: string }>(
+      "select bib, status from disputes where id = $1 for update",
+      [disputeId]
+    );
 
-  dispute.status = action;
-  dispute.resolution = resolution;
-  dispute.resolvedAt = Date.now();
-
-  if (action === "accepted" && adjustedMs !== undefined) {
-    const entries = getEntries();
-    const entry = entries.find((e) => e.bib === dispute.bib);
-    if (entry && entry.startTime) {
-      dispute.adjustedTime = adjustedMs;
-      entry.finishTime = entry.startTime + adjustedMs;
+    if (found.rowCount === 0) return { success: false, error: "Dispute not found" };
+    if (found.rows[0].status !== "pending") {
+      return { success: false, error: "Dispute already resolved" };
     }
-  }
 
-  return { success: true };
+    const applyAdjustment = action === "accepted" && adjustedMs !== undefined;
+
+    await client.query(
+      `update disputes
+         set status = $2, resolution = $3, resolved_at = $4,
+             adjusted_time = coalesce($5, adjusted_time)
+       where id = $1`,
+      [disputeId, action, resolution, Date.now(), applyAdjustment ? adjustedMs : null]
+    );
+
+    if (applyAdjustment) {
+      await client.query(
+        `update race_entries
+           set finish_time = start_time + $2
+         where bib = $1 and start_time is not null`,
+        [found.rows[0].bib, adjustedMs]
+      );
+    }
+
+    return { success: true };
+  });
 }
 
-// ── Formatting ──
+// ── Formatting ───────────────────────────────────────────────────────────────
 export function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const hours = Math.floor(totalSec / 3600);
