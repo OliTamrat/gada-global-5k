@@ -13,7 +13,7 @@ export const EVENT = {
   location: "Rock Creek Park Tennis Center",
   address: "5220 16th St NW, Washington, DC 20011",
   organization: "Gada Global Inc.",
-  supportEmail: "info@gadaglobal.com",
+  supportEmail: "info@gadaglobalus.com",
 } as const;
 
 export interface RegistrationConfirmation {
@@ -45,7 +45,7 @@ function esc(value: string | number | null | undefined): string {
 }
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://gadaglobal.com").replace(/\/$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://gadaglobalus.com").replace(/\/$/, "");
 }
 
 function buildHtml(d: RegistrationConfirmation): string {
