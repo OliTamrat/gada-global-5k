@@ -110,7 +110,7 @@ async function generateAIRecap(d: {
         messages: [
           {
             role: "user",
-            content: `Write a personalized, warm, and celebratory race recap for a runner at the Gada Global 5K (a celebration of Oromo heritage and the Irrecha festival, held on Rock Creek Parkway in Washington DC). Keep it to 3-4 sentences. Be specific with their stats. Do not use emojis.
+            content: `Write a personalized, warm, and celebratory race recap for a runner at the Gada Global 5K (a celebration of Oromo heritage and the Irrecha festival, held at the Rock Creek Park Tennis Center in Washington DC). Keep it to 3-4 sentences. Be specific with their stats. Do not use emojis.
 
 Runner: ${d.fullName}, age ${d.age}, ${d.gender}
 Official time: ${d.time}
@@ -167,5 +167,5 @@ function generateTemplateRecap(d: {
 
   const topPercent = 100 - d.percentile;
 
-  return `Congratulations, ${d.name}! You crossed the finish line at the Gada Global 5K with an official time of ${d.time}, finishing ${ordinal(d.position)} overall out of ${d.total} runners. ${paceComment} at ${d.pace}/mile. You placed ${ordinal(d.genderPos)} among ${d.genderTotal} runners in your gender category, and ${ordinal(d.agePos)} out of ${d.ageTotal} in the ${d.ageGroup} age group. You finished ahead of ${d.percentile}% of all participants${topPercent <= 10 ? " \u2014 placing you in the top " + topPercent + "%!" : "."} Thank you for celebrating Oromo heritage through running at Rock Creek Parkway. See you next year!`;
+  return `Congratulations, ${d.name}! You crossed the finish line at the Gada Global 5K with an official time of ${d.time}, finishing ${ordinal(d.position)} overall out of ${d.total} runners. ${paceComment} at ${d.pace}/mile. You placed ${ordinal(d.genderPos)} among ${d.genderTotal} runners in your gender category, and ${ordinal(d.agePos)} out of ${d.ageTotal} in the ${d.ageGroup} age group. You finished ahead of ${d.percentile}% of all participants${topPercent <= 10 ? " \u2014 placing you in the top " + topPercent + "%!" : "."} Thank you for celebrating Oromo heritage through running at Rock Creek Park. See you next year!`;
 }

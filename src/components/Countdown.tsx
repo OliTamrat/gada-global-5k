@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const TARGET = new Date("2026-10-03T07:30:00-04:00").getTime();
+const TARGET = new Date("2026-10-03T09:00:00-04:00").getTime();
 
 export function Countdown() {
   const [mounted, setMounted] = useState(false);
@@ -50,7 +50,7 @@ export function Countdown() {
             October 3, 2026
           </div>
           <div className="text-xs font-semibold text-charcoal/55">
-            Rock Creek Parkway, Washington DC
+            Rock Creek Park Tennis Center, Washington DC
           </div>
         </div>
       </div>

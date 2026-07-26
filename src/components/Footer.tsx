@@ -42,7 +42,7 @@ export function Footer() {
               GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
             </Link>
             <p className="text-[15px] md:text-[13px] leading-[1.85] max-w-[280px] text-white/65">
-              Celebrating Oromo heritage through the power of running. October 3, 2026 at Rock Creek Parkway, Washington DC.
+              Celebrating Oromo heritage through the power of running. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.
             </p>
           </div>
 

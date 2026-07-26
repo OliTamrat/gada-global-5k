@@ -29,7 +29,7 @@ const Icons = {
 };
 
 const eventPortfolio = [
-  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. October 3, 2026 at Rock Creek Parkway, DC.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg> },
+  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. October 3, 2026 at the Rock Creek Park Tennis Center, DC.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg> },
   { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> },
   { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg> },
   { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> },
@@ -96,7 +96,7 @@ export default function Home() {
             <div className="dark-card rounded-2xl p-6 flex flex-col min-h-[160px]">
               <div className="flex items-center gap-2 mb-4"><div className="w-8 h-8 rounded-full bg-green-deep/20 flex items-center justify-center text-green-light">{Icons.medal}</div><div><div className="text-sm font-bold text-white">Event Highlights</div><div className="text-[11px] text-white/50">3 Key Features</div></div></div>
               <div className="space-y-3 flex-1">
-                {[{ badge: "5K", label: "Rock Creek Parkway", sub: "Washington, DC" },{ badge: "IRR", label: "Irrecha Celebration", sub: "Oct 3, 2026" },{ badge: "COM", label: "Community Festival", sub: "Music, Food, Dance" }].map((item) => (
+                {[{ badge: "5K", label: "Rock Creek Tennis Center", sub: "Washington, DC" },{ badge: "IRR", label: "Irrecha Celebration", sub: "Oct 3, 2026" },{ badge: "COM", label: "Community Festival", sub: "Music, Food, Dance" }].map((item) => (
                   <div key={item.label} className="flex items-center gap-3"><span className="w-8 h-5 rounded bg-yellow/15 text-yellow text-[9px] font-black flex items-center justify-center tracking-wider">{item.badge}</span><div className="flex-1 min-w-0"><div className="text-xs font-semibold text-white truncate">{item.label}</div><div className="text-[11px] text-white/45">{item.sub}</div></div></div>
                 ))}
               </div>
@@ -127,7 +127,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { icon: Icons.leaf, title: "Irrecha Festival", desc: "Celebrating the Oromo thanksgiving to Waaqa at the water\u2019s edge" },
-                { icon: Icons.trophy, title: "5K Run & Walk", desc: "Scenic route along Rock Creek for all fitness levels" },
+                { icon: Icons.trophy, title: "5K Run & Walk", desc: "Scenic route through Rock Creek Park for all fitness levels" },
                 { icon: Icons.music, title: "Cultural Program", desc: "Live music, traditional dance, and Oromo cuisine" },
                 { icon: Icons.users, title: "Community Unity", desc: "Bringing together the global Oromo diaspora" },
               ].map((card) => (
@@ -169,7 +169,7 @@ export default function Home() {
                       </div>
                       <div className="text-[8px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
                       <div className="text-3xl font-black text-charcoal tracking-tight leading-none">0217</div>
-                      <div className="text-[9px] font-semibold text-charcoal/45 mt-1">Rock Creek &bull; Washington, DC</div>
+                      <div className="text-[9px] font-semibold text-charcoal/45 mt-1">Rock Creek Tennis Center &bull; Washington, DC</div>
                     </div>
                   </div>
                 ),
@@ -278,6 +278,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ══ PRIZE MONEY ══ */}
+      <section className="bg-green-deep py-24 md:py-32 px-6 md:px-16 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal className="text-center mb-14">
+            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Cash Awards</span>
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">$1,200 in Prize Money</h2>
+            <p className="text-base md:text-[15px] leading-[1.85] text-white/70 max-w-[540px] mx-auto">
+              Cash awards for the top three finishers in both the men&apos;s and women&apos;s divisions, presented at the 10:00 AM awards ceremony.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[860px] mx-auto">
+            {[
+              { division: "Men", label: "Dhiira" },
+              { division: "Women", label: "Dubartii" },
+            ].map((div) => (
+              <ScrollReveal key={div.division}>
+                <div className="rounded-2xl bg-white/8 border border-white/12 p-7 backdrop-blur-sm h-full">
+                  <div className="flex items-baseline gap-2.5 mb-6">
+                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-white tracking-tight">{div.division}</h3>
+                    <span className="text-[12px] font-semibold text-yellow/80 tracking-wide">{div.label}</span>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {[
+                      { place: "1st", amount: "$300" },
+                      { place: "2nd", amount: "$200" },
+                      { place: "3rd", amount: "$100" },
+                    ].map((p) => (
+                      <div key={p.place} className="flex items-center justify-between gap-4 rounded-xl bg-black/20 px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <span className="w-9 h-9 rounded-lg yellow-card flex items-center justify-center text-[12px] font-black shrink-0">{p.place}</span>
+                          <span className="text-[14px] font-semibold text-white/75">Place</span>
+                        </div>
+                        <span className="text-2xl font-black text-yellow tracking-tight tabular-nums">{p.amount}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal>
+            <p className="text-center text-[13px] text-white/50 mt-8 max-w-[540px] mx-auto leading-relaxed">
+              Age group awards and finisher medals are presented alongside the cash prizes. All participants receive a medal.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ══ DC LANDMARKS — THE COURSE ══ */}
       <section className="bg-charcoal py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
@@ -285,15 +335,14 @@ export default function Home() {
             <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">The Course</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Run Through the Heart of DC</h2>
             <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[520px] mx-auto">
-              Rock Creek Parkway winds through Washington DC&apos;s most beautiful green corridor, connecting iconic landmarks along the way.
+              The race starts and finishes at the Rock Creek Park Tennis Center, set inside Washington DC&apos;s largest stretch of urban wilderness.
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             {[
-              { img: "/images/course/rock-creek.jpg", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The race follows the paved parkway through the heart of this urban wilderness.", stat: "1,754 acres" },
-              { img: "/images/course/washington-monument.jpg", title: "Washington Monument", desc: "The iconic 555-foot obelisk stands as a beacon visible from the course. Runners pass through parkland just miles from this national treasure.", stat: "555 ft tall" },
-              { img: "/images/course/lincoln-memorial.jpg", title: "Lincoln Memorial", desc: "Abraham Lincoln\u2019s memorial sits at the western end of the National Mall, a short distance from where Rock Creek meets the Potomac River.", stat: "Est. 1922" },
+              { img: "/images/course/rock-creek.jpg", title: "Rock Creek Park", desc: "1,754 acres of forested trails, meadows, and creek crossings. The start and finish sit at the Tennis Center on 16th Street NW, in the heart of the park.", stat: "1,754 acres" },
+              { img: "/images/course/washington-monument.jpg", title: "The Nation\u2019s Capital", desc: "Rock Creek Park runs north to south through Washington DC, linking the neighborhoods above the start line to the monuments a few miles downstream.", stat: "Washington, DC" },
             ].map((landmark) => (
               <ScrollReveal key={landmark.title}>
                 <div className="rounded-2xl overflow-hidden dark-card hover:-translate-y-1 hover:border-yellow/15 transition-all">
@@ -319,7 +368,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="flex-1 md:border-l md:border-white/10 md:pl-8">
-                <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed">The course follows Rock Creek Parkway from the Nature Center south through the park, finishing near the Kennedy Center. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
+                <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed">The course starts and finishes at the Rock Creek Park Tennis Center, 5220 16th St NW, looping through the surrounding park roads and trails. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
               </div>
             </div>
           </ScrollReveal>
