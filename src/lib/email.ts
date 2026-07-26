@@ -6,9 +6,12 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 export const EVENT = {
   name: "Gada Global 5K",
   date: "Saturday, October 3, 2026",
-  startTime: "7:30 AM",
-  packetPickup: "6:00 AM",
-  location: "Rock Creek Parkway, Washington, DC",
+  startTime: "9:00 AM",
+  packetPickup: "7:00 AM",
+  awardsTime: "10:00 AM",
+  programHours: "7:00 AM to 12:00 PM",
+  location: "Rock Creek Park Tennis Center",
+  address: "5220 16th St NW, Washington, DC 20011",
   organization: "Gada Global Inc.",
   supportEmail: "info@gadaglobal.com",
 } as const;
@@ -66,9 +69,10 @@ function buildHtml(d: RegistrationConfirmation): string {
     .join("");
 
   const nextSteps = [
-    `Arrive by ${EVENT.packetPickup} for packet pickup at ${EVENT.location}.`,
+    `Packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
     "Bring a photo ID. Your bib, timing chip, and race t-shirt are in your packet.",
     "Wear your bib on the front of your shirt so the timing volunteers can scan it.",
+    `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
   ]
     .map(
@@ -157,12 +161,12 @@ function buildHtml(d: RegistrationConfirmation): string {
                 </tr>
                 <tr>
                   <td style="padding:2px 0 2px 14px;color:#4a453d;font-size:14px;line-height:1.6;">
-                    Start ${esc(EVENT.startTime)} &bull; Packet pickup ${esc(EVENT.packetPickup)}
+                    Race start ${esc(EVENT.startTime)} &bull; Packet pickup ${esc(EVENT.packetPickup)} &bull; Awards ${esc(EVENT.awardsTime)}
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:2px 0 2px 14px;color:#4a453d;font-size:14px;line-height:1.6;">
-                    ${esc(EVENT.location)}
+                    ${esc(EVENT.location)}, ${esc(EVENT.address)}
                   </td>
                 </tr>
               </table>
@@ -223,13 +227,14 @@ function buildText(d: RegistrationConfirmation): string {
     "",
     "RACE DAY",
     EVENT.date,
-    `Start ${EVENT.startTime} — Packet pickup ${EVENT.packetPickup}`,
-    EVENT.location,
+    `Race start ${EVENT.startTime} — Packet pickup ${EVENT.packetPickup} — Awards ${EVENT.awardsTime}`,
+    `${EVENT.location}, ${EVENT.address}`,
     "",
     "WHAT TO DO NEXT",
-    `- Arrive by ${EVENT.packetPickup} for packet pickup.`,
+    `- Packet pickup opens at ${EVENT.packetPickup}.`,
     "- Bring a photo ID. Bib, timing chip, and t-shirt are in your packet.",
     "- Wear your bib on the front of your shirt for timing scans.",
+    `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,
     "",
     `Questions? ${EVENT.supportEmail}`,
