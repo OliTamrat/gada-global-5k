@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Gada Global 5K | Irrecha Celebration Run - October 3, 2026",
   description:
-    "Join the Gada Global 5K Run celebrating Oromo culture and the annual Irrecha festival. October 3, 2026 at Rock Creek Parkway, Washington DC.",
+    "Join the Gada Global 5K Run celebrating Oromo culture and the annual Irrecha festival. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.",
 };
 
 export default function RootLayout({

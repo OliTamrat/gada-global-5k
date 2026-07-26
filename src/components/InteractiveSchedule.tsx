@@ -5,47 +5,47 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 const schedule = [
   {
-    time: "6:00 AM",
+    time: "7:00 AM",
     title: "Packet Pickup Opens",
-    desc: "Collect your race bib, timing chip, and official Gada Global 5K t-shirt at the start/finish area near the Rock Creek Nature Center.",
+    desc: "Collect your race bib, timing chip, and official Gada Global 5K t-shirt at the start/finish area at the Rock Creek Park Tennis Center, 5220 16th St NW.",
     details: ["Bring photo ID and registration confirmation", "T-shirt exchange available for sizing", "Course maps and safety briefing provided", "Water and light refreshments available"],
-    duration: "6:00 - 7:00 AM",
+    duration: "7:00 - 8:15 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>,
     color: "yellow" as const,
   },
   {
-    time: "7:00 AM",
+    time: "8:15 AM",
     title: "Opening Ceremony",
     desc: "A powerful start to the day with traditional Oromo blessings, community welcome, national anthems, and a group warm-up led by community elders.",
     details: ["Traditional Oromo prayer and blessing", "Ethiopian and American national anthems", "Community leaders welcome address", "Guided stretching and warm-up"],
-    duration: "7:00 - 7:25 AM",
+    duration: "8:15 - 8:50 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
     color: "green" as const,
   },
   {
-    time: "7:30 AM",
+    time: "9:00 AM",
     title: "5K Race Start",
-    desc: "Runners take off along the scenic Rock Creek Parkway. The course is flat to gently rolling, fully paved, with water stations at miles 1 and 2.",
+    desc: "Runners take off from the Rock Creek Park Tennis Center into the surrounding park. The course is flat to gently rolling, fully paved, with water stations at miles 1 and 2.",
     details: ["Wave start: competitive runners first, then walkers", "Course marshals at every turn", "Water stations at mile 1 and mile 2", "Medical team on standby throughout"],
-    duration: "7:30 - 8:30 AM",
+    duration: "9:00 - 10:00 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg>,
     color: "yellow" as const,
   },
   {
-    time: "9:00 AM",
+    time: "10:00 AM",
     title: "Awards Ceremony",
-    desc: "Celebrate the winners with trophies for overall and age group categories. Every finisher receives the official Gada Global 5K medal.",
-    details: ["Overall Male and Female top 3", "Age group awards: 14-19, 20-29, 30-39, 40-49, 50+", "Finisher medals for all participants", "Group photo opportunity"],
-    duration: "9:00 - 10:00 AM",
+    desc: "Cash prizes for the top three men and top three women: 300 dollars for first, 200 for second, and 100 for third in each category. Every finisher receives the official Gada Global 5K medal.",
+    details: ["Men's top 3: $300, $200, $100 cash", "Women's top 3: $300, $200, $100 cash", "Age group awards: 14-19, 20-29, 30-39, 40-49, 50+", "Finisher medals for all participants"],
+    duration: "10:00 - 10:45 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4a2 2 0 01-2-2V4h4M18 9h2a2 2 0 002-2V4h-4M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22h10c0-2-0.85-3.25-2.03-3.79A1.06 1.06 0 0114 17v-2.34"/><path d="M18 2H6v7a6 6 0 1012 0V2z"/></svg>,
     color: "green" as const,
   },
   {
-    time: "10:00 AM",
+    time: "10:45 AM",
     title: "Irrecha Cultural Festival",
     desc: "The heart of the event. Enjoy live traditional Oromo music, dance performances, authentic Ethiopian food, a kids zone, and community gathering.",
     details: ["Live traditional Oromo music and dance", "Ethiopian food vendors: injera, kitfo, coffee ceremony", "Kids zone with face painting and activities", "Community vendor booths and cultural exhibits"],
-    duration: "10:00 AM - 2:00 PM",
+    duration: "10:45 AM - 12:00 PM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
     color: "yellow" as const,
   },
@@ -61,7 +61,7 @@ export function InteractiveSchedule() {
       <ScrollReveal className="text-center mb-14">
         <span className="text-[10px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Race Day Schedule</span>
         <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">October 3, 2026</h2>
-        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[480px] mx-auto">A full day of running, culture, and community. Click any event to explore details.</p>
+        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[480px] mx-auto">A morning of running, culture, and community, from 7:00 AM to noon. Click any event to explore details.</p>
       </ScrollReveal>
 
       <ScrollReveal>
