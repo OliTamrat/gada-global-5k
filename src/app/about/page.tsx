@@ -13,7 +13,7 @@ const values = [
 ];
 
 const events = [
-  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. Inaugural event: October 3, 2026 at Rock Creek Parkway, Washington DC." },
+  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. Inaugural event: October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC." },
   { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment." },
   { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health." },
   { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels." },
@@ -255,7 +255,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
                 <p className="text-[15px] md:text-[14px] text-white/70 leading-relaxed max-w-[480px]">
-                  From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. Gada Global Run brings this spirit to Rock Creek Parkway.
+                  From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. Gada Global Run brings this spirit to Rock Creek Park.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
