@@ -73,16 +73,16 @@ export default function ScanPage() {
     <main className="bg-charcoal min-h-screen pt-24 pb-20 px-6 md:px-16 lg:px-20">
       <div className="max-w-lg mx-auto">
         <div className="text-center mb-8">
-          <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-4 block">
+          <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-4 block">
             Volunteer Mode
           </span>
           <h1 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white mb-2 tracking-tight">
             Race Scanner
           </h1>
-          <p className="text-[13px] text-white/40">
+          <p className="text-[14px] text-white/72">
             Enter bib numbers as runners cross the line.
           </p>
-          <div className="mt-2 inline-block px-3 py-1 rounded-lg bg-white/5 text-[11px] text-white/30 font-mono">
+          <div className="mt-2 inline-block px-3 py-1 rounded-lg bg-white/5 text-[12px] text-white/65 font-mono">
             Volunteer ID: {volunteerId}
           </div>
         </div>
@@ -93,12 +93,12 @@ export default function ScanPage() {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`py-4 rounded-xl font-black text-[14px] uppercase tracking-wider border-2 cursor-pointer transition-all ${
+              className={`py-4 rounded-xl font-black text-[15px] uppercase tracking-wider border-2 cursor-pointer transition-all ${
                 mode === m
                   ? m === "start"
                     ? "bg-green-deep text-white border-green-light"
                     : "yellow-card border-yellow"
-                  : "bg-white/5 text-white/30 border-white/8 hover:border-white/20"
+                  : "bg-white/5 text-white/65 border-white/8 hover:border-white/20"
               }`}
             >
               {m === "start" ? "Start Line" : "Finish Line"}
@@ -117,12 +117,12 @@ export default function ScanPage() {
               value={manualBib}
               onChange={(e) => setManualBib(e.target.value)}
               autoFocus
-              className="flex-1 min-w-0 px-6 py-4 rounded-xl bg-white/5 border border-white/15 text-white text-2xl font-black text-center placeholder:text-white/20 focus:outline-none focus:border-yellow/50 transition-colors tabular-nums"
+              className="flex-1 min-w-0 px-6 py-4 rounded-xl bg-white/5 border border-white/15 text-white text-2xl font-black text-center placeholder:text-white/55 focus:outline-none focus:border-yellow/50 transition-colors tabular-nums"
             />
             <button
               type="submit"
               disabled={scanning || !manualBib}
-              className={`shrink-0 w-[90px] py-4 rounded-xl font-bold text-[14px] uppercase tracking-wider border-none cursor-pointer transition-all ${
+              className={`shrink-0 w-[90px] py-4 rounded-xl font-bold text-[15px] uppercase tracking-wider border-none cursor-pointer transition-all ${
                 mode === "start"
                   ? "bg-green-deep text-white hover:bg-green-light"
                   : "yellow-card hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)]"
@@ -135,7 +135,7 @@ export default function ScanPage() {
 
         {/* Scan log */}
         <div>
-          <h3 className="text-[11px] font-bold tracking-[3px] uppercase text-white/30 mb-4">
+          <h3 className="text-[12px] font-bold tracking-[3px] uppercase text-white/65 mb-4">
             Scan Log ({logs.length})
           </h3>
           <div className="space-y-2 max-h-[400px] overflow-y-auto">
@@ -149,7 +149,7 @@ export default function ScanPage() {
                 }`}
               >
                 <div
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-black ${
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-[12px] font-black ${
                     log.success ? "bg-green-light/20 text-green-light" : "bg-red-oromo/20 text-red-oromo"
                   }`}
                 >
@@ -160,25 +160,25 @@ export default function ScanPage() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[13px] font-bold text-white">
+                  <div className="text-[14px] font-bold text-white">
                     Bib #{log.bib} &middot;{" "}
                     <span className={log.type === "start" ? "text-green-light" : "text-yellow"}>
                       {log.type.toUpperCase()}
                     </span>
                   </div>
-                  <div className="text-[11px] text-white/35">{log.message}</div>
+                  <div className="text-[12px] text-white/70">{log.message}</div>
                   {log.consensus && (
-                    <div className={`text-[10px] font-semibold mt-0.5 ${
+                    <div className={`text-[11px] font-semibold mt-0.5 ${
                       log.consensus.includes("HIGH") ? "text-green-light" :
                       log.consensus.includes("LOW") ? "text-red-oromo" : "text-yellow/70"
                     }`}>{log.consensus}</div>
                   )}
                 </div>
-                <div className="text-[11px] text-white/25 tabular-nums shrink-0">{log.time}</div>
+                <div className="text-[12px] text-white/60 tabular-nums shrink-0">{log.time}</div>
               </div>
             ))}
             {logs.length === 0 && (
-              <p className="text-white/20 text-[13px] text-center py-8">
+              <p className="text-white/55 text-[14px] text-center py-8">
                 No scans yet. Enter a bib number above.
               </p>
             )}
@@ -186,13 +186,13 @@ export default function ScanPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-10">
-          <Link href="/race" className="bg-white/8 text-white px-5 py-3 rounded-xl font-bold text-[12px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline text-center">
+          <Link href="/race" className="bg-white/8 text-white px-5 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline text-center">
             View Results
           </Link>
-          <Link href="/race/disputes" className="bg-white/8 text-white px-5 py-3 rounded-xl font-bold text-[12px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline text-center">
+          <Link href="/race/disputes" className="bg-white/8 text-white px-5 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline text-center">
             Disputes
           </Link>
-          <Link href="/" className="col-span-2 text-white/25 text-[13px] hover:text-yellow transition-colors no-underline flex items-center justify-center gap-2">
+          <Link href="/" className="col-span-2 text-white/60 text-[14px] hover:text-yellow transition-colors no-underline flex items-center justify-center gap-2">
             &larr; Home
           </Link>
         </div>

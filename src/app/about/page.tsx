@@ -56,7 +56,7 @@ const sponsors = [
   { tier: "Title Sponsor", color: "yellow-card", textColor: "text-charcoal" },
   { tier: "Platinum Sponsor", color: "bg-white/10 border border-white/20", textColor: "text-white" },
   { tier: "Gold Sponsor", color: "bg-yellow/15 border border-yellow/25", textColor: "text-yellow" },
-  { tier: "Silver Sponsor", color: "bg-white/5 border border-white/10", textColor: "text-white/70" },
+  { tier: "Silver Sponsor", color: "bg-white/5 border border-white/10", textColor: "text-white/90" },
   { tier: "Community Partner", color: "bg-green-deep/20 border border-green-light/20", textColor: "text-green-light" },
 ];
 
@@ -67,11 +67,11 @@ export default function AboutPage() {
       <section className="bg-charcoal pt-28 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global Run</span>
+          <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global Run</span>
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] text-white mb-6 tracking-tight">
             Every Finish Line Represents<br />Determination, Resilience &amp; Hope
           </h1>
-          <p className="text-base md:text-[15px] leading-[1.85] text-white/55 max-w-[580px] mx-auto">
+          <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
             A community-driven running organization celebrating cultural heritage, promoting healthy lifestyles, and uniting diverse communities through the transformative power of running.
           </p>
         </div>
@@ -83,17 +83,17 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
               <div>
-                <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Our Story</span>
+                <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Our Story</span>
                 <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] tracking-tight mb-6">
                   Rooted in the Gadaa System
                 </h2>
-                <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 mb-5">
+                <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
                   Gada Global Run is a community-driven running organization established under Gada Global Inc., dedicated to promoting healthy lifestyles, building stronger communities, and celebrating cultural diversity through professionally organized races, fitness events, and wellness initiatives.
                 </p>
-                <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 mb-5">
+                <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
                   The name <strong className="text-charcoal">Gada</strong> comes from the <strong className="text-charcoal">Gadaa System</strong>, an indigenous democratic governance system developed by the Oromo people and recognized by <strong className="text-charcoal">UNESCO as Intangible Cultural Heritage of Humanity</strong>. Rooted in values of inclusive leadership, equality, accountability, justice, and respect for human dignity, Gadaa inspires our commitment to creating spaces where everyone is welcomed, valued, and empowered.
                 </p>
-                <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70">
+                <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85">
                   Founded by visionary entrepreneurs, community leaders, and passionate athletes, Gada Global Run believes that every finish line represents more than a race &mdash; it represents determination, resilience, unity, and hope.
                 </p>
               </div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 <Image src="https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=600&q=80" alt="Runners at sunrise" width={480} height={400} className="w-full h-full object-cover rounded-2xl shadow-[0_24px_64px_rgba(0,0,0,0.12)]" />
                 <div className="absolute -bottom-4 -left-4 yellow-card w-[100px] h-[100px] rounded-2xl flex flex-col items-center justify-center font-black text-2xl leading-none shadow-[0_8px_24px_rgba(245,200,66,0.3)]">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                  <small className="text-[8px] font-bold tracking-wider uppercase mt-1.5">UNESCO</small>
+                  <small className="text-[10px] font-bold tracking-wider uppercase mt-1.5">UNESCO</small>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
           <ScrollReveal>
             <div className="mt-16 bg-charcoal rounded-2xl p-8 md:p-10 text-white text-center">
-              <p className="text-base md:text-[15px] leading-[1.85] text-white/70 max-w-[640px] mx-auto italic">
+              <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[640px] mx-auto italic">
                 &ldquo;Whether you are an elite runner, a first-time participant, or a family enjoying a walk together, you belong to Gada Global Run. We bring people together through the power of running to inspire healthier lives, meaningful connections, and positive impact &mdash; one step at a time.&rdquo;
               </p>
             </div>
@@ -126,11 +126,11 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-xl yellow-card flex items-center justify-center mb-5">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                 </div>
-                <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Vision</span>
-                <p className="text-base md:text-[15px] leading-[1.85] text-white/65">
+                <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Vision</span>
+                <p className="text-base md:text-[16px] leading-[1.85] text-white/88">
                   To become the leading community-driven running organization that inspires healthier lives, celebrates cultural heritage, empowers athletes, and unites diverse communities through the transformative power of running.
                 </p>
-                <p className="text-[15px] md:text-[14px] leading-[1.85] text-white/50 mt-4">
+                <p className="text-[16px] md:text-[15px] leading-[1.85] text-white/78 mt-4">
                   We envision a future where every race strengthens friendships, promotes wellness, supports youth development, and creates opportunities for athletes while building lasting social and economic impact.
                 </p>
               </div>
@@ -141,8 +141,8 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-xl bg-green-deep flex items-center justify-center text-green-light mb-5">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
                 </div>
-                <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Mission</span>
-                <p className="text-base md:text-[15px] leading-[1.85] text-white/65 mb-4">
+                <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Mission</span>
+                <p className="text-base md:text-[16px] leading-[1.85] text-white/88 mb-4">
                   Gada Global Run is committed to organizing world-class running events that promote health, unity, and community engagement.
                 </p>
                 <ul className="space-y-2.5">
@@ -155,7 +155,7 @@ export default function AboutPage() {
                     "Partner with businesses and nonprofits to strengthen community wellness",
                     "Build sustainable events that contribute to social and economic growth",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[15px] md:text-[13px] text-white/50">
+                    <li key={item} className="flex items-start gap-3 text-[16px] md:text-[14px] text-white/78">
                       <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-1 shrink-0">
                         <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                       </span>
@@ -173,7 +173,7 @@ export default function AboutPage() {
       <section className="bg-cream py-20 md:py-28 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">What We Stand For</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">What We Stand For</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] tracking-tight mb-4">Our Core Values</h2>
           </ScrollReveal>
 
@@ -184,8 +184,8 @@ export default function AboutPage() {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${i === 0 ? 'bg-charcoal text-yellow' : 'bg-yellow/12 text-gold-dim'}`}>
                     {v.icon}
                   </div>
-                  <h4 className="text-[15px] md:text-[14px] font-bold mb-1 tracking-tight">{v.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-charcoal/55 leading-relaxed">{v.desc}</p>
+                  <h4 className="text-[16px] md:text-[15px] font-bold mb-1 tracking-tight">{v.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-charcoal/75 leading-relaxed">{v.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -197,9 +197,9 @@ export default function AboutPage() {
       <section className="bg-charcoal py-20 md:py-28 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Event Portfolio</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Event Portfolio</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Our Events</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/55 max-w-[520px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[520px] mx-auto">
               From competitive races to community celebrations, Gada Global Run organizes events that bring people together and promote healthy living.
             </p>
           </ScrollReveal>
@@ -208,9 +208,9 @@ export default function AboutPage() {
             {events.map((ev) => (
               <ScrollReveal key={ev.title}>
                 <div className="dark-card rounded-2xl p-6 h-full hover:-translate-y-1 hover:border-yellow/15 transition-all">
-                  <span className="inline-block text-[9px] font-black tracking-[2px] uppercase text-yellow bg-yellow/10 px-2.5 py-1 rounded-md mb-4">{ev.badge}</span>
-                  <h4 className="text-[15px] font-bold text-white mb-2 tracking-tight">{ev.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-white/50 leading-relaxed">{ev.desc}</p>
+                  <span className="inline-block text-[11px] font-black tracking-[2px] uppercase text-yellow bg-yellow/10 px-2.5 py-1 rounded-md mb-4">{ev.badge}</span>
+                  <h4 className="text-[16px] font-bold text-white mb-2 tracking-tight">{ev.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-white/78 leading-relaxed">{ev.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -222,11 +222,11 @@ export default function AboutPage() {
       <section className="bg-cream py-20 md:py-28 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">A Legacy of Champions</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">A Legacy of Champions</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] tracking-tight mb-4">
               The Oromo Running Tradition
             </h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[600px] mb-14">
+            <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[600px] mb-14">
               For decades, Oromo athletes have dominated the world stage in distance running, carrying the Ethiopian flag to Olympic glory. Gada Global Run honors this extraordinary legacy and inspires the next generation.
             </p>
           </ScrollReveal>
@@ -238,12 +238,12 @@ export default function AboutPage() {
                   <div className="h-[180px] relative overflow-hidden bg-charcoal/5">
                     <Image src={athlete.image} alt={athlete.name} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 25vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <span className="absolute bottom-3 left-4 text-[10px] font-bold tracking-[3px] uppercase text-yellow bg-charcoal/70 backdrop-blur-sm px-2.5 py-1 rounded-md">{athlete.year}</span>
+                    <span className="absolute bottom-3 left-4 text-[11px] font-bold tracking-[3px] uppercase text-yellow bg-charcoal/70 backdrop-blur-sm px-2.5 py-1 rounded-md">{athlete.year}</span>
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold tracking-tight mb-1">{athlete.name}</h3>
-                    <p className="text-[14px] md:text-[12px] text-gold-dim font-semibold tracking-wide mb-2">{athlete.achievement}</p>
-                    <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed flex-1">{athlete.story}</p>
+                    <p className="text-[15px] md:text-[13px] text-gold-dim font-semibold tracking-wide mb-2">{athlete.achievement}</p>
+                    <p className="text-[16px] md:text-[14px] text-charcoal/78 leading-relaxed flex-1">{athlete.story}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -254,11 +254,11 @@ export default function AboutPage() {
             <div className="mt-10 bg-charcoal rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 text-white">
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
-                <p className="text-[15px] md:text-[14px] text-white/70 leading-relaxed max-w-[480px]">
+                <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
                   From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. Gada Global Run brings this spirit to Rock Creek Park.
                 </p>
               </div>
-              <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+              <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                 Join the Race
               </Link>
             </div>
@@ -270,9 +270,9 @@ export default function AboutPage() {
       <section className="bg-charcoal py-20 md:py-28 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Partner With Us</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Partner With Us</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Become a Sponsor</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/55 max-w-[520px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[520px] mx-auto">
               Partner with Gada Global Run to connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
             </p>
           </ScrollReveal>
@@ -281,7 +281,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {sponsors.map((s) => (
                 <div key={s.tier} className={`${s.color} rounded-2xl p-5 text-center hover:-translate-y-1 transition-all`}>
-                  <div className={`text-[14px] font-bold tracking-tight ${s.textColor}`}>{s.tier}</div>
+                  <div className={`text-[15px] font-bold tracking-tight ${s.textColor}`}>{s.tier}</div>
                 </div>
               ))}
             </div>
@@ -289,7 +289,7 @@ export default function AboutPage() {
 
           <ScrollReveal>
             <div className="text-center mt-10">
-              <a href="mailto:info@gadaglobal.com" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+              <a href="mailto:info@gadaglobal.com" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                 Sponsorship Inquiry
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
@@ -304,9 +304,9 @@ export default function AboutPage() {
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10">
           <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Ready to Run With Us?</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[440px] mx-auto mb-10">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[440px] mx-auto mb-10">
               Registration is open for the inaugural Gada Global 5K. Be part of something bigger than a race.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">

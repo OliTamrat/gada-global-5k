@@ -38,7 +38,7 @@ export function Countdown() {
             <div className="text-2xl md:text-4xl font-black text-white tabular-nums leading-none mb-1 tracking-tight">
               {item.value}
             </div>
-            <div className="text-[11px] md:text-[9px] font-bold tracking-[3px] uppercase text-yellow/60">
+            <div className="text-[12px] md:text-[11px] font-bold tracking-[3px] uppercase text-yellow/60">
               {item.label}
             </div>
           </div>
@@ -49,7 +49,7 @@ export function Countdown() {
           <div className="font-black text-charcoal text-base tracking-tight">
             October 3, 2026
           </div>
-          <div className="text-xs font-semibold text-charcoal/55">
+          <div className="text-xs font-semibold text-charcoal/75">
             Rock Creek Park Tennis Center, Washington DC
           </div>
         </div>

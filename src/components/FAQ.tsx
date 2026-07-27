@@ -26,14 +26,14 @@ export function FAQ() {
           {/* Left: heading + CTA */}
           <ScrollReveal>
             <div className="lg:sticky lg:top-24">
-              <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Got Questions?</span>
+              <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Got Questions?</span>
               <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">
                 Frequently Asked<br />Questions
               </h2>
-              <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/60 mb-8 max-w-[320px]">
+              <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/78 mb-8 max-w-[320px]">
                 Everything you need to know before race day. Can&apos;t find your answer? Reach out to us directly.
               </p>
-              <a href="mailto:info@gadaglobal.com" className="inline-flex items-center gap-2 text-[13px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
+              <a href="mailto:info@gadaglobal.com" className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
                 <span className="w-8 h-8 rounded-lg yellow-card flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                 </span>
@@ -57,21 +57,21 @@ export function FAQ() {
                     }`}
                   >
                     <div className="flex items-center gap-4 px-6 py-5">
-                      <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-black shrink-0 ${
-                        isOpen ? "yellow-card" : "bg-charcoal/5 text-charcoal/30"
+                      <span className={`w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-black shrink-0 ${
+                        isOpen ? "yellow-card" : "bg-charcoal/5 text-charcoal/55"
                       }`}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className={`text-[15px] font-bold tracking-tight flex-1 ${isOpen ? "text-white" : "text-charcoal"}`}>{faq.q}</span>
+                      <span className={`text-[16px] font-bold tracking-tight flex-1 ${isOpen ? "text-white" : "text-charcoal"}`}>{faq.q}</span>
                       <span className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                        isOpen ? "yellow-card rotate-45" : "bg-charcoal/5 text-charcoal/30"
+                        isOpen ? "yellow-card rotate-45" : "bg-charcoal/5 text-charcoal/55"
                       }`}>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>
                       </span>
                     </div>
                     {isOpen && (
                       <div className="px-6 pb-6 pl-[4.25rem]">
-                        <p className="text-[15px] md:text-[14px] text-white/60 leading-[1.85]">{faq.a}</p>
+                        <p className="text-[16px] md:text-[15px] text-white/85 leading-[1.85]">{faq.a}</p>
                       </div>
                     )}
                   </button>

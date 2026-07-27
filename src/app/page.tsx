@@ -60,7 +60,7 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-lg bg-charcoal flex items-center justify-center text-yellow shrink-0">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                   </div>
-                  <div className="flex-1 min-w-0"><div className="text-[13px] font-black tracking-tight leading-tight">Register Now</div><div className="text-[10px] opacity-50">From $25</div></div>
+                  <div className="flex-1 min-w-0"><div className="text-[14px] font-black tracking-tight leading-tight">Register Now</div><div className="text-[11px] opacity-50">From $25</div></div>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40 group-hover:opacity-70 transition-opacity shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
               </Link>
@@ -69,8 +69,8 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-lg bg-yellow/10 flex items-center justify-center text-yellow shrink-0">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.46L16 2 12 5 8 2 3.62 3.46a2 2 0 00-1.34 1.63l-.38 3.42L5 11v10h14V11l3.1-2.49-.38-3.42a2 2 0 00-1.34-1.63z"/></svg>
                   </div>
-                  <div className="flex-1 min-w-0"><div className="text-[13px] font-black tracking-tight text-white leading-tight">Buy Merch</div><div className="text-[10px] text-white/50">Tees &amp; Hoodies</div></div>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/30 group-hover:text-white/60 transition-colors shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  <div className="flex-1 min-w-0"><div className="text-[14px] font-black tracking-tight text-white leading-tight">Buy Merch</div><div className="text-[11px] text-white/78">Tees &amp; Hoodies</div></div>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/65 group-hover:text-white/85 transition-colors shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
               </Link>
             </div>
@@ -89,15 +89,15 @@ export default function Home() {
               <div><div className="text-xs font-semibold opacity-70 mb-1">Elevation Gain</div><div className="text-4xl font-black tracking-tight">45<span className="text-lg font-bold ml-0.5">m</span></div><div className="text-xs font-semibold opacity-60 mt-0.5">Gentle Route</div></div>
             </div>
             <div className="dark-card rounded-2xl p-6 flex flex-col justify-between min-h-[160px]">
-              <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-red-oromo/20 flex items-center justify-center text-yellow">{Icons.bolt}</div><div><div className="text-sm font-bold text-white">Event Stats</div><div className="text-[11px] text-white/50">October 2026</div></div></div>
+              <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-red-oromo/20 flex items-center justify-center text-yellow">{Icons.bolt}</div><div><div className="text-sm font-bold text-white">Event Stats</div><div className="text-[12px] text-white/78">October 2026</div></div></div>
               <div className="flex items-end gap-1 h-12 mt-3">{[30,45,25,60,40,55,70,50,65,80,45,90].map((h, i) => (<div key={i} className={`flex-1 rounded-sm ${i === 11 ? 'bg-yellow' : 'bg-white/15'}`} style={{ height: `${h}%` }} />))}</div>
-              <div className="flex items-baseline gap-1 mt-2"><span className="text-2xl font-black text-white">500</span><span className="text-xs text-white/50 font-medium">runners</span></div>
+              <div className="flex items-baseline gap-1 mt-2"><span className="text-2xl font-black text-white">500</span><span className="text-xs text-white/78 font-medium">runners</span></div>
             </div>
             <div className="dark-card rounded-2xl p-6 flex flex-col min-h-[160px]">
-              <div className="flex items-center gap-2 mb-4"><div className="w-8 h-8 rounded-full bg-green-deep/20 flex items-center justify-center text-green-light">{Icons.medal}</div><div><div className="text-sm font-bold text-white">Event Highlights</div><div className="text-[11px] text-white/50">3 Key Features</div></div></div>
+              <div className="flex items-center gap-2 mb-4"><div className="w-8 h-8 rounded-full bg-green-deep/20 flex items-center justify-center text-green-light">{Icons.medal}</div><div><div className="text-sm font-bold text-white">Event Highlights</div><div className="text-[12px] text-white/78">3 Key Features</div></div></div>
               <div className="space-y-3 flex-1">
                 {[{ badge: "5K", label: "Rock Creek Tennis Center", sub: "Washington, DC" },{ badge: "IRR", label: "Irrecha Celebration", sub: "Oct 3, 2026" },{ badge: "COM", label: "Community Festival", sub: "Music, Food, Dance" }].map((item) => (
-                  <div key={item.label} className="flex items-center gap-3"><span className="w-8 h-5 rounded bg-yellow/15 text-yellow text-[9px] font-black flex items-center justify-center tracking-wider">{item.badge}</span><div className="flex-1 min-w-0"><div className="text-xs font-semibold text-white truncate">{item.label}</div><div className="text-[11px] text-white/45">{item.sub}</div></div></div>
+                  <div key={item.label} className="flex items-center gap-3"><span className="w-8 h-5 rounded bg-yellow/15 text-yellow text-[11px] font-black flex items-center justify-center tracking-wider">{item.badge}</span><div className="flex-1 min-w-0"><div className="text-xs font-semibold text-white truncate">{item.label}</div><div className="text-[12px] text-white/75">{item.sub}</div></div></div>
                 ))}
               </div>
             </div>
@@ -119,9 +119,9 @@ export default function Home() {
             </div>
           </ScrollReveal>
           <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">About the Event</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">About the Event</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-6">Celebrating Oromo Heritage Through Movement</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/75 max-w-[520px] mb-10">
+            <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/88 max-w-[520px] mb-10">
               The Gada Global 5K is more than a race &mdash; it&apos;s a celebration of the Oromo people&apos;s rich cultural heritage, timed with the annual <strong className="text-charcoal">Irrecha</strong> thanksgiving festival. Experience the power of community as we run together through one of Washington DC&apos;s most beautiful parkways.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -133,8 +133,8 @@ export default function Home() {
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
                   <div className="w-10 h-10 rounded-xl bg-yellow/15 flex items-center justify-center text-gold-dim mb-3">{card.icon}</div>
-                  <h4 className="text-[15px] md:text-[14px] font-bold mb-1 tracking-tight">{card.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{card.desc}</p>
+                  <h4 className="text-[16px] md:text-[15px] font-bold mb-1 tracking-tight">{card.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-charcoal/78 leading-relaxed">{card.desc}</p>
                 </div>
               ))}
             </div>
@@ -146,11 +146,11 @@ export default function Home() {
       <section className="bg-charcoal py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Registration Package</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Registration Package</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-4 tracking-tight">
               What&apos;s Included
             </h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[480px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[480px] mx-auto">
               Every registered runner receives a complete race day package.
             </p>
           </ScrollReveal>
@@ -167,9 +167,9 @@ export default function Home() {
                       <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full yellow-card flex items-center justify-center">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                       </div>
-                      <div className="text-[8px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
+                      <div className="text-[10px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
                       <div className="text-3xl font-black text-charcoal tracking-tight leading-none">0217</div>
-                      <div className="text-[9px] font-semibold text-charcoal/45 mt-1">Rock Creek Tennis Center &bull; Washington, DC</div>
+                      <div className="text-[11px] font-semibold text-charcoal/68 mt-1">Rock Creek Tennis Center &bull; Washington, DC</div>
                     </div>
                   </div>
                 ),
@@ -202,10 +202,10 @@ export default function Home() {
                   <div className="h-[140px] rounded-xl bg-yellow/10 border border-yellow/20 flex items-center justify-center mb-5">
                     <div className="text-center">
                       <div className="text-2xl font-black text-yellow tracking-tight font-[family-name:var(--font-heading)]">27:42</div>
-                      <div className="text-[10px] font-bold text-white/40 tracking-wider uppercase mt-1">Live Split</div>
+                      <div className="text-[11px] font-bold text-white/72 tracking-wider uppercase mt-1">Live Split</div>
                       <div className="flex gap-3 mt-2 justify-center">
-                        <div className="text-[9px] text-white/30"><span className="text-white/60 font-bold">Mile 1</span> 8:52</div>
-                        <div className="text-[9px] text-white/30"><span className="text-white/60 font-bold">Mile 2</span> 9:15</div>
+                        <div className="text-[11px] text-white/65"><span className="text-white/85 font-bold">Mile 1</span> 8:52</div>
+                        <div className="text-[11px] text-white/65"><span className="text-white/85 font-bold">Mile 2</span> 9:15</div>
                       </div>
                     </div>
                   </div>
@@ -216,8 +216,8 @@ export default function Home() {
                 <div className="dark-card rounded-2xl p-5 h-full">
                   {item.visual}
                   <div className="text-yellow mb-3">{item.icon}</div>
-                  <h4 className="text-[15px] md:text-[14px] font-bold text-white mb-1.5 tracking-tight">{item.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-white/50 leading-relaxed">{item.desc}</p>
+                  <h4 className="text-[16px] md:text-[15px] font-bold text-white mb-1.5 tracking-tight">{item.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-white/78 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -225,7 +225,7 @@ export default function Home() {
 
           <ScrollReveal>
             <div className="text-center mt-12">
-              <Link href="/register" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+              <Link href="/register" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                 Register Now &mdash; From $25
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
@@ -238,11 +238,11 @@ export default function Home() {
       <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Beyond the 5K</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Beyond the 5K</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
               Our Event Portfolio
             </h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[560px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
               The Gada Global 5K is just the beginning. Gada Global Run organizes events that bring people together and promote healthy living across all communities.
             </p>
           </ScrollReveal>
@@ -254,9 +254,9 @@ export default function Home() {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${i === 0 ? 'bg-charcoal text-yellow' : 'bg-yellow/12 text-gold-dim'}`}>
                     {ev.icon}
                   </div>
-                  <span className={`inline-block text-[9px] font-black tracking-[2px] uppercase px-2.5 py-1 rounded-md mb-3 ${i === 0 ? 'bg-charcoal/15 text-charcoal' : 'bg-yellow/10 text-gold-dim'}`}>{ev.badge}</span>
-                  <h4 className="font-[family-name:var(--font-heading)] text-[15px] font-bold mb-2 tracking-tight">{ev.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{ev.desc}</p>
+                  <span className={`inline-block text-[11px] font-black tracking-[2px] uppercase px-2.5 py-1 rounded-md mb-3 ${i === 0 ? 'bg-charcoal/15 text-charcoal' : 'bg-yellow/10 text-gold-dim'}`}>{ev.badge}</span>
+                  <h4 className="font-[family-name:var(--font-heading)] text-[16px] font-bold mb-2 tracking-tight">{ev.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-charcoal/78 leading-relaxed">{ev.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -266,11 +266,11 @@ export default function Home() {
             <div className="bg-charcoal rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 text-white">
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Start With the 5K</h3>
-                <p className="text-[15px] md:text-[14px] text-white/70 leading-relaxed max-w-[480px]">
+                <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
                   The inaugural Gada Global 5K on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
                 </p>
               </div>
-              <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+              <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                 Register Now
               </Link>
             </div>
@@ -282,9 +282,9 @@ export default function Home() {
       <section className="bg-green-deep py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Cash Awards</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Cash Awards</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">$1,200 in Prize Money</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/70 max-w-[540px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[540px] mx-auto">
               Cash awards for the top three finishers in both the men&apos;s and women&apos;s divisions, presented at the 10:00 AM awards ceremony.
             </p>
           </ScrollReveal>
@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="rounded-2xl bg-white/8 border border-white/12 p-7 backdrop-blur-sm h-full">
                   <div className="flex items-baseline gap-2.5 mb-6">
                     <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-white tracking-tight">{div.division}</h3>
-                    <span className="text-[12px] font-semibold text-yellow/80 tracking-wide">{div.label}</span>
+                    <span className="text-[13px] font-semibold text-yellow/80 tracking-wide">{div.label}</span>
                   </div>
                   <div className="flex flex-col gap-3">
                     {[
@@ -308,8 +308,8 @@ export default function Home() {
                     ].map((p) => (
                       <div key={p.place} className="flex items-center justify-between gap-4 rounded-xl bg-black/20 px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <span className="w-9 h-9 rounded-lg yellow-card flex items-center justify-center text-[12px] font-black shrink-0">{p.place}</span>
-                          <span className="text-[14px] font-semibold text-white/75">Place</span>
+                          <span className="w-9 h-9 rounded-lg yellow-card flex items-center justify-center text-[13px] font-black shrink-0">{p.place}</span>
+                          <span className="text-[15px] font-semibold text-white/92">Place</span>
                         </div>
                         <span className="text-2xl font-black text-yellow tracking-tight tabular-nums">{p.amount}</span>
                       </div>
@@ -321,7 +321,7 @@ export default function Home() {
           </div>
 
           <ScrollReveal>
-            <p className="text-center text-[13px] text-white/50 mt-8 max-w-[540px] mx-auto leading-relaxed">
+            <p className="text-center text-[14px] text-white/78 mt-8 max-w-[540px] mx-auto leading-relaxed">
               Age group awards and finisher medals are presented alongside the cash prizes. All participants receive a medal.
             </p>
           </ScrollReveal>
@@ -332,9 +332,9 @@ export default function Home() {
       <section className="bg-charcoal py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">The Course</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">The Course</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Run Through the Heart of DC</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/60 max-w-[520px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[520px] mx-auto">
               The race starts and finishes at the Rock Creek Park Tennis Center, set inside Washington DC&apos;s largest stretch of urban wilderness.
             </p>
           </ScrollReveal>
@@ -349,11 +349,11 @@ export default function Home() {
                   <div className="h-[220px] relative overflow-hidden">
                     <Image src={landmark.img} alt={landmark.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute bottom-3 right-3 bg-charcoal/80 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">{landmark.stat}</div>
+                    <div className="absolute bottom-3 right-3 bg-charcoal/80 backdrop-blur-sm text-white text-[12px] font-bold px-3 py-1.5 rounded-lg">{landmark.stat}</div>
                   </div>
                   <div className="p-6">
-                    <h3 className="font-[family-name:var(--font-heading)] text-[15px] font-bold tracking-tight mb-2 text-white">{landmark.title}</h3>
-                    <p className="text-[15px] md:text-[13px] text-white/55 leading-relaxed">{landmark.desc}</p>
+                    <h3 className="font-[family-name:var(--font-heading)] text-[16px] font-bold tracking-tight mb-2 text-white">{landmark.title}</h3>
+                    <p className="text-[16px] md:text-[14px] text-white/82 leading-relaxed">{landmark.desc}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -364,11 +364,11 @@ export default function Home() {
             <div className="dark-card rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 text-white">
               <div className="flex gap-8 shrink-0">
                 {[{ val: "5K", label: "Distance" }, { val: "45m", label: "Elevation" }, { val: "Paved", label: "Surface" }].map((s) => (
-                  <div key={s.label} className="text-center"><div className="text-2xl font-black text-yellow tracking-tight">{s.val}</div><div className="text-[11px] font-semibold text-white/50 tracking-wider uppercase">{s.label}</div></div>
+                  <div key={s.label} className="text-center"><div className="text-2xl font-black text-yellow tracking-tight">{s.val}</div><div className="text-[12px] font-semibold text-white/78 tracking-wider uppercase">{s.label}</div></div>
                 ))}
               </div>
               <div className="flex-1 md:border-l md:border-white/10 md:pl-8">
-                <p className="text-[15px] md:text-[14px] text-white/65 leading-relaxed">The course starts and finishes at the Rock Creek Park Tennis Center, 5220 16th St NW, looping through the surrounding park roads and trails. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
+                <p className="text-[16px] md:text-[15px] text-white/88 leading-relaxed">The course starts and finishes at the Rock Creek Park Tennis Center, 5220 16th St NW, looping through the surrounding park roads and trails. Flat to gently rolling terrain, fully paved, with water stations at miles 1 and 2.</p>
               </div>
             </div>
           </ScrollReveal>
@@ -386,9 +386,9 @@ export default function Home() {
       {/* ══ CULTURE BANNER ══ */}
       <section className="text-white text-center py-24 md:py-32 px-6 md:px-16 lg:px-20" style={{ background: `linear-gradient(135deg, rgba(27,94,32,0.92), rgba(13,59,15,0.95)), url('https://images.unsplash.com/photo-1547483238-2cbf881a559f?w=1600&q=80') center/cover` }}>
         <ScrollReveal>
-          <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Irrecha &amp; Oromo Heritage</span>
+          <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Irrecha &amp; Oromo Heritage</span>
           <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white max-w-[600px] mx-auto mb-5 tracking-tight">More Than a Race,<br />It&apos;s a Celebration</h2>
-          <p className="text-base md:text-[15px] leading-[1.85] text-white/75 max-w-[500px] mx-auto mb-14">Irrecha is the Oromo people&apos;s thanksgiving festival, honoring Waaqa (God) and the renewal of life.</p>
+          <p className="text-base md:text-[16px] leading-[1.85] text-white/92 max-w-[500px] mx-auto mb-14">Irrecha is the Oromo people&apos;s thanksgiving festival, honoring Waaqa (God) and the renewal of life.</p>
         </ScrollReveal>
         <ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[920px] mx-auto">
@@ -399,8 +399,8 @@ export default function Home() {
             ].map((item) => (
               <div key={item.title} className="p-8 rounded-2xl bg-white/8 border border-white/10 backdrop-blur-sm hover:bg-white/12 transition-colors">
                 <div className="text-yellow mb-5">{item.icon}</div>
-                <h4 className="text-base md:text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
-                <p className="text-[15px] md:text-[13px] text-white/65 leading-relaxed">{item.desc}</p>
+                <h4 className="text-base md:text-[16px] font-bold mb-2 tracking-tight">{item.title}</h4>
+                <p className="text-[16px] md:text-[14px] text-white/88 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -411,11 +411,11 @@ export default function Home() {
       <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Everyone is Welcome</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Everyone is Welcome</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
               One Race, Every Community
             </h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[560px] mx-auto">
+            <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
               The Gada Global 5K is open to all runners, walkers, and supporters regardless of background. While we celebrate Oromo heritage, this event is designed to bring together the full diversity of Washington DC &mdash; because running has no borders.
             </p>
           </ScrollReveal>
@@ -456,8 +456,8 @@ export default function Home() {
               <ScrollReveal key={item.title}>
                 <div className="bg-white rounded-2xl p-6 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
                   <div className="w-12 h-12 rounded-xl bg-yellow/12 flex items-center justify-center text-gold-dim mb-4">{item.icon}</div>
-                  <h4 className="font-[family-name:var(--font-heading)] text-base md:text-[15px] font-bold mb-2 tracking-tight">{item.title}</h4>
-                  <p className="text-[15px] md:text-[13px] text-charcoal/60 leading-relaxed">{item.desc}</p>
+                  <h4 className="font-[family-name:var(--font-heading)] text-base md:text-[16px] font-bold mb-2 tracking-tight">{item.title}</h4>
+                  <p className="text-[16px] md:text-[14px] text-charcoal/78 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -466,9 +466,9 @@ export default function Home() {
           <ScrollReveal>
             <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white">
               <div className="text-center mb-8">
-                <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Partner With Us</span>
+                <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Partner With Us</span>
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Become a Sponsor</h3>
-                <p className="text-[15px] md:text-[14px] text-white/55 leading-relaxed max-w-[520px] mx-auto">
+                <p className="text-[16px] md:text-[15px] text-white/82 leading-relaxed max-w-[520px] mx-auto">
                   Connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
                 </p>
               </div>
@@ -477,19 +477,19 @@ export default function Home() {
                   { tier: "Title Sponsor", style: "yellow-card text-charcoal" },
                   { tier: "Platinum", style: "bg-white/10 border border-white/20 text-white" },
                   { tier: "Gold", style: "bg-yellow/15 border border-yellow/25 text-yellow" },
-                  { tier: "Silver", style: "bg-white/5 border border-white/10 text-white/70" },
+                  { tier: "Silver", style: "bg-white/5 border border-white/10 text-white/90" },
                   { tier: "Community Partner", style: "bg-green-deep/30 border border-green-light/20 text-green-light" },
                 ].map((s) => (
-                  <div key={s.tier} className={`${s.style} rounded-xl py-4 px-3 text-center font-bold text-[13px] tracking-tight`}>
+                  <div key={s.tier} className={`${s.style} rounded-xl py-4 px-3 text-center font-bold text-[14px] tracking-tight`}>
                     {s.tier}
                   </div>
                 ))}
               </div>
               <div className="flex gap-4 justify-center flex-wrap">
-                <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                   Register Your Team
                 </Link>
-                <a href="mailto:info@gadaglobal.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
+                <a href="mailto:info@gadaglobal.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
                   Sponsorship Inquiry
                 </a>
               </div>
@@ -504,9 +504,9 @@ export default function Home() {
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10">
           <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Secure Your Spot Today</h2>
-            <p className="text-base md:text-[15px] leading-[1.85] text-white/65 max-w-[440px] mx-auto mb-10">Registration includes bib, timing chip, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/88 max-w-[440px] mx-auto mb-10">Registration includes bib, timing chip, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/register" className="inline-flex items-center gap-3 bg-yellow text-charcoal px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl hover:bg-gold-light hover:shadow-[0_8px_32px_rgba(245,200,66,0.25)] hover:-translate-y-0.5 transition-all no-underline">Register for 5K</Link>
               <Link href="/shop" className="inline-flex items-center gap-3 bg-white/8 text-white px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl border border-white/12 hover:border-yellow/40 hover:text-yellow hover:-translate-y-0.5 transition-all no-underline">Shop Merch</Link>

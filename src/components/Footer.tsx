@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const socials = [
   {
@@ -38,10 +39,19 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           <div>
-            <Link href="/" className="font-black text-base tracking-[3px] text-yellow no-underline inline-block mb-5">
-              GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+            <Link href="/" className="flex items-center gap-3 no-underline mb-5" aria-label="Gada Global home">
+              <Image
+                src="/images/brand/gada-global-logo.png"
+                alt="Gada Global"
+                width={425}
+                height={360}
+                className="h-16 w-auto"
+              />
+              <span className="font-black text-xl tracking-[2.5px] text-yellow leading-none">
+                GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+              </span>
             </Link>
-            <p className="text-[15px] md:text-[13px] leading-[1.85] max-w-[280px] text-white/65">
+            <p className="text-[16px] md:text-[14px] leading-[1.85] max-w-[280px] text-white/88">
               Celebrating Oromo heritage through the power of running. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.
             </p>
           </div>
@@ -73,11 +83,11 @@ export function Footer() {
             },
           ].map((col) => (
             <div key={col.title}>
-              <h4 className="text-[11px] font-bold tracking-[3px] uppercase text-white/80 mb-5">{col.title}</h4>
+              <h4 className="text-[12px] font-bold tracking-[3px] uppercase text-white/95 mb-5">{col.title}</h4>
               <ul className="list-none space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-white/55 text-[15px] md:text-[13px] hover:text-yellow transition-colors no-underline">
+                    <Link href={link.href} className="text-white/82 text-[16px] md:text-[14px] hover:text-yellow transition-colors no-underline">
                       {link.label}
                     </Link>
                   </li>
@@ -87,7 +97,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] text-white/50">
+        <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-white/78">
           <span>&copy; 2026 Gada Global Inc. All rights reserved.</span>
           <div className="flex gap-3">
             {socials.map((s) => (
@@ -95,7 +105,7 @@ export function Footer() {
                 key={s.label}
                 href={s.href}
                 aria-label={s.label}
-                className="w-9 h-9 rounded-lg bg-white/8 text-white/50 flex items-center justify-center hover:bg-yellow hover:text-charcoal transition-all no-underline"
+                className="w-9 h-9 rounded-lg bg-white/8 text-white/78 flex items-center justify-center hover:bg-yellow hover:text-charcoal transition-all no-underline"
               >
                 {s.icon}
               </a>
