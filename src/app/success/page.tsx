@@ -25,7 +25,7 @@ function SuccessContent() {
           {isRegistration ? "You\u2019re Registered!" : "Order Confirmed!"}
         </h1>
 
-        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/45 mb-6">
+        <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/68 mb-6">
           {isRegistration ? (
             <>
               Welcome to the Gada Global 5K{name ? `, ${name}` : ""}! You&apos;ll
@@ -41,8 +41,8 @@ function SuccessContent() {
 
         {isRegistration && (
           <div className="bg-white rounded-2xl p-6 border border-charcoal/5 mb-8 text-left">
-            <h3 className="font-bold text-[15px] md:text-[13px] mb-3 tracking-tight">What&apos;s Next?</h3>
-            <ul className="space-y-2.5 text-[15px] md:text-[13px] text-charcoal/45">
+            <h3 className="font-bold text-[16px] md:text-[14px] mb-3 tracking-tight">What&apos;s Next?</h3>
+            <ul className="space-y-2.5 text-[16px] md:text-[14px] text-charcoal/68">
               <li className="flex items-start gap-2">
                 <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-0.5 shrink-0"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
                 Check your email for the confirmation and race waiver
@@ -65,11 +65,11 @@ function SuccessContent() {
         )}
 
         <div className="flex gap-3 justify-center flex-wrap">
-          <Link href="/" className="inline-flex items-center gap-2 yellow-card px-8 py-3 font-bold text-[13px] tracking-wider uppercase rounded-xl hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(245,200,66,0.2)] transition-all no-underline">
+          <Link href="/" className="inline-flex items-center gap-2 yellow-card px-8 py-3 font-bold text-[14px] tracking-wider uppercase rounded-xl hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(245,200,66,0.2)] transition-all no-underline">
             Back to Home
           </Link>
           {isRegistration && (
-            <Link href="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-8 py-3 font-bold text-[13px] tracking-wider uppercase rounded-xl hover:bg-warm-gray transition-all no-underline">
+            <Link href="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-8 py-3 font-bold text-[14px] tracking-wider uppercase rounded-xl hover:bg-warm-gray transition-all no-underline">
               Shop Merch
             </Link>
           )}
@@ -84,7 +84,7 @@ export default function SuccessPage() {
     <Suspense
       fallback={
         <main className="bg-cream min-h-screen flex items-center justify-center">
-          <div className="text-[15px] text-charcoal/35">Loading...</div>
+          <div className="text-[16px] text-charcoal/60">Loading...</div>
         </main>
       }
     >

@@ -73,8 +73,8 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
       <main className="bg-charcoal min-h-screen pt-24 pb-20 px-6 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Runner Not Found</h1>
-          <p className="text-white/50 mb-8">{error}</p>
-          <Link href="/race" className="yellow-card px-6 py-3 rounded-xl font-bold text-[13px] no-underline">
+          <p className="text-white/78 mb-8">{error}</p>
+          <Link href="/race" className="yellow-card px-6 py-3 rounded-xl font-bold text-[14px] no-underline">
             View All Results
           </Link>
         </div>
@@ -85,7 +85,7 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
   if (!data) {
     return (
       <main className="bg-charcoal min-h-screen pt-24 pb-20 px-6 flex items-center justify-center">
-        <div className="text-white/30 text-[14px]">Loading runner data...</div>
+        <div className="text-white/65 text-[15px]">Loading runner data...</div>
       </main>
     );
   }
@@ -115,7 +115,7 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
                 <h1 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white tracking-tight">
                   {runner.firstName} {runner.lastName}
                 </h1>
-                <div className="text-[13px] text-white/45 mt-1">
+                <div className="text-[14px] text-white/75 mt-1">
                   Bib #{runner.bib} &middot; {runner.gender} &middot; Age {runner.age} &middot; {stats.ageGroup}
                 </div>
               </div>
@@ -126,14 +126,14 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
           <div className="p-8 text-center border-b border-white/6">
             {isFinished && runner.netTime ? (
               <>
-                <div className="text-[11px] font-bold tracking-[4px] uppercase text-yellow/60 mb-2">Official Time</div>
+                <div className="text-[12px] font-bold tracking-[4px] uppercase text-yellow/60 mb-2">Official Time</div>
                 <div className="text-5xl md:text-6xl font-black text-yellow tracking-tight tabular-nums font-[family-name:var(--font-heading)]">
                   {formatTime(runner.netTime)}
                 </div>
-                <div className="text-[14px] text-white/45 mt-2">
+                <div className="text-[15px] text-white/75 mt-2">
                   Pace: {runner.pace}/mi
                 </div>
-                <div className={`inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                <div className={`inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                   runner.timingConfidence === "high" ? "bg-green-deep/20 text-green-light" :
                   runner.timingConfidence === "low" ? "bg-red-oromo/15 text-red-oromo" :
                   "bg-yellow/10 text-yellow/70"
@@ -147,13 +147,13 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
               </>
             ) : runner.startTime ? (
               <>
-                <div className="text-[11px] font-bold tracking-[4px] uppercase text-green-light/60 mb-2">Status</div>
+                <div className="text-[12px] font-bold tracking-[4px] uppercase text-green-light/60 mb-2">Status</div>
                 <div className="text-3xl font-black text-green-light tracking-tight">On Course</div>
               </>
             ) : (
               <>
-                <div className="text-[11px] font-bold tracking-[4px] uppercase text-white/30 mb-2">Status</div>
-                <div className="text-3xl font-bold text-white/30">Not Started</div>
+                <div className="text-[12px] font-bold tracking-[4px] uppercase text-white/65 mb-2">Status</div>
+                <div className="text-3xl font-bold text-white/65">Not Started</div>
               </>
             )}
           </div>
@@ -169,7 +169,7 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
               ].map((s) => (
                 <div key={s.label} className="p-5 text-center">
                   <div className="text-lg font-black text-white tracking-tight">{s.value}</div>
-                  <div className="text-[10px] font-semibold text-white/35 uppercase tracking-wider mt-1">{s.label}</div>
+                  <div className="text-[11px] font-semibold text-white/70 uppercase tracking-wider mt-1">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -182,9 +182,9 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                 </svg>
-                <span className="text-[11px] font-bold tracking-[3px] uppercase text-yellow/60">AI Race Recap</span>
+                <span className="text-[12px] font-bold tracking-[3px] uppercase text-yellow/60">AI Race Recap</span>
               </div>
-              <p className="text-[15px] text-white/75 leading-[1.85]">{recap}</p>
+              <p className="text-[16px] text-white/92 leading-[1.85]">{recap}</p>
             </div>
           )}
         </div>
@@ -193,14 +193,14 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
         <div className="flex gap-3 justify-center">
           <button
             onClick={handleShare}
-            className="yellow-card px-6 py-3 rounded-xl font-bold text-[12px] tracking-wider uppercase cursor-pointer border-none hover:-translate-y-0.5 transition-all"
+            className="yellow-card px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase cursor-pointer border-none hover:-translate-y-0.5 transition-all"
           >
             {copied ? "Link Copied" : "Share Result"}
           </button>
-          <Link href="/race" className="bg-white/8 text-white px-6 py-3 rounded-xl font-bold text-[12px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
+          <Link href="/race" className="bg-white/8 text-white px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/10 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
             All Results
           </Link>
-          <Link href="/race/disputes" className="bg-white/4 text-white/40 px-6 py-3 rounded-xl font-bold text-[12px] tracking-wider uppercase border border-white/6 hover:text-yellow transition-all no-underline">
+          <Link href="/race/disputes" className="bg-white/4 text-white/72 px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase border border-white/6 hover:text-yellow transition-all no-underline">
             Dispute Time
           </Link>
         </div>

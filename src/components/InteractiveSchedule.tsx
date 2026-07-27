@@ -59,9 +59,9 @@ export function InteractiveSchedule() {
   return (
     <div className="max-w-7xl mx-auto">
       <ScrollReveal className="text-center mb-14">
-        <span className="text-[10px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Race Day Schedule</span>
+        <span className="text-[11px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Race Day Schedule</span>
         <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-4">October 3, 2026</h2>
-        <p className="text-base md:text-[15px] leading-[1.85] text-charcoal/70 max-w-[480px] mx-auto">A morning of running, culture, and community, from 7:00 AM to noon. Click any event to explore details.</p>
+        <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[480px] mx-auto">A morning of running, culture, and community, from 7:00 AM to noon. Click any event to explore details.</p>
       </ScrollReveal>
 
       <ScrollReveal>
@@ -83,13 +83,13 @@ export function InteractiveSchedule() {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
                     isActive
                       ? item.color === "yellow" ? "yellow-card" : "bg-green-deep text-white"
-                      : "bg-charcoal/5 text-charcoal/30"
+                      : "bg-charcoal/5 text-charcoal/55"
                   }`}>
                     {item.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className={`text-[10px] font-bold tracking-[2px] uppercase mb-0.5 ${isActive ? "text-gold-dim" : "text-charcoal/30"}`}>{item.time}</div>
-                    <div className={`text-[14px] font-bold tracking-tight truncate ${isActive ? "text-charcoal" : "text-charcoal/60"}`}>{item.title}</div>
+                    <div className={`text-[11px] font-bold tracking-[2px] uppercase mb-0.5 ${isActive ? "text-gold-dim" : "text-charcoal/55"}`}>{item.time}</div>
+                    <div className={`text-[15px] font-bold tracking-tight truncate ${isActive ? "text-charcoal" : "text-charcoal/78"}`}>{item.title}</div>
                   </div>
                   {isActive && (
                     <div className="w-6 h-6 rounded-full yellow-card flex items-center justify-center shrink-0">
@@ -108,22 +108,22 @@ export function InteractiveSchedule() {
                 {active.icon}
               </div>
               <div>
-                <div className="text-[10px] font-bold tracking-[3px] uppercase text-yellow">{active.duration}</div>
+                <div className="text-[11px] font-bold tracking-[3px] uppercase text-yellow">{active.duration}</div>
                 <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold tracking-tight">{active.title}</h3>
               </div>
             </div>
 
-            <p className="text-base md:text-[15px] text-white/80 leading-relaxed mb-8">{active.desc}</p>
+            <p className="text-base md:text-[16px] text-white/95 leading-relaxed mb-8">{active.desc}</p>
 
             <div className="flex-1">
-              <div className="text-[10px] font-bold tracking-[3px] uppercase text-white/40 mb-4">What to Expect</div>
+              <div className="text-[11px] font-bold tracking-[3px] uppercase text-white/72 mb-4">What to Expect</div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {active.details.map((detail) => (
                   <div key={detail} className="flex items-start gap-3 bg-white/5 rounded-xl p-4">
                     <div className="w-5 h-5 rounded-md yellow-card flex items-center justify-center shrink-0 mt-0.5">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                     </div>
-                    <span className="text-[15px] md:text-[13px] text-white/75 leading-relaxed">{detail}</span>
+                    <span className="text-[16px] md:text-[14px] text-white/92 leading-relaxed">{detail}</span>
                   </div>
                 ))}
               </div>
