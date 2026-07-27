@@ -11,9 +11,9 @@ const faqs = [
   { q: "What time does the event start?", a: "Packet pickup opens at 7:00 AM, the opening ceremony begins at 8:15 AM, and the 5K starts at 9:00 AM. The awards ceremony follows at 10:00 AM and the Irrecha cultural festival runs until noon." },
   { q: "Is there a virtual option?", a: "We are exploring a virtual participation option for those who cannot attend in person. Check back closer to race day for updates on virtual registration." },
   { q: "Where do I park?", a: "Parking information will be shared via email to all registered participants closer to race day. Free parking is available at the Rock Creek Park Tennis Center, 5220 16th St NW, where the race starts and finishes." },
-  { q: "Are refunds available?", a: "Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at info@gadaglobal.com for transfer requests." },
+  { q: "Are refunds available?", a: "Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at info@gadaglobalus.com for transfer requests." },
   { q: "Can children participate?", a: "Children under 12 can participate with a registered adult guardian. We also plan to offer a Kids Dash as part of our event programming." },
-  { q: "How can I become a sponsor?", a: "We offer multiple sponsorship tiers from Community Partner to Title Sponsor. Email info@gadaglobal.com or visit our About page for sponsorship details and benefits." },
+  { q: "How can I become a sponsor?", a: "We offer multiple sponsorship tiers from Community Partner to Title Sponsor. Email info@gadaglobalus.com or visit our About page for sponsorship details and benefits." },
 ];
 
 export function FAQ() {
@@ -33,11 +33,11 @@ export function FAQ() {
               <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/78 mb-8 max-w-[320px]">
                 Everything you need to know before race day. Can&apos;t find your answer? Reach out to us directly.
               </p>
-              <a href="mailto:info@gadaglobal.com" className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
+              <a href="mailto:info@gadaglobalus.com" className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
                 <span className="w-8 h-8 rounded-lg yellow-card flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                 </span>
-                info@gadaglobal.com
+                info@gadaglobalus.com
               </a>
             </div>
           </ScrollReveal>
