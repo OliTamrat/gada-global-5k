@@ -52,13 +52,18 @@ start and finish are now the same place, inside Rock Creek Park.
 
 `master` holds the deployable code.
 
-**Vercel is NOT currently deploying `master`.** As of 2026-07-27 the live site is
-frozen at commit `41eba44`, and none of the merged work has shipped. Evidence: all
-four PRs opened against this repo show only a GitGuardian check and **no Vercel
-check at all**, which a Vercel-connected repo always produces for preview
-deployments. Most likely the project's Git integration is disconnected or its
-Production Branch is set to `main` rather than `master`. Fix in
-Vercel → Settings → Git. Until that is resolved, merging changes nothing visible.
+**Vercel deploy history — resolved 2026-08-01.** For a period the live site was frozen
+at commit `41eba44` and no merged work shipped. Root cause: the Vercel project had
+**no Git repository connected at all** (Settings → Git showed the provider picker, and
+Deploy Hooks reported "This Project is not connected to a Git repository"). The tell
+was that every PR showed only a GitGuardian check and **no Vercel check** — a
+connected repo always produces one for preview deployments. Reconnected to
+`OliTamrat/gada-global-5k` on 2026-08-01.
+
+If deployments ever go stale again, check that first: Settings → Git must show the
+connected repo, and the Production Branch must be `master` (this repo has no `main`).
+Connecting does not retroactively deploy — trigger one via Deployments → Redeploy or
+a fresh push.
 
 | PR | Contents | State |
 |---|---|---|
