@@ -77,9 +77,10 @@ After #3 merges, PR #1 needs a rebase onto `master`.
 |---|---|
 | Neon Postgres | **Provisioned**, schema applied, 6 tables. Password rotated 2026-07-26. |
 | `DATABASE_URL` in Vercel | Not set |
-| Resend account | Dedicated account on `gadaglobalrun@gmail.com` (2026-07-27), replacing the earlier personal `sifanbone` account. No API key set, no domain verified. |
+| Resend account | Dedicated account on `gadaglobalrun@gmail.com`. **Domain `gadaglobalrun.com` VERIFIED 2026-08-01** — DKIM, SPF, and the `send` MX feedback record all green. API key not yet created. |
+| Inbound mail for `info@` | **Not set up.** Resend only sends; mail to `info@gadaglobalrun.com` bounces until forwarding (Cloudflare Email Routing / ImprovMX) or a mailbox (Google Workspace / Zoho) adds apex MX records. |
 | Stripe webhook endpoint | Not registered |
-| `gadaglobalrun.com` | Chosen 2026-07-27, registration status unconfirmed |
+| `gadaglobalrun.com` | **Registered**, DNS on Cloudflare (Vercel records must be grey-cloud / DNS only) |
 | **Vercel Git integration** | **Broken — not deploying `master`. Blocks everything visible.** |
 
 Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
@@ -93,11 +94,13 @@ Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 0. **Reconnect Vercel to the repo** (Settings → Git; Production Branch must be
    `master`). Nothing that has been merged is visible until this is fixed, so it
    comes before everything else.
-1. **Register `gadaglobalrun.com`**, set up `info@` mailbox or forwarder.
-2. **Merge PR #3** once that address works.
-3. **Resend**: create API key, add the **apex** domain `gadaglobalrun.com` (not the www
-   host), add DKIM/SPF records at the registrar. Slowest step — DNS propagation.
-   Start early.
+1. ~~Register `gadaglobalrun.com`~~ **Done.** Still to do: set up **inbound** mail for
+   `info@` — Resend only sends, so replies bounce until forwarding or a mailbox adds
+   apex MX records.
+2. **Merge PR #3** once `info@` receives mail.
+3. ~~Resend domain verification~~ **Done 2026-08-01** — DKIM, SPF, and the `send` MX
+   record are all verified. Remaining: **create the API key** and set `RESEND_API_KEY`
+   in Vercel. Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
 4. **Vercel env vars** (Production + Preview), then redeploy:
    - `DATABASE_URL` — Neon pooled connection string
    - `RESEND_API_KEY`
@@ -110,6 +113,10 @@ Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 6. **Rebase PR #1** onto `master`, mark ready, merge.
 7. **End-to-end test**: Stripe test-mode registration → check the `registrations`
    row has `payment_status='paid'` and a bib >= 101 → confirm the email arrives.
+
+**No longer needed as of 2026-08-01** — the domain is verified, so
+`REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"` now sends to any
+recipient. Kept for reference only:
 
 **Shortcut for testing before DNS is ready:** set
 `REGISTRATION_FROM_EMAIL="Gada Global 5K <onboarding@resend.dev>"` and register with
