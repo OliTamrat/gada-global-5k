@@ -77,7 +77,7 @@ After #3 merges, PR #1 needs a rebase onto `master`.
 |---|---|
 | Neon Postgres | **Provisioned**, schema applied, 6 tables. Password rotated 2026-07-26. |
 | `DATABASE_URL` in Vercel | Not set |
-| Resend account | Created (`sifanbone`). No API key set, no domain verified. |
+| Resend account | Dedicated account on `gadaglobalrun@gmail.com` (2026-07-27), replacing the earlier personal `sifanbone` account. No API key set, no domain verified. |
 | Stripe webhook endpoint | Not registered |
 | `gadaglobalrun.com` | Chosen 2026-07-27, registration status unconfirmed |
 | **Vercel Git integration** | **Broken — not deploying `master`. Blocks everything visible.** |
@@ -112,9 +112,10 @@ Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
    row has `payment_status='paid'` and a bib >= 101 → confirm the email arrives.
 
 **Shortcut for testing before DNS is ready:** set
-`REGISTRATION_FROM_EMAIL="Gada Global 5K <onboarding@resend.dev>"` and register with the
-Resend account's own signup address. Unverified Resend accounts can only send to that
-address.
+`REGISTRATION_FROM_EMAIL="Gada Global 5K <onboarding@resend.dev>"` and register with
+**`gadaglobalrun@gmail.com`** as the runner email. An unverified Resend account can only
+send to its own signup address, so that specific address is the only one that will
+receive anything until the domain verifies.
 
 ### Open questions
 
