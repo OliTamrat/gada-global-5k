@@ -264,9 +264,11 @@ export function buildRegistrationEmail(d: RegistrationConfirmation): {
 export async function sendRegistrationConfirmation(
   d: RegistrationConfirmation
 ): Promise<SendResult> {
-  const apiKey = process.env.RESEND_API_KEY;
+  // RESEND_API_KEY is the canonical name; RESEND_API is accepted as a fallback
+  // so a differently-named variable in the host environment still works.
+  const apiKey = process.env.RESEND_API_KEY || process.env.RESEND_API;
   if (!apiKey) {
-    return { sent: false, error: "RESEND_API_KEY is not set" };
+    return { sent: false, error: "Neither RESEND_API_KEY nor RESEND_API is set" };
   }
 
   const from = process.env.REGISTRATION_FROM_EMAIL || `${EVENT.name} <${EVENT.supportEmail}>`;
