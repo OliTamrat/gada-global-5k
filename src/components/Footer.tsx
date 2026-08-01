@@ -77,7 +77,7 @@ export function Footer() {
             {
               title: "Contact",
               links: [
-                { href: "mailto:info@gadaglobalus.com", label: "info@gadaglobalus.com" },
+                { href: "mailto:info@gadaglobalrun.com", label: "info@gadaglobalrun.com" },
                 { href: "/#event", label: "Race Day FAQ" },
               ],
             },

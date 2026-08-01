@@ -489,7 +489,7 @@ export default function Home() {
                 <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
                   Register Your Team
                 </Link>
-                <a href="mailto:info@gadaglobalus.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
+                <a href="mailto:info@gadaglobalrun.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
                   Sponsorship Inquiry
                 </a>
               </div>
