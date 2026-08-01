@@ -41,18 +41,29 @@ start and finish are now the same place, inside Rock Creek Park.
 ## Domain
 
 - `gadaglobal.com` is **registered to a third party** — do not use it.
-- **`gadaglobalus.com`** is the chosen domain. Confirm it is registered and that
-  `info@` receives mail before relying on it.
+- `gadaglobalus.com` and `gadaglobalinc.com` were considered and dropped.
+- **`gadaglobalrun.com`** is the chosen domain (decided 2026-07-27).
+- **Host split:** the site canonical is `https://www.gadaglobalrun.com` (the www host),
+  but email uses the apex — `info@gadaglobalrun.com`. Email addresses never carry a
+  `www`, and Resend verifies the **apex** domain, not the www subdomain.
 - Site currently lives at `gada-global-5k.vercel.app`.
 
 ## Repository state
 
-`master` is deployable and auto-deploys to Vercel.
+`master` holds the deployable code.
+
+**Vercel is NOT currently deploying `master`.** As of 2026-07-27 the live site is
+frozen at commit `41eba44`, and none of the merged work has shipped. Evidence: all
+four PRs opened against this repo show only a GitGuardian check and **no Vercel
+check at all**, which a Vercel-connected repo always produces for preview
+deployments. Most likely the project's Git integration is disconnected or its
+Production Branch is set to `main` rather than `master`. Fix in
+Vercel → Settings → Git. Until that is resolved, merging changes nothing visible.
 
 | PR | Contents | State |
 |---|---|---|
 | #2 | Venue, times, prize section | **Merged** |
-| #3 | Contact email → `gadaglobalus.com` (7 marketing refs) | Open, ready, no dependencies |
+| #3 | Contact email → `gadaglobalrun.com` (7 marketing refs) | Open, ready, no dependencies |
 | #1 | Postgres + Resend confirmation email | **Draft** — blocked on env vars |
 
 PR #1 branch: `claude/gada-global-5k-status-35dp69`
@@ -68,7 +79,8 @@ After #3 merges, PR #1 needs a rebase onto `master`.
 | `DATABASE_URL` in Vercel | Not set |
 | Resend account | Created (`sifanbone`). No API key set, no domain verified. |
 | Stripe webhook endpoint | Not registered |
-| `gadaglobalus.com` | Chosen, registration status unconfirmed |
+| `gadaglobalrun.com` | Chosen 2026-07-27, registration status unconfirmed |
+| **Vercel Git integration** | **Broken — not deploying `master`. Blocks everything visible.** |
 
 Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 `merch_orders`, `stripe_events`. Apply or re-apply with `npm run db:setup`
@@ -78,15 +90,19 @@ Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 
 ## NEXT TODO — in order
 
-1. **Register `gadaglobalus.com`**, set up `info@` mailbox or forwarder.
+0. **Reconnect Vercel to the repo** (Settings → Git; Production Branch must be
+   `master`). Nothing that has been merged is visible until this is fixed, so it
+   comes before everything else.
+1. **Register `gadaglobalrun.com`**, set up `info@` mailbox or forwarder.
 2. **Merge PR #3** once that address works.
-3. **Resend**: create API key, add domain `gadaglobalus.com`, add DKIM/SPF records at
-   the registrar. Slowest step — DNS propagation. Start early.
+3. **Resend**: create API key, add the **apex** domain `gadaglobalrun.com` (not the www
+   host), add DKIM/SPF records at the registrar. Slowest step — DNS propagation.
+   Start early.
 4. **Vercel env vars** (Production + Preview), then redeploy:
    - `DATABASE_URL` — Neon pooled connection string
    - `RESEND_API_KEY`
-   - `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalus.com>"`
-   - `NEXT_PUBLIC_SITE_URL=https://gadaglobalus.com`
+   - `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"`
+   - `NEXT_PUBLIC_SITE_URL=https://www.gadaglobalrun.com`
    - `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
 5. **Stripe**: Developers → Webhooks → endpoint `https://<domain>/api/webhook`,
    event `checkout.session.completed`. This is the real gate — without it nothing
