@@ -37,6 +37,44 @@ const eventPortfolio = [
   { badge: "CHARITY", title: "Charity Run for Education & Health", desc: "Raising funds for community causes. Every mile run contributes to education and health initiatives that make a real difference.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
 ];
 
+// Podium tiers. Metallic gradients rather than flat brand yellow, so first,
+// second, and third read as gold, silver, and bronze at a glance.
+const podium = [
+  {
+    n: "1",
+    place: "1st",
+    label: "First Place",
+    metalName: "Gold",
+    amount: "$300",
+    metal: "linear-gradient(145deg,#F7DE7A 0%,#E8B930 45%,#C49B20 100%)",
+    accent: "#F5D245",
+    rowBg: "linear-gradient(90deg,rgba(232,185,48,0.20) 0%,rgba(232,185,48,0.05) 100%)",
+    rowBorder: "rgba(232,185,48,0.45)",
+  },
+  {
+    n: "2",
+    place: "2nd",
+    label: "Second Place",
+    metalName: "Silver",
+    amount: "$200",
+    metal: "linear-gradient(145deg,#F2F4F7 0%,#C9CDD4 45%,#9AA1AA 100%)",
+    accent: "#DDE2E8",
+    rowBg: "linear-gradient(90deg,rgba(221,226,232,0.14) 0%,rgba(221,226,232,0.03) 100%)",
+    rowBorder: "rgba(221,226,232,0.30)",
+  },
+  {
+    n: "3",
+    place: "3rd",
+    label: "Third Place",
+    metalName: "Bronze",
+    amount: "$100",
+    metal: "linear-gradient(145deg,#E8B183 0%,#C4763A 45%,#96552A 100%)",
+    accent: "#E0A070",
+    rowBg: "linear-gradient(90deg,rgba(196,118,58,0.18) 0%,rgba(196,118,58,0.04) 100%)",
+    rowBorder: "rgba(196,118,58,0.38)",
+  },
+];
+
 export default function Home() {
   return (
     <main>
@@ -162,14 +200,48 @@ export default function Home() {
                 title: "Race Bib & Number",
                 desc: "Personalized bib with your name and unique race number",
                 visual: (
-                  <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5">
-                    <div className="bg-white rounded-xl px-5 py-3.5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-charcoal/5 relative">
-                      <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full yellow-card flex items-center justify-center">
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5 px-3">
+                    {/* Race bib: pin holes at the corners, event band, dominant
+                        number, and a perforated tear-off strip for the chip. */}
+                    <div className="relative w-full max-w-[172px] bg-white rounded-[5px] shadow-[0_6px_18px_rgba(0,0,0,0.28)] rotate-[-1.5deg] overflow-hidden">
+                      {/* pin holes */}
+                      <span className="absolute top-[5px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute top-[5px] right-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute bottom-[24px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute bottom-[24px] right-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+
+                      {/* event band */}
+                      <div className="bg-charcoal px-2 pt-[7px] pb-[5px] text-center">
+                        <div className="text-[7px] font-black tracking-[2.5px] uppercase text-yellow leading-none">
+                          Gada Global 5K
+                        </div>
+                        <div className="text-[6px] font-semibold tracking-[1.2px] uppercase text-white/55 leading-none mt-[3px]">
+                          Oct 3, 2026 &bull; Washington DC
+                        </div>
                       </div>
-                      <div className="text-[10px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
-                      <div className="text-3xl font-black text-charcoal tracking-tight leading-none">0217</div>
-                      <div className="text-[11px] font-semibold text-charcoal/68 mt-1">Rock Creek Tennis Center &bull; Washington, DC</div>
+
+                      {/* number */}
+                      <div className="px-2 pt-[6px] pb-[5px] text-center">
+                        <div className="text-[38px] leading-[0.88] font-black text-charcoal tracking-[-0.02em] tabular-nums">
+                          0217
+                        </div>
+                      </div>
+
+                      {/* perforated tear strip */}
+                      <div className="border-t border-dashed border-charcoal/25 bg-charcoal/[0.04] px-2 py-[4px] flex items-center justify-between">
+                        <span className="text-[6px] font-bold tracking-[1px] uppercase text-charcoal/50">
+                          Timing Chip
+                        </span>
+                        <span className="flex gap-[2px]" aria-hidden="true">
+                          {[3, 2, 4, 2, 3, 5, 2].map((w, i) => (
+                            <span
+                              key={i}
+                              className="block h-[7px] bg-charcoal/45"
+                              style={{ width: `${w * 0.6}px` }}
+                            />
+                          ))}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ),
@@ -279,41 +351,90 @@ export default function Home() {
       </section>
 
       {/* ══ PRIZE MONEY ══ */}
-      <section className="bg-green-deep py-24 md:py-32 px-6 md:px-16 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
+      <section className="bg-green-deep py-24 md:py-32 px-6 md:px-16 lg:px-20 relative overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.09]"
+          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, #E8B930 0%, transparent 70%)" }}
+        />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal className="text-center mb-12">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Cash Awards</span>
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">$1,200 in Prize Money</h2>
-            <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[540px] mx-auto">
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-5">
+              <span className="text-yellow">$1,200</span> in Prize Money
+            </h2>
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[560px] mx-auto mb-7">
               Cash awards for the top three finishers in both the men&apos;s and women&apos;s divisions, presented at the 10:00 AM awards ceremony.
             </p>
+            <div className="inline-flex items-center gap-5 rounded-full border border-yellow/30 bg-yellow/8 px-7 py-3">
+              {[
+                { v: "6", l: "Winners paid" },
+                { v: "2", l: "Divisions" },
+                { v: "$300", l: "Top prize" },
+              ].map((s, i) => (
+                <div key={s.l} className="flex items-center gap-5">
+                  {i > 0 && <span className="w-px h-7 bg-white/15" />}
+                  <div className="text-center">
+                    <div className="text-[17px] font-black text-yellow leading-none tabular-nums">{s.v}</div>
+                    <div className="text-[11px] font-semibold tracking-[1px] uppercase text-white/65 mt-1">{s.l}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[860px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 max-w-[940px] mx-auto">
             {[
               { division: "Men", label: "Dhiira" },
               { division: "Women", label: "Dubartii" },
             ].map((div) => (
               <ScrollReveal key={div.division}>
-                <div className="rounded-2xl bg-white/8 border border-white/12 p-7 backdrop-blur-sm h-full">
-                  <div className="flex items-baseline gap-2.5 mb-6">
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-white tracking-tight">{div.division}</h3>
-                    <span className="text-[13px] font-semibold text-yellow/80 tracking-wide">{div.label}</span>
+                <div className="relative rounded-3xl bg-gradient-to-b from-white/[0.12] to-white/[0.03] border border-white/15 p-7 md:p-8 h-full overflow-hidden">
+                  {/* Division header */}
+                  <div className="flex items-center gap-3 mb-7">
+                    <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold text-white tracking-tight">{div.division}</h3>
+                    <span className="text-[13px] font-semibold text-yellow/90 tracking-wide">{div.label}</span>
+                    <span className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent ml-1" />
                   </div>
-                  <div className="flex flex-col gap-3">
-                    {[
-                      { place: "1st", amount: "$300" },
-                      { place: "2nd", amount: "$200" },
-                      { place: "3rd", amount: "$100" },
-                    ].map((p) => (
-                      <div key={p.place} className="flex items-center justify-between gap-4 rounded-xl bg-black/20 px-5 py-4">
-                        <div className="flex items-center gap-3">
-                          <span className="w-9 h-9 rounded-lg yellow-card flex items-center justify-center text-[13px] font-black shrink-0">{p.place}</span>
-                          <span className="text-[15px] font-semibold text-white/92">Place</span>
+
+                  <div className="flex flex-col gap-3.5">
+                    {podium.map((p) => (
+                      <div
+                        key={p.place}
+                        className="relative flex items-center gap-4 rounded-2xl px-5 py-4 border transition-transform hover:-translate-y-0.5"
+                        style={{ background: p.rowBg, borderColor: p.rowBorder }}
+                      >
+                        {/* Medal disc */}
+                        <span
+                          className="relative w-12 h-12 rounded-full flex items-center justify-center shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+                          style={{ background: p.metal }}
+                        >
+                          <span
+                            className="absolute inset-[3px] rounded-full border"
+                            style={{ borderColor: "rgba(255,255,255,0.35)" }}
+                          />
+                          <span className="relative text-[15px] font-black text-charcoal leading-none">{p.n}</span>
+                        </span>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[15px] font-bold text-white leading-tight whitespace-nowrap">{p.label}</div>
+                          <div className="text-[12px] font-semibold tracking-[1.5px] uppercase mt-0.5" style={{ color: p.accent }}>
+                            {p.metalName}
+                          </div>
                         </div>
-                        <span className="text-2xl font-black text-yellow tracking-tight tabular-nums">{p.amount}</span>
+
+                        <span
+                          className="text-[23px] md:text-[28px] font-black tracking-tight tabular-nums leading-none shrink-0"
+                          style={{ color: p.accent }}
+                        >
+                          {p.amount}
+                        </span>
                       </div>
                     ))}
+                  </div>
+
+                  <div className="mt-6 pt-5 border-t border-white/10 flex items-baseline justify-between">
+                    <span className="text-[12px] font-bold tracking-[2px] uppercase text-white/60">Division total</span>
+                    <span className="text-[17px] font-black text-white tabular-nums">$600</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -321,8 +442,8 @@ export default function Home() {
           </div>
 
           <ScrollReveal>
-            <p className="text-center text-[14px] text-white/78 mt-8 max-w-[540px] mx-auto leading-relaxed">
-              Age group awards and finisher medals are presented alongside the cash prizes. All participants receive a medal.
+            <p className="text-center text-[14px] text-white/78 mt-9 max-w-[560px] mx-auto leading-relaxed">
+              Age group awards and finisher medals are presented alongside the cash prizes. Every participant receives a medal.
             </p>
           </ScrollReveal>
         </div>
