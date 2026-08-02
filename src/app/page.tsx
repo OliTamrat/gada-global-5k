@@ -222,10 +222,10 @@ export default function Home() {
               {
                 icon: Icons.shirt,
                 title: "Official Race Tee",
-                desc: "Limited-edition heritage design with Oromo artwork",
+                desc: "The Gada Global 5K emblem tee — One World, One Goal",
                 visual: (
                   <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/5 to-transparent">
-                    <Image src="/products/heritage-tee.jpg" alt="Race tee" fill className="object-contain object-center p-2" />
+                    <Image src="/products/race-day-tee.jpg" alt="Official Gada Global 5K race tee" fill className="object-contain object-center p-2" />
                   </div>
                 ),
               },
