@@ -201,6 +201,36 @@ receive anything until the domain verifies.
 
 ---
 
+## Race operations and organizer visibility
+
+**`RACE_OPS_PASSCODE` gates every screen that changes results or shows registrant
+data:** `/race/start`, `/race/scan`, `/race/disputes`, `/organizers`, and the
+routes behind them, plus the `?seed=true` reset. Volunteers enter it once per
+device; it is stored in localStorage and sent as an `x-race-ops` header.
+
+The gate is **enforced server-side** — the component is convenience only.
+It **fails closed**: with the variable unset those routes return 503. An unset
+secret is a deploy mistake fixable in a minute, whereas a wave sent by a
+stranger cannot be undone. `/api/health` reports whether it is configured.
+
+Public reads stay open: `GET /api/race` (results) and the runner pages are
+unauthenticated, as they should be.
+
+**Organizers are emailed on every paid registration** — runner, bib, wave, tier,
+amount, shirt size, phone, emergency contact, and the running total, with
+reply-to set to the runner. Recipients come from `ORGANIZER_EMAILS`
+(comma-separated), defaulting to the support address so a missed variable never
+leaves organizers blind. Like the runner confirmation, a send failure is logged
+and swallowed — it must never fail the webhook and trigger a Stripe retry.
+
+**`/organizers`** is the standing answer to "how many have registered": paid
+count, revenue, abandoned checkouts, breakdowns by wave, tier and **t-shirt size
+for ordering**, the 25 most recent, and a CSV export of every paid registration.
+CSV cells starting `=`, `+`, `-` or `@` are prefixed with an apostrophe so a
+runner's name cannot execute as a spreadsheet formula.
+
+---
+
 ## Race-day timing model
 
 **Runners are never scanned at the start line.** Scanning 500 people individually
@@ -259,9 +289,11 @@ volunteers per bib and raises confidence when they agree.
   `select * from registrations where payment_status='paid' and confirmation_sent_at is null;`
 - **`export const dynamic = "force-dynamic"` is still valid** in Next 16. Route handlers
   are uncached by default anyway.
-- **3 pre-existing eslint errors** in `Countdown.tsx` and `WordRotator.tsx`
-  (`react-hooks/set-state-in-effect`). Not introduced by recent work — verify against a
-  clean tree before blaming a change.
+- **3 pre-existing eslint errors** (`react-hooks/set-state-in-effect`), one each in
+  `race/page.tsx`, `Countdown.tsx`, and `WordRotator.tsx`. Not introduced by recent
+  work — verify against a clean tree before blaming a change. New code avoids the
+  rule by deferring the first fetch with `void Promise.resolve().then(load)` rather
+  than calling it in the effect body.
 - **Stripe test and live are parallel worlds.** Separate keys, separate webhook
   endpoints, and **separate signing secrets**. A live-mode `whsec_` will not verify a
   test-mode event: `constructEvent` throws, the route returns 400, the payment

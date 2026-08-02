@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
+import { OpsGate, opsFetch } from "@/components/OpsGate";
 
 interface ScanLog {
   bib: number;
@@ -13,6 +14,14 @@ interface ScanLog {
 }
 
 export default function ScanPage() {
+  return (
+    <OpsGate title="Finish line">
+      <ScanScreen />
+    </OpsGate>
+  );
+}
+
+function ScanScreen() {
   const [mode, setMode] = useState<"start" | "finish">("finish");
   const [manualBib, setManualBib] = useState("");
   const [scanning, setScanning] = useState(false);
@@ -25,7 +34,7 @@ export default function ScanPage() {
     setScanning(true);
 
     try {
-      const res = await fetch("/api/race/scan", {
+      const res = await opsFetch("/api/race/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bib, type: mode, volunteerId }),

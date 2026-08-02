@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireOps } from "@/lib/ops-auth";
 import { recordScan } from "@/lib/race";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
+  const denied = requireOps(req);
+  if (denied) return denied;
+
   try {
     const { bib, type, volunteerId } = await req.json();
 

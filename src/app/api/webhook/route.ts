@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { query, transaction } from "@/lib/db";
-import { sendRegistrationConfirmation } from "@/lib/email";
+import { sendRegistrationConfirmation, sendOrganizerNotification } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +18,9 @@ interface ConfirmedRegistration {
   amount_cents: number;
   tshirt_size: string | null;
   wave: string;
+  phone: string | null;
+  emergency_contact: string | null;
+  total_registered: number;
   already_confirmed: boolean;
 }
 
@@ -53,6 +56,7 @@ export async function POST(req: NextRequest) {
           // roll back the payment record.
           if (registration && !registration.already_confirmed) {
             await sendConfirmation(registration);
+            await notifyOrganizers(registration);
           }
         }
         break;
@@ -105,6 +109,8 @@ async function handleRegistration(
       amount_cents: number;
       tshirt_size: string | null;
       wave: string;
+      phone: string | null;
+      emergency_contact: string | null;
       payment_status: string;
       confirmation_sent_at: Date | null;
     }>(
@@ -147,9 +153,14 @@ async function handleRegistration(
       [bib, reg.first_name, reg.last_name, reg.age, reg.gender, reg.wave]
     );
 
+    const totals = await client.query<{ count: number }>(
+      "select count(*)::int as count from registrations where payment_status = 'paid'"
+    );
+
     return {
       id: reg.id,
       bib,
+      total_registered: totals.rows[0]?.count ?? 0,
       first_name: reg.first_name,
       last_name: reg.last_name,
       email: reg.email,
@@ -159,6 +170,8 @@ async function handleRegistration(
       amount_cents: session.amount_total ?? reg.amount_cents,
       tshirt_size: reg.tshirt_size,
       wave: reg.wave,
+      phone: reg.phone,
+      emergency_contact: reg.emergency_contact,
       already_confirmed: alreadyConfirmed,
     };
   });
@@ -188,6 +201,33 @@ async function sendConfirmation(reg: ConfirmedRegistration): Promise<void> {
     console.error(
       `Confirmation email FAILED for bib #${reg.bib} (${reg.email}): ${result.error}`
     );
+  }
+}
+
+/**
+ * Tells the organizers a registration came in. Failures are logged and
+ * swallowed: this is an internal courtesy, and it must never be the reason a
+ * confirmed payment gets retried by Stripe.
+ */
+async function notifyOrganizers(reg: ConfirmedRegistration): Promise<void> {
+  const result = await sendOrganizerNotification({
+    firstName: reg.first_name,
+    lastName: reg.last_name,
+    email: reg.email,
+    bib: reg.bib,
+    tierName: reg.tier_name,
+    amountCents: reg.amount_cents,
+    tshirtSize: reg.tshirt_size,
+    wave: reg.wave,
+    phone: reg.phone,
+    emergencyContact: reg.emergency_contact,
+    totalRegistered: reg.total_registered,
+  });
+
+  if (result.sent) {
+    console.log(`Organizer notification sent for bib #${reg.bib}`);
+  } else {
+    console.error(`Organizer notification FAILED for bib #${reg.bib}: ${result.error}`);
   }
 }
 

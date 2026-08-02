@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { WAVES, WAVE_META, type Wave } from "@/lib/waves";
+import { OpsGate, opsFetch } from "@/components/OpsGate";
 
 interface WaveStatus {
   wave: Wave;
@@ -28,6 +29,14 @@ function elapsed(sinceMs: number, nowMs: number): string {
 }
 
 export default function StartLinePage() {
+  return (
+    <OpsGate title="Start line">
+      <StartLineScreen />
+    </OpsGate>
+  );
+}
+
+function StartLineScreen() {
   const [statuses, setStatuses] = useState<WaveStatus[]>([]);
   const [confirming, setConfirming] = useState<Wave | null>(null);
   const [busy, setBusy] = useState<Wave | null>(null);
@@ -36,7 +45,7 @@ export default function StartLinePage() {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch("/api/race/waves");
+      const res = await opsFetch("/api/race/waves");
       const data = await res.json();
       if (data.waves) setStatuses(data.waves);
     } catch {
@@ -60,7 +69,7 @@ export default function StartLinePage() {
     setBusy(wave);
     setConfirming(null);
     try {
-      const res = await fetch("/api/race/waves", {
+      const res = await opsFetch("/api/race/waves", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ wave, volunteerId: "starter" }),

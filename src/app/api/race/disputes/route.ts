@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireOps } from "@/lib/ops-auth";
 import { getDisputes, createDispute, resolveDispute } from "@/lib/race";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const denied = requireOps(req);
+  if (denied) return denied;
+
   try {
     return NextResponse.json({ disputes: await getDisputes() });
   } catch (error) {
@@ -13,6 +17,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const denied = requireOps(req);
+  if (denied) return denied;
+
   try {
     const body = await req.json();
     const { action } = body;
