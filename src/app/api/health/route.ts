@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { query, isDatabaseConfigured } from "@/lib/db";
+import { isOpsConfigured } from "@/lib/ops-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -180,6 +181,19 @@ function checkEmail(): Check {
   return { status: "ok", detail: `API key present, sending as ${from}` };
 }
 
+function checkRaceOps(): Check {
+  // Not required to sell a registration, so this warns rather than fails —
+  // but the race-day screens refuse to work without it.
+  if (!isOpsConfigured()) {
+    return {
+      status: "warn",
+      detail:
+        "RACE_OPS_PASSCODE is not set — the start line, finish scanner, and organizer dashboard will refuse to open",
+    };
+  }
+  return { status: "ok", detail: "volunteer passcode set" };
+}
+
 function checkSiteUrl(): Check {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url) {
@@ -196,6 +210,7 @@ export async function GET() {
     database: await checkDatabase(),
     stripe: checkStripe(),
     email: checkEmail(),
+    raceOps: checkRaceOps(),
     siteUrl: checkSiteUrl(),
   };
 

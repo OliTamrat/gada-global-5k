@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireOps } from "@/lib/ops-auth";
 import { startWave, getWaveStatuses } from "@/lib/race";
 import { isWave } from "@/lib/waves";
 
@@ -14,6 +15,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const denied = requireOps(req);
+  if (denied) return denied;
+
   try {
     const { wave, volunteerId } = await req.json();
 

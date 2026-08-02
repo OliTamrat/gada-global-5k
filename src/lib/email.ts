@@ -322,3 +322,145 @@ export async function sendRegistrationConfirmation(
     return { sent: false, error: err instanceof Error ? err.message : String(err) };
   }
 }
+
+// ── Organizer notification ───────────────────────────────────────────────────
+
+export interface OrganizerNotification extends RegistrationConfirmation {
+  /** Count of paid registrations including this one. */
+  totalRegistered: number;
+  phone?: string | null;
+  emergencyContact?: string | null;
+}
+
+/**
+ * Where registration alerts go. Falls back to the support address so
+ * organizers are never silently left without notifications because a variable
+ * was missed — a blind organizer is the failure this exists to prevent.
+ */
+function organizerRecipients(): string[] {
+  const raw = process.env.ORGANIZER_EMAILS || EVENT.supportEmail;
+  return raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+export function buildOrganizerEmail(d: OrganizerNotification): {
+  subject: string;
+  html: string;
+  text: string;
+} {
+  const site = siteUrl();
+  const rows: Array<[string, string]> = [
+    ["Runner", `${d.firstName} ${d.lastName}`],
+    ["Bib", String(d.bib)],
+    ["Email", d.email],
+    ["Wave", WAVE_META[coerceWave(d.wave)].label],
+    ["Registration", d.tierName],
+    ["Amount", formatUsd(d.amountCents)],
+  ];
+  if (d.tshirtSize) rows.push(["T-shirt", d.tshirtSize]);
+  if (d.phone) rows.push(["Phone", d.phone]);
+  if (d.emergencyContact) rows.push(["Emergency contact", d.emergencyContact]);
+
+  const detailRows = rows
+    .map(
+      ([label, value]) => `
+        <tr>
+          <td style="padding:8px 0;border-bottom:1px solid #eee6d6;color:#6b6459;font-size:13px;">${esc(label)}</td>
+          <td style="padding:8px 0;border-bottom:1px solid #eee6d6;color:#141210;font-size:13px;font-weight:600;text-align:right;">${esc(value)}</td>
+        </tr>`
+    )
+    .join("");
+
+  const html = `<!doctype html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#FAF6EE;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF6EE;padding:28px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #eee6d6;">
+        <tr>
+          <td style="background:#141210;padding:22px 28px;">
+            <div style="color:#E8B930;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">
+              New registration
+            </div>
+            <div style="color:#ffffff;font-size:26px;font-weight:800;letter-spacing:-0.5px;margin-top:6px;">
+              ${esc(d.totalRegistered)} registered
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:24px 28px 8px 28px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${detailRows}</table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:20px 28px 26px 28px;">
+            <a href="${esc(`${site}/organizers`)}"
+               style="display:inline-block;background:#E8B930;color:#141210;text-decoration:none;padding:12px 24px;border-radius:9px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
+              Open dashboard
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const text = [
+    `New registration — ${d.totalRegistered} registered`,
+    "",
+    ...rows.map(([label, value]) => `${label}: ${value}`),
+    "",
+    `Dashboard: ${site}/organizers`,
+  ].join("\n");
+
+  return {
+    subject: `Registration #${d.totalRegistered} — ${d.firstName} ${d.lastName}, bib ${d.bib}`,
+    html,
+    text,
+  };
+}
+
+/**
+ * Notifies organizers of a paid registration. Never throws, for the same
+ * reason the runner confirmation does not: a mail failure must not fail the
+ * webhook, or Stripe would retry and re-process the payment.
+ */
+export async function sendOrganizerNotification(
+  d: OrganizerNotification
+): Promise<SendResult> {
+  const apiKey = process.env.RESEND_API_KEY || process.env.RESEND_API;
+  if (!apiKey) {
+    return { sent: false, error: "Neither RESEND_API_KEY nor RESEND_API is set" };
+  }
+
+  const to = organizerRecipients();
+  if (to.length === 0) return { sent: false, error: "No organizer recipients configured" };
+
+  const from = process.env.REGISTRATION_FROM_EMAIL || `${EVENT.name} <${EVENT.supportEmail}>`;
+  const { subject, html, text } = buildOrganizerEmail(d);
+
+  try {
+    const res = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      // reply_to is the runner, so an organizer can answer a question by
+      // hitting reply rather than copying the address out.
+      body: JSON.stringify({ from, to, reply_to: d.email, subject, html, text }),
+    });
+
+    if (!res.ok) {
+      const body = await res.text();
+      return { sent: false, error: `Resend responded ${res.status}: ${body.slice(0, 300)}` };
+    }
+    return { sent: true };
+  } catch (err) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
