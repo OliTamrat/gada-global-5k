@@ -55,9 +55,6 @@ export const WAVE_META: Record<Wave, WaveMeta> = {
 
 export const DEFAULT_WAVE: Wave = "open";
 
-/** Age at which we stop nudging a registrant toward the kids wave. */
-export const KIDS_WAVE_MAX_AGE = 12;
-
 export function isWave(value: unknown): value is Wave {
   return typeof value === "string" && (WAVES as readonly string[]).includes(value);
 }
@@ -68,6 +65,3 @@ export function coerceWave(value: unknown): Wave {
   return isWave(value) ? value : DEFAULT_WAVE;
 }
 
-export function waveLabel(value: unknown): string {
-  return WAVE_META[coerceWave(value)].label;
-}

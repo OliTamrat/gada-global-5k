@@ -13,13 +13,17 @@ annual community race celebrating Oromo heritage and the Irrecha festival, run b
 **Gada Global Inc.**
 
 **Stack:** Next.js 16.2.9 (App Router, Turbopack), React 19, Tailwind v4, Stripe,
-Postgres via `pg`, Resend for email, `html5-qrcode` for bib scanning.
+Postgres via `pg`, Resend for email, `qrcode` for generated QR codes.
 Deployed on Vercel from `master`.
+
+Bib entry at the finish line is typed, not camera-scanned. `html5-qrcode` was a
+dependency for a scanner that was never built and has been removed; add it back
+only alongside actual scanning code.
 
 > Read `AGENTS.md`: this Next.js version has breaking changes from training data.
 > Consult `node_modules/next/dist/docs/` before writing framework code.
 
-## Event facts (current as of 2026-07-26)
+## Event facts (current as of 2026-08-02)
 
 | | |
 |---|---|
@@ -32,7 +36,7 @@ Deployed on Vercel from `master`.
 | Cultural festival | 10:45 AM – 12:00 PM |
 | Program window | 7:00 AM to noon |
 | Prizes | $300 / $200 / $100 for top three **men** and top three **women** — $1,200 purse |
-| Registration tiers | Early Bird $25, Standard $35, Race Week $45 |
+| Registration tiers | Early Bird **$45**, Standard **$48**, Race Week **$50** (`src/lib/registration.ts` is the source of truth) |
 
 The venue changed from Rock Creek Parkway in July 2026. Anything describing a
 point-to-point parkway course (Kennedy Center finish, Lincoln Memorial) is stale —
@@ -65,31 +69,23 @@ connected repo, and the Production Branch must be `master` (this repo has no `ma
 Connecting does not retroactively deploy — trigger one via Deployments → Redeploy or
 a fresh push.
 
-| PR | Contents | State |
-|---|---|---|
-| #2 | Venue, times, prize section | **Merged** |
-| #3 | Contact email → `gadaglobalrun.com` (7 marketing refs) | **Merged** |
-| #1 | Postgres + Resend confirmation email | **Merged 2026-08-02** (`1a6058d`) |
-| #5 | Prize podium, race bib, merch, spacing, transparent tee | **Merged 2026-08-02** (`257b7e7`) |
-
-**All application code is merged.** `master` at `257b7e7` contains the full stack:
-Postgres persistence, the Stripe webhook, Resend confirmations, and the finished
-marketing page. Nothing further is blocked on code.
-
-PR #5's body carries one stale line — it lists the tee artwork as a follow-up. That
-was already done; `public/products/race-day-tee-cutout.png` is wired into the What's
-Included section.
+Every pull request opened for this project has been merged; none are outstanding.
+The full history is on GitHub, so rather than a table that goes stale every time,
+what matters is: **`master` is the deployable truth and contains everything** —
+Postgres persistence, the Stripe webhook, Resend confirmations for runners and
+organizers, wave starts, the printable bib, QR codes, the link-in-bio page, the
+organizer dashboard, and the passcode on race-day screens.
 
 ## Infrastructure status
 
 | Item | Status |
 |---|---|
 | Neon Postgres | **Provisioned**, schema applied, 6 tables. Password rotated 2026-07-26. |
-| `DATABASE_URL` in Vercel | Not set |
-| Resend account | Dedicated account on `gadaglobalrun@gmail.com`. **Domain `gadaglobalrun.com` VERIFIED 2026-08-01** — DKIM, SPF, and the `send` MX feedback record all green. API key not yet created. |
-| Inbound mail for `info@` | **Not set up.** Resend only sends; mail to `info@gadaglobalrun.com` bounces until forwarding (Cloudflare Email Routing / ImprovMX) or a mailbox (Google Workspace / Zoho) adds apex MX records. |
+| `DATABASE_URL` in Vercel | **Set**, verified reachable from production via `/api/health` |
+| Resend account | Dedicated account on `gadaglobalrun@gmail.com`. **Domain `gadaglobalrun.com` VERIFIED 2026-08-01** — DKIM, SPF, and the `send` MX feedback record all green. API key created and set; `/api/health` reports `email: ok`. |
+| Inbound mail for `info@` | **Cloudflare Email Routing configured** → `gadaglobalrun@gmail.com`. Resend still only sends; routing handles inbound. |
 | Stripe account | **Created 2026-08-01** — "Gada Global Run", live mode activated. Live secret + publishable keys exist. |
-| Stripe webhook endpoint | **Not registered** — this is the gate on everything below |
+| Stripe webhook endpoint | **Sandbox registered** and verified end to end. A **second, live-mode endpoint** is still required before real payments — signing secrets are per-mode. |
 | `gadaglobalrun.com` | **Registered**, DNS on Cloudflare (Vercel records must be grey-cloud / DNS only) |
 | **Vercel Git integration** | **Fixed 2026-08-01** — reconnected, preview + production deploys firing |
 
@@ -193,8 +189,6 @@ receive anything until the domain verifies.
   Memorial card, and updating the website only. Re-confirm before print or promotion.
 - The 5K route is described generically ("looping through the surrounding park roads
   and trails"). Replace with the real route once mapped.
-- `public/images/course/lincoln-memorial.jpg` is now unused. A Tennis Center or
-  course photo would make a better third card in the course section.
 - Proposal documents (`GADA_GLOBAL_5K_BUSINESS_PROPOSAL.md`, `public/proposal.html`,
   `proposal/index.html`) still carry the old venue and 7:30 AM start. Intentionally
   untouched — they may already be with sponsors.
