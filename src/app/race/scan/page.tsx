@@ -87,9 +87,12 @@ export default function ScanPage() {
           </div>
         </div>
 
-        {/* Mode toggle */}
-        <div className="grid grid-cols-2 gap-3 mb-8">
-          {(["start", "finish"] as const).map((m) => (
+        {/* Mode toggle.
+            Finish is the default and the normal case. Start is kept only as a
+            manual override for a single late runner — the start line itself is
+            run from /race/start, which sends a whole wave in one tap. */}
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          {(["finish", "start"] as const).map((m) => (
             <button
               key={m}
               onClick={() => setMode(m)}
@@ -101,10 +104,20 @@ export default function ScanPage() {
                   : "bg-white/5 text-white/65 border-white/8 hover:border-white/20"
               }`}
             >
-              {m === "start" ? "Start Line" : "Finish Line"}
+              {m === "start" ? "Late Start" : "Finish Line"}
             </button>
           ))}
         </div>
+
+        <p className="text-[13px] leading-[1.6] text-white/55 mb-8">
+          {mode === "finish"
+            ? "Scan every runner as they cross the line."
+            : "Only for a runner who set off after their wave. To start a whole wave, use the start-line screen."}
+          {" "}
+          <Link href="/race/start" className="text-yellow no-underline font-semibold">
+            Start line →
+          </Link>
+        </p>
 
         {/* Manual bib entry */}
         <form onSubmit={handleSubmit} className="mb-8">

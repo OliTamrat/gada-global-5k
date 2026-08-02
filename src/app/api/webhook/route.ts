@@ -17,6 +17,7 @@ interface ConfirmedRegistration {
   tier_name: string;
   amount_cents: number;
   tshirt_size: string | null;
+  wave: string;
   already_confirmed: boolean;
 }
 
@@ -103,6 +104,7 @@ async function handleRegistration(
       tier_name: string;
       amount_cents: number;
       tshirt_size: string | null;
+      wave: string;
       payment_status: string;
       confirmation_sent_at: Date | null;
     }>(
@@ -135,11 +137,14 @@ async function handleRegistration(
     const bib = updated.rows[0].bib;
 
     // Put the runner on the timing roster so volunteers can scan them.
+    // start_time is seeded from wave_starts, so a day-of registration whose
+    // wave has already been sent still has a running clock.
     await client.query(
-      `insert into race_entries (bib, first_name, last_name, age, gender)
-       values ($1, $2, $3, $4, $5)
+      `insert into race_entries (bib, first_name, last_name, age, gender, wave, start_time)
+       values ($1, $2, $3, $4, $5, $6,
+               (select started_at from wave_starts where wave = $6))
        on conflict (bib) do nothing`,
-      [bib, reg.first_name, reg.last_name, reg.age, reg.gender]
+      [bib, reg.first_name, reg.last_name, reg.age, reg.gender, reg.wave]
     );
 
     return {
@@ -153,6 +158,7 @@ async function handleRegistration(
       tier_name: reg.tier_name,
       amount_cents: session.amount_total ?? reg.amount_cents,
       tshirt_size: reg.tshirt_size,
+      wave: reg.wave,
       already_confirmed: alreadyConfirmed,
     };
   });
@@ -167,6 +173,7 @@ async function sendConfirmation(reg: ConfirmedRegistration): Promise<void> {
     tierName: reg.tier_name,
     amountCents: reg.amount_cents,
     tshirtSize: reg.tshirt_size,
+    wave: reg.wave,
   });
 
   if (result.sent) {

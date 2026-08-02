@@ -201,6 +201,43 @@ receive anything until the domain verifies.
 
 ---
 
+## Race-day timing model
+
+**Runners are never scanned at the start line.** Scanning 500 people individually
+would take ~25 minutes; instead the starter sends a wave and one volunteer taps
+once at `/race/start`, which writes a single row to `wave_starts` and backfills
+`start_time` for every runner in that wave.
+
+Three waves, in `src/lib/waves.ts`: **elite → open → kids**, a few minutes apart.
+Separating them is a safety measure as much as a timing one — fast runners
+weaving through walkers and children in the first 200 m is how people get hurt.
+
+- Wave is chosen at registration, stored on `registrations` and `race_entries`,
+  printed as a coloured band on the bib so runners self-sort into a corral, and
+  named in the confirmation email.
+- **Sending a wave is idempotent.** The primary key on `wave_starts` means a
+  second tap returns the original timestamp rather than resetting the clock on
+  runners already on the course. The UI also requires two taps to send.
+- A finish scan for a runner with no `start_time` **inherits their wave's start**
+  rather than being rejected. A volunteer at a finish line cannot fix a missing
+  start, and turning a finisher away loses their result. It only fails if the
+  wave itself was never sent.
+- Day-of registrations seed `start_time` from `wave_starts` at insert, so someone
+  who registers after their wave has gone still has a running clock.
+- `/race/scan` keeps a "Late Start" mode as a manual override for a single runner.
+  It is not how the race is started.
+- Timing is **gun time per wave**, not net time. Elite goes first in a small wave
+  so the prize places are decided on a few seconds of spread. True net time needs
+  chip timing.
+
+**Not solved in code — the finish line is the real bottleneck.** Expect 40–60
+finishers inside a two-minute window around 28–32 min. That needs a single-file
+chute with 3–4 volunteers scanning in parallel, plus someone writing bib numbers
+in finish order on paper as a fallback. `recordScan` already supports multiple
+volunteers per bib and raises confidence when they agree.
+
+---
+
 ## Gotchas
 
 - **Switching branches changes `package.json`.** `pg` exists only on the PR #1 branch.
