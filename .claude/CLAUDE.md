@@ -68,13 +68,17 @@ a fresh push.
 | PR | Contents | State |
 |---|---|---|
 | #2 | Venue, times, prize section | **Merged** |
-| #3 | Contact email → `gadaglobalrun.com` (7 marketing refs) | Open, ready, no dependencies |
-| #1 | Postgres + Resend confirmation email | **Draft** — blocked on env vars |
+| #3 | Contact email → `gadaglobalrun.com` (7 marketing refs) | **Merged** |
+| #1 | Postgres + Resend confirmation email | **Merged 2026-08-02** (`1a6058d`) |
+| #5 | Prize podium, race bib, merch, spacing, transparent tee | **Merged 2026-08-02** (`257b7e7`) |
 
-PR #1 branch: `claude/gada-global-5k-status-35dp69`
-PR #3 branch: `claude/domain-gadaglobalus-35dp69`
+**All application code is merged.** `master` at `257b7e7` contains the full stack:
+Postgres persistence, the Stripe webhook, Resend confirmations, and the finished
+marketing page. Nothing further is blocked on code.
 
-After #3 merges, PR #1 needs a rebase onto `master`.
+PR #5's body carries one stale line — it lists the tee artwork as a follow-up. That
+was already done; `public/products/race-day-tee-cutout.png` is wired into the What's
+Included section.
 
 ## Infrastructure status
 
@@ -84,9 +88,10 @@ After #3 merges, PR #1 needs a rebase onto `master`.
 | `DATABASE_URL` in Vercel | Not set |
 | Resend account | Dedicated account on `gadaglobalrun@gmail.com`. **Domain `gadaglobalrun.com` VERIFIED 2026-08-01** — DKIM, SPF, and the `send` MX feedback record all green. API key not yet created. |
 | Inbound mail for `info@` | **Not set up.** Resend only sends; mail to `info@gadaglobalrun.com` bounces until forwarding (Cloudflare Email Routing / ImprovMX) or a mailbox (Google Workspace / Zoho) adds apex MX records. |
-| Stripe webhook endpoint | Not registered |
+| Stripe account | **Created 2026-08-01** — "Gada Global Run", live mode activated. Live secret + publishable keys exist. |
+| Stripe webhook endpoint | **Not registered** — this is the gate on everything below |
 | `gadaglobalrun.com` | **Registered**, DNS on Cloudflare (Vercel records must be grey-cloud / DNS only) |
-| **Vercel Git integration** | **Broken — not deploying `master`. Blocks everything visible.** |
+| **Vercel Git integration** | **Fixed 2026-08-01** — reconnected, preview + production deploys firing |
 
 Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 `merch_orders`, `stripe_events`. Apply or re-apply with `npm run db:setup`
@@ -96,28 +101,45 @@ Neon tables: `registrations`, `race_entries`, `scan_logs`, `disputes`,
 
 ## NEXT TODO — in order
 
-0. **Reconnect Vercel to the repo** (Settings → Git; Production Branch must be
-   `master`). Nothing that has been merged is visible until this is fixed, so it
-   comes before everything else.
-1. ~~Register `gadaglobalrun.com`~~ **Done.** Still to do: set up **inbound** mail for
-   `info@` — Resend only sends, so replies bounce until forwarding or a mailbox adds
-   apex MX records.
-2. **Merge PR #3** once `info@` receives mail.
-3. ~~Resend domain verification~~ **Done 2026-08-01** — DKIM, SPF, and the `send` MX
-   record are all verified. Remaining: **create the API key** and set `RESEND_API_KEY`
-   in Vercel. Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
-4. **Vercel env vars** (Production + Preview), then redeploy:
+The code is done. Everything remaining is configuration the agent sandbox cannot
+reach (Neon, Resend, Stripe, Vercel all blocked — see gotchas), so these are all
+user-side steps.
+
+> **Check your work with `GET /api/health`.** It reports, without ever printing a
+> secret, whether the deployment can see `DATABASE_URL` (and whether all 6 tables
+> plus `bib_seq` exist), whether the Stripe key is test or live and whether the
+> webhook secret is set, whether Resend is wired, and what `NEXT_PUBLIC_SITE_URL`
+> resolves to. Returns 503 until everything required is present. Hit it after each
+> step below instead of guessing.
+
+**Do the whole loop in Stripe test mode first.** Test and live are parallel worlds
+with separate keys, separate webhook endpoints, and separate signing secrets.
+
+1. **Resend API key** — the domain is verified but no key exists yet. Create one.
+   Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
+2. **Inbound mail for `info@`** — Resend only *sends*. Mail to
+   `info@gadaglobalrun.com` bounces until Cloudflare Email Routing / ImprovMX
+   forwarding, or a real mailbox, adds apex MX records. Not a blocker for sending
+   confirmations; is a blocker for anyone replying to one.
+3. **Stripe webhook endpoint** (test mode): Developers → Webhooks → add endpoint
+   `https://www.gadaglobalrun.com/api/webhook`, event `checkout.session.completed`.
+   Reveal the signing secret — that `whsec_…` is `STRIPE_WEBHOOK_SECRET`.
+   **This is the real gate.** Without it nothing marks a registration paid or
+   assigns a bib, so no email ever fires.
+4. **Vercel env vars** (Production + Preview), then redeploy — Vercel does not pick
+   up new vars on an existing deployment:
    - `DATABASE_URL` — Neon pooled connection string
    - `RESEND_API_KEY`
    - `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"`
    - `NEXT_PUBLIC_SITE_URL=https://www.gadaglobalrun.com`
-   - `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
-5. **Stripe**: Developers → Webhooks → endpoint `https://<domain>/api/webhook`,
-   event `checkout.session.completed`. This is the real gate — without it nothing
-   marks a registration paid or assigns a bib, so no email fires.
-6. **Rebase PR #1** onto `master`, mark ready, merge.
-7. **End-to-end test**: Stripe test-mode registration → check the `registrations`
-   row has `payment_status='paid'` and a bib >= 101 → confirm the email arrives.
+   - `STRIPE_SECRET_KEY` (`sk_test_…` for now), `STRIPE_WEBHOOK_SECRET`
+5. **End-to-end test** with card `4242 4242 4242 4242`: register → the
+   `registrations` row should show `payment_status='paid'` and a bib >= 101 → the
+   confirmation email should arrive.
+6. **Go live**: swap in `sk_live_…`, register a *second* webhook endpoint in live
+   mode, and replace `STRIPE_WEBHOOK_SECRET` with that endpoint's secret.
+7. **Merge PR #5** (prize podium / bib / merch / spacing). Independent of all the
+   above — no env vars, no database.
 
 **No longer needed as of 2026-08-01** — the domain is verified, so
 `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"` now sends to any
@@ -169,7 +191,21 @@ receive anything until the domain verifies.
 - **3 pre-existing eslint errors** in `Countdown.tsx` and `WordRotator.tsx`
   (`react-hooks/set-state-in-effect`). Not introduced by recent work — verify against a
   clean tree before blaming a change.
+- **Stripe test and live are parallel worlds.** Separate keys, separate webhook
+  endpoints, and **separate signing secrets**. A live-mode `whsec_` will not verify a
+  test-mode event: `constructEvent` throws, the route returns 400, the payment
+  succeeds and nothing is recorded. Going live means registering a *second* webhook
+  endpoint in live mode and swapping `STRIPE_WEBHOOK_SECRET` to that endpoint's
+  secret — not just swapping the API key. `/api/health` reports which mode the key is.
+- **The Stripe publishable key is unused.** Checkout is a server-side redirect
+  (`getStripe().checkout.sessions.create` → `session.url`); nothing imports
+  `@stripe/stripe-js`. Only `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` matter.
+  (Publishable keys are public by design anyway — no action needed if one leaks.)
 - **Sandbox egress is allowlisted.** Neon (TCP 5432), `api.resend.com`, and Stripe are
   all unreachable from the agent sandbox — connections hang or return
   `403 CONNECT tunnel failed`. Anything touching those services must be verified by the
-  user. Local Postgres 16 is installed and can be used for real integration testing.
+  user. Local Postgres 16 **is** installed and `schema.sql` applies to it cleanly, so
+  DB-touching code can be integration-tested for real. Two snags: `initdb` refuses to
+  run as root (`su postgres -c …`, and put PGDATA somewhere postgres can traverse,
+  e.g. `/tmp`), and `pkill -f "next dev"` matches its own shell — it kills the calling
+  Bash tool with exit 144.

@@ -1,0 +1,175 @@
+import { NextResponse } from "next/server";
+import { query, isDatabaseConfigured } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
+
+/**
+ * Deployment readiness check.
+ *
+ * Every remaining launch step is environment configuration set by hand in a
+ * dashboard, where a typo is invisible until a runner pays and nothing happens.
+ * This reports what the running deployment can actually see.
+ *
+ * It never returns a secret — only whether one is present, and for the Stripe
+ * key which mode it belongs to, since mixing test and live keys with a
+ * mismatched webhook secret is the easiest way to lose a payment.
+ */
+
+const REQUIRED_TABLES = [
+  "registrations",
+  "race_entries",
+  "scan_logs",
+  "disputes",
+  "merch_orders",
+  "stripe_events",
+];
+
+type Status = "ok" | "warn" | "fail";
+
+interface Check {
+  status: Status;
+  detail: string;
+}
+
+/**
+ * Postgres errors can quote the connection string, which carries the password.
+ * Strip anything URI-shaped before it reaches the response.
+ */
+function safeError(err: unknown): string {
+  const message = err instanceof Error ? err.message : String(err);
+  return message
+    .replace(/postgres(ql)?:\/\/\S+/gi, "[connection string redacted]")
+    .slice(0, 200);
+}
+
+function stripeMode(key: string | undefined): "live" | "test" | null {
+  if (!key) return null;
+  if (key.startsWith("sk_live_")) return "live";
+  if (key.startsWith("sk_test_")) return "test";
+  return null;
+}
+
+async function checkDatabase(): Promise<Check> {
+  if (!isDatabaseConfigured()) {
+    return { status: "fail", detail: "DATABASE_URL is not set" };
+  }
+
+  try {
+    // to_regclass resolves against the connection's search_path, so this stays
+    // correct if the schema is ever moved out of public.
+    const rows = await query<{ name: string; present: boolean }>(
+      `select t.name, to_regclass(t.name) is not null as present
+         from unnest($1::text[]) as t(name)`,
+      [REQUIRED_TABLES]
+    );
+    const missing = rows.filter((r) => !r.present).map((r) => r.name);
+
+    if (missing.length > 0) {
+      return {
+        status: "fail",
+        detail: `connected, but missing table(s): ${missing.join(", ")} — run npm run db:setup`,
+      };
+    }
+
+    // The webhook cannot assign a bib without this sequence.
+    const [seq] = await query<{ exists: boolean }>(
+      `select exists (
+         select 1 from pg_class
+         where relkind = 'S' and relname = 'bib_seq'
+       ) as exists`
+    );
+    if (!seq?.exists) {
+      return {
+        status: "fail",
+        detail: "connected, all tables present, but sequence bib_seq is missing",
+      };
+    }
+
+    return { status: "ok", detail: "connected, all 6 tables and bib_seq present" };
+  } catch (err) {
+    return { status: "fail", detail: `connection failed: ${safeError(err)}` };
+  }
+}
+
+function checkStripe(): Check {
+  const mode = stripeMode(process.env.STRIPE_SECRET_KEY);
+  const hasWebhookSecret = Boolean(process.env.STRIPE_WEBHOOK_SECRET);
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return { status: "fail", detail: "STRIPE_SECRET_KEY is not set" };
+  }
+  if (!mode) {
+    return {
+      status: "fail",
+      detail: "STRIPE_SECRET_KEY is set but is not an sk_test_ or sk_live_ key",
+    };
+  }
+  if (!hasWebhookSecret) {
+    return {
+      status: "fail",
+      detail: `${mode} mode key present, but STRIPE_WEBHOOK_SECRET is not set — payments will succeed and no bib or email will follow`,
+    };
+  }
+  return {
+    status: mode === "live" ? "ok" : "warn",
+    detail:
+      mode === "live"
+        ? "live mode key and webhook secret present"
+        : "test mode key and webhook secret present — safe for testing, swap to sk_live_ and a live-mode webhook secret to take real registrations",
+  };
+}
+
+function checkEmail(): Check {
+  // RESEND_API is accepted because it was set under that name first.
+  const hasKey = Boolean(process.env.RESEND_API_KEY || process.env.RESEND_API);
+  const from = process.env.REGISTRATION_FROM_EMAIL;
+
+  if (!hasKey) {
+    return {
+      status: "fail",
+      detail: "RESEND_API_KEY is not set — registrations will be recorded but no confirmation will send",
+    };
+  }
+  if (!from) {
+    return {
+      status: "warn",
+      detail: "API key present, but REGISTRATION_FROM_EMAIL is not set — falling back to the built-in default",
+    };
+  }
+  return { status: "ok", detail: `API key present, sending as ${from}` };
+}
+
+function checkSiteUrl(): Check {
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!url) {
+    return {
+      status: "warn",
+      detail: "NEXT_PUBLIC_SITE_URL is not set — email links fall back to https://www.gadaglobalrun.com",
+    };
+  }
+  return { status: "ok", detail: url };
+}
+
+export async function GET() {
+  const checks: Record<string, Check> = {
+    database: await checkDatabase(),
+    stripe: checkStripe(),
+    email: checkEmail(),
+    siteUrl: checkSiteUrl(),
+  };
+
+  const values = Object.values(checks);
+  const ready = values.every((c) => c.status !== "fail");
+
+  return NextResponse.json(
+    {
+      ready,
+      summary: ready
+        ? "All required configuration is present."
+        : `Not ready: ${values.filter((c) => c.status === "fail").length} check(s) failing.`,
+      checks,
+    },
+    // 503 so an uptime monitor treats a half-configured deployment as down.
+    { status: ready ? 200 : 503 }
+  );
+}
