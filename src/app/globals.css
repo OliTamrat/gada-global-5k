@@ -102,3 +102,31 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 @media (prefers-reduced-motion: reduce) {
   .podium-in > * { animation: none; }
 }
+
+/* ── Print ────────────────────────────────────────────────────────────────
+   Site chrome is noise on paper. The bib sheet is sized in inches so it
+   comes out the same regardless of the viewport it was printed from. */
+@media print {
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .bib-sheet {
+    width: 7in;
+    max-width: 7in;
+    margin: 0 auto;
+    border-color: #141210 !important;
+    /* Keep the bib on one sheet rather than splitting mid-number. */
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@page {
+  margin: 0.4in;
+}

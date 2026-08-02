@@ -70,7 +70,7 @@ function buildHtml(d: RegistrationConfirmation): string {
 
   const nextSteps = [
     `Packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
-    "Bring a photo ID. Your bib, timing chip, and race t-shirt are in your packet.",
+    "Bring a photo ID. Your bib and race t-shirt are in your packet.",
     "Wear your bib on the front of your shirt so the timing volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
@@ -232,7 +232,7 @@ function buildText(d: RegistrationConfirmation): string {
     "",
     "WHAT TO DO NEXT",
     `- Packet pickup opens at ${EVENT.packetPickup}.`,
-    "- Bring a photo ID. Bib, timing chip, and t-shirt are in your packet.",
+    "- Bring a photo ID. Bib and t-shirt are in your packet.",
     "- Wear your bib on the front of your shirt for timing scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,
