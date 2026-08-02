@@ -7,6 +7,7 @@ import { WordRotator } from "@/components/WordRotator";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { InteractiveSchedule } from "@/components/InteractiveSchedule";
 import { FAQ } from "@/components/FAQ";
+import { PrizePodium } from "@/components/PrizePodium";
 
 const Icons = {
   barChart: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10M6 20V4M18 20v-6"/></svg>,
@@ -60,7 +61,7 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-lg bg-charcoal flex items-center justify-center text-yellow shrink-0">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                   </div>
-                  <div className="flex-1 min-w-0"><div className="text-[14px] font-black tracking-tight leading-tight">Register Now</div><div className="text-[11px] opacity-50">From $25</div></div>
+                  <div className="flex-1 min-w-0"><div className="text-[14px] font-black tracking-tight leading-tight">Register Now</div><div className="text-[11px] opacity-50">From $45</div></div>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40 group-hover:opacity-70 transition-opacity shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
               </Link>
@@ -109,7 +110,7 @@ export default function Home() {
       <section className="relative z-10 -mt-1"><Countdown /></section>
 
       {/* ══ ABOUT ══ */}
-      <section id="about" className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section id="about" className="bg-cream py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="relative h-[380px] md:h-[520px]">
@@ -143,9 +144,9 @@ export default function Home() {
       </section>
 
       {/* ══ WHAT'S INCLUDED ══ */}
-      <section className="bg-charcoal py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section className="bg-charcoal py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Registration Package</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-4 tracking-tight">
               What&apos;s Included
@@ -162,14 +163,48 @@ export default function Home() {
                 title: "Race Bib & Number",
                 desc: "Personalized bib with your name and unique race number",
                 visual: (
-                  <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5">
-                    <div className="bg-white rounded-xl px-5 py-3.5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-charcoal/5 relative">
-                      <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full yellow-card flex items-center justify-center">
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5 px-3">
+                    {/* Race bib: pin holes at the corners, event band, dominant
+                        number, and a perforated tear-off strip for the chip. */}
+                    <div className="relative w-full max-w-[172px] bg-white rounded-[5px] shadow-[0_6px_18px_rgba(0,0,0,0.28)] rotate-[-1.5deg] overflow-hidden">
+                      {/* pin holes */}
+                      <span className="absolute top-[5px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute top-[5px] right-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute bottom-[24px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+                      <span className="absolute bottom-[24px] right-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
+
+                      {/* event band */}
+                      <div className="bg-charcoal px-2 pt-[7px] pb-[5px] text-center">
+                        <div className="text-[7px] font-black tracking-[2.5px] uppercase text-yellow leading-none">
+                          Gada Global 5K
+                        </div>
+                        <div className="text-[6px] font-semibold tracking-[1.2px] uppercase text-white/55 leading-none mt-[3px]">
+                          Oct 3, 2026 &bull; Washington DC
+                        </div>
                       </div>
-                      <div className="text-[10px] font-black tracking-[3px] uppercase text-yellow bg-charcoal rounded px-2 py-0.5 inline-block mb-1.5">Gada Global 5K</div>
-                      <div className="text-3xl font-black text-charcoal tracking-tight leading-none">0217</div>
-                      <div className="text-[11px] font-semibold text-charcoal/68 mt-1">Rock Creek Tennis Center &bull; Washington, DC</div>
+
+                      {/* number */}
+                      <div className="px-2 pt-[6px] pb-[5px] text-center">
+                        <div className="text-[38px] leading-[0.88] font-black text-charcoal tracking-[-0.02em] tabular-nums">
+                          0217
+                        </div>
+                      </div>
+
+                      {/* perforated tear strip */}
+                      <div className="border-t border-dashed border-charcoal/25 bg-charcoal/[0.04] px-2 py-[4px] flex items-center justify-between">
+                        <span className="text-[6px] font-bold tracking-[1px] uppercase text-charcoal/50">
+                          Timing Chip
+                        </span>
+                        <span className="flex gap-[2px]" aria-hidden="true">
+                          {[3, 2, 4, 2, 3, 5, 2].map((w, i) => (
+                            <span
+                              key={i}
+                              className="block h-[7px] bg-charcoal/45"
+                              style={{ width: `${w * 0.6}px` }}
+                            />
+                          ))}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ),
@@ -187,10 +222,17 @@ export default function Home() {
               {
                 icon: Icons.shirt,
                 title: "Official Race Tee",
-                desc: "Limited-edition heritage design with Oromo artwork",
+                desc: "The Gada Global 5K emblem tee — One World, One Goal",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/5 to-transparent">
-                    <Image src="/products/heritage-tee.jpg" alt="Race tee" fill className="object-contain object-center p-2" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/8 to-white/[0.02]">
+                    {/* Transparent cutout: the flat-lay shot is a white tee on a
+                        light background, which all but vanishes on a dark card. */}
+                    <Image
+                      src="/products/race-day-tee-cutout.png"
+                      alt="Official Gada Global 5K race tee"
+                      fill
+                      className="object-contain object-center p-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]"
+                    />
                   </div>
                 ),
               },
@@ -223,10 +265,20 @@ export default function Home() {
             ))}
           </div>
 
+          <ScrollReveal className="text-center mb-10">
+            <Link
+              href="/about#events"
+              className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline"
+            >
+              See all six events
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </Link>
+          </ScrollReveal>
+
           <ScrollReveal>
             <div className="text-center mt-12">
               <Link href="/register" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
-                Register Now &mdash; From $25
+                Register Now &mdash; From $45
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -235,9 +287,9 @@ export default function Home() {
       </section>
 
       {/* ══ OUR EVENTS — BEYOND THE 5K ══ */}
-      <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section className="bg-cream py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Beyond the 5K</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
               Our Event Portfolio
@@ -247,8 +299,8 @@ export default function Home() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-            {eventPortfolio.map((ev, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            {eventPortfolio.slice(0, 3).map((ev, i) => (
               <ScrollReveal key={ev.title}>
                 <div className={`rounded-2xl p-6 h-full hover:-translate-y-1 transition-all ${i === 0 ? 'yellow-card' : 'bg-white border border-charcoal/5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)]'}`}>
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${i === 0 ? 'bg-charcoal text-yellow' : 'bg-yellow/12 text-gold-dim'}`}>
@@ -279,59 +331,29 @@ export default function Home() {
       </section>
 
       {/* ══ PRIZE MONEY ══ */}
-      <section className="bg-green-deep py-24 md:py-32 px-6 md:px-16 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Cash Awards</span>
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">$1,200 in Prize Money</h2>
-            <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[540px] mx-auto">
-              Cash awards for the top three finishers in both the men&apos;s and women&apos;s divisions, presented at the 10:00 AM awards ceremony.
-            </p>
+      <section className="bg-green-deep py-14 md:py-16 px-6 md:px-16 lg:px-20 relative overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.09]"
+          style={{ background: "radial-gradient(ellipse 70% 55% at 50% 0%, #E8B930 0%, transparent 70%)" }}
+        />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal className="text-center mb-8">
+            <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Cash Awards</span>
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight">
+              <span className="text-yellow">$1,200</span> in Prize Money
+            </h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[860px] mx-auto">
-            {[
-              { division: "Men", label: "Dhiira" },
-              { division: "Women", label: "Dubartii" },
-            ].map((div) => (
-              <ScrollReveal key={div.division}>
-                <div className="rounded-2xl bg-white/8 border border-white/12 p-7 backdrop-blur-sm h-full">
-                  <div className="flex items-baseline gap-2.5 mb-6">
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-white tracking-tight">{div.division}</h3>
-                    <span className="text-[13px] font-semibold text-yellow/80 tracking-wide">{div.label}</span>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {[
-                      { place: "1st", amount: "$300" },
-                      { place: "2nd", amount: "$200" },
-                      { place: "3rd", amount: "$100" },
-                    ].map((p) => (
-                      <div key={p.place} className="flex items-center justify-between gap-4 rounded-xl bg-black/20 px-5 py-4">
-                        <div className="flex items-center gap-3">
-                          <span className="w-9 h-9 rounded-lg yellow-card flex items-center justify-center text-[13px] font-black shrink-0">{p.place}</span>
-                          <span className="text-[15px] font-semibold text-white/92">Place</span>
-                        </div>
-                        <span className="text-2xl font-black text-yellow tracking-tight tabular-nums">{p.amount}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
           <ScrollReveal>
-            <p className="text-center text-[14px] text-white/78 mt-8 max-w-[540px] mx-auto leading-relaxed">
-              Age group awards and finisher medals are presented alongside the cash prizes. All participants receive a medal.
-            </p>
+            <PrizePodium />
           </ScrollReveal>
         </div>
       </section>
 
       {/* ══ DC LANDMARKS — THE COURSE ══ */}
-      <section className="bg-charcoal py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section className="bg-charcoal py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">The Course</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Run Through the Heart of DC</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[520px] mx-auto">
@@ -379,12 +401,12 @@ export default function Home() {
       <FAQ />
 
       {/* ══ INTERACTIVE SCHEDULE ══ */}
-      <section id="event" className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section id="event" className="bg-cream py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <InteractiveSchedule />
       </section>
 
       {/* ══ CULTURE BANNER ══ */}
-      <section className="text-white text-center py-24 md:py-32 px-6 md:px-16 lg:px-20" style={{ background: `linear-gradient(135deg, rgba(27,94,32,0.92), rgba(13,59,15,0.95)), url('https://images.unsplash.com/photo-1547483238-2cbf881a559f?w=1600&q=80') center/cover` }}>
+      <section className="text-white text-center py-16 md:py-20 px-6 md:px-16 lg:px-20" style={{ background: `linear-gradient(135deg, rgba(27,94,32,0.92), rgba(13,59,15,0.95)), url('https://images.unsplash.com/photo-1547483238-2cbf881a559f?w=1600&q=80') center/cover` }}>
         <ScrollReveal>
           <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Irrecha &amp; Oromo Heritage</span>
           <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white max-w-[600px] mx-auto mb-5 tracking-tight">More Than a Race,<br />It&apos;s a Celebration</h2>
@@ -408,9 +430,9 @@ export default function Home() {
       </section>
 
       {/* ══ COMMUNITY — ALL ARE WELCOME ══ */}
-      <section className="bg-cream py-24 md:py-32 px-6 md:px-16 lg:px-20">
+      <section className="bg-cream py-16 md:py-20 px-6 md:px-16 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">Everyone is Welcome</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-5">
               One Race, Every Community
@@ -420,44 +442,44 @@ export default function Home() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-10">
             {[
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
                 title: "DC Running Community",
-                desc: "Partner with local running clubs like DC Road Runners, Pacers, and Georgetown Running Company to bring experienced runners of all backgrounds to the course."
+                desc: "In partnership with DC Road Runners, Pacers, and Georgetown Running Company."
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>,
                 title: "Local Neighborhoods",
-                desc: "Engage Adams Morgan, Columbia Heights, Dupont Circle, and Georgetown communities through flyers, local business partnerships, and neighborhood outreach."
+                desc: "Adams Morgan, Columbia Heights, Dupont Circle, and Georgetown."
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
                 title: "Schools & Universities",
-                desc: "Invite cross-country teams and student organizations from Howard University, Georgetown, GW, and local high schools. Student discount registration available."
+                desc: "Cross-country teams from Howard, Georgetown, GW, and local high schools. Student rates available."
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>,
                 title: "African Diaspora Communities",
-                desc: "Connect with Ethiopian, Eritrean, Somali, Kenyan, and broader African community organizations across the DMV area for cross-cultural participation."
+                desc: "Ethiopian, Eritrean, Somali, Kenyan, and wider African communities across the DMV."
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>,
                 title: "Social Media & Influencers",
-                desc: "Partner with DC fitness influencers, running bloggers, and community pages across Instagram, TikTok, and Facebook to reach 50,000+ local followers."
+                desc: "DC fitness voices and running communities on Instagram, TikTok, and Facebook."
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>,
                 title: "Corporate & Charity Partners",
-                desc: "Offer corporate team registration packages and partner with local nonprofits. Companies can sponsor bibs, water stations, or the cultural festival stage."
+                desc: "Team registration packages, plus bib, water station, and festival stage sponsorships."
               },
             ].map((item) => (
               <ScrollReveal key={item.title}>
-                <div className="bg-white rounded-2xl p-6 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
-                  <div className="w-12 h-12 rounded-xl bg-yellow/12 flex items-center justify-center text-gold-dim mb-4">{item.icon}</div>
-                  <h4 className="font-[family-name:var(--font-heading)] text-base md:text-[16px] font-bold mb-2 tracking-tight">{item.title}</h4>
-                  <p className="text-[16px] md:text-[14px] text-charcoal/78 leading-relaxed">{item.desc}</p>
+                <div className="bg-white rounded-2xl p-5 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
+                  <div className="w-10 h-10 rounded-lg bg-yellow/12 flex items-center justify-center text-gold-dim mb-3">{item.icon}</div>
+                  <h4 className="font-[family-name:var(--font-heading)] text-[14px] md:text-[16px] font-bold mb-1.5 tracking-tight leading-snug">{item.title}</h4>
+                  <p className="text-[13px] md:text-[14px] text-charcoal/78 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -499,7 +521,7 @@ export default function Home() {
       </section>
 
       {/* ══ CTA ══ */}
-      <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-20 text-center overflow-hidden">
+      <section className="relative py-16 md:py-20 px-6 md:px-16 lg:px-20 text-center overflow-hidden">
         <div className="absolute inset-0 bg-charcoal" />
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10">

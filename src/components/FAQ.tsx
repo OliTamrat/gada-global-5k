@@ -20,7 +20,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-cream pt-24 md:pt-32 pb-8 md:pb-12 px-6 md:px-16 lg:px-20">
+    <section id="faq" className="bg-cream pt-16 md:pt-20 pb-8 md:pb-12 px-6 md:px-16 lg:px-20">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-10 lg:gap-16 items-start">
           {/* Left: heading + CTA */}
