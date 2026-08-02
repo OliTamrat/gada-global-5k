@@ -78,7 +78,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ ABOUT / ORIGIN STORY ══ */}
-      <section className="bg-cream py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-cream py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
@@ -118,7 +118,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ VISION & MISSION ══ */}
-      <section className="bg-charcoal py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-charcoal py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <ScrollReveal>
@@ -170,7 +170,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ CORE VALUES ══ */}
-      <section className="bg-cream py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-cream py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">What We Stand For</span>
@@ -194,7 +194,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ OUR EVENTS ══ */}
-      <section className="bg-charcoal py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-charcoal py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Event Portfolio</span>
@@ -219,7 +219,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ OROMO ATHLETES LEGACY ══ */}
-      <section className="bg-cream py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-cream py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">A Legacy of Champions</span>
@@ -267,7 +267,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ BECOME A SPONSOR ══ */}
-      <section className="bg-charcoal py-20 md:py-28 px-6 md:px-16 lg:px-20">
+      <section className="bg-charcoal py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Partner With Us</span>
@@ -299,7 +299,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══ CTA ══ */}
-      <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-20 text-center overflow-hidden">
+      <section className="relative py-14 md:py-18 px-6 md:px-16 lg:px-20 text-center overflow-hidden">
         <div className="absolute inset-0 bg-charcoal" />
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10">
