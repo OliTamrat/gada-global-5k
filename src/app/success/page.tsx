@@ -49,7 +49,7 @@ function SuccessContent() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-0.5 shrink-0"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-                Mark your calendar: October 3, 2026 \u2014 race starts 9:00 AM
+                Mark your calendar: October 3, 2026 — race starts 9:00 AM
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-0.5 shrink-0"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
