@@ -25,6 +25,7 @@ export function Navbar() {
   const showSolid = !isHome || scrolled;
 
   const links = [
+    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/#event", label: "Event" },
     { href: "/register", label: "Register" },
@@ -55,7 +56,7 @@ export function Navbar() {
       </Link>
 
       {/* Desktop links */}
-      <ul className="hidden md:flex gap-7 list-none">
+      <ul className="hidden lg:flex gap-7 list-none">
         {links.map((link) => (
           <li key={link.href}>
             <Link
@@ -97,7 +98,7 @@ export function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="flex md:hidden flex-col gap-1.5 bg-transparent border-none cursor-pointer"
+          className="flex lg:hidden flex-col gap-1.5 bg-transparent border-none cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
@@ -109,7 +110,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <ul className="absolute top-[76px] left-0 right-0 bg-charcoal border-b border-white/6 flex flex-col gap-1 p-4 list-none md:hidden shadow-[0_12px_32px_rgba(0,0,0,0.4)]">
+        <ul className="absolute top-[76px] left-0 right-0 bg-charcoal border-b border-white/6 flex flex-col gap-1 p-4 list-none lg:hidden shadow-[0_12px_32px_rgba(0,0,0,0.4)]">
           {links.map((link) => (
             <li key={link.href}>
               <Link

@@ -45,7 +45,9 @@ export default function Home() {
       <section className="relative min-h-screen flex flex-col overflow-hidden">
         <HeroVideo />
         <Particles />
-        <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-24">
+        {/* Mobile gets extra padding above and below so the hero is not squeezed
+            against the nav and the stat cards, which also lets the video show. */}
+        <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-32 pb-12 md:pt-24 md:pb-0">
           <div className="max-w-[780px]">
             <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.8rem,5.5vw,4.8rem)] font-bold leading-[1.08] text-white mb-10 tracking-tight">
               <span className="block hero-line">Let&apos;s celebrate</span>
@@ -79,7 +81,10 @@ export default function Home() {
         </div>
 
         {/* Bottom stats — clean grid, no fake nav */}
-        <div className="relative z-20 px-6 md:px-16 lg:px-20 pb-6 mt-auto">
+        {/* mt-auto pins the cards to the bottom on desktop. On mobile the hero
+            overflows the viewport, where mt-auto collapses to nothing — the
+            explicit margin keeps a gap above the cards there. */}
+        <div className="relative z-20 px-6 md:px-16 lg:px-20 pb-6 mt-10 md:mt-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="yellow-card rounded-2xl p-6 flex flex-col justify-between min-h-[160px]">
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-charcoal">{Icons.barChart}</div>
