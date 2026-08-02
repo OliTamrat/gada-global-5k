@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { SITE_LINKS, activeSocials } from "@/lib/links";
+import { LINK_SECTIONS, activeSocials, type SiteLink, type SocialLink } from "@/lib/links";
+import { LINK_ICONS } from "@/components/LinkIcons";
+import { ShareButton } from "@/components/ShareButton";
 import { EVENT } from "@/lib/email";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.gadaglobalrun.com";
@@ -18,35 +20,110 @@ export const metadata: Metadata = {
   },
 };
 
-const SOCIAL_ICONS: Record<string, React.ReactNode> = {
-  Instagram: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  ),
-  Facebook: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-    </svg>
-  ),
-  X: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  ),
-};
+function Row({ link }: { link: SiteLink | SocialLink }) {
+  const isSite = "primary" in link;
+  const primary = isSite && link.primary;
+  const label = "label" in link ? link.label : "";
+  const external = ("external" in link && link.external) || !isSite;
+
+  const inner = (
+    <>
+      <span
+        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${link.tint}`}
+      >
+        {LINK_ICONS[link.icon]}
+      </span>
+      <span className="flex-1 min-w-0">
+        <span
+          className={`block text-[16px] font-bold tracking-tight leading-snug ${
+            primary ? "text-charcoal" : "text-white"
+          }`}
+        >
+          {label}
+        </span>
+        <span
+          className={`block text-[13px] leading-snug mt-0.5 ${
+            primary ? "text-charcoal/60" : "text-white/50"
+          }`}
+        >
+          {link.blurb}
+        </span>
+      </span>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        className={`shrink-0 transition-transform group-hover:translate-x-0.5 ${
+          primary ? "text-charcoal/45" : "text-white/35"
+        }`}
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </>
+  );
+
+  const className = `group flex items-center gap-4 rounded-2xl px-4 py-3.5 no-underline transition-all hover:-translate-y-0.5 ${
+    primary
+      ? "yellow-card hover:shadow-[0_10px_32px_rgba(245,200,66,0.28)]"
+      : "bg-white/[0.055] border border-white/10 hover:bg-white/[0.09] hover:border-white/18"
+  }`;
+
+  if (external) {
+    return (
+      <a
+        href={link.href}
+        className={className}
+        {...(link.href.startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={link.href} className={className}>
+      {inner}
+    </Link>
+  );
+}
+
+function Divider({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-4 py-2">
+      <span className="h-px flex-1 bg-gradient-to-r from-transparent to-yellow/35" />
+      <span className="text-[11px] font-bold tracking-[3px] uppercase text-yellow/80">
+        {title}
+      </span>
+      <span className="h-px flex-1 bg-gradient-to-l from-transparent to-yellow/35" />
+    </div>
+  );
+}
 
 export default function LinksPage() {
   const socials = activeSocials();
 
   return (
-    // No nav or footer chrome — this is the page a phone opens from a bio link,
-    // so it is one screen of taps and nothing else.
-    <main className="bg-charcoal min-h-screen px-5 pt-24 pb-14 flex flex-col items-center">
-      <div className="w-full max-w-[460px]">
-        <div className="text-center mb-9">
+    <main className="relative bg-charcoal min-h-screen px-5 pt-24 pb-14 overflow-hidden">
+      {/* Warm vignette so the page is not a flat black rectangle. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(70% 45% at 50% 0%, rgba(232,185,48,0.10), transparent 70%), radial-gradient(60% 40% at 100% 100%, rgba(198,40,40,0.10), transparent 70%)",
+        }}
+      />
+
+      <div className="relative w-full max-w-[460px] mx-auto">
+        <header className="text-center mb-9">
           <Image
             src="/images/brand/gada-global-logo.png"
             alt="Gada Global"
@@ -58,7 +135,7 @@ export default function LinksPage() {
           <h1 className="font-[family-name:var(--font-heading)] text-[26px] font-bold text-white tracking-tight leading-tight">
             {EVENT.brand}
           </h1>
-          <p className="text-[14px] leading-[1.65] text-white/65 mt-2.5 max-w-[330px] mx-auto">
+          <p className="text-[14px] leading-[1.65] text-white/60 mt-2.5 max-w-[330px] mx-auto">
             Celebrating Oromo heritage through running.
           </p>
           <div className="inline-flex items-center gap-2 mt-4 rounded-full bg-white/8 border border-white/12 px-4 py-2">
@@ -67,87 +144,56 @@ export default function LinksPage() {
               {`${EVENT.date} · Washington, DC`}
             </span>
           </div>
-        </div>
+        </header>
 
         <div className="space-y-3">
-          {SITE_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`group block rounded-2xl px-5 py-4 no-underline transition-all hover:-translate-y-0.5 ${
-                link.primary
-                  ? "yellow-card hover:shadow-[0_10px_32px_rgba(245,200,66,0.28)]"
-                  : "bg-white/8 border border-white/12 hover:bg-white/12"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex-1 min-w-0">
-                  <div
-                    className={`text-[16px] font-bold tracking-tight leading-snug ${
-                      link.primary ? "text-charcoal" : "text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </div>
-                  <div
-                    className={`text-[13px] leading-snug mt-0.5 ${
-                      link.primary ? "text-charcoal/60" : "text-white/55"
-                    }`}
-                  >
-                    {link.blurb}
-                  </div>
-                </div>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className={`shrink-0 transition-transform group-hover:translate-x-0.5 ${
-                    link.primary ? "text-charcoal/45" : "text-white/40"
-                  }`}
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
+          {LINK_SECTIONS.map((section, i) => (
+            <div key={section.title ?? `lead-${i}`} className="space-y-3">
+              {section.title && <Divider title={section.title} />}
+              {section.links.map((link) => (
+                <Row key={link.href + link.label} link={link} />
+              ))}
+            </div>
           ))}
 
-          <a
-            href={`mailto:${EVENT.supportEmail}`}
-            className="group block rounded-2xl px-5 py-4 no-underline bg-white/8 border border-white/12 hover:bg-white/12 transition-all hover:-translate-y-0.5"
-          >
-            <div className="text-[16px] font-bold tracking-tight text-white leading-snug">
-              Contact us
+          {socials.length > 0 && (
+            <div className="space-y-3">
+              <Divider title="Follow" />
+              {socials.map((s) => (
+                <Row key={s.label} link={s} />
+              ))}
             </div>
-            <div className="text-[13px] text-white/55 mt-0.5">{EVENT.supportEmail}</div>
-          </a>
+          )}
         </div>
 
-        {socials.length > 0 && (
-          <div className="flex justify-center gap-3 mt-9">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="w-11 h-11 rounded-xl bg-white/8 border border-white/12 text-white/75 flex items-center justify-center hover:bg-yellow hover:text-charcoal hover:border-yellow transition-all no-underline"
-              >
-                {SOCIAL_ICONS[s.label]}
-              </a>
-            ))}
-          </div>
-        )}
+        <div className="text-center mt-9">
+          <ShareButton url={`${SITE}/links`} title={`${EVENT.brand} — ${EVENT.name}`} />
+        </div>
 
-        <p className="text-center text-[12px] text-white/35 mt-10">
-          {`© 2026 ${EVENT.organization}`}
-        </p>
+        <footer className="text-center mt-11">
+          <div className="text-[11px] font-bold tracking-[5px] uppercase text-white/30 mb-3">
+            {EVENT.brand}
+          </div>
+          <p className="text-[12px] text-white/28 leading-relaxed">
+            {`© 2026 ${EVENT.organization} All rights reserved.`}
+          </p>
+          {/* SVG heart, not an emoji — the project forbids emoji in UI. */}
+          <p className="text-[12px] text-white/28 leading-relaxed inline-flex items-center gap-1.5 mt-1">
+            Built with
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="text-red-oromo shrink-0"
+              role="img"
+              aria-label="love"
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            by Olink Technologies
+          </p>
+        </footer>
       </div>
     </main>
   );
