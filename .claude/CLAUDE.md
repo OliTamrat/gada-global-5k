@@ -201,6 +201,22 @@ receive anything until the domain verifies.
 
 ---
 
+## Link-in-bio page
+
+**`/links`** collects register, event details, shop, live results, print-your-bib,
+about, and contact into one tap-per-row screen for Instagram bios, flyers, and
+QR codes. `/api/qr/links` generates the matching code, listed on `/promo`.
+
+Destinations live in `src/lib/links.ts`, shared with the footer so the two can
+never drift. **Social hrefs are still `#` placeholders and are filtered out
+rather than rendered as dead icons** — replace the href in that file and they
+appear in both places at once.
+
+The site footer is hidden on `/links` (it repeated the same destinations
+directly beneath them), which is why `Footer` is a client component.
+
+---
+
 ## Race operations and organizer visibility
 
 **`RACE_OPS_PASSCODE` gates every screen that changes results or shows registrant
