@@ -132,26 +132,48 @@ with separate keys, separate webhook endpoints, and separate signing secrets.
   **Promote to Production** on a current deployment rather than **Redeploy** on a
   stale one (Redeploy rebuilds that row's own commit).
 
+### END-TO-END VERIFIED — 2026-08-02
+
+A sandbox registration with card `4242 4242 4242 4242` went the whole way:
+Stripe Checkout → payment → webhook → `payment_status='paid'` → **bib 101** →
+confirmation email delivered. Event details, tier, amount, and t-shirt size all
+rendered correctly in the email. **The registration pipeline works.**
+
+Cloudflare Email Routing is configured for `info@gadaglobalrun.com` →
+`gadaglobalrun@gmail.com` (destination verified, routing rule created). Exactly
+one `v=spf1` record exists on the apex, so there is no SPF conflict with Resend
+— Resend's records live on `send.gadaglobalrun.com`.
+
+**The two-variable Stripe trap cost the most time here.** `STRIPE_SECRET_KEY`
+(`sk_test_…`) and `STRIPE_WEBHOOK_SECRET` (`whsec_…`) are *different
+credentials for opposite directions*: the first authenticates you calling
+Stripe (creating the Checkout session), the second verifies Stripe calling you
+(the payment-completed webhook). Checkout working proves **only** the first.
+The `whsec_` was pasted into `STRIPE_SECRET_KEY` and the second variable was
+never created, which produced a successful payment with no bib and no email.
+`/api/health` names this exact fault now.
+
 ### Still open
 
-1. **`STRIPE_SECRET_KEY` value is wrong.** `/api/health` reports it set but not an
-   `sk_test_`/`sk_live_` key. The variables are marked **Sensitive** in Vercel, so
-   the value cannot be read back in the dashboard — `/api/health` is the only way
-   to inspect it, and it now names the specific fault (publishable key, restricted
-   key, webhook secret in the wrong slot, whitespace, or a masked preview copied
-   instead of the revealed key). Reveal the key in Stripe *before* copying.
-2. **Inbound mail for `info@`** — Resend only *sends*. Mail to
-   `info@gadaglobalrun.com` bounces until Cloudflare Email Routing / ImprovMX
-   forwarding, or a real mailbox, adds apex MX records. Not a blocker for sending
-   confirmations; is a blocker for anyone replying to one.
+1. **Clear the test data before real registrations open.** Bib 101 is consumed
+   by the sandbox test above, and test and live Stripe modes share **one
+   database**. Leaving it means the first real runner gets bib 102 and a fake
+   entry sits in the results. Clean up with:
+   ```sql
+   delete from race_entries where bib in (select bib from registrations where payment_status = 'paid' and email = '<test email>');
+   delete from registrations where email = '<test email>';
+   delete from stripe_events;            -- test-mode event ids, no longer needed
+   alter sequence bib_seq restart with 101;
+   ```
+2. **Go live.** Swap `STRIPE_SECRET_KEY` to `sk_live_…`, register a *second*
+   webhook endpoint in **live** mode (same URL, same `checkout.session.completed`,
+   payload style **Snapshot**), and replace `STRIPE_WEBHOOK_SECRET` with that
+   endpoint's signing secret. Signing secrets are per-mode — reusing the sandbox
+   one silently drops every live payment. Redeploy, then confirm `/api/health`
+   shows `stripe: ok` rather than `warn`.
 3. Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
-4. **End-to-end test** with card `4242 4242 4242 4242`: register → the
-   `registrations` row should show `payment_status='paid'` and a bib >= 101 → the
-   confirmation email should arrive. Stripe's destination page shows each delivery
-   and its response code, so a 400 there means the signing secret is mismatched
-   and a 200 means the webhook ran.
-5. **Go live**: swap in `sk_live_…`, register a *second* webhook endpoint in live
-   mode, and replace `STRIPE_WEBHOOK_SECRET` with that endpoint's secret.
+4. Optionally widen `RESEND_API_KEY` to Preview (it is Production-only), so
+   preview deployments can send test confirmations.
 
 **No longer needed as of 2026-08-01** — the domain is verified, so
 `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"` now sends to any
