@@ -224,8 +224,15 @@ export default function Home() {
                 title: "Official Race Tee",
                 desc: "The Gada Global 5K emblem tee — One World, One Goal",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/5 to-transparent">
-                    <Image src="/products/race-day-tee.jpg" alt="Official Gada Global 5K race tee" fill className="object-contain object-center p-2" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/8 to-white/[0.02]">
+                    {/* Transparent cutout: the flat-lay shot is a white tee on a
+                        light background, which all but vanishes on a dark card. */}
+                    <Image
+                      src="/products/race-day-tee-cutout.png"
+                      alt="Official Gada Global 5K race tee"
+                      fill
+                      className="object-contain object-center p-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]"
+                    />
                   </div>
                 ),
               },
