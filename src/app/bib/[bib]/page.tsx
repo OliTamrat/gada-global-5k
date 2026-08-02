@@ -62,7 +62,7 @@ export default async function BibPage({
 
           <div className="px-8 pt-2 pb-1 text-center">
             <div className="text-[11px] font-black tracking-[5px] uppercase text-charcoal/60">
-              {EVENT.organization}
+              {EVENT.brand}
             </div>
           </div>
 

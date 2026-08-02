@@ -5,6 +5,10 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 export const EVENT = {
   name: "Gada Global 5K",
+  // The public-facing brand. "Gada Global Inc." below is the registered legal
+  // entity the brand operates under — use it only where the legal name is
+  // required, never as a heading a runner reads.
+  brand: "Gada Global Run",
   date: "Saturday, October 3, 2026",
   startTime: "9:00 AM",
   packetPickup: "7:00 AM",
@@ -69,8 +73,9 @@ function buildHtml(d: RegistrationConfirmation): string {
     .join("");
 
   const nextSteps = [
-    `Packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
-    "Bring a photo ID. Your bib and race t-shirt are in your packet.",
+    `Print your race bib at home from ${site}/bib/${d.bib} — then you can head straight to the start line on race day.`,
+    `If you would rather collect it in person, packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
+    "Bring a photo ID. Your race t-shirt is in your packet at pickup.",
     "Wear your bib on the front of your shirt so the timing volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
@@ -105,7 +110,7 @@ function buildHtml(d: RegistrationConfirmation): string {
           <tr>
             <td style="background:#141210;padding:28px 32px;">
               <div style="color:#E8B930;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">
-                ${esc(EVENT.organization)}
+                ${esc(EVENT.brand)}
               </div>
               <div style="color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.4px;margin-top:6px;">
                 ${esc(EVENT.name)}
@@ -184,9 +189,13 @@ function buildHtml(d: RegistrationConfirmation): string {
 
           <tr>
             <td style="padding:28px 32px 32px 32px;">
-              <a href="${esc(site)}"
+              <a href="${esc(`${site}/bib/${d.bib}`)}"
                  style="display:inline-block;background:#E8B930;color:#141210;text-decoration:none;padding:14px 28px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
-                View event details
+                Print your race bib
+              </a>
+              <a href="${esc(site)}"
+                 style="display:inline-block;margin-left:10px;color:#4a453d;text-decoration:none;padding:14px 20px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid #ded5c4;">
+                Event details
               </a>
             </td>
           </tr>
@@ -197,8 +206,11 @@ function buildHtml(d: RegistrationConfirmation): string {
                 Questions? Reply to this email or write to
                 <a href="mailto:${esc(EVENT.supportEmail)}" style="color:#141210;font-weight:600;">${esc(EVENT.supportEmail)}</a>.
               </p>
-              <p style="margin:0;color:#9a9287;font-size:12px;line-height:1.6;">
-                ${esc(EVENT.organization)} &bull; Celebrating Oromo heritage through running.
+              <p style="margin:0 0 4px 0;color:#9a9287;font-size:12px;line-height:1.6;">
+                ${esc(EVENT.brand)} &bull; Celebrating Oromo heritage through running.
+              </p>
+              <p style="margin:0;color:#b3aca2;font-size:11px;line-height:1.6;">
+                Operated by ${esc(EVENT.organization)}
               </p>
             </td>
           </tr>
@@ -231,14 +243,15 @@ function buildText(d: RegistrationConfirmation): string {
     `${EVENT.location}, ${EVENT.address}`,
     "",
     "WHAT TO DO NEXT",
-    `- Packet pickup opens at ${EVENT.packetPickup}.`,
-    "- Bring a photo ID. Bib and t-shirt are in your packet.",
+    `- Print your race bib at home: ${siteUrl()}/bib/${d.bib}`,
+    `- Or collect it in person — packet pickup opens at ${EVENT.packetPickup}.`,
+    "- Bring a photo ID. Your t-shirt is in your packet at pickup.",
     "- Wear your bib on the front of your shirt for timing scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,
     "",
     `Questions? ${EVENT.supportEmail}`,
-    `${EVENT.organization}`
+    `${EVENT.brand} — operated by ${EVENT.organization}`
   );
   return lines.join("\n");
 }
