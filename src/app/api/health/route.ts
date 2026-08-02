@@ -49,6 +49,39 @@ function stripeMode(key: string | undefined): "live" | "test" | null {
   return null;
 }
 
+/**
+ * Says what is wrong with the value, so a mis-paste is one glance to diagnose
+ * instead of a guessing game. Returns null when the key is well formed.
+ *
+ * Shape is checked BEFORE the sk_test_/sk_live_ prefix, because a masked copy
+ * ("sk_test_...51Tzo") carries a valid prefix and would otherwise be reported
+ * as healthy while failing every real call to Stripe.
+ *
+ * Key prefixes are not secret — Stripe documents them, and pk_ keys are public
+ * by design — so naming the type leaks nothing. The raw value is never echoed.
+ */
+function stripeKeyProblem(key: string): string | null {
+  if (key !== key.trim()) {
+    return "the value has leading or trailing whitespace — re-paste it with no surrounding spaces or newline";
+  }
+  if (key.includes("...") || key.includes("…")) {
+    return "the value contains an ellipsis, so a masked preview was copied rather than the revealed key — click Reveal, then the copy button";
+  }
+  if (key.startsWith("pk_")) {
+    return "that is a publishable key (pk_), not a secret key — the secret key is the row below it on the API keys page";
+  }
+  if (key.startsWith("rk_")) {
+    return "that is a restricted key (rk_) — use the standard secret key instead";
+  }
+  if (key.startsWith("whsec_")) {
+    return "that is a webhook signing secret (whsec_) — it belongs in STRIPE_WEBHOOK_SECRET, not here";
+  }
+  if (!/^sk_(test|live)_[A-Za-z0-9]+$/.test(key)) {
+    return `unrecognized format (${key.length} characters) — expected sk_test_ or sk_live_ followed by letters and digits only`;
+  }
+  return null;
+}
+
 async function checkDatabase(): Promise<Check> {
   if (!isDatabaseConfigured()) {
     return { status: "fail", detail: "DATABASE_URL is not set" };
@@ -92,18 +125,26 @@ async function checkDatabase(): Promise<Check> {
 }
 
 function checkStripe(): Check {
-  const mode = stripeMode(process.env.STRIPE_SECRET_KEY);
+  const key = process.env.STRIPE_SECRET_KEY;
   const hasWebhookSecret = Boolean(process.env.STRIPE_WEBHOOK_SECRET);
 
-  if (!process.env.STRIPE_SECRET_KEY) {
+  if (!key) {
     return { status: "fail", detail: "STRIPE_SECRET_KEY is not set" };
   }
-  if (!mode) {
+
+  const problem = stripeKeyProblem(key);
+  if (problem) {
+    // Report the webhook secret too — otherwise this failure masks whether the
+    // next variable along is also missing, costing an extra redeploy to find out.
     return {
       status: "fail",
-      detail: "STRIPE_SECRET_KEY is set but is not an sk_test_ or sk_live_ key",
+      detail: `STRIPE_SECRET_KEY is set but unusable: ${problem}. (STRIPE_WEBHOOK_SECRET is ${
+        hasWebhookSecret ? "set" : "NOT set"
+      }.)`,
     };
   }
+
+  const mode = stripeMode(key);
   if (!hasWebhookSecret) {
     return {
       status: "fail",
@@ -168,8 +209,21 @@ export async function GET() {
         ? "All required configuration is present."
         : `Not ready: ${values.filter((c) => c.status === "fail").length} check(s) failing.`,
       checks,
+      // Environment variable changes only take effect on a new build, so the
+      // commonest false alarm is reading a stale deployment. This identifies
+      // which build answered. The commit sha is public (the repo is), and
+      // these are populated only when Vercel's system environment variables
+      // are enabled for the project.
+      deployment: {
+        commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "unknown",
+        environment: process.env.VERCEL_ENV ?? "unknown",
+      },
     },
-    // 503 so an uptime monitor treats a half-configured deployment as down.
-    { status: ready ? 200 : 503 }
+    {
+      // 503 so an uptime monitor treats a half-configured deployment as down.
+      status: ready ? 200 : 503,
+      // Without this a browser can keep showing a pre-fix answer.
+      headers: { "Cache-Control": "no-store, max-age=0" },
+    }
   );
 }
