@@ -5,7 +5,14 @@ import { isWave } from "@/lib/waves";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+// Guarded as well as POST. Wave status is operational data, and this is also
+// the endpoint OpsGate checks a passcode against — leaving it open meant any
+// passcode appeared to be accepted, and the volunteer only found out when the
+// first real action failed.
+export async function GET(req: NextRequest) {
+  const denied = requireOps(req);
+  if (denied) return denied;
+
   try {
     return NextResponse.json({ waves: await getWaveStatuses() });
   } catch (error) {
