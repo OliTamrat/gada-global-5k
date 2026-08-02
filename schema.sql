@@ -102,3 +102,30 @@ create table if not exists stripe_events (
   type        text not null,
   received_at timestamptz not null default now()
 );
+
+-- ── Start waves ──────────────────────────────────────────────────────────────
+-- Runners are not scanned at the start line. The starter sends a wave, one
+-- volunteer taps once, and every runner in that wave inherits the timestamp.
+-- Scanning 500 people individually would take longer than the race.
+--
+-- Added after the initial schema, so these are ALTERs rather than columns on
+-- the CREATE above. Both forms are idempotent, so this file stays re-runnable.
+alter table registrations
+  add column if not exists wave text not null default 'open'
+    check (wave in ('elite', 'open', 'kids'));
+
+alter table race_entries
+  add column if not exists wave text not null default 'open'
+    check (wave in ('elite', 'open', 'kids'));
+
+create index if not exists race_entries_wave_idx on race_entries (wave);
+
+-- One row per wave, written once when the starter sends it. The primary key
+-- makes a second tap a no-op rather than restarting the clock on a wave that
+-- is already running.
+create table if not exists wave_starts (
+  wave       text primary key check (wave in ('elite', 'open', 'kids')),
+  started_at bigint not null,
+  started_by text,
+  created_at timestamptz not null default now()
+);

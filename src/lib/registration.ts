@@ -54,4 +54,5 @@ export interface RegistrationData {
   tshirtSize: string;
   tierId: string;
   emergencyContact: string;
+  wave: string;
 }

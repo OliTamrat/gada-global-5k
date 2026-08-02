@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getRaceEntry } from "@/lib/race";
 import { EVENT } from "@/lib/email";
+import { WAVE_META } from "@/lib/waves";
 import { PrintButton } from "@/components/PrintButton";
 
 // Reads the database per request; nothing here can be prerendered.
@@ -27,6 +28,7 @@ export default async function BibPage({
   if (!entry) notFound();
 
   const name = `${entry.firstName} ${entry.lastName}`.trim();
+  const wave = WAVE_META[entry.wave];
 
   return (
     <main className="bg-cream min-h-screen pt-28 pb-16 px-6 print:p-0 print:bg-white">
@@ -78,6 +80,13 @@ export default async function BibPage({
             </div>
           </div>
 
+          {/* Wave band — lets runners find their corral without a list */}
+          <div className={`px-8 py-2 text-center ${wave.bandClass}`}>
+            <span className="text-[13px] font-black tracking-[4px] uppercase">
+              {wave.bandLabel}
+            </span>
+          </div>
+
           {/* Number */}
           <div className="px-8 py-6 text-center">
             <div className="font-[family-name:var(--font-heading)] font-black leading-[0.85] tracking-tighter text-charcoal text-[clamp(5rem,18vw,9rem)]">
@@ -122,8 +131,11 @@ export default async function BibPage({
           </div>
         </div>
 
-        <p className="print:hidden text-[13px] text-charcoal/55 text-center mt-6">
-          Wear this on the front of your shirt so the timing volunteers can read it.
+        <p className="print:hidden text-[13px] leading-[1.7] text-charcoal/55 text-center mt-6 max-w-[460px] mx-auto">
+          Wear this on the front of your shirt so the finish-line volunteers can
+          read it. Line up in the{" "}
+          <strong className="text-charcoal/75">{wave.label}</strong> corral —
+          waves start a few minutes apart.
         </p>
       </div>
     </main>

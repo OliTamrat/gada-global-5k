@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { tiers, getCurrentTier } from "@/lib/registration";
+import { WAVES, WAVE_META, DEFAULT_WAVE } from "@/lib/waves";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function RegisterPage() {
@@ -27,6 +28,7 @@ export default function RegisterPage() {
       tshirtSize: form.get("tshirtSize") as string,
       tierId: selectedTier,
       emergencyContact: form.get("emergency") as string,
+      wave: form.get("wave") as string,
     };
 
     try {
@@ -271,6 +273,22 @@ export default function RegisterPage() {
                       <label className={labelClass}>Emergency Contact</label>
                       <input name="emergency" required placeholder="Jane Doe - (202) 555-0199" className={inputClass} />
                     </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <label className={labelClass}>Start Wave</label>
+                    <select name="wave" required defaultValue={DEFAULT_WAVE} className={`${inputClass} cursor-pointer appearance-none`}>
+                      {WAVES.map((w) => (
+                        <option key={w} value={w}>
+                          {WAVE_META[w].label}
+                        </option>
+                      ))}
+                    </select>
+                    <p className="text-[13px] leading-[1.6] text-charcoal/55 mt-2">
+                      Waves start a few minutes apart so faster runners are not
+                      weaving through walkers and children. Most adults belong in
+                      Open; pick Kids &amp; Family if you are running with children.
+                    </p>
                   </div>
 
                   <div className="mt-auto pt-6">

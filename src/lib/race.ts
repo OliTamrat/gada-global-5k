@@ -1,7 +1,9 @@
 import { query, queryOne, transaction } from "@/lib/db";
+import { coerceWave, WAVES, type Wave } from "@/lib/waves";
 
 export interface RaceEntry {
   bib: number;
+  wave: Wave;
   firstName: string;
   lastName: string;
   age: number;
@@ -53,6 +55,7 @@ function isUniqueViolation(err: unknown): boolean {
 // ── Row shapes ───────────────────────────────────────────────────────────────
 interface EntryRow {
   bib: number;
+  wave: string;
   first_name: string;
   last_name: string;
   age: number;
@@ -80,6 +83,7 @@ interface DisputeRow {
 function toEntry(row: EntryRow): RaceEntry {
   return {
     bib: row.bib,
+    wave: coerceWave(row.wave),
     firstName: row.first_name,
     lastName: row.last_name,
     age: row.age,
@@ -109,7 +113,7 @@ function toDispute(row: DisputeRow): Dispute {
 
 const ENTRY_SELECT = `
   select
-    e.bib, e.first_name, e.last_name, e.age, e.gender,
+    e.bib, e.first_name, e.last_name, e.age, e.gender, e.wave,
     e.start_time, e.finish_time, e.timing_confidence,
     coalesce(
       json_agg(
@@ -196,6 +200,96 @@ export async function seedDemoData(): Promise<RaceEntry[]> {
   return getRaceEntries();
 }
 
+export interface WaveStatus {
+  wave: Wave;
+  startedAt?: number;
+  startedBy?: string;
+  /** Runners assigned to this wave. */
+  registered: number;
+  finished: number;
+}
+
+/**
+ * Sends a wave. One tap gives every runner in it the same start time.
+ *
+ * Idempotent by design: the primary key on wave_starts means a second tap
+ * returns the original timestamp rather than restarting a wave that is already
+ * running. A volunteer double-tapping under pressure must not reset the clock
+ * on runners already on the course.
+ */
+export async function startWave(
+  wave: Wave,
+  volunteerId: string
+): Promise<{ started: boolean; startedAt: number; alreadyStarted: boolean }> {
+  const now = Date.now();
+
+  return transaction(async (client) => {
+    const claim = await client.query<{ started_at: number }>(
+      `insert into wave_starts (wave, started_at, started_by)
+       values ($1, $2, $3)
+       on conflict (wave) do nothing
+       returning started_at`,
+      [wave, now, volunteerId]
+    );
+
+    if (claim.rowCount === 0) {
+      const existing = await client.query<{ started_at: number }>(
+        "select started_at from wave_starts where wave = $1",
+        [wave]
+      );
+      return {
+        started: false,
+        startedAt: existing.rows[0].started_at,
+        alreadyStarted: true,
+      };
+    }
+
+    // Only fills blanks, so a runner given an individual start time (a late
+    // starter corrected by an official) keeps it.
+    await client.query(
+      "update race_entries set start_time = $2 where wave = $1 and start_time is null",
+      [wave, now]
+    );
+
+    return { started: true, startedAt: now, alreadyStarted: false };
+  });
+}
+
+/** Per-wave counts and start state, for the starter's screen. */
+export async function getWaveStatuses(): Promise<WaveStatus[]> {
+  const rows = await query<{
+    wave: string;
+    started_at: number | null;
+    started_by: string | null;
+    registered: number;
+    finished: number;
+  }>(
+    `select
+       w.wave,
+       ws.started_at,
+       ws.started_by,
+       count(e.bib)                                          as registered,
+       count(e.bib) filter (where e.finish_time is not null)  as finished
+     from unnest($1::text[]) as w(wave)
+     left join wave_starts ws on ws.wave = w.wave
+     left join race_entries e on e.wave = w.wave
+     group by w.wave, ws.started_at, ws.started_by`,
+    [WAVES as unknown as string[]]
+  );
+
+  const byWave = new Map(rows.map((r) => [r.wave, r]));
+  return WAVES.map((wave) => {
+    const r = byWave.get(wave);
+    return {
+      wave,
+      startedAt: r?.started_at ?? undefined,
+      startedBy: r?.started_by ?? undefined,
+      registered: Number(r?.registered ?? 0),
+      finished: Number(r?.finished ?? 0),
+    };
+  });
+}
+
 export async function getRaceEntries(): Promise<RaceEntry[]> {
   const rows = await query<EntryRow>(`${ENTRY_SELECT} group by e.bib order by e.bib`);
   return rows.map(toEntry);
@@ -216,16 +310,21 @@ export async function upsertRaceEntry(entry: {
   lastName: string;
   age: number;
   gender: string;
+  wave: Wave;
 }): Promise<void> {
+  // start_time is seeded from wave_starts so someone who registers on race day,
+  // after their wave has already been sent, still has a clock running.
   await query(
-    `insert into race_entries (bib, first_name, last_name, age, gender)
-     values ($1, $2, $3, $4, $5)
+    `insert into race_entries (bib, first_name, last_name, age, gender, wave, start_time)
+     values ($1, $2, $3, $4, $5, $6,
+             (select started_at from wave_starts where wave = $6))
      on conflict (bib) do update set
        first_name = excluded.first_name,
        last_name  = excluded.last_name,
        age        = excluded.age,
-       gender     = excluded.gender`,
-    [entry.bib, entry.firstName, entry.lastName, entry.age, entry.gender]
+       gender     = excluded.gender,
+       wave       = excluded.wave`,
+    [entry.bib, entry.firstName, entry.lastName, entry.age, entry.gender, entry.wave]
   );
 }
 
@@ -267,8 +366,32 @@ export async function recordScan(
       }
 
       // Finish scan — supports multiple volunteers.
-      if (startTime === null) {
-        return { success: false, error: `Bib #${bib} hasn't started yet` };
+      //
+      // Runners are not scanned at the start, so a null start_time normally
+      // just means this runner registered after their wave was sent. Inherit
+      // the wave's timestamp rather than rejecting the scan: a volunteer at a
+      // finish line has no way to fix a missing start, and turning a finisher
+      // away loses their result entirely.
+      let effectiveStart = startTime;
+      if (effectiveStart === null) {
+        const waveRow = await client.query<{ started_at: number }>(
+          `select w.started_at
+             from wave_starts w
+             join race_entries e on e.wave = w.wave
+            where e.bib = $1`,
+          [bib]
+        );
+        if (waveRow.rowCount === 0) {
+          return {
+            success: false,
+            error: `Bib #${bib}'s wave has not been started yet`,
+          };
+        }
+        effectiveStart = waveRow.rows[0].started_at;
+        await client.query("update race_entries set start_time = $2 where bib = $1", [
+          bib,
+          effectiveStart,
+        ]);
       }
 
       await client.query(

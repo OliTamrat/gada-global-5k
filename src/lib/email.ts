@@ -1,6 +1,8 @@
 // Resend is called over its REST API rather than the SDK: it is a single POST,
 // and this keeps the dependency surface (and cold starts) small.
 
+import { WAVE_META, coerceWave, type Wave } from "@/lib/waves";
+
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 export const EVENT = {
@@ -28,6 +30,7 @@ export interface RegistrationConfirmation {
   tierName: string;
   amountCents: number;
   tshirtSize?: string | null;
+  wave?: Wave | string | null;
 }
 
 export interface SendResult {
@@ -60,6 +63,7 @@ function buildHtml(d: RegistrationConfirmation): string {
     ["Registration", d.tierName],
     ["Amount paid", formatUsd(d.amountCents)],
   ];
+  rows.push(["Start wave", WAVE_META[coerceWave(d.wave)].label]);
   if (d.tshirtSize) rows.push(["T-shirt size", d.tshirtSize]);
 
   const detailRows = rows
@@ -76,7 +80,8 @@ function buildHtml(d: RegistrationConfirmation): string {
     `Print your race bib at home from ${site}/bib/${d.bib} — then you can head straight to the start line on race day.`,
     `If you would rather collect it in person, packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
     "Bring a photo ID. Your race t-shirt is in your packet at pickup.",
-    "Wear your bib on the front of your shirt so the timing volunteers can scan it.",
+    `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral. Waves set off a few minutes apart so faster runners are not weaving through walkers and children.`,
+    "Wear your bib on the front of your shirt so the finish-line volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
   ]
@@ -234,6 +239,7 @@ function buildText(d: RegistrationConfirmation): string {
     `Registration: ${d.tierName}`,
     `Amount paid: ${formatUsd(d.amountCents)}`,
   ];
+  lines.push(`Start wave: ${WAVE_META[coerceWave(d.wave)].label}`);
   if (d.tshirtSize) lines.push(`T-shirt size: ${d.tshirtSize}`);
   lines.push(
     "",
@@ -246,7 +252,8 @@ function buildText(d: RegistrationConfirmation): string {
     `- Print your race bib at home: ${siteUrl()}/bib/${d.bib}`,
     `- Or collect it in person — packet pickup opens at ${EVENT.packetPickup}.`,
     "- Bring a photo ID. Your t-shirt is in your packet at pickup.",
-    "- Wear your bib on the front of your shirt for timing scans.",
+    `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral.`,
+    "- Wear your bib on the front of your shirt for finish-line scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,
     "",

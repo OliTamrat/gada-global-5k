@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { tiers, type RegistrationData } from "@/lib/registration";
 import { query } from "@/lib/db";
+import { coerceWave } from "@/lib/waves";
 
 export const dynamic = "force-dynamic";
 
@@ -29,11 +30,15 @@ export async function POST(req: NextRequest) {
 
     // Persist as pending first so the entry survives even if the runner
     // abandons checkout. The webhook promotes it to paid.
+    // An unrecognised wave falls back to Open rather than failing the
+    // registration — a bad select value must never cost a sale.
+    const wave = coerceWave(data.wave);
+
     const [row] = await query<{ id: string }>(
       `insert into registrations
          (first_name, last_name, email, phone, age, gender,
-          tshirt_size, tier_id, tier_name, amount_cents, emergency_contact)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+          tshirt_size, tier_id, tier_name, amount_cents, emergency_contact, wave)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
        returning id`,
       [
         data.firstName,
@@ -47,6 +52,7 @@ export async function POST(req: NextRequest) {
         tier.name,
         tier.price,
         data.emergencyContact || null,
+        wave,
       ]
     );
     registrationId = row.id;
@@ -78,6 +84,7 @@ export async function POST(req: NextRequest) {
         email: data.email,
         tier: tier.name,
         tshirtSize: data.tshirtSize,
+        wave,
       },
     });
 
