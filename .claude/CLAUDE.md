@@ -224,8 +224,11 @@ leaves organizers blind. Like the runner confirmation, a send failure is logged
 and swallowed — it must never fail the webhook and trigger a Stripe retry.
 
 **`/organizers`** is the standing answer to "how many have registered": paid
-count, revenue, abandoned checkouts, breakdowns by wave, tier and **t-shirt size
-for ordering**, the 25 most recent, and a CSV export of every paid registration.
+count, **total revenue across registrations and merch**, merch order count,
+abandoned checkouts, breakdowns by wave, tier and **t-shirt size for ordering**,
+the 25 most recent registrations, recent merch orders, and a CSV export of every
+paid registration. The revenue figure combines both streams so it reconciles
+against a Stripe payout without adding two numbers by hand.
 CSV cells starting `=`, `+`, `-` or `@` are prefixed with an apostrophe so a
 runner's name cannot execute as a spreadsheet formula.
 

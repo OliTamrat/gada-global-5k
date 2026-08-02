@@ -6,10 +6,23 @@ import { OpsGate, opsFetch } from "@/components/OpsGate";
 import { WAVE_META, coerceWave } from "@/lib/waves";
 
 interface Dashboard {
-  totals: { paid: number; pending: number; revenueCents: number };
+  totals: {
+    paid: number;
+    pending: number;
+    revenueCents: number;
+    merchOrders: number;
+    merchRevenueCents: number;
+    totalRevenueCents: number;
+  };
   byWave: Record<string, number>;
   byTier: Record<string, number>;
   byShirt: Record<string, number>;
+  recentMerch: Array<{
+    email: string | null;
+    items: string;
+    amountCents: number;
+    orderedAt: string;
+  }>;
   recent: Array<{
     bib: number | null;
     name: string;
@@ -104,14 +117,24 @@ function OrganizerDashboard() {
           <p className="text-white/50 text-[14px]">Loading…</p>
         ) : (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-7">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
               <Stat label="Registered" value={String(data.totals.paid)} accent />
-              <Stat label="Revenue" value={usd(data.totals.revenueCents)} />
+              <Stat
+                label="Total revenue"
+                value={usd(data.totals.totalRevenueCents)}
+                hint="registrations + merch"
+              />
+              <Stat label="Merch orders" value={String(data.totals.merchOrders)} />
               <Stat
                 label="Abandoned"
                 value={String(data.totals.pending)}
                 hint="started checkout, never paid"
               />
+            </div>
+
+            <div className="text-[12px] text-white/45 mb-7">
+              Registrations {usd(data.totals.revenueCents)} · Merch{" "}
+              {usd(data.totals.merchRevenueCents)}
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4 mb-7">
@@ -167,6 +190,36 @@ function OrganizerDashboard() {
                 ))
               )}
             </div>
+
+            {data.recentMerch.length > 0 && (
+              <>
+                <h2 className="text-[12px] font-bold tracking-[2px] uppercase text-white/60 mt-7 mb-3">
+                  Merch orders
+                </h2>
+                <div className="rounded-2xl border border-white/12 overflow-hidden">
+                  {data.recentMerch.map((m, i) => (
+                    <div
+                      key={`${m.email}-${i}`}
+                      className={`flex items-center gap-4 px-4 py-3 ${
+                        i % 2 ? "bg-white/[0.03]" : ""
+                      }`}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[14px] font-semibold text-white truncate">
+                          {m.items || "Order"}
+                        </div>
+                        <div className="text-[12px] text-white/50 truncate">
+                          {m.email ?? "no email on file"}
+                        </div>
+                      </div>
+                      <span className="text-[13px] font-semibold text-white/80 shrink-0 tabular-nums">
+                        {usd(m.amountCents)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
 
             <p className="text-[12px] text-white/40 mt-4">
               Refreshes every 30 seconds. CSV includes every paid registration.

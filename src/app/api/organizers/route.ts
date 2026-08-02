@@ -4,6 +4,13 @@ import { requireOps } from "@/lib/ops-auth";
 
 export const dynamic = "force-dynamic";
 
+interface MerchRow {
+  email: string | null;
+  items: string;
+  amount_cents: number | null;
+  created_at: string;
+}
+
 interface RegistrationRow {
   bib: number | null;
   first_name: string;
@@ -65,6 +72,12 @@ export async function GET(req: NextRequest) {
 
     const paid = rows.filter((r) => r.payment_status === "paid");
 
+    const merch = await query<MerchRow>(
+      `select email, items, amount_cents, created_at
+         from merch_orders
+        order by created_at desc`
+    );
+
     if (req.nextUrl.searchParams.get("format") === "csv") {
       // Paid only — pending rows are abandoned checkouts, not registrations.
       return new NextResponse(toCsv(paid), {
@@ -82,16 +95,30 @@ export async function GET(req: NextRequest) {
       return out;
     };
 
+    const registrationRevenue = paid.reduce((sum, r) => sum + r.amount_cents, 0);
+    const merchRevenue = merch.reduce((sum, m) => sum + (m.amount_cents ?? 0), 0);
+
     return NextResponse.json(
       {
         totals: {
           paid: paid.length,
           pending: rows.length - paid.length,
-          revenueCents: paid.reduce((sum, r) => sum + r.amount_cents, 0),
+          revenueCents: registrationRevenue,
+          merchOrders: merch.length,
+          merchRevenueCents: merchRevenue,
+          // What actually landed in the Stripe account, so the number can be
+          // reconciled against a payout without adding two figures by hand.
+          totalRevenueCents: registrationRevenue + merchRevenue,
         },
         byWave: tally((r) => r.wave),
         byTier: tally((r) => r.tier_name),
         byShirt: tally((r) => r.tshirt_size ?? "unspecified"),
+        recentMerch: merch.slice(0, 15).map((m) => ({
+          email: m.email,
+          items: m.items,
+          amountCents: m.amount_cents ?? 0,
+          orderedAt: m.created_at,
+        })),
         recent: paid.slice(0, 25).map((r) => ({
           bib: r.bib,
           name: `${r.first_name} ${r.last_name}`,
