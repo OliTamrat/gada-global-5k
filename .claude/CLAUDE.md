@@ -207,6 +207,12 @@ receive anything until the domain verifies.
 about, and contact into one tap-per-row screen for Instagram bios, flyers, and
 QR codes. `/api/qr/links` generates the matching code, listed on `/promo`.
 
+Built to match the Nooruu Official linktree: a coloured icon tile per row,
+centred divider labels between groups, a Share-this-page button (native share
+sheet, clipboard fallback), and a brand/copyright/Olink footer block.
+Glyphs live in `src/components/LinkIcons.tsx`, keyed by the `icon` field on a
+link so `links.ts` stays plain data — the footer draws from the same set.
+
 Destinations live in `src/lib/links.ts`, shared with the footer so the two can
 never drift. **Social hrefs are still `#` placeholders and are filtered out
 rather than rendered as dead icons** — replace the href in that file and they
