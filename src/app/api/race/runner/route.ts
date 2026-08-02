@@ -12,8 +12,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Missing bib" }, { status: 400 });
   }
 
-  const entries = getRaceEntries();
-  const results = computeResults(entries);
+  let results;
+  try {
+    results = computeResults(await getRaceEntries());
+  } catch (error) {
+    console.error("Runner lookup error:", error);
+    return NextResponse.json({ error: "Failed to load runner" }, { status: 500 });
+  }
+
   const runner = results.find((r) => r.bib === Number(bib));
 
   if (!runner) {

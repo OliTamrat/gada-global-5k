@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = recordScan(
+    const result = await recordScan(
       Number(bib),
       type,
       volunteerId || "vol-" + Math.random().toString(36).slice(2, 6)
