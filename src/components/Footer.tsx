@@ -69,9 +69,9 @@ export function Footer() {
             {
               title: "Shop",
               links: [
-                { href: "/shop", label: "Heritage Tee" },
-                { href: "/shop", label: "Black & Gold Tee" },
-                { href: "/shop", label: "Race Day Combo" },
+                { href: "/shop", label: "Race Day Tee" },
+                { href: "/shop", label: "Race Day Hoodie" },
+                { href: "/shop", label: "Race Day Bundle" },
               ],
             },
             {
@@ -98,7 +98,29 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-white/78">
-          <span>&copy; 2026 Gada Global Inc. All rights reserved.</span>
+          <div className="flex flex-col sm:flex-row items-center gap-x-3 gap-y-1.5 text-center sm:text-left">
+            <span>&copy; 2026 Gada Global Inc. All rights reserved.</span>
+            <span className="hidden sm:inline text-white/30" aria-hidden="true">
+              &middot;
+            </span>
+            {/* SVG heart rather than an emoji — the project forbids emoji in UI,
+                and this also renders identically across platforms. */}
+            <span className="inline-flex items-center gap-1.5">
+              Made with
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="text-red-oromo shrink-0"
+                role="img"
+                aria-label="love"
+              >
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+              by <span className="font-semibold text-white/92">Olink Technologies</span>
+            </span>
+          </div>
           <div className="flex gap-3">
             {socials.map((s) => (
               <a

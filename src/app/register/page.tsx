@@ -153,7 +153,7 @@ export default function RegisterPage() {
                   <h4 className="font-bold text-[14px] text-charcoal mb-5 tracking-tight">What&apos;s Included</h4>
                   <ul className="space-y-3">
                     {[
-                      "Official race bib with timing chip",
+                      "Official race bib",
                       "Gada Global 5K finisher medal",
                       "Official race t-shirt",
                       "Post-race Irrecha celebration access",

@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
             currency: "usd",
             product_data: {
               name: `Gada Global 5K - ${tier.name} Registration`,
-              description: `5K Run/Walk registration for ${data.firstName} ${data.lastName}. Includes bib, timing chip, medal, and t-shirt (${data.tshirtSize}).`,
+              description: `5K Run/Walk registration for ${data.firstName} ${data.lastName}. Includes race bib, medal, and t-shirt (${data.tshirtSize}).`,
             },
             unit_amount: tier.price,
           },

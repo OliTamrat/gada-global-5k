@@ -45,11 +45,12 @@ export default function Home() {
       <section className="relative min-h-screen flex flex-col overflow-hidden">
         <HeroVideo />
         <Particles />
-        {/* Mobile gets extra padding above and below so the hero is not squeezed
-            against the nav and the stat cards, which also lets the video show. */}
-        <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-32 pb-12 md:pt-24 md:pb-0">
+        {/* Phones and iPads get extra padding above and below so the hero is not
+            squeezed against the nav and the stat cards, which also lets the video
+            show. Desktop (lg+) keeps the original spacing. */}
+        <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-32 pb-12 lg:pt-24 lg:pb-0">
           <div className="max-w-[780px]">
-            <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.8rem,5.5vw,4.8rem)] font-bold leading-[1.08] text-white mb-10 tracking-tight">
+            <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.8rem,5.5vw,4.8rem)] font-bold leading-[1.08] text-white mb-16 lg:mb-10 tracking-tight">
               <span className="block hero-line">Let&apos;s celebrate</span>
               <span className="block hero-line"><span className="text-yellow">Oromo</span> heritage</span>
               <span className="block hero-line">
@@ -81,10 +82,10 @@ export default function Home() {
         </div>
 
         {/* Bottom stats — clean grid, no fake nav */}
-        {/* mt-auto pins the cards to the bottom on desktop. On mobile the hero
+        {/* mt-auto pins the cards to the bottom on desktop. Below lg the hero
             overflows the viewport, where mt-auto collapses to nothing — the
             explicit margin keeps a gap above the cards there. */}
-        <div className="relative z-20 px-6 md:px-16 lg:px-20 pb-6 mt-10 md:mt-auto">
+        <div className="relative z-20 px-6 md:px-16 lg:px-20 pb-6 mt-10 lg:mt-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="yellow-card rounded-2xl p-6 flex flex-col justify-between min-h-[160px]">
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-charcoal">{Icons.barChart}</div>
@@ -533,7 +534,7 @@ export default function Home() {
           <ScrollReveal>
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Secure Your Spot Today</h2>
-            <p className="text-base md:text-[16px] leading-[1.85] text-white/88 max-w-[440px] mx-auto mb-10">Registration includes bib, timing chip, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
+            <p className="text-base md:text-[16px] leading-[1.85] text-white/88 max-w-[440px] mx-auto mb-10">Registration includes your race bib, finisher medal, and official race t-shirt. Limited to 500 runners.</p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/register" className="inline-flex items-center gap-3 bg-yellow text-charcoal px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl hover:bg-gold-light hover:shadow-[0_8px_32px_rgba(245,200,66,0.25)] hover:-translate-y-0.5 transition-all no-underline">Register for 5K</Link>
               <Link href="/shop" className="inline-flex items-center gap-3 bg-white/8 text-white px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl border border-white/12 hover:border-yellow/40 hover:text-yellow hover:-translate-y-0.5 transition-all no-underline">Shop Merch</Link>
