@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",
-    "@stripe/stripe-js": "^9.8.0",
-    "html5-qrcode": "^2.3.8",
     "next": "16.2.9",
     "pg": "^8.22.0",
     "qrcode": "^1.5.4",

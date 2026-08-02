@@ -142,5 +142,3 @@ export function activeSocials(): SocialLink[] {
   return SOCIALS.filter((s) => s.href && s.href !== "#");
 }
 
-/** Flat list of every internal destination, for the footer. */
-export const SITE_LINKS: SiteLink[] = LINK_SECTIONS.flatMap((s) => s.links);
