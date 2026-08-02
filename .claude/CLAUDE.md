@@ -115,31 +115,43 @@ user-side steps.
 **Do the whole loop in Stripe test mode first.** Test and live are parallel worlds
 with separate keys, separate webhook endpoints, and separate signing secrets.
 
-1. **Resend API key** — the domain is verified but no key exists yet. Create one.
-   Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
+### Done as of 2026-08-02
+
+- **Resend API key** created and set. `/api/health` reports `email: ok`.
+- **Neon** reachable from production — `database: ok`, all 6 tables and `bib_seq`
+  verified through the live deployment, not just locally.
+- **Stripe sandbox webhook destination** created: `Gada 5K registration (sandbox)`
+  → `https://www.gadaglobalrun.com/api/webhook`, payload style **Snapshot**,
+  listening to `checkout.session.completed` only.
+- **Vercel env vars** set for Production + Preview: `DATABASE_URL`,
+  `NEXT_PUBLIC_SITE_URL`, `REGISTRATION_FROM_EMAIL`, `STRIPE_SECRET_KEY`,
+  `STRIPE_WEBHOOK_SECRET`. `RESEND_API_KEY` was Production-only — widen it to
+  Preview so preview builds can send.
+- **Vercel production deploys** were lagging behind `master` even with previews
+  green. Check *Settings → Git → Production Branch* is `master`, and use
+  **Promote to Production** on a current deployment rather than **Redeploy** on a
+  stale one (Redeploy rebuilds that row's own commit).
+
+### Still open
+
+1. **`STRIPE_SECRET_KEY` value is wrong.** `/api/health` reports it set but not an
+   `sk_test_`/`sk_live_` key. The variables are marked **Sensitive** in Vercel, so
+   the value cannot be read back in the dashboard — `/api/health` is the only way
+   to inspect it, and it now names the specific fault (publishable key, restricted
+   key, webhook secret in the wrong slot, whitespace, or a masked preview copied
+   instead of the revealed key). Reveal the key in Stripe *before* copying.
 2. **Inbound mail for `info@`** — Resend only *sends*. Mail to
    `info@gadaglobalrun.com` bounces until Cloudflare Email Routing / ImprovMX
    forwarding, or a real mailbox, adds apex MX records. Not a blocker for sending
    confirmations; is a blocker for anyone replying to one.
-3. **Stripe webhook endpoint** (test mode): Developers → Webhooks → add endpoint
-   `https://www.gadaglobalrun.com/api/webhook`, event `checkout.session.completed`.
-   Reveal the signing secret — that `whsec_…` is `STRIPE_WEBHOOK_SECRET`.
-   **This is the real gate.** Without it nothing marks a registration paid or
-   assigns a bib, so no email ever fires.
-4. **Vercel env vars** (Production + Preview), then redeploy — Vercel does not pick
-   up new vars on an existing deployment:
-   - `DATABASE_URL` — Neon pooled connection string
-   - `RESEND_API_KEY`
-   - `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"`
-   - `NEXT_PUBLIC_SITE_URL=https://www.gadaglobalrun.com`
-   - `STRIPE_SECRET_KEY` (`sk_test_…` for now), `STRIPE_WEBHOOK_SECRET`
-5. **End-to-end test** with card `4242 4242 4242 4242`: register → the
+3. Optionally add a DMARC TXT record on `_dmarc` (`v=DMARC1; p=none;`).
+4. **End-to-end test** with card `4242 4242 4242 4242`: register → the
    `registrations` row should show `payment_status='paid'` and a bib >= 101 → the
-   confirmation email should arrive.
-6. **Go live**: swap in `sk_live_…`, register a *second* webhook endpoint in live
+   confirmation email should arrive. Stripe's destination page shows each delivery
+   and its response code, so a 400 there means the signing secret is mismatched
+   and a 200 means the webhook ran.
+5. **Go live**: swap in `sk_live_…`, register a *second* webhook endpoint in live
    mode, and replace `STRIPE_WEBHOOK_SECRET` with that endpoint's secret.
-7. **Merge PR #5** (prize podium / bib / merch / spacing). Independent of all the
-   above — no env vars, no database.
 
 **No longer needed as of 2026-08-01** — the domain is verified, so
 `REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"` now sends to any
