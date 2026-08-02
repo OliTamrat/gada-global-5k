@@ -24,6 +24,12 @@ const CODES = [
     url: SITE,
   },
   {
+    target: "links",
+    title: "All Links",
+    blurb: "The link-in-bio page — register, shop, results, and contact in one place.",
+    url: `${SITE}/links`,
+  },
+  {
     target: "results",
     title: "Live Results",
     blurb: "For race-day signage at the finish line and the results table.",

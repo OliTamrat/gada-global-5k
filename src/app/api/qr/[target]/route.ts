@@ -16,6 +16,7 @@ const TARGETS: Record<string, { path: string; label: string }> = {
   register: { path: "/register", label: "Register" },
   results: { path: "/race", label: "Live Results" },
   shop: { path: "/shop", label: "Shop" },
+  links: { path: "/links", label: "All Links" },
 };
 
 function siteUrl(): string {
