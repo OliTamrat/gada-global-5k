@@ -217,6 +217,45 @@ directly beneath them), which is why `Footer` is a client component.
 
 ---
 
+## Sponsorship
+
+**`/sponsors`** is the page to send a business to, and `src/lib/sponsors.ts` is
+the only place the levels and benefits are written down. The page, the
+`Become a Sponsor` section on `/about`, the enquiry mailto links and the
+`/api/qr/sponsors` code all read from it, so they cannot drift apart from each
+other — or from the printed flyer, as long as the file is kept in step with it.
+
+Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
+Bronze $250+.
+
+`SponsorTiers` is the interactive part. Tapping a level opens a panel listing
+every benefit, ticked in that level's metal colour where it is included. What
+is *not* included shows a muted dash rather than a red cross, plus a link to the
+cheapest level that unlocks it — so every "no" is a route to a higher level
+instead of a rejection. `unlockedBy()` derives that from the benefit's tier
+list; nothing is hard-coded per level.
+
+**Two things to settle with the organizers before this is promoted widely:**
+
+1. **Silver and Bronze currently unlock exactly the same two benefits**, so
+   there is no reason to pay $500 rather than $250. This is carried over from
+   the flyer deliberately rather than silently patched. Moving
+   `Logo on website & social media` down to include `silver` fixes it in one
+   line and costs nothing to give.
+2. **The flyer's contact details do not match the site.** It prints
+   `info@gadaaglobal5k.org` and `www.gadaaglobal5k.org` (note the double "a"),
+   neither of which is this project's domain. The code uses
+   `info@gadaglobalrun.com`. Whichever is right, the two must be reconciled
+   before the flyer goes out or sponsor enquiries will land nowhere.
+
+Enquiries are **email, not checkout** — deliberately. A sponsor has to send
+logo artwork and agree a printing deadline, so a pay-now button would just
+leave the organizers chasing files. `sponsorMailto()` pre-fills the level in
+the subject line and a short form in the body. If instant sponsor payment is
+ever wanted, it is a new Stripe line item, not a change to this page.
+
+---
+
 ## Race operations and organizer visibility
 
 **`RACE_OPS_PASSCODE` gates every screen that changes results or shows registrant

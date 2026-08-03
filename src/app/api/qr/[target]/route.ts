@@ -18,6 +18,7 @@ const TARGETS: Record<string, { path: string; label: string }> = {
   results: { path: "/race", label: "Live Results" },
   shop: { path: "/shop", label: "Shop" },
   links: { path: "/links", label: "All Links" },
+  sponsors: { path: "/sponsors", label: "Become a Sponsor" },
 };
 
 export async function GET(

@@ -103,6 +103,16 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
   .podium-in > * { animation: none; }
 }
 
+/* Sponsor levels: the benefit panel slides in when a level is opened */
+@keyframes sponsorPanelIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sponsor-panel-in { animation: sponsorPanelIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-panel-in { animation: none; }
+}
+
 /* ── Print ────────────────────────────────────────────────────────────────
    Site chrome is noise on paper. The bib sheet is sized in inches so it
    comes out the same regardless of the viewport it was printed from. */

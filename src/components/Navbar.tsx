@@ -30,6 +30,7 @@ export function Navbar() {
     { href: "/#event", label: "Event" },
     { href: "/register", label: "Register" },
     { href: "/shop", label: "Shop" },
+    { href: "/sponsors", label: "Sponsors" },
     { href: "/race", label: "Live Results" },
   ];
 

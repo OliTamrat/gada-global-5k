@@ -11,6 +11,7 @@ export type LinkIcon =
   | "shirt"
   | "info"
   | "mail"
+  | "handshake"
   | "instagram"
   | "facebook"
   | "x";
@@ -81,6 +82,13 @@ export const LINK_SECTIONS: LinkSection[] = [
         blurb: "Race Day tee, hoodie, and bundle",
         icon: "shirt",
         tint: "bg-yellow/12 text-yellow",
+      },
+      {
+        href: "/sponsors",
+        label: "Become a Sponsor",
+        blurb: "Sponsor levels and benefits from $250",
+        icon: "handshake",
+        tint: "bg-green-deep/25 text-green-light",
       },
       {
         href: "/about",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SponsorTiers } from "@/components/SponsorTiers";
 
 const values = [
   { title: "Health", desc: "Encouraging lifelong physical and mental wellness.", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> },
@@ -50,14 +51,6 @@ const athletes = [
     year: "2008",
     image: "/athletes/tirunesh-dibaba.jpg",
   },
-];
-
-const sponsors = [
-  { tier: "Title Sponsor", color: "yellow-card", textColor: "text-charcoal" },
-  { tier: "Platinum Sponsor", color: "bg-white/10 border border-white/20", textColor: "text-white" },
-  { tier: "Gold Sponsor", color: "bg-yellow/15 border border-yellow/25", textColor: "text-yellow" },
-  { tier: "Silver Sponsor", color: "bg-white/5 border border-white/10", textColor: "text-white/90" },
-  { tier: "Community Partner", color: "bg-green-deep/20 border border-green-light/20", textColor: "text-green-light" },
 ];
 
 export default function AboutPage() {
@@ -278,21 +271,15 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {sponsors.map((s) => (
-                <div key={s.tier} className={`${s.color} rounded-2xl p-5 text-center hover:-translate-y-1 transition-all`}>
-                  <div className={`text-[15px] font-bold tracking-tight ${s.textColor}`}>{s.tier}</div>
-                </div>
-              ))}
-            </div>
+            <SponsorTiers />
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="text-center mt-10">
-              <a href="mailto:info@gadaglobalrun.com" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
-                Sponsorship Inquiry
+              <Link href="/sponsors" className="inline-flex items-center gap-3 yellow-card px-10 py-4 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                Full Sponsorship Details
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              </Link>
             </div>
           </ScrollReveal>
         </div>
