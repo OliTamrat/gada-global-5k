@@ -120,12 +120,6 @@ export default function PromoPage() {
 
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/bib"
-            className="inline-flex items-center gap-2 bg-charcoal text-white px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase no-underline hover:bg-warm-gray transition-colors"
-          >
-            Getting Your Race Bib
-          </Link>
-          <Link
             href="/"
             className="inline-flex items-center gap-2 border border-charcoal/15 px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase no-underline hover:bg-white transition-colors"
           >

@@ -6,27 +6,27 @@ import { siteUrl } from "@/lib/site";
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Getting Your Race Bib | Gada Global 5K",
+  title: "Your Race Bib | Gada Global 5K",
   description:
-    "How to collect your Gada Global 5K race bib. Packet pickup opens at 7:00 AM on race day at the Rock Creek Park Tennis Center.",
+    "How to get your Gada Global 5K race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
   alternates: { canonical: `${SITE}/bib` },
 };
 
 const STEPS = [
   {
     n: "1",
-    title: "Find your bib number",
-    body: "It is in your confirmation email, in large type near the top. Keep that email — it is also your proof of registration at pickup.",
+    title: "Open your confirmation email",
+    body: "It has your bib number in large type, and a Print Your Bib button that opens your own bib ready to print. Only your email carries that link.",
   },
   {
     n: "2",
-    title: `Come to packet pickup from ${EVENT.packetPickup}`,
-    body: `At the ${EVENT.location}, ${EVENT.address}. It runs right up to the ${EVENT.startTime} start, but come early — the queue is longest in the last half hour.`,
+    title: "Print it at 100% scale",
+    body: 'Plain paper is fine. Turn off "fit to page" — it shrinks the number, and the finish-line volunteers need to read it at speed.',
   },
   {
     n: "3",
-    title: "Bring a photo ID",
-    body: "A volunteer checks your name against the registration list and hands you your bib, your safety pins and your race t-shirt.",
+    title: `Or collect it from ${EVENT.packetPickup}`,
+    body: `No printer, no problem. Packet pickup runs from ${EVENT.packetPickup} at the ${EVENT.location}, ${EVENT.address}, right up to the ${EVENT.startTime} start. Bring a photo ID.`,
   },
   {
     n: "4",
@@ -54,12 +54,12 @@ export default function BibPage() {
             Getting Your Race Bib
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[540px] mx-auto">
-            {`Bibs are handed out in person on race morning. Packet pickup opens at ${EVENT.packetPickup} and runs until the ${EVENT.startTime} start.`}
+            {`Print it at home from the link in your confirmation email, or collect it at packet pickup from ${EVENT.packetPickup} on race morning.`}
           </p>
         </div>
       </section>
 
-      {/* ══ NOT PRINTABLE — said plainly, high up, so nobody goes looking ══ */}
+      {/* ══ WHERE THE LINK LIVES ══ */}
       <section className="bg-charcoal-light py-12 md:py-14 px-6 md:px-16 lg:px-20">
         <div className="max-w-3xl mx-auto">
           <div className="relative rounded-2xl bg-white/[0.05] border border-white/12 p-6 md:p-8 overflow-hidden">
@@ -70,24 +70,20 @@ export default function BibPage() {
             <div className="flex gap-4">
               <span className="w-10 h-10 rounded-xl bg-yellow/15 text-yellow flex items-center justify-center shrink-0">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <path d="M9 12l2 2 4-4" />
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 6l-10 7L2 6" />
                 </svg>
               </span>
               <div>
                 <h2 className="font-bold text-[18px] md:text-[19px] text-white tracking-tight mb-2.5">
-                  Bibs are not printable at home
+                  Your print link is in your confirmation email
                 </h2>
                 <p className="text-[15px] leading-[1.8] text-white/72">
-                  Every bib is issued in person and checked against the
-                  registration list. A bib anyone could print is a bib anyone
-                  could run on &mdash; and with a $1,200 prize purse split across
-                  six places, that is not a risk worth taking with somebody
-                  else&rsquo;s result.
-                </p>
-                <p className="text-[15px] leading-[1.8] text-white/72 mt-3">
-                  It also means the volunteers know exactly who is out on the
-                  course, which matters if anyone needs help.
+                  There is no bib-number box on this page on purpose. A form that
+                  prints a bib for any number typed into it would let anyone
+                  print anyone&rsquo;s &mdash; and with a $1,200 purse across six
+                  places, that is not a risk worth carrying. The link that opens
+                  your bib is the one sent to the address you registered with.
                 </p>
               </div>
             </div>
@@ -103,7 +99,7 @@ export default function BibPage() {
               On the Morning
             </span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] tracking-tight">
-              Four Steps to the Start Line
+              From Email to Start Line
             </h2>
           </div>
 
@@ -135,16 +131,16 @@ export default function BibPage() {
             Lost Your Confirmation Email?
           </h2>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/78 max-w-[500px] mx-auto mb-8">
-            You do not need it to collect your bib &mdash; your name on the
-            registration list is enough. But if you would like your bib number in
-            advance, write to us and we will look it up.
+            You can still collect your bib at packet pickup &mdash; your name on
+            the registration list is enough. If you want the print link resent,
+            write to us and we will send it to your registered address.
           </p>
           <div className="flex flex-col sm:flex-row gap-3.5 justify-center items-center">
             <a
-              href={`mailto:${EVENT.supportEmail}?subject=${encodeURIComponent("Bib number lookup — Gada Global 5K")}`}
+              href={`mailto:${EVENT.supportEmail}?subject=${encodeURIComponent("Resend my bib link — Gada Global 5K")}`}
               className="inline-flex items-center gap-2.5 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline"
             >
-              Ask for My Bib Number
+              Resend My Bib Link
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

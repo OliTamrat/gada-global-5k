@@ -114,9 +114,8 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 }
 
 /* ── Print ────────────────────────────────────────────────────────────────
-   Nothing on the site is designed to be printed any more — the printable bib
-   was removed, since a bib anyone can print is a bib anyone can run on. This
-   just keeps site chrome off the page if someone prints anyway. */
+   Site chrome is noise on paper. The bib sheet is sized in inches so it
+   comes out the same regardless of the viewport it was printed from. */
 @media print {
   nav,
   footer {
@@ -125,6 +124,16 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 
   body {
     background: #fff !important;
+  }
+
+  .bib-sheet {
+    width: 7in;
+    max-width: 7in;
+    margin: 0 auto;
+    border-color: #141210 !important;
+    /* Keep the bib on one sheet rather than splitting mid-number. */
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
 
