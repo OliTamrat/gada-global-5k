@@ -154,13 +154,38 @@ never created, which produced a successful payment with no bib and no email.
 1. **Clear the test data before real registrations open.** Bib 101 is consumed
    by the sandbox test above, and test and live Stripe modes share **one
    database**. Leaving it means the first real runner gets bib 102 and a fake
-   entry sits in the results. Clean up with:
+   entry sits in the results.
+
+   Run this in the **Neon SQL Editor** as one block, while nothing real has
+   been taken yet. It wipes every row — do not run it once real registrations
+   exist.
    ```sql
-   delete from race_entries where bib in (select bib from registrations where payment_status = 'paid' and email = '<test email>');
-   delete from registrations where email = '<test email>';
-   delete from stripe_events;            -- test-mode event ids, no longer needed
+   begin;
+   delete from race_entries;   -- cascades to scan_logs and disputes
+   delete from registrations;
+   delete from merch_orders;
+   delete from stripe_events;
+   delete from wave_starts;
    alter sequence bib_seq restart with 101;
+   commit;
    ```
+   **`wave_starts` matters more than it looks.** Sending a wave is idempotent
+   by design — a second tap returns the original timestamp rather than resetting
+   the clock. So a leftover test row means that on race morning the starter taps
+   "send", gets a silent success, and every runner in that wave is timed from a
+   rehearsal weeks earlier. Verify it is empty before race day:
+   `select * from wave_starts;` must return zero rows.
+
+   Afterwards confirm with:
+   ```sql
+   select (select count(*) from registrations) as regs,
+          (select count(*) from race_entries) as entries,
+          (select count(*) from merch_orders) as merch,
+          (select count(*) from wave_starts) as waves,
+          last_value from bib_seq;
+   ```
+   All counts zero. `bib_seq.last_value` reads 101 and `is_called` is false, so
+   the first real runner gets 101.
 2. **Go live.** Swap `STRIPE_SECRET_KEY` to `sk_live_…`, register a *second*
    webhook endpoint in **live** mode (same URL, same `checkout.session.completed`,
    payload style **Snapshot**), and replace `STRIPE_WEBHOOK_SECRET` with that
