@@ -8,6 +8,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { InteractiveSchedule } from "@/components/InteractiveSchedule";
 import { FAQ } from "@/components/FAQ";
 import { PrizePodium } from "@/components/PrizePodium";
+import { SponsorTiers } from "@/components/SponsorTiers";
 
 const Icons = {
   barChart: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10M6 20V4M18 20v-6"/></svg>,
@@ -500,26 +501,18 @@ export default function Home() {
                   Connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
                 </p>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
-                {[
-                  { tier: "Title Sponsor", style: "yellow-card text-charcoal" },
-                  { tier: "Platinum", style: "bg-white/10 border border-white/20 text-white" },
-                  { tier: "Gold", style: "bg-yellow/15 border border-yellow/25 text-yellow" },
-                  { tier: "Silver", style: "bg-white/5 border border-white/10 text-white/90" },
-                  { tier: "Community Partner", style: "bg-green-deep/30 border border-green-light/20 text-green-light" },
-                ].map((s) => (
-                  <div key={s.tier} className={`${s.style} rounded-xl py-4 px-3 text-center font-bold text-[14px] tracking-tight`}>
-                    {s.tier}
-                  </div>
-                ))}
+              {/* The real levels, same component as /sponsors and /about, so the
+                  three can never disagree about what a level costs or includes. */}
+              <div className="mb-8">
+                <SponsorTiers />
               </div>
               <div className="flex gap-4 justify-center flex-wrap">
-                <Link href="/register" className="yellow-card px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                <Link href="/sponsors" className="yellow-card px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                  Full Sponsorship Details
+                </Link>
+                <Link href="/register" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
                   Register Your Team
                 </Link>
-                <a href="mailto:info@gadaglobalrun.com" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
-                  Sponsorship Inquiry
-                </a>
               </div>
             </div>
           </ScrollReveal>

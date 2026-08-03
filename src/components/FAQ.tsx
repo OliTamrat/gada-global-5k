@@ -13,7 +13,7 @@ const faqs = [
   { q: "Where do I park?", a: "Parking information will be shared via email to all registered participants closer to race day. Free parking is available at the Rock Creek Park Tennis Center, 5220 16th St NW, where the race starts and finishes." },
   { q: "Are refunds available?", a: "Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at info@gadaglobalrun.com for transfer requests." },
   { q: "Can children participate?", a: "Children under 12 can participate with a registered adult guardian. We also plan to offer a Kids Dash as part of our event programming." },
-  { q: "How can I become a sponsor?", a: "We offer multiple sponsorship tiers from Community Partner to Title Sponsor. Email info@gadaglobalrun.com or visit our About page for sponsorship details and benefits." },
+  { q: "How can I become a sponsor?", a: "There are four levels — Platinum, Gold, Silver and Bronze — starting at $250. Each one lists exactly what it includes on our Sponsors page, and the enquiry link there arrives with your level already filled in. You can also email info@gadaglobalrun.com directly." },
 ];
 
 export function FAQ() {
