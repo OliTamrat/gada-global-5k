@@ -10,6 +10,7 @@ import {
   type BenefitIcon,
   type SponsorTierId,
 } from "@/lib/sponsors";
+import { CoverageMeter } from "@/components/CoverageMeter";
 
 /**
  * Sponsorship levels as a vertical accordion.
@@ -50,32 +51,16 @@ const ICONS: Record<BenefitIcon, ReactNode> = {
   ),
 };
 
-/** Four segments, filled for each benefit the level unlocks. */
-function CoverageMeter({ filled, dim }: { filled: number; dim: boolean }) {
-  return (
-    <span className="flex items-center gap-1" aria-hidden="true">
-      {SPONSOR_BENEFITS.map((_, i) => (
-        <span
-          key={i}
-          className="h-[5px] w-5 md:w-6 rounded-full transition-colors"
-          style={{
-            background:
-              i < filled
-                ? dim
-                  ? "rgba(245,200,66,0.42)"
-                  : ACCENT
-                : "rgba(255,255,255,0.11)",
-          }}
-        />
-      ))}
-    </span>
-  );
-}
-
-export function SponsorTiers() {
-  // Opens on the top level rather than closed: four collapsed rows tell a
-  // business nothing, and the best offer is the one to read first.
-  const [openId, setOpenId] = useState<SponsorTierId | null>("platinum");
+export function SponsorTiers({
+  initialOpen = "platinum",
+}: {
+  /** Which level starts open. Set from ?level= so a homepage tile lands on
+   *  the level that was tapped rather than always on Platinum. */
+  initialOpen?: SponsorTierId;
+}) {
+  // Opens on a level rather than closed: four collapsed rows tell a business
+  // nothing, and the best offer is the one to read first.
+  const [openId, setOpenId] = useState<SponsorTierId | null>(initialOpen);
 
   return (
     <div className="max-w-3xl mx-auto space-y-3">

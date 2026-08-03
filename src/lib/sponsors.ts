@@ -130,6 +130,12 @@ export function unlockedBy(benefit: SponsorBenefit): SponsorTier {
   return SPONSOR_TIERS[0];
 }
 
+export function isSponsorTier(value: unknown): value is SponsorTierId {
+  return (
+    typeof value === "string" && SPONSOR_TIERS.some((t) => t.id === value)
+  );
+}
+
 /** How many of the four a level unlocks — drives the coverage meter. */
 export function includedCount(tier: SponsorTierId): number {
   return SPONSOR_BENEFITS.filter((b) => b.tiers.includes(tier)).length;

@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { InteractiveSchedule } from "@/components/InteractiveSchedule";
 import { FAQ } from "@/components/FAQ";
 import { PrizePodium } from "@/components/PrizePodium";
-import { SponsorTiers } from "@/components/SponsorTiers";
+import { SponsorLevelTiles } from "@/components/SponsorLevelTiles";
 
 const Icons = {
   barChart: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10M6 20V4M18 20v-6"/></svg>,
@@ -479,40 +479,81 @@ export default function Home() {
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>,
                 title: "Corporate & Charity Partners",
-                desc: "Team registration packages, plus bib, water station, and festival stage sponsorships."
+                desc: "Team registration packages, plus bib, water station, and festival stage sponsorships.",
+                href: "/sponsors"
               },
-            ].map((item) => (
-              <ScrollReveal key={item.title}>
+            ].map((item: { icon: React.ReactNode; title: string; desc: string; href?: string }) => {
+              const card = (
                 <div className="bg-white rounded-2xl p-5 border border-charcoal/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all h-full">
                   <div className="w-10 h-10 rounded-lg bg-yellow/12 flex items-center justify-center text-gold-dim mb-3">{item.icon}</div>
                   <h4 className="font-[family-name:var(--font-heading)] text-[14px] md:text-[16px] font-bold mb-1.5 tracking-tight leading-snug">{item.title}</h4>
                   <p className="text-[13px] md:text-[14px] text-charcoal/78 leading-relaxed">{item.desc}</p>
+                  {/* Only the card with somewhere to go gets an affordance, so
+                      the rest do not read as broken links. */}
+                  {item.href && (
+                    <span className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-wider uppercase text-gold-dim mt-3">
+                      Sponsorship Levels
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                  )}
                 </div>
-              </ScrollReveal>
-            ))}
+              );
+              return (
+                <ScrollReveal key={item.title}>
+                  {item.href ? (
+                    <Link href={item.href} className="block h-full no-underline text-inherit">
+                      {card}
+                    </Link>
+                  ) : (
+                    card
+                  )}
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <ScrollReveal>
-            <div className="bg-charcoal rounded-2xl p-8 md:p-10 text-white">
-              <div className="text-center mb-8">
-                <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Partner With Us</span>
-                <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-3">Become a Sponsor</h3>
-                <p className="text-[16px] md:text-[15px] text-white/82 leading-relaxed max-w-[520px] mx-auto">
-                  Connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
-                </p>
-              </div>
-              {/* The real levels, same component as /sponsors and /about, so the
-                  three can never disagree about what a level costs or includes. */}
-              <div className="mb-8">
-                <SponsorTiers />
-              </div>
-              <div className="flex gap-4 justify-center flex-wrap">
-                <Link href="/sponsors" className="yellow-card px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
-                  Full Sponsorship Details
-                </Link>
-                <Link href="/register" className="bg-white/8 text-white px-8 py-3 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
-                  Register Your Team
-                </Link>
+            <div className="relative bg-charcoal rounded-2xl p-7 md:p-10 text-white overflow-hidden">
+              {/* Warm corner wash so the card reads as a feature rather than
+                  another flat panel at the foot of the section. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(65% 55% at 100% 0%, rgba(232,185,48,0.13), transparent 70%), radial-gradient(55% 50% at 0% 100%, rgba(27,94,32,0.20), transparent 70%)",
+                }}
+              />
+
+              <div className="relative">
+                <div className="text-center mb-8">
+                  <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Partner With Us</span>
+                  <h3 className="font-[family-name:var(--font-heading)] text-[clamp(1.4rem,2.6vw,2rem)] font-bold tracking-tight leading-tight mb-3">
+                    Put Your Business in Front of the Whole Race
+                  </h3>
+                  <p className="text-[16px] md:text-[15px] text-white/78 leading-[1.8] max-w-[520px] mx-auto">
+                    Four levels, starting at $250. Your logo goes on the race
+                    t-shirt, the banner, the website and the stage &mdash; in front
+                    of everyone on site from packet pickup through the festival.
+                  </p>
+                </div>
+
+                {/* Compact tiles rather than the full accordion: the detail
+                    belongs on /sponsors, and every tile deep-links to its own
+                    level there. */}
+                <div className="mb-8">
+                  <SponsorLevelTiles />
+                </div>
+
+                <div className="flex gap-3.5 justify-center flex-wrap">
+                  <Link href="/sponsors" className="inline-flex items-center gap-2.5 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
+                    Compare All Levels
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </Link>
+                  <Link href="/register" className="bg-white/8 text-white px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase border border-white/12 hover:border-yellow/40 hover:text-yellow transition-all no-underline">
+                    Register Your Team
+                  </Link>
+                </div>
               </div>
             </div>
           </ScrollReveal>

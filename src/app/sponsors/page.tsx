@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SponsorTiers } from "@/components/SponsorTiers";
-import { sponsorMailto, SPONSOR_EMAIL } from "@/lib/sponsors";
+import { sponsorMailto, SPONSOR_EMAIL, isSponsorTier } from "@/lib/sponsors";
 import { siteUrl } from "@/lib/site";
 import { EVENT } from "@/lib/email";
 
@@ -63,7 +63,17 @@ const STEPS = [
   },
 ];
 
-export default function SponsorsPage() {
+export default async function SponsorsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  // Homepage tiles deep-link here with ?level=gold so the accordion opens on
+  // the level that was tapped. An unrecognised value falls back to Platinum
+  // rather than erroring — a bad link must never break the page.
+  const level = (await searchParams).level;
+  const initialOpen = isSponsorTier(level) ? level : "platinum";
+
   return (
     <main>
       {/* ══ HERO ══ */}
@@ -101,7 +111,7 @@ export default function SponsorsPage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <SponsorTiers />
+            <SponsorTiers initialOpen={initialOpen} />
           </ScrollReveal>
         </div>
       </section>
