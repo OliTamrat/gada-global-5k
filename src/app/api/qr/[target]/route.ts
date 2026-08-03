@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
+import { siteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -18,12 +19,6 @@ const TARGETS: Record<string, { path: string; label: string }> = {
   shop: { path: "/shop", label: "Shop" },
   links: { path: "/links", label: "All Links" },
 };
-
-function siteUrl(): string {
-  return (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.gadaglobalrun.com"
-  ).replace(/\/$/, "");
-}
 
 export async function GET(
   req: NextRequest,

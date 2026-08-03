@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { tiers, type RegistrationData } from "@/lib/registration";
 import { query } from "@/lib/db";
-import { coerceWave } from "@/lib/waves";
+import { coerceWave, WAVE_META } from "@/lib/waves";
+import { EVENT } from "@/lib/email";
+import { publicAsset } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -57,17 +59,34 @@ export async function POST(req: NextRequest) {
     );
     registrationId = row.id;
 
-    // Create Stripe Checkout session
+    // Checkout is the last thing a runner sees before paying, so it repeats the
+    // facts they would otherwise have to trust from memory: who the entry is
+    // for, which wave, and when and where the race actually is.
+    const logo = publicAsset("/images/brand/gada-global-logo.png");
+    const runner = `${data.firstName} ${data.lastName}`;
+    const detail = [
+      runner,
+      `${WAVE_META[wave].label} wave`,
+      data.tshirtSize ? `T-shirt ${data.tshirtSize}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
     const session = await getStripe().checkout.sessions.create({
-      payment_method_types: ["card"],
+      // No payment_method_types: Stripe then offers everything enabled on the
+      // account, so Apple Pay, Google Pay and Link appear above the card form
+      // instead of a bare card field. Which methods show is controlled in the
+      // Stripe Dashboard under Settings -> Payment methods.
       customer_email: data.email,
+      client_reference_id: registrationId,
       line_items: [
         {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `Gada Global 5K - ${tier.name} Registration`,
-              description: `5K Run/Walk registration for ${data.firstName} ${data.lastName}. Includes race bib, medal, and t-shirt (${data.tshirtSize}).`,
+              name: `${EVENT.name} — Race Entry (${tier.name})`,
+              description: `${detail}. ${EVENT.date}, ${EVENT.startTime} at the ${EVENT.location}, Washington DC.`,
+              ...(logo ? { images: [logo] } : {}),
             },
             unit_amount: tier.price,
           },
@@ -75,12 +94,21 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
+      custom_text: {
+        submit: {
+          message:
+            "Entry includes your race bib, a finisher medal, the official event t-shirt, water stations on course, race photography, and access to the Irrecha cultural festival afterwards. The top three men and top three women share a $1,200 cash purse.",
+        },
+        after_submit: {
+          message: `Your confirmation email with your bib number and start wave arrives within a few minutes. Questions: ${EVENT.supportEmail}`,
+        },
+      },
       success_url: `${req.nextUrl.origin}/success?type=registration&name=${encodeURIComponent(data.firstName)}`,
       cancel_url: `${req.nextUrl.origin}/register`,
       metadata: {
         type: "registration",
         registrationId,
-        registrant: `${data.firstName} ${data.lastName}`,
+        registrant: runner,
         email: data.email,
         tier: tier.name,
         tshirtSize: data.tshirtSize,
