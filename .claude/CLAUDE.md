@@ -228,12 +228,24 @@ other — or from the printed flyer, as long as the file is kept in step with it
 Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
 Bronze $250+.
 
-`SponsorTiers` is the interactive part. Tapping a level opens a panel listing
-every benefit, ticked in that level's metal colour where it is included. What
-is *not* included shows a muted dash rather than a red cross, plus a link to the
-cheapest level that unlocks it — so every "no" is a route to a higher level
-instead of a rejection. `unlockedBy()` derives that from the benefit's tier
-list; nothing is hard-coded per level.
+**The flyer is a reference for the offer, not a design to reproduce.** It sets
+the levels, the prices and the four benefits, and those have to match. Nothing
+else does — the page deliberately does *not* copy its four-column comparison
+table, its star medallions, its platinum/gold/silver/bronze metal gradients or
+its "Own a restaurant or business?" / "Let's grow together!" headlines. All of
+those were present in a first pass and were removed.
+
+`SponsorTiers` is a vertical accordion in the site's own language: charcoal
+surfaces, a single yellow accent, and a left rail whose opacity comes from the
+level's `weight` rather than from a metal colour. Each row carries a **coverage
+meter** — four segments, filled for each benefit the level unlocks, with an
+"N of 4" readout. That is what conveys hierarchy, and it is also what makes the
+Silver/Bronze collision below impossible to miss (both read "2 of 4").
+
+Opening a level lists every benefit, included or not. What is *not* included
+shows a muted icon and a link to the cheapest level that unlocks it — so every
+"no" is a route to a higher level instead of a rejection. `unlockedBy()` derives
+that from the benefit's tier list; nothing is hard-coded per level.
 
 **Two things to settle with the organizers before this is promoted widely:**
 

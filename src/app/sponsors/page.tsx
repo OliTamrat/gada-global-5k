@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sponsor the Gada Global 5K",
     description:
-      "Own a restaurant or business? Put your name in front of a whole community on race morning.",
+      "Back the inaugural Gada Global 5K. Four sponsorship levels, starting at $250.",
     url: `${SITE}/sponsors`,
   },
 };
@@ -79,10 +79,10 @@ export default function SponsorsPage() {
             Partner With Us
           </span>
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] text-white mb-6 tracking-tight">
-            Own a Restaurant<br />or a Business?
+            Your Name on the Shirt,<br />the Banner and the Stage
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
-            {`Put your name in front of an entire community on ${EVENT.date}, at the ${EVENT.location} in Washington DC. Four levels, from $250.`}
+            {`Back the inaugural Gada Global 5K on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four levels, starting at $250.`}
           </p>
         </div>
       </section>
@@ -92,11 +92,11 @@ export default function SponsorsPage() {
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-10 md:mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">
-              Sponsor Levels &amp; Benefits
+              Four Ways to Back the Race
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/75 max-w-[520px] mx-auto">
-              Select a level to see exactly what it includes. Every level is a
-              minimum &mdash; you are welcome to give more.
+              Open a level to see exactly what it includes. Each figure is a
+              minimum, not a fixed price.
             </p>
           </ScrollReveal>
 
@@ -172,11 +172,11 @@ export default function SponsorsPage() {
       <section className="bg-green-deep py-14 md:py-18 px-6 md:px-16 lg:px-20 text-center">
         <ScrollReveal>
           <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">
-            Let&rsquo;s Grow Together
+            Back the Run
           </h2>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[480px] mx-auto mb-9">
-            Promote your business, support the community, and be part of an
-            unforgettable morning.
+            Every level puts your name in front of the people who live here, on
+            a morning they will remember.
           </p>
           <div className="flex flex-col sm:flex-row gap-3.5 justify-center items-center">
             <a
