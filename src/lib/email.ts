@@ -2,6 +2,7 @@
 // and this keeps the dependency surface (and cold starts) small.
 
 import { WAVE_META, coerceWave, type Wave } from "@/lib/waves";
+import { siteUrl } from "@/lib/site";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
@@ -49,10 +50,6 @@ function esc(value: string | number | null | undefined): string {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
-}
-
-function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://www.gadaglobalrun.com").replace(/\/$/, "");
 }
 
 function buildHtml(d: RegistrationConfirmation): string {

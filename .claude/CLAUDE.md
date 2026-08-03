@@ -287,6 +287,50 @@ volunteers per bib and raises confidence when they agree.
 
 ---
 
+## Stripe Checkout page
+
+Checkout is hosted by Stripe, so what it looks like is split between this repo
+and the Stripe Dashboard. Knowing which half owns a given complaint saves a lot
+of searching.
+
+**This repo controls the content** (`src/app/api/register/route.ts` and
+`src/app/api/checkout/route.ts`):
+
+- The line item carries a real product name, a description naming the runner,
+  their wave, shirt size, and the date, time and venue, and the Gada Global
+  logo as a thumbnail via `product_data.images`.
+- `custom_text.submit` lists what the entry includes and the $1,200 purse;
+  `custom_text.after_submit` says the confirmation email is coming and gives
+  the support address. Both cap at 1200 characters.
+- `client_reference_id` is the registration id, so a Stripe payment can be
+  traced back to a row without opening the metadata panel.
+- **`payment_method_types` is deliberately not set.** Omitting it lets Stripe
+  offer everything enabled on the account, so Apple Pay, Google Pay and Link
+  appear above the card form. Pinning it back to `["card"]` is what makes the
+  page a bare card field again.
+- Line-item images are absolute URLs built by `publicAsset()` in
+  `src/lib/site.ts`, which returns null for a non-https origin. Stripe fetches
+  these from its own servers and cannot reach localhost, so in local dev the
+  thumbnail is omitted rather than broken.
+
+**The Stripe Dashboard controls the appearance** — nothing in this repo can
+change these:
+
+- *Settings → Business → Branding*: logo, icon, brand colour and accent colour.
+  An account with no logo set is why Checkout looks generic.
+- *Settings → Business details*: the business name in the header and the
+  statement descriptor on the card statement.
+- *Settings → Payment methods*: which wallets and methods actually appear.
+
+**Merch prices are looked up server-side.** `/api/checkout` takes only `id`,
+`size` and `quantity` from the browser and reads the price from
+`src/lib/products.ts`. It previously passed the request body's `price` straight
+into `unit_amount`, so a crafted POST could buy a $55 hoodie for a cent. Sizes
+are validated against the product and quantity is capped at 20. Keep it that
+way: the browser must never name a price.
+
+---
+
 ## Gotchas
 
 - **Switching branches changes `package.json`.** `pg` exists only on the PR #1 branch.

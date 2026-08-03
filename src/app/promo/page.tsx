@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Promo Kit | Gada Global 5K",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.gadaglobalrun.com";
+const SITE = siteUrl();
 
 const CODES = [
   {

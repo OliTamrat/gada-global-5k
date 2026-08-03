@@ -5,8 +5,9 @@ import { LINK_SECTIONS, activeSocials, type SiteLink, type SocialLink } from "@/
 import { LINK_ICONS } from "@/components/LinkIcons";
 import { ShareButton } from "@/components/ShareButton";
 import { EVENT } from "@/lib/email";
+import { siteUrl } from "@/lib/site";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.gadaglobalrun.com";
+const SITE = siteUrl();
 
 export const metadata: Metadata = {
   title: "Gada Global Run — All Links",
