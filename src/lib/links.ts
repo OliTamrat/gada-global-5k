@@ -66,8 +66,8 @@ export const LINK_SECTIONS: LinkSection[] = [
       },
       {
         href: "/bib",
-        label: "Print Your Race Bib",
-        blurb: "Already registered? Print it at home",
+        label: "Getting Your Race Bib",
+        blurb: "Where and when to collect it on race day",
         icon: "bib",
         tint: "bg-red-oromo/20 text-red-oromo",
       },

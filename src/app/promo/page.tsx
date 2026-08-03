@@ -123,7 +123,7 @@ export default function PromoPage() {
             href="/bib"
             className="inline-flex items-center gap-2 bg-charcoal text-white px-6 py-3 rounded-xl font-bold text-[13px] tracking-wider uppercase no-underline hover:bg-warm-gray transition-colors"
           >
-            Printable Race Bib
+            Getting Your Race Bib
           </Link>
           <Link
             href="/"

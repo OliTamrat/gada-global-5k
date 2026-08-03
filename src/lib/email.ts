@@ -52,6 +52,14 @@ function esc(value: string | number | null | undefined): string {
     .replace(/"/g, "&quot;");
 }
 
+/** Google Maps link for the venue — "get directions" is the one thing a
+ *  runner actually needs from this email on the morning itself. */
+function mapsUrl(): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${EVENT.location}, ${EVENT.address}`
+  )}`;
+}
+
 function buildHtml(d: RegistrationConfirmation): string {
   const site = siteUrl();
   const rows: Array<[string, string]> = [
@@ -74,9 +82,8 @@ function buildHtml(d: RegistrationConfirmation): string {
     .join("");
 
   const nextSteps = [
-    `Print your race bib at home from ${site}/bib/${d.bib} — then you can head straight to the start line on race day.`,
-    `If you would rather collect it in person, packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
-    "Bring a photo ID. Your race t-shirt is in your packet at pickup.",
+    `Collect your bib at packet pickup, which opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}. Bibs are issued in person — there is nothing to print.`,
+    "Bring a photo ID. Your bib, safety pins and race t-shirt are all in your packet.",
     `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral. Waves set off a few minutes apart so faster runners are not weaving through walkers and children.`,
     "Wear your bib on the front of your shirt so the finish-line volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
@@ -110,14 +117,31 @@ function buildHtml(d: RegistrationConfirmation): string {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #eee6d6;">
 
           <tr>
-            <td style="background:#141210;padding:28px 32px;">
-              <div style="color:#E8B930;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">
-                ${esc(EVENT.brand)}
-              </div>
-              <div style="color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.4px;margin-top:6px;">
+            <td style="background:#141210;padding:26px 32px 24px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding-right:12px;vertical-align:middle;">
+                    <img src="${esc(`${site}/images/brand/gada-global-logo.png`)}"
+                         width="52" height="44" alt="${esc(EVENT.brand)}"
+                         style="display:block;width:52px;height:auto;border:0;outline:none;text-decoration:none;">
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <div style="color:#E8B930;font-size:17px;font-weight:800;letter-spacing:2.5px;line-height:1;">
+                      GADA<span style="color:#ffffff;font-weight:500;">&nbsp;GLOBAL</span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <div style="color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.4px;margin-top:16px;">
                 ${esc(EVENT.name)}
               </div>
+              <div style="color:#9a9287;font-size:13px;line-height:1.5;margin-top:5px;">
+                ${esc(EVENT.date)} &bull; Washington, DC
+              </div>
             </td>
+          </tr>
+          <tr>
+            <td style="height:4px;background:#E8B930;font-size:0;line-height:0;">&nbsp;</td>
           </tr>
 
           <tr>
@@ -191,14 +215,22 @@ function buildHtml(d: RegistrationConfirmation): string {
 
           <tr>
             <td style="padding:28px 32px 32px 32px;">
-              <a href="${esc(`${site}/bib/${d.bib}`)}"
-                 style="display:inline-block;background:#E8B930;color:#141210;text-decoration:none;padding:14px 28px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
-                Print your race bib
-              </a>
-              <a href="${esc(site)}"
-                 style="display:inline-block;margin-left:10px;color:#4a453d;text-decoration:none;padding:14px 20px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid #ded5c4;">
-                Event details
-              </a>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
+                <tr>
+                  <td width="50%" valign="middle" style="padding-right:6px;">
+                    <a href="${esc(`${site}/#event`)}"
+                       style="display:block;background:#E8B930;color:#141210;text-decoration:none;padding:14px 8px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;text-align:center;white-space:nowrap;">
+                      Event details
+                    </a>
+                  </td>
+                  <td width="50%" valign="middle" style="padding-left:6px;">
+                    <a href="${esc(mapsUrl())}"
+                       style="display:block;color:#4a453d;text-decoration:none;padding:13px 8px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;text-align:center;white-space:nowrap;border:1px solid #ded5c4;">
+                      Directions
+                    </a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
@@ -246,9 +278,8 @@ function buildText(d: RegistrationConfirmation): string {
     `${EVENT.location}, ${EVENT.address}`,
     "",
     "WHAT TO DO NEXT",
-    `- Print your race bib at home: ${siteUrl()}/bib/${d.bib}`,
-    `- Or collect it in person — packet pickup opens at ${EVENT.packetPickup}.`,
-    "- Bring a photo ID. Your t-shirt is in your packet at pickup.",
+    `- Collect your bib at packet pickup from ${EVENT.packetPickup}. Bibs are issued in person — nothing to print.`,
+    "- Bring a photo ID. Bib, pins and t-shirt are all in your packet.",
     `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral.`,
     "- Wear your bib on the front of your shirt for finish-line scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
