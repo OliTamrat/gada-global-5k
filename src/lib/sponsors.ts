@@ -1,22 +1,21 @@
 /**
  * Sponsorship levels and what each one actually buys.
  *
- * The levels, prices and the four benefits come from the organizers' printed
- * flyer — that is the offer, and it has to match. Nothing else does: the flyer
- * is a reference for *what* is on sale, not for how this page looks. The
- * presentation here is the site's own (charcoal surfaces, the single yellow
- * accent, DM Sans headings) rather than a reproduction of the flyer's
- * four-column table, its medallions or its colour coding.
+ * PLACEHOLDER FIGURES. The four levels, the prices and the four benefits were
+ * taken from a sample sponsorship flyer used as a reference, not from Gada
+ * Global's own agreed offer. They are plausible and internally consistent, and
+ * the page works, but nobody has signed off on them — confirm the real levels,
+ * prices and benefits with the organizers before this is promoted or printed.
  *
- * If the offer is revised, change it here — the /sponsors page, the about-page
- * section and the enquiry links all read from this file, so they cannot drift
- * apart.
+ * Everything is editable from this one file. The /sponsors page, the about-page
+ * section, the enquiry links and the QR target all read from it, so changing a
+ * price or moving a benefit between levels needs no other edit. Adding or
+ * removing a benefit needs an entry in SPONSOR_BENEFITS and a matching glyph in
+ * SponsorTiers' ICONS map; the coverage meter sizes itself.
  *
- * KNOWN ISSUE, carried over from the flyer deliberately rather than silently
- * "fixed": Silver ($500) and Bronze ($250) currently unlock exactly the same
- * two benefits, so there is no reason for a business to choose Silver. Adding
- * "silver" to the `web` benefit below resolves it and costs the organizers
- * nothing. Left as-is until they decide.
+ * The design is the site's own — charcoal surfaces, one yellow accent, an
+ * accordion with a coverage meter. Deliberately not the reference flyer's
+ * four-column table, medallions or metal colour coding.
  */
 
 export type SponsorTierId = "platinum" | "gold" | "silver" | "bronze";
@@ -79,6 +78,11 @@ export interface SponsorBenefit {
   tiers: SponsorTierId[];
 }
 
+/**
+ * NOTE while these are placeholders: `silver` and `bronze` currently unlock the
+ * same two benefits, so there is no reason to pick Silver. If the real offer
+ * keeps four levels, give each one something the level below does not have.
+ */
 export const SPONSOR_BENEFITS: SponsorBenefit[] = [
   {
     id: "tshirt",

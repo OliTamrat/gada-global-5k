@@ -228,12 +228,22 @@ other — or from the printed flyer, as long as the file is kept in step with it
 Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
 Bronze $250+.
 
-**The flyer is a reference for the offer, not a design to reproduce.** It sets
-the levels, the prices and the four benefits, and those have to match. Nothing
-else does — the page deliberately does *not* copy its four-column comparison
-table, its star medallions, its platinum/gold/silver/bronze metal gradients or
-its "Own a restaurant or business?" / "Let's grow together!" headlines. All of
-those were present in a first pass and were removed.
+**The figures on the page are placeholders.** The four levels, the prices and
+the four benefits came from a *sample* sponsorship flyer used as a visual and
+structural reference — not from Gada Global's own agreed offer. Nobody has
+signed these off. Confirm the real levels, prices and benefits with the
+organizers before the page is promoted or anything is printed from it.
+
+Everything is editable from `src/lib/sponsors.ts` alone: prices, level names,
+blurbs, and which levels unlock which benefits. Adding or removing a benefit
+needs an entry in `SPONSOR_BENEFITS` plus a glyph in `SponsorTiers`' `ICONS`
+map — the coverage meter sizes itself. As the placeholders stand, Silver and
+Bronze unlock the same two benefits, so if the real offer keeps four levels,
+each should get something the level below does not have.
+
+The **design** is the site's own and does not need revisiting: it deliberately
+does not reproduce the reference flyer's four-column table, star medallions,
+metal gradients or headlines. An earlier pass did, and was rebuilt.
 
 `SponsorTiers` is a vertical accordion in the site's own language: charcoal
 surfaces, a single yellow accent, and a left rail whose opacity comes from the
