@@ -52,6 +52,14 @@ function esc(value: string | number | null | undefined): string {
     .replace(/"/g, "&quot;");
 }
 
+/** Google Maps link for the venue — "get directions" is the one thing a
+ *  runner actually needs from this email on the morning itself. */
+function mapsUrl(): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${EVENT.location}, ${EVENT.address}`
+  )}`;
+}
+
 function buildHtml(d: RegistrationConfirmation): string {
   const site = siteUrl();
   const rows: Array<[string, string]> = [
@@ -74,9 +82,9 @@ function buildHtml(d: RegistrationConfirmation): string {
     .join("");
 
   const nextSteps = [
-    `Print your race bib at home from ${site}/bib/${d.bib} — then you can head straight to the start line on race day.`,
-    `If you would rather collect it in person, packet pickup opens at ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}.`,
-    "Bring a photo ID. Your race t-shirt is in your packet at pickup.",
+    `Print your bib from the button below — plain paper is fine, but print at 100% scale rather than "fit to page", which shrinks the number.`,
+    `No printer? Collect it at packet pickup, open from ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}. Bring a photo ID.`,
+    "Your race t-shirt is in your packet at pickup either way.",
     `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral. Waves set off a few minutes apart so faster runners are not weaving through walkers and children.`,
     "Wear your bib on the front of your shirt so the finish-line volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
@@ -110,14 +118,31 @@ function buildHtml(d: RegistrationConfirmation): string {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #eee6d6;">
 
           <tr>
-            <td style="background:#141210;padding:28px 32px;">
-              <div style="color:#E8B930;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">
-                ${esc(EVENT.brand)}
-              </div>
-              <div style="color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.4px;margin-top:6px;">
+            <td style="background:#141210;padding:26px 32px 24px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding-right:12px;vertical-align:middle;">
+                    <img src="${esc(`${site}/images/brand/gada-global-logo.png`)}"
+                         width="52" height="44" alt="${esc(EVENT.brand)}"
+                         style="display:block;width:52px;height:auto;border:0;outline:none;text-decoration:none;">
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <div style="color:#E8B930;font-size:17px;font-weight:800;letter-spacing:2.5px;line-height:1;">
+                      GADA<span style="color:#ffffff;font-weight:500;">&nbsp;GLOBAL</span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <div style="color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.4px;margin-top:16px;">
                 ${esc(EVENT.name)}
               </div>
+              <div style="color:#9a9287;font-size:13px;line-height:1.5;margin-top:5px;">
+                ${esc(EVENT.date)} &bull; Washington, DC
+              </div>
             </td>
+          </tr>
+          <tr>
+            <td style="height:4px;background:#E8B930;font-size:0;line-height:0;">&nbsp;</td>
           </tr>
 
           <tr>
@@ -191,29 +216,81 @@ function buildHtml(d: RegistrationConfirmation): string {
 
           <tr>
             <td style="padding:28px 32px 32px 32px;">
-              <a href="${esc(`${site}/bib/${d.bib}`)}"
-                 style="display:inline-block;background:#E8B930;color:#141210;text-decoration:none;padding:14px 28px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
-                Print your race bib
-              </a>
-              <a href="${esc(site)}"
-                 style="display:inline-block;margin-left:10px;color:#4a453d;text-decoration:none;padding:14px 20px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid #ded5c4;">
-                Event details
-              </a>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
+                <tr>
+                  <td width="50%" valign="middle" style="padding-right:6px;">
+                    <a href="${esc(`${site}/bib/${d.bib}`)}"
+                       style="display:block;background:#E8B930;color:#141210;text-decoration:none;padding:14px 8px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;text-align:center;white-space:nowrap;">
+                      Print your bib
+                    </a>
+                  </td>
+                  <td width="50%" valign="middle" style="padding-left:6px;">
+                    <a href="${esc(mapsUrl())}"
+                       style="display:block;color:#4a453d;text-decoration:none;padding:13px 8px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;text-align:center;white-space:nowrap;border:1px solid #ded5c4;">
+                      Directions
+                    </a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
           <tr>
-            <td style="background:#FAF6EE;padding:22px 32px;border-top:1px solid #eee6d6;">
-              <p style="margin:0 0 6px 0;color:#6b6459;font-size:13px;line-height:1.6;">
-                Questions? Reply to this email or write to
-                <a href="mailto:${esc(EVENT.supportEmail)}" style="color:#141210;font-weight:600;">${esc(EVENT.supportEmail)}</a>.
-              </p>
-              <p style="margin:0 0 4px 0;color:#9a9287;font-size:12px;line-height:1.6;">
-                ${esc(EVENT.brand)} &bull; Celebrating Oromo heritage through running.
-              </p>
-              <p style="margin:0;color:#b3aca2;font-size:11px;line-height:1.6;">
-                Operated by ${esc(EVENT.organization)}
-              </p>
+            <td style="background:#141210;padding:26px 32px 24px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;">
+                <tr>
+                  <td style="padding-right:10px;vertical-align:middle;">
+                    <img src="${esc(`${site}/images/brand/gada-global-logo.png`)}"
+                         width="34" height="29" alt="${esc(EVENT.brand)}"
+                         style="display:block;width:34px;height:auto;border:0;outline:none;text-decoration:none;">
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <div style="color:#E8B930;font-size:13px;font-weight:800;letter-spacing:2px;line-height:1;">
+                      GADA<span style="color:#ffffff;font-weight:500;">&nbsp;GLOBAL</span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="color:#9a9287;font-size:13px;line-height:1.75;margin-bottom:16px;">
+                ${esc(EVENT.location)}<br>
+                ${esc(EVENT.address)}<br>
+                ${esc(EVENT.date)} &bull; ${esc(EVENT.programHours)}
+              </div>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;">
+                <tr>
+                  <td style="padding-right:16px;">
+                    <a href="${esc(`${site}/#event`)}" style="color:#E8B930;font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;text-decoration:none;">Event</a>
+                  </td>
+                  <td style="padding-right:16px;">
+                    <a href="${esc(`${site}/race`)}" style="color:#E8B930;font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;text-decoration:none;">Results</a>
+                  </td>
+                  <td style="padding-right:16px;">
+                    <a href="${esc(`${site}/shop`)}" style="color:#E8B930;font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;text-decoration:none;">Shop</a>
+                  </td>
+                  <td>
+                    <a href="${esc(`${site}/sponsors`)}" style="color:#E8B930;font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;text-decoration:none;">Sponsor</a>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="border-top:1px solid #2a2520;padding-top:16px;">
+                <p style="margin:0 0 10px 0;color:#c9c2b7;font-size:13px;line-height:1.65;">
+                  Questions? Reply to this email or write to
+                  <a href="mailto:${esc(EVENT.supportEmail)}" style="color:#E8B930;font-weight:600;text-decoration:none;">${esc(EVENT.supportEmail)}</a>
+                </p>
+                <p style="margin:0 0 4px 0;color:#6b6459;font-size:12px;line-height:1.6;">
+                  ${esc(EVENT.brand)} &bull; Celebrating Oromo heritage through running.
+                </p>
+                <p style="margin:0 0 4px 0;color:#5a544c;font-size:11px;line-height:1.6;">
+                  &copy; 2026 ${esc(EVENT.organization)} All rights reserved. You are receiving
+                  this because you registered for the ${esc(EVENT.name)}.
+                </p>
+                <p style="margin:0;color:#4a453d;font-size:11px;line-height:1.6;">
+                  Built by Olink Technologies
+                </p>
+              </div>
             </td>
           </tr>
 
@@ -246,9 +323,9 @@ function buildText(d: RegistrationConfirmation): string {
     `${EVENT.location}, ${EVENT.address}`,
     "",
     "WHAT TO DO NEXT",
-    `- Print your race bib at home: ${siteUrl()}/bib/${d.bib}`,
-    `- Or collect it in person — packet pickup opens at ${EVENT.packetPickup}.`,
-    "- Bring a photo ID. Your t-shirt is in your packet at pickup.",
+    `- Print your bib: ${siteUrl()}/bib/${d.bib} (print at 100% scale, not "fit to page")`,
+    `- No printer? Collect it at packet pickup from ${EVENT.packetPickup}. Bring a photo ID.`,
+    "- Your race t-shirt is in your packet at pickup either way.",
     `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral.`,
     "- Wear your bib on the front of your shirt for finish-line scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,

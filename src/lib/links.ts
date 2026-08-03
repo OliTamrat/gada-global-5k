@@ -7,7 +7,6 @@ export type LinkIcon =
   | "run"
   | "calendar"
   | "trophy"
-  | "bib"
   | "shirt"
   | "info"
   | "mail"
@@ -63,13 +62,6 @@ export const LINK_SECTIONS: LinkSection[] = [
         blurb: "Finish times as runners cross",
         icon: "trophy",
         tint: "bg-green-deep/25 text-green-light",
-      },
-      {
-        href: "/bib",
-        label: "Print Your Race Bib",
-        blurb: "Already registered? Print it at home",
-        icon: "bib",
-        tint: "bg-red-oromo/20 text-red-oromo",
       },
     ],
   },

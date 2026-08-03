@@ -24,13 +24,6 @@ export const LINK_ICONS: Record<LinkIcon, ReactNode> = {
       <path d="M18 2H6v7a6 6 0 1012 0V2z" />
     </svg>
   ),
-  bib: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <line x1="3" y1="14" x2="21" y2="14" strokeDasharray="2 2" />
-      <path d="M8 9h8" />
-    </svg>
-  ),
   shirt: (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20.38 3.46L16 2 12 5 8 2 3.62 3.46a2 2 0 00-1.34 1.63l-.38 3.42L5 11v10h14V11l3.1-2.49-.38-3.42a2 2 0 00-1.34-1.63z" />
