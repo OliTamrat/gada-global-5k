@@ -31,6 +31,12 @@ const CODES = [
     url: `${SITE}/links`,
   },
   {
+    target: "sponsors",
+    title: "Become a Sponsor",
+    blurb: "For the sponsor flyer and for handing to restaurants and businesses.",
+    url: `${SITE}/sponsors`,
+  },
+  {
     target: "results",
     title: "Live Results",
     blurb: "For race-day signage at the finish line and the results table.",

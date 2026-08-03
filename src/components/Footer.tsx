@@ -45,6 +45,7 @@ export function Footer() {
                 { href: "/#event", label: "Details" },
                 { href: "/#schedule", label: "Schedule" },
                 { href: "/register", label: "Register" },
+                { href: "/sponsors", label: "Become a Sponsor" },
                 { href: "/links", label: "All Links" },
               ],
             },

@@ -49,6 +49,14 @@ export const LINK_ICONS: Record<LinkIcon, ReactNode> = {
       <path d="M22 6l-10 7L2 6" />
     </svg>
   ),
+  handshake: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 17l-2 2a1.93 1.93 0 01-2.74 0 1.93 1.93 0 010-2.74l.79-.79" />
+      <path d="M14 14l2.5 2.5a1.93 1.93 0 002.74 0 1.93 1.93 0 000-2.74L13.5 8.5" />
+      <path d="M3 11l3.5-3.5a2 2 0 012.83 0L12 10l1.5-1.5" />
+      <path d="M21 13l-2-2M3 11l-2 2" />
+    </svg>
+  ),
   instagram: (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
