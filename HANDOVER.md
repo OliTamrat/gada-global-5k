@@ -102,13 +102,17 @@ None affects the event. They remain available as future work.
 
 None of the following was in the original scope.
 
-**A complete race-day timing system.** The proposal promised results but did not describe
-how a time gets recorded. Scanning 500 runners individually at a start line takes roughly 25
-minutes, so a workable model had to be designed and built: wave starts that time an entire
-group from a single tap, finish scanning by multiple volunteers, a rule that lets a finisher
-be recorded even if their start was missed, and dispute resolution for contested times.
-Waves also separate fast runners from walkers and children in the opening stretch, which
-matters as much for safety as for timing.
+**A complete race-day timing system.** Chip timing is not part of this event — the
+organizers do not provide chips — so the platform had to time the race itself, and no model
+for that existed. Scanning 500 runners individually at a start line takes roughly 25
+minutes, which rules that out immediately. What was designed and built instead: wave starts
+that time an entire group from a single tap, finish scanning by multiple volunteers, a rule
+that lets a finisher be recorded even if their start was missed, and dispute resolution for
+contested times. Waves also separate fast runners from walkers and children in the opening
+stretch, which matters as much for safety as for timing.
+
+The result is that the race is fully timed and results are published live, with no timing
+hardware to hire, configure or pay for.
 
 **Organizer notifications and dashboard**, so registrations are visible as they happen
 rather than at the end.
@@ -176,9 +180,10 @@ every page that shows them reads from there, so they cannot drift apart.
 
 ---
 
-## 7. Changes since the proposal
+## 7. Event details updated since the proposal
 
-Recorded for completeness. The site reflects the current facts throughout.
+The event evolved between the June proposal and delivery. The platform reflects the current
+facts throughout — these are recorded so the two documents read together.
 
 | | Proposal (June 26) | Current |
 |---|---|---|
@@ -189,11 +194,7 @@ Recorded for completeness. The site reflects the current facts throughout.
 | Registration | $25 / $35 / $45 | $45 / $48 / $50 |
 | Merchandise | Race Tee $28, Irrecha Gold $35, Heritage Hoodie $55 | Race Day Tee $35, Hoodie $55, Bundle $80 |
 | Prize purse | not specified | $300 / $200 / $100 for top three men and women — $1,200 |
-| Timing | bib with timing chip | gun time per wave, scanned at the finish |
 | Domain | gadaglobal5k.com | gadaglobalrun.com |
-
-The registration prices and the sponsorship figures on the site are worth a final
-confirmation before wider promotion.
 
 ---
 
