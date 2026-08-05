@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { products, formatPrice } from "@/lib/products";
+import { products, formatPrice, sizeLabel } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import Link from "next/link";
@@ -19,7 +19,8 @@ export default function ShopPage() {
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/70 max-w-[480px] mx-auto">
             Rep your Oromo pride with our limited-edition Gada Global 5K
-            collection. All proceeds support the event.
+            collection. Youth sizes on every item, so the whole family can match.
+            All proceeds support the event.
           </p>
         </ScrollReveal>
 
@@ -80,22 +81,27 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
             <label className="block text-[11px] font-bold tracking-[2px] uppercase text-white/60 mb-2">
               Size
             </label>
-            <div className="flex flex-wrap gap-1.5">
-              {product.sizes.map((size) => (
-                <button
-                  key={size}
-                  type="button"
-                  onClick={() => setSelectedSize(size)}
-                  className={`px-3 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer ${
-                    selectedSize === size
-                      ? "yellow-card border-yellow"
-                      : "bg-white/4 text-white/75 border-white/6 hover:border-white/20"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
+            <SizeGroup
+              heading="Adult"
+              sizes={product.sizes}
+              selected={selectedSize}
+              onSelect={setSelectedSize}
+            />
+            {product.youthSizes && product.youthSizes.length > 0 && (
+              <div className="mt-3">
+                <SizeGroup
+                  heading="Youth"
+                  sizes={product.youthSizes}
+                  selected={selectedSize}
+                  onSelect={setSelectedSize}
+                />
+              </div>
+            )}
+            {selectedSize && (
+              <p className="text-[12px] text-white/55 mt-2">
+                Selected: {sizeLabel(selectedSize)}
+              </p>
+            )}
           </div>
 
           <div className="flex items-center justify-between">
@@ -120,6 +126,49 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
         </div>
       </div>
     </ScrollReveal>
+  );
+}
+
+/**
+ * One row of size buttons under its own heading. Youth buttons drop the "Y"
+ * prefix — the heading above them is what distinguishes a youth medium from an
+ * adult one, and the full name is spelled out once a size is picked.
+ */
+function SizeGroup({
+  heading,
+  sizes,
+  selected,
+  onSelect,
+}: {
+  heading: string;
+  sizes: string[];
+  selected: string;
+  onSelect: (size: string) => void;
+}) {
+  return (
+    <div>
+      <span className="block text-[10px] font-bold tracking-[1.5px] uppercase text-white/40 mb-1.5">
+        {heading}
+      </span>
+      <div className="flex flex-wrap gap-1.5">
+        {sizes.map((size) => (
+          <button
+            key={size}
+            type="button"
+            onClick={() => onSelect(size)}
+            aria-label={sizeLabel(size)}
+            aria-pressed={selected === size}
+            className={`px-3 py-1.5 rounded-lg text-[12px] font-bold border transition-all cursor-pointer ${
+              selected === size
+                ? "yellow-card border-yellow"
+                : "bg-white/4 text-white/75 border-white/6 hover:border-white/20"
+            }`}
+          >
+            {size.startsWith("Y") ? size.slice(1) : size}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -164,7 +213,7 @@ function CartSummary() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-[14px] font-bold text-white truncate">{item.name}</div>
-                <div className="text-[12px] text-white/65">Size: {item.size}</div>
+                <div className="text-[12px] text-white/65">Size: {sizeLabel(item.size)}</div>
               </div>
               <div className="flex items-center gap-1.5">
                 <button

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { tiers, getCurrentTier } from "@/lib/registration";
 import { WAVES, WAVE_META, DEFAULT_WAVE } from "@/lib/waves";
+import { ADULT_SIZES, YOUTH_SIZES, sizeLabel } from "@/lib/products";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function RegisterPage() {
@@ -262,18 +263,14 @@ export default function RegisterPage() {
                       <select name="tshirtSize" required defaultValue="" className={`${inputClass} cursor-pointer appearance-none`}>
                         <option value="" disabled>Select size</option>
                         <optgroup label="Youth">
-                          <option value="YXS">Youth XS</option>
-                          <option value="YS">Youth Small</option>
-                          <option value="YM">Youth Medium</option>
-                          <option value="YL">Youth Large</option>
+                          {YOUTH_SIZES.map((s) => (
+                            <option key={s} value={s}>{sizeLabel(s)}</option>
+                          ))}
                         </optgroup>
                         <optgroup label="Adult">
-                          <option value="XS">Adult XS</option>
-                          <option value="S">Adult Small</option>
-                          <option value="M">Adult Medium</option>
-                          <option value="L">Adult Large</option>
-                          <option value="XL">Adult XL</option>
-                          <option value="XXL">Adult XXL</option>
+                          {ADULT_SIZES.map((s) => (
+                            <option key={s} value={s}>{sizeLabel(s)}</option>
+                          ))}
                         </optgroup>
                       </select>
                       <p className="text-[13px] leading-[1.6] text-charcoal/55 mt-2">
