@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
-import { products } from "@/lib/products";
+import { products, availableSizes, sizeLabel } from "@/lib/products";
 import { EVENT } from "@/lib/email";
 import { publicAsset } from "@/lib/site";
 
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       }
 
       const size = String(line.size ?? "");
-      if (!product.sizes.includes(size)) {
+      if (!availableSizes(product).includes(size)) {
         return NextResponse.json(
           { error: `${product.name} is not available in size ${size || "(none)"}` },
           { status: 400 }
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
         price_data: {
           currency: "usd",
           product_data: {
-            name: `${product.name} — Size ${size}`,
+            name: `${product.name} — ${sizeLabel(size)}`,
             description: product.description,
             ...(image ? { images: [image] } : {}),
           },
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
         },
         quantity,
       });
-      summary.push(`${product.name} (${size}) x${quantity}`);
+      summary.push(`${product.name} (${sizeLabel(size)}) x${quantity}`);
     }
 
     const session = await getStripe().checkout.sessions.create({

@@ -46,7 +46,8 @@ export const WAVE_META: Record<Wave, WaveMeta> = {
   kids: {
     id: "kids",
     label: "Kids & Family",
-    blurb: "Children, families, and strollers. Sets off last into a clear course.",
+    blurb:
+      "Children and anyone running with them, including strollers. Each child needs their own registration, and an adult running alongside should pick this wave too. Sets off last into a clear course.",
     bandLabel: "KIDS & FAMILY",
     offsetMinutes: 6,
     bandClass: "bg-green-deep text-white",

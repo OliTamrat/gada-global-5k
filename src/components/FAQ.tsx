@@ -12,7 +12,7 @@ const faqs = [
   { q: "Is there a virtual option?", a: "We are exploring a virtual participation option for those who cannot attend in person. Check back closer to race day for updates on virtual registration." },
   { q: "Where do I park?", a: "Parking information will be shared via email to all registered participants closer to race day. Free parking is available at the Rock Creek Park Tennis Center, 5220 16th St NW, where the race starts and finishes." },
   { q: "Are refunds available?", a: "Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at info@gadaglobalrun.com for transfer requests." },
-  { q: "Can children participate?", a: "Children under 12 can participate with a registered adult guardian. We also plan to offer a Kids Dash as part of our event programming." },
+  { q: "Can children run, and how do I register them?", a: "Yes. Children are welcome from age 5. Each child needs their own registration — that is what gives them a bib, a finish time and a t-shirt. On the form, choose the Kids & Family start wave and a Youth t-shirt size. If you are running alongside your child, register yourself too and pick the same wave so you start together. Kids & Family sets off last, a few minutes after the other waves, so the course ahead is clear and nobody is weaving past children. Strollers are welcome in this wave." },
   { q: "How can I become a sponsor?", a: "There are four levels — Platinum, Gold, Silver and Bronze — starting at $250. Each one lists exactly what it includes on our Sponsors page, and the enquiry link there arrives with your level already filled in. You can also email info@gadaglobalrun.com directly." },
 ];
 
