@@ -151,8 +151,8 @@ Confirmed from production on August 3, 2026:
 registration marked paid → bib assigned → confirmation email delivered with the correct
 event details, tier, amount, wave and shirt size.
 
-**Ready for registrations.** The database is clean and the bib sequence is at 101, so the
-first runner receives bib 101.
+**Registration is open and taking payments.** The first runners are registered and hold
+bibs from 101.
 
 ---
 
