@@ -30,9 +30,52 @@ export default function ShopPage() {
           ))}
         </div>
 
-        <CartSummary />
+        <CartBar />
       </div>
     </main>
+  );
+}
+
+/**
+ * The cart itself is the drawer in the layout — this is just the prompt back
+ * into it, so the shop page still shows that something is waiting.
+ */
+function CartBar() {
+  const { itemCount, total, openCart } = useCart();
+
+  if (itemCount === 0) {
+    return (
+      <div className="text-center">
+        <Link href="/" className="text-white/60 text-[14px] hover:text-yellow transition-colors no-underline">
+          &larr; Back to Home
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <ScrollReveal className="text-center">
+      <button
+        type="button"
+        onClick={openCart}
+        className="dark-card inline-flex items-center gap-4 rounded-2xl px-7 py-4 cursor-pointer hover:border-yellow/25 transition-all"
+      >
+        <span className="text-[14px] font-bold text-white">
+          {itemCount} {itemCount === 1 ? "item" : "items"} in your cart
+        </span>
+        <span className="text-[14px] font-black text-yellow tabular-nums">
+          ${(total / 100).toFixed(2)}
+        </span>
+        <span className="text-[13px] font-bold tracking-wider uppercase text-yellow">
+          View Cart &rarr;
+        </span>
+      </button>
+      <div className="mt-8">
+        <Link href="/" className="text-white/60 text-[14px] hover:text-yellow transition-colors no-underline">
+          &larr; Back to Home
+        </Link>
+      </div>
+    </ScrollReveal>
   );
 }
 
@@ -169,97 +212,5 @@ function SizeGroup({
         ))}
       </div>
     </div>
-  );
-}
-
-function CartSummary() {
-  const { items, total, itemCount, removeItem, updateQuantity } = useCart();
-  const [loading, setLoading] = useState(false);
-
-  if (itemCount === 0) return null;
-
-  async function handleCheckout() {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
-      });
-      const result = await res.json();
-      if (result.url) {
-        window.location.href = result.url;
-      }
-    } catch {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <ScrollReveal>
-      <div className="dark-card rounded-3xl p-8 max-w-2xl mx-auto">
-        <h3 className="text-lg font-bold text-white mb-6 tracking-tight">
-          Your Cart ({itemCount} {itemCount === 1 ? "item" : "items"})
-        </h3>
-
-        <div className="space-y-3 mb-6">
-          {items.map((item) => (
-            <div
-              key={`${item.id}-${item.size}`}
-              className="flex items-center gap-4 bg-white/3 rounded-xl p-4"
-            >
-              <div className="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-br from-yellow/15 to-yellow/5 shrink-0">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[14px] font-bold text-white truncate">{item.name}</div>
-                <div className="text-[12px] text-white/65">Size: {sizeLabel(item.size)}</div>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
-                  className="w-6 h-6 rounded-md bg-white/6 text-white flex items-center justify-center text-xs hover:bg-white/15 transition-colors cursor-pointer border-none"
-                >-</button>
-                <span className="text-[14px] font-bold text-white w-5 text-center tabular-nums">{item.quantity}</span>
-                <button
-                  onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                  className="w-6 h-6 rounded-md bg-white/6 text-white flex items-center justify-center text-xs hover:bg-white/15 transition-colors cursor-pointer border-none"
-                >+</button>
-              </div>
-              <div className="text-[14px] font-bold text-yellow w-12 text-right tabular-nums">
-                ${((item.price * item.quantity) / 100).toFixed(0)}
-              </div>
-              <button
-                onClick={() => removeItem(item.id, item.size)}
-                className="text-white/55 hover:text-red-400 text-base transition-colors cursor-pointer bg-transparent border-none"
-              >&times;</button>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-between border-t border-white/6 pt-6">
-          <div className="text-base font-black text-white tracking-tight">
-            Total: <span className="text-yellow">${(total / 100).toFixed(2)}</span>
-          </div>
-          <button
-            onClick={handleCheckout}
-            disabled={loading}
-            className="yellow-card px-7 py-2.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(245,200,66,0.2)] transition-all disabled:opacity-50 cursor-pointer border-none"
-          >
-            {loading ? "Processing..." : "Checkout"}
-          </button>
-        </div>
-
-        <p className="text-[12px] text-white/55 text-center mt-4">
-          Secure payment powered by Stripe. Shipping to US addresses only.
-        </p>
-      </div>
-
-      <div className="text-center mt-8">
-        <Link href="/" className="text-white/60 text-[14px] hover:text-yellow transition-colors no-underline">
-          &larr; Back to Home
-        </Link>
-      </div>
-    </ScrollReveal>
   );
 }
