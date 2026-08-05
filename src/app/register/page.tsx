@@ -261,13 +261,24 @@ export default function RegisterPage() {
                       <label className={labelClass}>T-Shirt Size</label>
                       <select name="tshirtSize" required defaultValue="" className={`${inputClass} cursor-pointer appearance-none`}>
                         <option value="" disabled>Select size</option>
-                        <option value="XS">XS</option>
-                        <option value="S">Small</option>
-                        <option value="M">Medium</option>
-                        <option value="L">Large</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
+                        <optgroup label="Youth">
+                          <option value="YXS">Youth XS</option>
+                          <option value="YS">Youth Small</option>
+                          <option value="YM">Youth Medium</option>
+                          <option value="YL">Youth Large</option>
+                        </optgroup>
+                        <optgroup label="Adult">
+                          <option value="XS">Adult XS</option>
+                          <option value="S">Adult Small</option>
+                          <option value="M">Adult Medium</option>
+                          <option value="L">Adult Large</option>
+                          <option value="XL">Adult XL</option>
+                          <option value="XXL">Adult XXL</option>
+                        </optgroup>
                       </select>
+                      <p className="text-[13px] leading-[1.6] text-charcoal/55 mt-2">
+                        Registering a child? Pick a Youth size.
+                      </p>
                     </div>
                     <div>
                       <label className={labelClass}>Emergency Contact</label>
@@ -284,10 +295,19 @@ export default function RegisterPage() {
                         </option>
                       ))}
                     </select>
-                    <p className="text-[13px] leading-[1.6] text-charcoal/55 mt-2">
-                      Waves start a few minutes apart so faster runners are not
-                      weaving through walkers and children. Most adults belong in
-                      Open; pick Kids &amp; Family if you are running with children.
+                    <ul className="list-none mt-3 mb-0 p-0 space-y-2">
+                      {WAVES.map((w) => (
+                        <li key={w} className="flex gap-2.5 text-[13px] leading-[1.6] text-charcoal/60">
+                          <span className="font-bold text-charcoal/80 shrink-0 w-[92px]">
+                            {WAVE_META[w].label}
+                          </span>
+                          <span>{WAVE_META[w].blurb}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-[13px] leading-[1.6] text-charcoal/55 mt-3">
+                      Waves set off a few minutes apart, so faster runners are not
+                      weaving through walkers and children in the first stretch.
                     </p>
                   </div>
 
