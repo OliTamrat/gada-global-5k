@@ -443,6 +443,31 @@ way: the browser must never name a price.
   work — verify against a clean tree before blaming a change. New code avoids the
   rule by deferring the first fetch with `void Promise.resolve().then(load)` rather
   than calling it in the effect body.
+- **The webhook URL must carry the `www` AND the `/api/webhook` path.** Exactly:
+  `https://www.gadaglobalrun.com/api/webhook`. This cost three real runners their
+  bibs and emails on 2026-08-05. Stripe does not follow redirects, so each wrong
+  form fails in its own way and none of them is obvious from the Stripe UI:
+  - `https://gadaglobalrun.com/api/webhook` → apex redirects to www → **308**
+  - `https://www.gadaglobalrun.com` → lands on the homepage → **405**
+  - correct URL, wrong signing secret → **400** `{"error":"Invalid signature"}`
+  - working → **200** `{"received":true}`
+
+  **Payments succeed regardless.** Stripe charges the card at Checkout; the bib,
+  the runner's confirmation and the organizer alert all come from the webhook. So
+  the failure looks like "money arrived, nothing happened" — rows sit at
+  `payment_status='pending'` with no bib, and `/organizers` shows nothing because
+  it counts only paid rows.
+
+  **Before announcing registration, open a delivery in Stripe → Webhooks and
+  confirm it returned 200.** `/api/health` cannot check this: it only sees that a
+  `whsec_` exists, not what URL Stripe has registered or whether deliveries land.
+
+  **Recovery is safe.** The webhook is idempotent, so any failed event can be
+  replayed from Stripe → Webhooks → the destination → the event → **Resend**. It
+  assigns the bib, emails the runner and emails the organizers. Stripe also
+  auto-retries failed events for ~3 days, so fixing the URL often heals the
+  backlog without touching anything.
+
 - **Stripe test and live are parallel worlds.** Separate keys, separate webhook
   endpoints, and **separate signing secrets**. A live-mode `whsec_` will not verify a
   test-mode event: `constructEvent` throws, the route returns 400, the payment
