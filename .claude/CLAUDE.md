@@ -318,6 +318,32 @@ stranger cannot be undone. `/api/health` reports whether it is configured.
 Public reads stay open: `GET /api/race` (results) and the runner pages are
 unauthenticated, as they should be.
 
+**Locked out? The passcode lives in exactly one place: `RACE_OPS_PASSCODE` in
+the Vercel environment variables.** It is not in the repo, not in git history,
+and `.env.example` carries only a placeholder. `/api/health` reports whether one
+is set, never what it is. Recovery, in order:
+
+1. Vercel → `gada-global-5k` → Settings → Environment Variables →
+   `RACE_OPS_PASSCODE` → reveal the value. A variable marked **Sensitive**
+   cannot be revealed to anyone — go to step 2.
+2. Set a new value, then **redeploy**. Environment variables are read at build
+   time, so until a new deployment exists the old passcode is still the live
+   one. This is the step that gets missed.
+
+**Read the error, it names the fault.** "That passcode was not accepted" is a
+**401** — a passcode *is* configured and what was typed is not it. "Race
+operations are not configured on this deployment yet" is a **503** — the
+variable is unset, which is a deploy problem, not a memory problem.
+
+Nothing needs clearing on the device: `OpsGate` verifies a code against the
+server before storing it, so a wrong one is never saved. (The localStorage key
+is `gada-race-ops`, and the "Lock this device" button clears it.)
+
+**Setting the value from a shell mangles it.** `vercel env add` with an
+unquoted string lets the shell eat `$word` as an undefined variable, so
+`$irn@g@d@` gets stored as `@g@d@`. Trailing whitespace from a paste does the
+same thing invisibly. Prefer the dashboard, and avoid `$`, backticks and `!`.
+
 **Organizers are emailed on every paid registration** — runner, bib, wave, tier,
 amount, shirt size, phone, emergency contact, and the running total, with
 reply-to set to the runner. Recipients come from `ORGANIZER_EMAILS`
