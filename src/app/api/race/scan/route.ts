@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireOps } from "@/lib/ops-auth";
+import { requireRaceDay } from "@/lib/race-window";
 import { recordScan } from "@/lib/race";
 
 export const dynamic = "force-dynamic";
@@ -7,6 +8,9 @@ export const dynamic = "force-dynamic";
 export async function POST(req: NextRequest) {
   const denied = requireOps(req);
   if (denied) return denied;
+
+  const locked = requireRaceDay();
+  if (locked) return locked;
 
   try {
     const { bib, type, volunteerId } = await req.json();

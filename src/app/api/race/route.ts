@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireOps } from "@/lib/ops-auth";
+import { requireRaceDay } from "@/lib/race-window";
 import { getRaceEntries, computeResults, seedDemoData } from "@/lib/race";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,8 @@ export async function GET(req: Request) {
     if (searchParams.get("seed") === "true") {
       const denied = requireOps(req);
       if (denied) return denied;
+      const locked = requireRaceDay();
+      if (locked) return locked;
       await seedDemoData();
     }
 

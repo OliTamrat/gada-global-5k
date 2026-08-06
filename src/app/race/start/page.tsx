@@ -42,12 +42,16 @@ function StartLineScreen() {
   const [busy, setBusy] = useState<Wave | null>(null);
   const [message, setMessage] = useState("");
   const [now, setNow] = useState(() => Date.now());
+  const [locked, setLocked] = useState(false);
+  const [raceDay, setRaceDay] = useState("");
 
   const load = useCallback(async () => {
     try {
       const res = await opsFetch("/api/race/waves");
       const data = await res.json();
       if (data.waves) setStatuses(data.waves);
+      setLocked(Boolean(data.locked));
+      setRaceDay(data.raceDay ?? "");
     } catch {
       // A dropped poll on a phone at a start line is not worth surfacing.
     }
@@ -101,6 +105,18 @@ function StartLineScreen() {
             scanned here — only at the finish.
           </p>
         </div>
+
+        {locked && (
+          <div className="bg-yellow/10 border border-yellow/30 rounded-xl px-4 py-3 mb-6">
+            <p className="text-[14px] font-bold text-yellow m-0 mb-1">
+              Timing is locked until race day{raceDay ? ` (${raceDay})` : ""}
+            </p>
+            <p className="text-[13px] leading-[1.6] text-white/70 m-0">
+              Waves and finish scans are refused until then, so testing this
+              screen cannot start anybody&apos;s clock.
+            </p>
+          </div>
+        )}
 
         {message && (
           <div className="bg-white/8 border border-white/12 rounded-xl px-4 py-3 text-[14px] text-white/90 mb-6">

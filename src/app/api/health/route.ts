@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { query, isDatabaseConfigured } from "@/lib/db";
 import { isOpsConfigured } from "@/lib/ops-auth";
+import { isRaceDay, isOverridden, RACE_DAY_ISO } from "@/lib/race-window";
 
 export const dynamic = "force-dynamic";
 
@@ -194,6 +195,24 @@ function checkRaceOps(): Check {
   return { status: "ok", detail: "volunteer passcode set" };
 }
 
+function checkRaceClock(): Check {
+  if (isOverridden()) {
+    return {
+      status: "warn",
+      detail:
+        `RACE_TIMING_UNLOCKED=true — waves and finish scans are live outside race day. ` +
+        `Clear the timing data and unset this after rehearsing.`,
+    };
+  }
+  if (isRaceDay()) {
+    return { status: "ok", detail: `race day (${RACE_DAY_ISO}) — timing is open` };
+  }
+  return {
+    status: "ok",
+    detail: `locked until ${RACE_DAY_ISO} — waves and finish scans return 423`,
+  };
+}
+
 function checkSiteUrl(): Check {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url) {
@@ -211,6 +230,7 @@ export async function GET() {
     stripe: checkStripe(),
     email: checkEmail(),
     raceOps: checkRaceOps(),
+    raceClock: checkRaceClock(),
     siteUrl: checkSiteUrl(),
   };
 
