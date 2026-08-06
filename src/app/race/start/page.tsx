@@ -50,10 +50,19 @@ function StartLineScreen() {
       const res = await opsFetch("/api/race/waves");
       const data = await res.json();
       if (data.waves) setStatuses(data.waves);
+    } catch {
+      // A dropped poll on a phone at a start line is not worth surfacing.
+    }
+  }, []);
+
+  const loadLockState = useCallback(async () => {
+    try {
+      const res = await opsFetch("/api/race/lock");
+      const data = await res.json();
       setLocked(Boolean(data.locked));
       setRaceDay(data.raceDay ?? "");
     } catch {
-      // A dropped poll on a phone at a start line is not worth surfacing.
+      // The API enforces this regardless of what the banner says.
     }
   }, []);
 
@@ -63,11 +72,12 @@ function StartLineScreen() {
     // Deferred to a microtask so the first fetch does not set state during the
     // effect body itself, which react-hooks/set-state-in-effect rejects.
     void Promise.resolve().then(load);
+    void Promise.resolve().then(loadLockState);
     return () => {
       clearInterval(poll);
       clearInterval(tick);
     };
-  }, [load]);
+  }, [load, loadLockState]);
 
   async function send(wave: Wave) {
     setBusy(wave);

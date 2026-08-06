@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { OpsGate, opsFetch } from "@/components/OpsGate";
 
@@ -28,6 +28,27 @@ function ScanScreen() {
   const [logs, setLogs] = useState<ScanLog[]>([]);
   const [volunteerId] = useState(() => "vol-" + Math.random().toString(36).slice(2, 6));
   const inputRef = useRef<HTMLInputElement>(null);
+  const [locked, setLocked] = useState(false);
+  const [raceDay, setRaceDay] = useState("");
+
+  // The server refuses scans outside race day anyway; this is so a volunteer
+  // sees it before typing a bib rather than after tapping Scan.
+  const loadLockState = useCallback(async () => {
+    try {
+      const res = await opsFetch("/api/race/lock");
+      const data = await res.json();
+      setLocked(Boolean(data.locked));
+      setRaceDay(data.raceDay ?? "");
+    } catch {
+      // Leave the screen usable — the API is the thing that enforces this.
+    }
+  }, []);
+
+  useEffect(() => {
+    // Deferred so the first fetch does not set state during the effect body,
+    // which react-hooks/set-state-in-effect rejects.
+    void Promise.resolve().then(loadLockState);
+  }, [loadLockState]);
 
   async function handleScan(bib: number) {
     if (scanning) return;
@@ -128,6 +149,18 @@ function ScanScreen() {
           </Link>
         </p>
 
+        {locked && (
+          <div className="bg-yellow/10 border border-yellow/30 rounded-xl px-4 py-3 mb-8">
+            <p className="text-[14px] font-bold text-yellow m-0 mb-1">
+              Timing is locked until race day{raceDay ? ` (${raceDay})` : ""}
+            </p>
+            <p className="text-[13px] leading-[1.6] text-white/70 m-0">
+              Scans are refused until then, so testing this screen cannot record
+              a finish or start anybody&apos;s clock.
+            </p>
+          </div>
+        )}
+
         {/* Manual bib entry */}
         <form onSubmit={handleSubmit} className="mb-8">
           <div className="flex gap-3">
@@ -143,14 +176,14 @@ function ScanScreen() {
             />
             <button
               type="submit"
-              disabled={scanning || !manualBib}
+              disabled={scanning || !manualBib || locked}
               className={`shrink-0 w-[90px] py-4 rounded-xl font-bold text-[15px] uppercase tracking-wider border-none cursor-pointer transition-all ${
                 mode === "start"
                   ? "bg-green-deep text-white hover:bg-green-light"
                   : "yellow-card hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)]"
               } disabled:opacity-30 disabled:cursor-not-allowed`}
             >
-              {scanning ? "..." : "Scan"}
+              {scanning ? "..." : locked ? "Locked" : "Scan"}
             </button>
           </div>
         </form>
