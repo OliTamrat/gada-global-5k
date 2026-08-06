@@ -318,6 +318,80 @@ stranger cannot be undone. `/api/health` reports whether it is configured.
 Public reads stay open: `GET /api/race` (results) and the runner pages are
 unauthenticated, as they should be.
 
+**Locked out? The passcode lives in exactly one place: `RACE_OPS_PASSCODE` in
+the Vercel environment variables.** It is not in the repo, not in git history,
+and `.env.example` carries only a placeholder. `/api/health` reports whether one
+is set, never what it is. Recovery, in order:
+
+1. Vercel → `gada-global-5k` → Settings → Environment Variables →
+   `RACE_OPS_PASSCODE` → reveal the value. A variable marked **Sensitive**
+   cannot be revealed to anyone — go to step 2.
+2. Set a new value, then **redeploy**. Environment variables are read at build
+   time, so until a new deployment exists the old passcode is still the live
+   one. This is the step that gets missed.
+
+**Read the error, it names the fault.** "That passcode was not accepted" is a
+**401** — a passcode *is* configured and what was typed is not it. "Race
+operations are not configured on this deployment yet" is a **503** — the
+variable is unset, which is a deploy problem, not a memory problem.
+
+Nothing needs clearing on the device: `OpsGate` verifies a code against the
+server before storing it, so a wrong one is never saved. (The localStorage key
+is `gada-race-ops`, and the "Lock this device" button clears it.)
+
+**Setting the value from a shell mangles it.** `vercel env add` with an
+unquoted string lets the shell eat `$word` as an undefined variable, so
+`$irn@g@d@` gets stored as `@g@d@`. Trailing whitespace from a paste does the
+same thing invisibly. Prefer the dashboard, and avoid `$`, backticks and `!`.
+
+### The race clock is locked until race day
+
+`src/lib/race-window.ts` refuses **wave sends, finish scans and `?seed=true`**
+with a **423** on any date other than `2026-10-03` in `America/New_York`. The
+passcode was never the whole defence: it stops strangers, not a volunteer
+testing the start screen in August. The whole calendar day is open rather than a
+window around the 9:00 gun, so no timezone slip can be what stops a wave going
+out with runners on the line. `/api/health` reports the state, and `/race/start`
+shows a banner when locked.
+
+To rehearse deliberately, set `RACE_TIMING_UNLOCKED=true` in Vercel and
+**redeploy** (env vars are read at build time), then clear the timing data and
+unset it. Health downgrades to `warn` the whole time it is on, so it cannot be
+left set by accident.
+
+**Why this was needed — a leftover wave row starts real runners silently.** A
+test tap on `/race/start` writes a `wave_starts` row. That row is permanent by
+design (sending a wave is idempotent so a double-tap cannot reset the clock),
+and both `/api/webhook` and `createRaceEntry` seed `start_time` from it *at
+insert*, so a day-of registrant still has a running clock. The consequence
+before this lock: every runner who registered into that wave afterwards appeared
+as "Running…" on the public leaderboard with nobody having touched a scanner.
+That is exactly what happened on 2026-08-05 — bib 104 showed on course from a
+July rehearsal row, and it looked like a break-in when it was the timing model
+working as written.
+
+**Clearing the timing data** (Neon SQL Editor — keeps registrations, bibs and
+paid records untouched, resets only the clock):
+
+```sql
+begin;
+delete from wave_starts;                                   -- the row that does it
+delete from scan_logs;
+delete from disputes;
+update race_entries set start_time = null, finish_time = null;
+commit;
+
+-- must all be zero / null
+select (select count(*) from wave_starts)  as waves,
+       (select count(*) from scan_logs)    as scans,
+       (select count(*) from disputes)     as disputes,
+       (select count(*) from race_entries where start_time is not null) as started;
+```
+
+Do **not** use `GET /api/race?seed=true` for this. It is the demo seeder: it
+wipes and recreates bibs 1–12 with fake finish times and leaves real entries
+alone — the opposite of what a reset needs.
+
 **Organizers are emailed on every paid registration** — runner, bib, wave, tier,
 amount, shirt size, phone, emergency contact, and the running total, with
 reply-to set to the runner. Recipients come from `ORGANIZER_EMAILS`
