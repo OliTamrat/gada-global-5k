@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireOps } from "@/lib/ops-auth";
+<<<<<<< HEAD
 import { requireRaceDay } from "@/lib/race-window";
+=======
+import { requireRaceDay, isTimingUnlocked, RACE_DAY_ISO } from "@/lib/race-window";
+>>>>>>> origin/claude/gada-global-5k-status-35dp69
 import { startWave, getWaveStatuses } from "@/lib/race";
 import { isWave } from "@/lib/waves";
 
@@ -15,7 +19,13 @@ export async function GET(req: NextRequest) {
   if (denied) return denied;
 
   try {
-    return NextResponse.json({ waves: await getWaveStatuses() });
+    // The lock state rides along so the start screen can say so up front,
+    // rather than a volunteer discovering it on the tap that matters.
+    return NextResponse.json({
+      waves: await getWaveStatuses(),
+      locked: !isTimingUnlocked(),
+      raceDay: RACE_DAY_ISO,
+    });
   } catch (error) {
     console.error("Wave status error:", error);
     return NextResponse.json({ error: "Failed to load waves" }, { status: 500 });

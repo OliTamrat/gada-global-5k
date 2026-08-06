@@ -50,6 +50,8 @@ function StartLineScreen() {
       const res = await opsFetch("/api/race/waves");
       const data = await res.json();
       if (data.waves) setStatuses(data.waves);
+      setLocked(Boolean(data.locked));
+      setRaceDay(data.raceDay ?? "");
     } catch {
       // A dropped poll on a phone at a start line is not worth surfacing.
     }
