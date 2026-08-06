@@ -57,17 +57,29 @@ function StartLineScreen() {
     }
   }, []);
 
+  const loadLockState = useCallback(async () => {
+    try {
+      const res = await opsFetch("/api/race/lock");
+      const data = await res.json();
+      setLocked(Boolean(data.locked));
+      setRaceDay(data.raceDay ?? "");
+    } catch {
+      // The API enforces this regardless of what the banner says.
+    }
+  }, []);
+
   useEffect(() => {
     const poll = setInterval(load, 5000);
     const tick = setInterval(() => setNow(Date.now()), 1000);
     // Deferred to a microtask so the first fetch does not set state during the
     // effect body itself, which react-hooks/set-state-in-effect rejects.
     void Promise.resolve().then(load);
+    void Promise.resolve().then(loadLockState);
     return () => {
       clearInterval(poll);
       clearInterval(tick);
     };
-  }, [load]);
+  }, [load, loadLockState]);
 
   async function send(wave: Wave) {
     setBusy(wave);
