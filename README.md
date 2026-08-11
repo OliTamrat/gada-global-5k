@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gada Global 5K
 
-## Getting Started
+Marketing site, registration, payment, and race-day timing system for the
+**Gada Global 5K** — an annual community race celebrating Oromo heritage and
+the Irrecha festival, run by **Gada Global Inc.**
 
-First, run the development server:
+Runners register and pay through Stripe Checkout, get a printable bib with a
+QR code, and are timed by wave rather than individually scanned at the
+start line — a volunteer sends each wave once, and every runner in it gets
+a start time backfilled from that single tap. Organizers get a live
+dashboard: paid count, revenue across registrations and merch, breakdowns
+by wave/tier/shirt size, and a CSV export.
+
+**Stack:** Next.js 16.2.9 (App Router, Turbopack), React 19, Tailwind v4,
+Stripe, Postgres via `pg`, Resend for email, `qrcode` for generated codes.
+Deployed on Vercel from `master`.
+
+> This Next.js version has breaking changes from most training data — see
+> `AGENTS.md` before writing framework code.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). `npm run db:setup`
+applies `schema.sql` to whatever `DATABASE_URL` points at (idempotent).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`docs/` is this product's OKM (Olink Knowledge Management) tree —
+`overview.md`, `architecture.md`, `runbooks/`, `integrations/`, and
+`decisions/` (ADRs, including two marked *provisional* because they came
+from timeout defaults and still need organizer confirmation — see
+`docs/decisions/0005-timeout-default-decisions.md`). Checkable claims there
+(registration tiers, wave order, sponsor levels, ADR numbering) are graded
+against the code by `scripts/docs-truth.mjs` in CI.
 
-## Learn More
+`.claude/CLAUDE.md` is the full operational briefing — event facts,
+infrastructure status, the exact webhook and timing gotchas that have
+already cost real runners a bib once. Read it before touching Stripe,
+the race clock, or anything under `/race`.
 
-To learn more about Next.js, take a look at the following resources:
+All seven Olink products follow this same `docs/` taxonomy and aggregate
+into one searchable portal at
+[`olink-knowledge`](https://github.com/OliTamrat/olink-knowledge).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Vercel, from `master` (this repo has no `main`). Check
+`GET /api/health` after any change to secrets or environment — it reports
+database, Stripe mode, and email configuration without ever printing a
+secret.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*A product of [Olink Technologies](https://olinkgo.us).*
