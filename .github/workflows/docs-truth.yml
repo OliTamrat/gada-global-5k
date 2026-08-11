@@ -1,0 +1,16 @@
+name: docs-truth
+# This repository's first CI workflow. Deliberately tiny: no install, no
+# framework — scripts/docs-truth.mjs is plain node and greps source files,
+# so the check can never rot behind a broken dependency tree.
+on:
+  push:
+    branches: [master]
+  pull_request: {}
+jobs:
+  docs-truth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/docs-truth.mjs

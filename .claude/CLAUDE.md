@@ -6,6 +6,16 @@
 
 ---
 
+## Durable knowledge — OKM
+
+**`docs/` follows the OKM taxonomy (see `docs/README.md`):** runbooks,
+per-integration failure modes, and `docs/decisions/` — ADRs, including two
+recorded as *provisional* because they came from timeout defaults and need
+organizer confirmation. When a session makes a real decision, end it by
+appending an ADR. Checkable claims (registration tiers, wave order, sponsor
+levels, ADR numbering) are enforced by `scripts/docs-truth.mjs`, run by
+`.github/workflows/docs-truth.yml` — this repo's first CI workflow.
+
 ## What this is
 
 Marketing site, registration, and race-day timing system for the **Gada Global 5K**, an
