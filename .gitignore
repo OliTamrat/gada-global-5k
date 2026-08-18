@@ -43,3 +43,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated Word documents — outputs of design/letter/build.mjs. A committed
+# .docx is a second copy of the offer, free to drift from src/lib/sponsors.ts.
+Gada-Global-Letterhead*.docx
+Gada-Global-5K-Sponsor-Letter*.docx
+
+# Generated brochure artefacts — outputs of design/trifold/build.mjs
+design/trifold/brochure.html
+design/trifold/*.pdf
+design/trifold/*.png
+design/trifold/*.docx
+
+# Generated letterhead artefacts — outputs of design/letterhead/build.mjs
+design/letterhead/*.html
+design/letterhead/*.pdf
+design/letterhead/*.png

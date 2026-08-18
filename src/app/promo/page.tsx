@@ -100,6 +100,29 @@ export default function PromoPage() {
           ))}
         </div>
 
+        {/* The other printable thing in the kit. It is not a QR code, so it
+            sits outside the grid rather than being forced into a card that
+            has nowhere to put an image. */}
+        <div className="bg-white rounded-2xl p-7 border border-charcoal/8 mb-6">
+          <h2 className="font-bold text-[18px] tracking-tight mb-2">Sponsor Letter</h2>
+          <p className="text-[15px] leading-[1.75] text-charcoal/70 mb-5 max-w-[620px]">
+            A letterheaded approach letter for businesses you are asking to
+            sponsor the race. Fill in the business and the level, then print
+            it to sign or copy it as an email. Read the notes on that page
+            before you send one — the sponsorship prices have not been
+            confirmed yet.
+          </p>
+          <Link
+            href="/sponsors/letter"
+            className="inline-flex items-center gap-2 yellow-card rounded-lg px-6 py-2.5 font-bold text-[13px] tracking-wider uppercase no-underline hover:-translate-y-0.5 transition-transform"
+          >
+            Open the Letter
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
         <div className="bg-white rounded-2xl p-7 border border-charcoal/8 mb-10">
           <h2 className="font-bold text-[18px] tracking-tight mb-4">Using these</h2>
           <ul className="space-y-3 text-[15px] leading-[1.75] text-charcoal/70 list-none">

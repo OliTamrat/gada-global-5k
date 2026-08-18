@@ -260,14 +260,25 @@ the only place the levels and benefits are written down. The page, the
 `/api/qr/sponsors` code all read from it, so they cannot drift apart from each
 other — or from the printed flyer, as long as the file is kept in step with it.
 
-Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
-Bronze $250+.
+Four levels: **Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500** —
+confirmed by the organizers 2026-08 (ADR-0008), replacing the flyer's
+placeholder figures. Each is a minimum commitment, not the flyer's open-ended
+`+`.
 
-**The figures on the page are placeholders.** The four levels, the prices and
-the four benefits came from a *sample* sponsorship flyer used as a visual and
-structural reference — not from Gada Global's own agreed offer. Nobody has
-signed these off. Confirm the real levels, prices and benefits with the
-organizers before the page is promoted or anything is printed from it.
+**The BENEFITS are still the flyer's and still unconfirmed.** Only the prices
+were signed off. Silver and Bronze unlock the same two benefits, so a business
+has no reason to pay $1,000 rather than $500 — settle that before the page is
+promoted or anything is printed.
+
+**The sponsorship materials name no particular community** (ADR-0008). They
+describe a community road race run by Gada Global Inc., a licensed Washington DC
+company, open to runners and walkers of every age and background. The
+organizers' reasoning: some people do not want to be part of the Irrecha
+celebration, and a business being asked for money should read a welcome rather
+than a qualifier. **The rest of the site was deliberately left alone** — the
+homepage, about page, schedule, FAQ, shop copy, email footer and metadata all
+still carry the heritage framing, because taking it site-wide is a whole-brand
+decision rather than a sponsorship one.
 
 Everything is editable from `src/lib/sponsors.ts` alone: prices, level names,
 blurbs, and which levels unlock which benefits. Adding or removing a benefit
@@ -295,7 +306,7 @@ that from the benefit's tier list; nothing is hard-coded per level.
 **Two things to settle with the organizers before this is promoted widely:**
 
 1. **Silver and Bronze currently unlock exactly the same two benefits**, so
-   there is no reason to pay $500 rather than $250. This is carried over from
+   there is no reason to pay $1,000 rather than $500. This is carried over from
    the flyer deliberately rather than silently patched. Moving
    `Logo on website & social media` down to include `silver` fixes it in one
    line and costs nothing to give.
@@ -304,6 +315,166 @@ that from the benefit's tier list; nothing is hard-coded per level.
    neither of which is this project's domain. The code uses
    `info@gadaglobalrun.com`. Whichever is right, the two must be reconciled
    before the flyer goes out or sponsor enquiries will land nowhere.
+
+### The approach letter — `/sponsors/letter`
+
+There is **no brochure in this repo**, and there never was. The only outreach
+documents are the three proposals (`GADA_GLOBAL_5K_BUSINESS_PROPOSAL.md`,
+`public/proposal.html`, `proposal/index.html`), and all three still carry the
+**old venue and the 7:30 AM start** — deliberately untouched because they may
+already be with sponsors. Do not point anyone at them as current.
+
+`/sponsors/letter` is the letterheaded approach letter for businesses: fill in
+the business, the contact and the level, then print it to sign or copy it as an
+email. It is linked from `/promo` and is `noindex`, like the rest of the
+organizer tooling.
+
+**It is generated, not a template** (ADR-0007). Nothing about the race is
+retyped into it: the date, venue and times come from `EVENT` in
+`src/lib/email.ts`, the levels and benefits from `src/lib/sponsors.ts`. A
+`.docx` or a markdown draft would be a fourth document free to go stale the way
+the three proposals did.
+
+Three things that are load-bearing rather than incidental:
+
+- **The benefit list is derived, never described.** The first draft wrote it as
+  prose — "the higher levels add your logo to the race t-shirt" — which is true
+  in a Bronze letter and false in a Gold one. `letterBenefits()` reads
+  `SPONSOR_BENEFITS`, lists what the level includes, and turns each benefit it
+  does not reach into a signpost naming the cheapest level that does.
+- **It fits on one sheet, and that is measured**, not assumed. Print margins are
+  0.75in at the sides and 0.55in top and bottom, built from the 0.4in `@page`
+  plus the sheet's own print padding. The tightest variant (all four levels, a
+  long business name) leaves 0.37in spare. Adding a paragraph means re-checking
+  it in a browser under print media — the sheet's own height is the check.
+- **The brand is on the sheet, and it has to survive the printer.** A green-into-gold
+  rule under the masthead, the event and date as a gold eyebrow, a gold mark on
+  the subject line, and the benefits in a cream panel with a gold rail and deep-green
+  checks. All of it is `background`, and **Chrome drops backgrounds from a print
+  job by default** — `print-color-adjust: exact` on `.letter-sheet` is what stops
+  the branding silently not existing on paper. Colour is accent only, never
+  carrying meaning on its own, so a black-and-white office printer degrades it to
+  greys rather than losing information.
+- **The screen-only warning must never print.** It names the unresolved
+  Silver/Bronze benefit collision and the three things deliberately left out of
+  the letter: how many runners to expect, the artwork deadline, and a postal
+  address on the letterhead (it reads "Washington, DC" — the venue address is
+  the park's, not the organization's).
+
+### The Word documents — `design/letter/`
+
+The page prints and copies; **`design/letter/build.mjs` produces the two `.docx`
+files an organizer actually attaches to an email.** `--blank` gives the
+letterhead on its own — the file that outlives this letter, so the next
+thank-you or permit cover note starts from the right masthead — and the default
+gives the sponsorship draft. `--tier gold` proposes a named level.
+
+Same rule as the page: **the offer is not typed into the script.** It parses
+`src/lib/sponsors.ts` and `src/lib/email.ts`, and every extractor throws if it
+matches nothing, so a rename fails the build loudly rather than shipping a
+letter with gaps. Outputs are gitignored — a committed `.docx` is a second copy
+of the offer free to drift from the first, which is exactly how the three
+proposals went stale.
+
+`docx` is installed with `--no-save --no-package-lock`; it is not a dependency
+of the site. **LibreOffice cannot render these in the agent sandbox** — only
+`libreoffice-core` is present, with no writer module, so `soffice --convert-to
+pdf` fails on any file at all, including a plain `.txt`. Verify with
+`docx-preview` driven in Chromium instead.
+
+### The printed letterhead — `design/letterhead/`
+
+`build.mjs` emits `letterhead.html` and `letter.html`; `render.mjs` turns them
+into **`Gada-Global-Letterhead-<palette>.pdf`** and
+**`Gada-Global-5K-Sponsor-Letter-<palette>.pdf`**.
+Same palette and faces as the tri-fold, so the leaflet a business is handed and
+the letter it is posted look like one organization.
+
+**The PDF and the `.docx` are not the same request** and both exist on purpose:
+the `.docx` under `design/letter/` is for *editing*, the PDF here is for
+*printing*. Asking for "a printable letterhead" and being handed a Word file
+is a fair complaint.
+
+`render.mjs` fails the build if either sheet runs past one page — a letterhead
+that spills onto a second sheet carrying only a footer is the worst-looking way
+for it to break, and it is invisible until somebody prints it.
+
+### The printed tri-fold — `design/trifold/`
+
+**The leaflet a business is handed across a counter.** US Letter landscape, two
+sides, three panels each, no bleed so it prints on an office printer. `build.mjs`
+emits the HTML, `render.mjs` turns it into a vector PDF and two 288dpi PNGs.
+
+Panel order, left to right on the flat sheet — the thing that is easy to get
+wrong and expensive to get wrong:
+
+| Side | Left | Middle | Right |
+|---|---|---|---|
+| Outside | Back cover (contact, levels, QR) | At a glance | **Front cover** |
+| Inside | Overview | The morning | Sponsorship levels |
+
+Roll fold, so the tuck-in panel is cut fractionally narrower. Every panel is
+self-contained: letting a block span two panels uses the spread better and puts
+a sentence, or a table column, on a crease.
+
+Same rule as everything else under `design/` — **the offer is not typed in.**
+`design/lib/source.mjs` parses `src/lib/sponsors.ts` and `src/lib/email.ts`, and
+throws when an extractor matches nothing. The levels table is derived from
+`SPONSOR_BENEFITS`, never described.
+
+**`render.mjs` fails the build on overflow or anything crossing a fold**, which
+is what makes it safe to send to a printer. Decorative shapes are exempt —
+they are meant to run off the edge, are marked `aria-hidden`, and the check
+hides them before measuring. With them visible the disc behind the schedule
+reported 125px of overflow on a panel that was two-thirds empty.
+
+**The palette is a PARAMETER, and two are live.** `design/lib/palette.mjs`
+holds both; every build script takes `--palette navy` or `--palette ink` and
+produces the whole set either way, and every output carries the palette in its
+filename so two files called `brochure.pdf` cannot end up in one downloads
+folder with the wrong one going to the printer.
+
+- **navy** — midnight navy and amber, the palette of the proposal decks this
+  work was modelled on. Cover headline is orange over amber.
+- **ink** — near-black and a single amber, matching gadaglobalrun.com exactly,
+  so print and web are the same. Cover headline is white over amber.
+
+Adding a third is this file and nothing else: the build scripts use token
+*names* (`field`, `d1`, `d2`, `accent`, `accentInk`, `onDark`…), never hex.
+
+**It was chosen, not reasoned to, and that is the transferable part.** Two
+attempts missed — the site's charcoal read "heavy and dull", and a gold field
+with red and green display type read worse. The third attempt was four covers
+rendered side by side and one question, and it settled in a single message.
+When a colour note comes back twice, stop arguing from contrast ratios and
+render options.
+
+Navy carries the front cover, the back cover and the schedule panel; cream
+carries the rest, alternating so no two adjacent panels share a field and the
+folds stay legible. The QR sits on a white card rather than inverted — a
+light-on-dark code is legal in the spec and unreliable on a cheap phone camera
+in poor light.
+
+**Two variable faces, and each is doing a job the other cannot.** Fraunces
+(WONK axis on, so its terminals sit off the vertical) carries the section
+titles and the organization's name; Bricolage Grotesque at `wdth` 75 carries
+the cover words and the table headers. Anton was the first choice and got the
+note "lacking creativity" — fairly, it is the default poster condensed. But the
+cover still needs a CONDENSED face: "SPONSORSHIP" set in Fraunces measures
+about 300pt in a 216pt column and ran clean off the panel. Bricolage narrow is
+what fits and still has character. Both are vendored under
+`design/trifold/fonts/` and embedded as data URIs.
+
+**The width check earned its keep here.** A long unbreakable word overflows its
+BOX while the box stays inside the panel, so comparing rectangles alone missed
+the cover headline running off the edge entirely — `scrollWidth > clientWidth`
+is what catches it, and it then caught the levels table and the "PLATINUM"
+header too.
+
+> **Note for whoever merges this:** PR #32 adds a *different* tri-fold at
+> `design/brochure/`, generated from Python. This one lives at
+> `design/trifold/` so the two do not collide on a filename. Pick one before
+> either is printed — two leaflets is how the offer ends up stated twice.
 
 Enquiries are **email, not checkout** — deliberately. A sponsor has to send
 logo artwork and agree a printing deadline, so a pay-now button would just

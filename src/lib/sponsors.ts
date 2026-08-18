@@ -1,11 +1,13 @@
 /**
  * Sponsorship levels and what each one actually buys.
  *
- * PLACEHOLDER FIGURES. The four levels, the prices and the four benefits were
- * taken from a sample sponsorship flyer used as a reference, not from Gada
- * Global's own agreed offer. They are plausible and internally consistent, and
- * the page works, but nobody has signed off on them — confirm the real levels,
- * prices and benefits with the organizers before this is promoted or printed.
+ * PRICES CONFIRMED by the organizers, 2026-08: Platinum $5,000, Gold $2,500,
+ * Silver $1,000, Bronze $500. They replace the placeholder figures carried
+ * over from a sample flyer (ADR-0006), which nobody had signed off on.
+ *
+ * The BENEFITS are still the flyer's four and still unconfirmed — in
+ * particular Silver and Bronze unlock the same two, so there is no reason to
+ * pay $1,000 rather than $500. Settle that before this is promoted widely.
  *
  * Everything is editable from this one file. The /sponsors page, the about-page
  * section, the enquiry links and the QR target all read from it, so changing a
@@ -23,7 +25,7 @@ export type SponsorTierId = "platinum" | "gold" | "silver" | "bronze";
 export interface SponsorTier {
   id: SponsorTierId;
   name: string;
-  /** Display amount. Every level is a floor, not a fixed price. */
+  /** Display amount. Each level is a minimum commitment, not a ceiling. */
   amount: string;
   /** One line on who the level suits. */
   blurb: string;
@@ -40,28 +42,28 @@ export const SPONSOR_TIERS: SponsorTier[] = [
   {
     id: "platinum",
     name: "Platinum",
-    amount: "$2,000+",
+    amount: "$5,000",
     blurb: "Everywhere the race puts a name: the shirt, the banner, the site and the stage.",
     weight: 1,
   },
   {
     id: "gold",
     name: "Gold",
-    amount: "$1,000+",
+    amount: "$2,500",
     blurb: "Your logo on the shirt runners keep and wear long after race day.",
     weight: 0.7,
   },
   {
     id: "silver",
     name: "Silver",
-    amount: "$500+",
+    amount: "$1,000",
     blurb: "On-site presence from packet pickup through the awards.",
     weight: 0.46,
   },
   {
     id: "bronze",
     name: "Bronze",
-    amount: "$250+",
+    amount: "$500",
     blurb: "A local business standing visibly behind the race.",
     weight: 0.3,
   },
