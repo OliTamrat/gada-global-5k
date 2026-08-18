@@ -371,6 +371,22 @@ of the site. **LibreOffice cannot render these in the agent sandbox** — only
 pdf` fails on any file at all, including a plain `.txt`. Verify with
 `docx-preview` driven in Chromium instead.
 
+### The printed letterhead — `design/letterhead/`
+
+`build.mjs` emits `letterhead.html` and `letter.html`; `render.mjs` turns them
+into **`Gada-Global-Letterhead.pdf`** and **`Gada-Global-5K-Sponsor-Letter.pdf`**.
+Same palette and faces as the tri-fold, so the leaflet a business is handed and
+the letter it is posted look like one organization.
+
+**The PDF and the `.docx` are not the same request** and both exist on purpose:
+the `.docx` under `design/letter/` is for *editing*, the PDF here is for
+*printing*. Asking for "a printable letterhead" and being handed a Word file
+is a fair complaint.
+
+`render.mjs` fails the build if either sheet runs past one page — a letterhead
+that spills onto a second sheet carrying only a footer is the worst-looking way
+for it to break, and it is invisible until somebody prints it.
+
 ### The printed tri-fold — `design/trifold/`
 
 **The leaflet a business is handed across a counter.** US Letter landscape, two
@@ -400,11 +416,29 @@ they are meant to run off the edge, are marked `aria-hidden`, and the check
 hides them before measuring. With them visible the disc behind the schedule
 reported 125px of overflow on a panel that was two-thirds empty.
 
-The cover field is **charcoal, not the deep green**, because Oromo red on dark
-green does not reach 3:1 and the cover depends on that pair. Three fields
-alternate across the panels so no two neighbours share a colour and the folds
-stay legible. Anton and DM Sans are vendored under `design/trifold/fonts/` and
-embedded as data URIs.
+**The palette is gold, emerald and cream — no black fields anywhere**, and that
+is a correction rather than a preference. The first pass put the cover and two
+panels on the site's charcoal; the verdict was "heavy and dull" and it was
+fair. Gold carries the cover, deep green the two dark panels, cream the rest,
+so three fields alternate and no two neighbours share a colour — which is what
+keeps the folds legible. Oromo red and emerald are the cover's display pair;
+both clear 3:1 on gold, which charcoal-based schemes could not manage with red.
+
+**Two variable faces, and each is doing a job the other cannot.** Fraunces
+(WONK axis on, so its terminals sit off the vertical) carries the section
+titles and the organization's name; Bricolage Grotesque at `wdth` 75 carries
+the cover words and the table headers. Anton was the first choice and got the
+note "lacking creativity" — fairly, it is the default poster condensed. But the
+cover still needs a CONDENSED face: "SPONSORSHIP" set in Fraunces measures
+about 300pt in a 216pt column and ran clean off the panel. Bricolage narrow is
+what fits and still has character. Both are vendored under
+`design/trifold/fonts/` and embedded as data URIs.
+
+**The width check earned its keep here.** A long unbreakable word overflows its
+BOX while the box stays inside the panel, so comparing rectangles alone missed
+the cover headline running off the edge entirely — `scrollWidth > clientWidth`
+is what catches it, and it then caught the levels table and the "PLATINUM"
+header too.
 
 > **Note for whoever merges this:** PR #32 adds a *different* tri-fold at
 > `design/brochure/`, generated from Python. This one lives at

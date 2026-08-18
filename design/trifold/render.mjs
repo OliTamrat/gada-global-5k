@@ -73,6 +73,14 @@ const overflow = await page.evaluate(() => {
         bad.push(`${panel.className} — <${el.tagName.toLowerCase()} class="${el.className}"> crosses the fold`);
         break;
       }
+      // A long unbreakable word overflows its BOX while the box itself stays
+      // inside the panel, so comparing rectangles alone missed the cover
+      // headline running off the edge entirely. scrollWidth is what catches
+      // it, and it is the failure that would have reached the printer.
+      if (el.scrollWidth > el.clientWidth + 1 && el.clientWidth > 0) {
+        bad.push(`${panel.className} — <${el.tagName.toLowerCase()} class="${el.className}"> text is ${el.scrollWidth - el.clientWidth}px wider than its box`);
+        break;
+      }
     }
   }
 

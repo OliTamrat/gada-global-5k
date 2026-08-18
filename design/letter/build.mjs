@@ -50,15 +50,20 @@ import {
 
 /* ------------------------------------------------------------ the brand */
 
-// The site's own tokens, from src/app/globals.css. Word wants them without
-// the hash.
-const GOLD = "E8B930";
-const GOLD_DIM = "C49B20";
-const GREEN = "1B5E20";
-const CHARCOAL = "141210";
-const INK_SOFT = "5A544C";
-const INK_MUTED = "8A8378";
-const CREAM = "FAF6EE";
+// The printed pieces' palette, matching design/trifold and design/letterhead
+// so the .docx a business is emailed and the PDF it is handed are recognisably
+// one organization. Word wants them without the hash.
+//
+// Warmer and lighter than the first pass, which used the site's charcoal and
+// read as heavy on paper. Emerald carries the name and the checks, gold the
+// rules and labels; nothing here is a black field.
+const GOLD = "EFB01E";
+const GOLD_DEEP = "D99A0C";
+const GREEN = "0E4F35";
+const CHARCOAL = "1A1512";
+const INK_SOFT = "5A5048";
+const INK_MUTED = "96897A";
+const CREAM = "FFFBF2";
 
 // US Letter in DXA (1440 = 1in). docx-js defaults to A4, which would reflow
 // the whole letter and is invisible until it prints wrong.
@@ -136,7 +141,7 @@ function letterhead(event, domain) {
             new Paragraph({
               spacing: { before: 60, after: 40 },
               children: [
-                new TextRun({ text: event.organization, size: 30, bold: true, color: CHARCOAL, font: "Calibri" }),
+                new TextRun({ text: event.organization, size: 30, bold: true, color: GREEN, font: "Calibri" }),
               ],
             }),
             new Paragraph({
@@ -149,7 +154,7 @@ function letterhead(event, domain) {
                   text: `${event.name}  ·  ${event.date.replace(/^[A-Za-z]+,\s*/, "")}`.toUpperCase(),
                   size: 15,
                   bold: true,
-                  color: GOLD_DIM,
+                  color: GOLD_DEEP,
                   characterSpacing: 30,
                   font: "Calibri",
                 }),
@@ -158,7 +163,7 @@ function letterhead(event, domain) {
           ]),
           cell(3880, [
             right("Washington, DC", INK_SOFT),
-            right(event.supportEmail, CHARCOAL, true),
+            right(event.supportEmail, GREEN, true),
             right(domain, INK_SOFT),
           ]),
         ],
@@ -216,7 +221,7 @@ function benefitPanel({ tier, tiers, benefits, domain }) {
           text: (tier ? `${tier.name} includes` : "Every level includes").toUpperCase(),
           size: 16,
           bold: true,
-          color: GOLD_DIM,
+          color: GOLD_DEEP,
           characterSpacing: 24,
           font: "Calibri",
         }),

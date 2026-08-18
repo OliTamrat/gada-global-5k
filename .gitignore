@@ -53,3 +53,8 @@ Gada-Global-5K-Sponsor-Letter*.docx
 design/trifold/brochure.html
 design/trifold/*.pdf
 design/trifold/*.png
+
+# Generated letterhead artefacts — outputs of design/letterhead/build.mjs
+design/letterhead/*.html
+design/letterhead/*.pdf
+design/letterhead/*.png
