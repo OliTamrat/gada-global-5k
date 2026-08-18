@@ -36,7 +36,15 @@ Three properties are load-bearing rather than incidental:
   the page and the enquiry email together.
 - **It fits on one sheet, and that is measured.** Every variant is checked
   against a US Letter page in a browser under print media; the tightest
-  (all four levels, a long business name) leaves 0.28in spare.
+  (all four levels, a long business name) leaves 0.37in spare.
+- **The brand is on the sheet, and it prints.** Green-into-gold rule, gold
+  eyebrow, gold subject mark, cream benefit panel with a gold rail and
+  deep-green checks — the site's own palette, so a business that reads the
+  letter and then visits the page sees one organization. All of it is
+  `background`, which Chrome drops from a print job unless told otherwise;
+  `print-color-adjust: exact` is what stops the branding silently not
+  existing on paper. Colour is accent only and never carries meaning alone,
+  so black-and-white printing degrades it rather than breaking it.
 - **Nothing is stored.** Composed, printed or copied, gone. A page that kept
   a list of every business approached would be holding outreach records
   nobody asked it to hold.

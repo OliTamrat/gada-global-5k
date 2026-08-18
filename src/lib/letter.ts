@@ -78,17 +78,15 @@ export function subjectLine(tier?: SponsorTier): string {
 /**
  * The body, paragraph by paragraph.
  *
- * Five short paragraphs and a list, which is about as long as a cold letter to
+ * Four short paragraphs and a list, which is about as long as a cold letter to
  * a small business can be before it stops being read — and it is measured, not
  * guessed: the sheet is checked against a US Letter page so every variant fits
  * on ONE side. Each paragraph does one job: what the event is, why the morning
- * is worth being part of, what is being asked for, what the shirt is worth,
- * what happens next.
+ * is worth being part of, what is being asked for, what happens next.
  */
 export function letterParagraphs(fields: LetterFields): string[] {
   const { businessName, tier } = fields;
   const business = orPlaceholder(businessName, "Business name");
-  const site = siteUrl().replace(/^https?:\/\//, "");
 
   const levelSentence = tier
     ? `We would like to invite ${business} to sponsor the race at the ${tier.name} level, ${tier.amount}. ${tier.blurb}`
@@ -106,8 +104,6 @@ export function letterParagraphs(fields: LetterFields): string[] {
 
     levelSentence,
 
-    `A shirt is not a flyer: the race t-shirt is worn around Washington DC long after October. Every level, side by side, is at ${site}/sponsors.`,
-
     `If this is something ${business} would consider, a reply to this letter is all it takes to start. We will confirm the amount, send you the artwork specification and the printing deadline, and you will hear from us again after race day with photographs of where your name appeared. If you would rather talk it through first, write to ${SPONSOR_EMAIL} and we will call you.`,
   ];
 }
@@ -118,6 +114,18 @@ export interface LetterBenefits {
   included: string[];
   /** Benefits the proposed level does not reach, each with the level that does. */
   upsell: Array<{ label: string; tierName: string; amount: string }>;
+  /**
+   * The line under the list. It used to be a paragraph of its own and cost
+   * three lines of a page that has to stay one sheet; attached to the list it
+   * is the caption to the thing it is about, which is also where it reads
+   * better.
+   */
+  note: string;
+}
+
+function benefitNote(): string {
+  const site = siteUrl().replace(/^https?:\/\//, "");
+  return `A shirt is not a flyer: the race t-shirt is worn around Washington DC long after October. Every level side by side is at ${site}/sponsors.`;
 }
 
 /**
@@ -148,6 +156,7 @@ export function letterBenefits(tier?: SponsorTier): LetterBenefits {
         const by = unlockedBy(b);
         return { label: b.label, tierName: by.name, amount: by.amount };
       }),
+      note: benefitNote(),
     };
   }
 
@@ -162,6 +171,7 @@ export function letterBenefits(tier?: SponsorTier): LetterBenefits {
         return { label: b.label, tierName: by.name, amount: by.amount };
       },
     ),
+    note: benefitNote(),
   };
 }
 
@@ -202,7 +212,7 @@ export function letterPlainText(fields: LetterFields): string {
       for (const u of benefits.upsell) {
         lines.push(`  - ${u.label} — not at this level; ${u.tierName}, ${u.amount}`);
       }
-      lines.push("");
+      lines.push("", benefits.note, "");
     }
   });
 

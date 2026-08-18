@@ -332,10 +332,18 @@ Three things that are load-bearing rather than incidental:
   `SPONSOR_BENEFITS`, lists what the level includes, and turns each benefit it
   does not reach into a signpost naming the cheapest level that does.
 - **It fits on one sheet, and that is measured**, not assumed. Print margins are
-  0.75in at the sides and 0.6in top and bottom, built from the 0.4in `@page`
+  0.75in at the sides and 0.55in top and bottom, built from the 0.4in `@page`
   plus the sheet's own print padding. The tightest variant (all four levels, a
-  long business name) leaves 0.28in spare. Adding a paragraph means re-checking
+  long business name) leaves 0.37in spare. Adding a paragraph means re-checking
   it in a browser under print media — the sheet's own height is the check.
+- **The brand is on the sheet, and it has to survive the printer.** A green-into-gold
+  rule under the masthead, the event and date as a gold eyebrow, a gold mark on
+  the subject line, and the benefits in a cream panel with a gold rail and deep-green
+  checks. All of it is `background`, and **Chrome drops backgrounds from a print
+  job by default** — `print-color-adjust: exact` on `.letter-sheet` is what stops
+  the branding silently not existing on paper. Colour is accent only, never
+  carrying meaning on its own, so a black-and-white office printer degrades it to
+  greys rather than losing information.
 - **The screen-only warning must never print.** It names the ADR-0006 price
   problem and the three things deliberately left out of the letter: how many
   runners to expect, the artwork deadline, and a postal address on the

@@ -29,43 +29,70 @@ function displayDomain(): string {
   return SITE.replace(/^https?:\/\//, "");
 }
 
+/**
+ * "October 3, 2026", not "Saturday, October 3, 2026".
+ *
+ * The weekday is worth having in the body, where a business is picturing the
+ * morning. In a tracked-out uppercase eyebrow it is four wasted words that
+ * wrapped the line in two on screen — and a masthead that wraps stops being a
+ * masthead. The body still says Saturday.
+ */
+function dateWithoutWeekday(): string {
+  return EVENT.date.replace(/^[A-Za-z]+,\s*/, "");
+}
+
 export function Letterhead() {
   return (
-    <header className="flex items-start justify-between gap-6 pb-4 border-b-2 border-charcoal">
-      <div className="flex items-center gap-4">
-        <Image
-          src="/images/brand/gada-global-logo.png"
-          alt=""
-          width={64}
-          height={64}
-          className="w-12 h-12 md:w-14 md:h-14 object-contain shrink-0"
-          priority
-        />
-        <div>
-          <p className="font-[family-name:var(--font-heading)] text-[20px] md:text-[22px] font-bold tracking-tight text-charcoal leading-none">
-            {EVENT.organization}
-          </p>
-          <p className="text-[12px] tracking-[3px] uppercase text-charcoal/55 mt-1.5">
-            {EVENT.name}
-          </p>
+    <header>
+      <div className="flex items-start justify-between gap-6 pb-3.5">
+        <div className="flex items-center gap-4">
+          <Image
+            src="/images/brand/gada-global-logo.png"
+            alt=""
+            width={64}
+            height={64}
+            className="w-12 h-12 md:w-14 md:h-14 object-contain shrink-0"
+            priority
+          />
+          <div>
+            <p className="font-[family-name:var(--font-heading)] text-[21px] md:text-[23px] font-bold tracking-tight text-charcoal leading-none">
+              {EVENT.organization}
+            </p>
+            {/* The event and its date, in the brand's gold. This is the only
+                place on the sheet where the race is named before the reader
+                reaches the body, and a business filing the letter reads the
+                date off the top. */}
+            <p className="text-[10.5px] font-bold tracking-[2.2px] uppercase text-gold-dim mt-1.5">
+              {EVENT.name} · {dateWithoutWeekday()}
+            </p>
+          </div>
+        </div>
+
+        {/* Right-aligned contact block: where a recipient's eye goes for the
+            reply address, and where it sits on almost every business letter
+            they have ever received.
+
+            It says "Washington, DC" and NOT the venue address. A letterhead's
+            address block is the sender's, and printing the Rock Creek Park
+            Tennis Center there tells a business to post its reply to a park
+            building the organization does not occupy. Gada Global Inc. has no
+            mailing address recorded anywhere in this repo; when it has one, it
+            goes here, and the city line comes out. */}
+        <div className="text-right text-[11.5px] leading-[1.7] text-charcoal/70 shrink-0">
+          <p>Washington, DC</p>
+          <p className="mt-1.5 font-semibold text-charcoal">{EVENT.supportEmail}</p>
+          <p>{displayDomain()}</p>
         </div>
       </div>
 
-      {/* Right-aligned contact block: where a recipient's eye goes for the
-          reply address, and where it sits on almost every business letter
-          they have ever received.
-
-          It says "Washington, DC" and NOT the venue address. A letterhead's
-          address block is the sender's, and printing the Rock Creek Park
-          Tennis Center there tells a business to post its reply to a park
-          building the organization does not occupy. Gada Global Inc. has no
-          mailing address recorded anywhere in this repo; when it has one, it
-          goes here, and the city line comes out. The venue and the date are
-          in the letter's own footer, which is where an event belongs. */}
-      <div className="text-right text-[11.5px] leading-[1.7] text-charcoal/70 shrink-0">
-        <p>Washington, DC</p>
-        <p className="mt-1.5 font-semibold text-charcoal">{EVENT.supportEmail}</p>
-        <p>{displayDomain()}</p>
+      {/* The brand rule. Two segments rather than one flat bar: the deep green
+          is the race's own colour and the gold is what the site accents with,
+          and the short-green-into-long-gold proportion is what stops it
+          reading as a banner. 3px so it survives a cheap office printer, and
+          it degrades to two greys in black and white rather than disappearing. */}
+      <div className="flex h-[3px] w-full" aria-hidden>
+        <span className="w-[22%] bg-green-deep" />
+        <span className="flex-1 bg-gold" />
       </div>
     </header>
   );
@@ -97,11 +124,11 @@ export function LetterSignOff({ senderName, senderTitle }: {
   senderTitle: string;
 }) {
   return (
-    <div className="mt-5 letter-signoff">
+    <div className="mt-4 letter-signoff">
       <p className="text-[13px] text-charcoal">With thanks,</p>
       {/* Room for an actual pen. A printed letter that leaves nowhere to sign
           reads as a mailshot, which is the opposite of the point. */}
-      <div className="h-10" aria-hidden />
+      <div className="h-9" aria-hidden />
       <p className="text-[13px] font-bold text-charcoal">{senderName}</p>
       <p className="text-[12.5px] text-charcoal/70">{senderTitle}</p>
       <p className="text-[12.5px] text-charcoal/70">{EVENT.organization}</p>

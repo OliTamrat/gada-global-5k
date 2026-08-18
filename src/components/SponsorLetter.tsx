@@ -150,7 +150,8 @@ export function SponsorLetter({ today }: { today: string }) {
           {orPlaceholder(businessName, "Business name")}
         </p>
 
-        <p className="font-[family-name:var(--font-heading)] text-[14.5px] font-bold tracking-tight text-charcoal mt-4">
+        <p className="font-[family-name:var(--font-heading)] text-[14.5px] font-bold tracking-tight text-charcoal mt-4 flex items-baseline gap-2">
+          <span className="w-2 h-2 bg-gold shrink-0 translate-y-[-1px]" aria-hidden />
           {subjectLine(tier)}
         </p>
 
@@ -193,14 +194,23 @@ function BenefitList({
   benefits: ReturnType<typeof letterBenefits>;
 }) {
   return (
-    <div className="pl-1">
-      <p className="text-[12px] font-bold tracking-[0.5px] text-charcoal mb-1.5">
-        {benefits.heading}:
+    // A tinted panel with a gold rail, not a bare list. This is the part a
+    // business owner scans for and reads back to you on the phone, so it is
+    // the one block on the sheet that earns being set apart — and the cream
+    // and gold are the site's own, so the letter and the page look like one
+    // organization.
+    <div className="bg-cream border-l-[3px] border-gold rounded-r-md px-4 py-3">
+      <p className="text-[11px] font-bold tracking-[1.8px] uppercase text-gold-dim mb-2">
+        {benefits.heading}
       </p>
       <ul className="space-y-1">
         {benefits.included.map((label) => (
-          <li key={label} className="flex gap-2.5 text-[12.5px] leading-[1.6] text-charcoal">
-            <span className="w-1 h-1 rounded-full bg-charcoal mt-[7px] shrink-0" aria-hidden />
+          <li key={label} className="flex gap-2.5 text-[12.5px] leading-[1.55] text-charcoal">
+            {/* A check, not a bullet: it says "yes, included" on its own,
+                which is what makes the muted rows below unambiguous. */}
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" className="mt-[4px] shrink-0" aria-hidden>
+              <path d="M3 8.3l3.2 3.2L13 4.6" stroke="#1B5E20" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             {label}
           </li>
         ))}
@@ -209,17 +219,22 @@ function BenefitList({
             /sponsors accordion follows, so the letter and the page make the
             same argument. */}
         {benefits.upsell.map((u) => (
-          <li key={u.label} className="flex gap-2.5 text-[12.5px] leading-[1.6] text-charcoal/55">
-            <span className="w-1 h-1 rounded-full bg-charcoal/35 mt-[7px] shrink-0" aria-hidden />
+          <li key={u.label} className="flex gap-2.5 text-[12.5px] leading-[1.55] text-charcoal/50">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" className="mt-[4px] shrink-0" aria-hidden>
+              <path d="M4 8h8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+            </svg>
             <span>
               {u.label}{" "}
-              <span className="whitespace-nowrap">
+              <span className="whitespace-nowrap font-semibold text-charcoal/65">
                 — {u.tierName}, {u.amount}
               </span>
             </span>
           </li>
         ))}
       </ul>
+      <p className="text-[11px] leading-[1.5] text-charcoal/60 mt-2.5 pt-2 border-t border-charcoal/10">
+        {benefits.note}
+      </p>
     </div>
   );
 }
