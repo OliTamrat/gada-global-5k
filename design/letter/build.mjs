@@ -54,16 +54,16 @@ import {
 // so the .docx a business is emailed and the PDF it is handed are recognisably
 // one organization. Word wants them without the hash.
 //
-// Warmer and lighter than the first pass, which used the site's charcoal and
-// read as heavy on paper. Emerald carries the name and the checks, gold the
-// rules and labels; nothing here is a black field.
-const GOLD = "EFB01E";
-const GOLD_DEEP = "D99A0C";
-const GREEN = "0E4F35";
-const CHARCOAL = "1A1512";
-const INK_SOFT = "5A5048";
-const INK_MUTED = "96897A";
-const CREAM = "FFFBF2";
+// Midnight navy and amber, chosen from a four-way comparison after two
+// guesses missed. GREEN is a legacy name for the dark tone and now holds the
+// navy — renaming it would touch every call site for no behavioural gain.
+const GOLD = "F08A24";
+const GOLD_DEEP = "B4630C";
+const GREEN = "131C3A";
+const CHARCOAL = "16182A";
+const INK_SOFT = "4C4F62";
+const INK_MUTED = "8A8D9C";
+const CREAM = "FAF7F0";
 
 // US Letter in DXA (1440 = 1in). docx-js defaults to A4, which would reflow
 // the whole letter and is invisible until it prints wrong.

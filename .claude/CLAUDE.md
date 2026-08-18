@@ -416,13 +416,24 @@ they are meant to run off the edge, are marked `aria-hidden`, and the check
 hides them before measuring. With them visible the disc behind the schedule
 reported 125px of overflow on a panel that was two-thirds empty.
 
-**The palette is gold, emerald and cream — no black fields anywhere**, and that
-is a correction rather than a preference. The first pass put the cover and two
-panels on the site's charcoal; the verdict was "heavy and dull" and it was
-fair. Gold carries the cover, deep green the two dark panels, cream the rest,
-so three fields alternate and no two neighbours share a colour — which is what
-keeps the folds legible. Oromo red and emerald are the cover's display pair;
-both clear 3:1 on gold, which charcoal-based schemes could not manage with red.
+**The palette is midnight navy and amber, and it was CHOSEN, not reasoned to.**
+Two attempts missed — the site's charcoal read "heavy and dull", and a
+gold field with red and green display type read worse. The third attempt was
+four covers rendered side by side and a question; navy + amber won. It is also
+the palette of the proposal decks this leaflet was modelled on, which is the
+reference that should have been followed from the start rather than derived
+from the website's tokens.
+
+**When a colour note comes back twice, stop guessing and show options.** Two
+rounds of reasoning about contrast ratios produced two rejected palettes; one
+render of four covers settled it in a single message. Colour is not a thing to
+argue toward in prose.
+
+Navy carries the front cover, the back cover and the schedule panel; cream
+carries the rest, alternating so no two adjacent panels share a field and the
+folds stay legible. The QR sits on a white card rather than inverted — a
+light-on-dark code is legal in the spec and unreliable on a cheap phone camera
+in poor light.
 
 **Two variable faces, and each is doing a job the other cannot.** Fraunces
 (WONK axis on, so its terminals sit off the vertical) carries the section

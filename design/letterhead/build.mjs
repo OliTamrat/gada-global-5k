@@ -31,19 +31,21 @@ const FONTS = resolve(HERE, "../trifold/fonts");
 
 /* --------------------------------------------------------------- palette */
 
-// The tri-fold's palette, unchanged, so a business that gets the leaflet and
-// then the letter sees one organization. Gold and emerald carry the brand;
-// nothing here is a black field.
+// The tri-fold's palette, so a business that gets the leaflet and then the
+// letter sees one organization. Midnight navy carries the masthead and the
+// headings, amber the rules and labels.
 const C = {
-  gold: "#EFB01E",
-  goldDeep: "#D99A0C",
-  emerald: "#0E4F35",
-  red: "#C1121F",
-  cream: "#FFFBF2",
-  ink: "#1A1512",
-  inkSoft: "#5A5048",
-  inkMuted: "#96897A",
-  rule: "#EADFC9",
+  navy: "#131C3A",
+  orange: "#F08A24",
+  amber: "#FFD166",
+  // Amber on white is 1.8:1. This is the same hue at a weight that clears
+  // 4.5:1, for the labels on a light sheet.
+  amberInk: "#B4630C",
+  cream: "#FAF7F0",
+  ink: "#16182A",
+  inkSoft: "#4C4F62",
+  inkMuted: "#8A8D9C",
+  rule: "#E2DED2",
 };
 
 const esc = (s) =>
@@ -196,20 +198,20 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .org {
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 90;
-  font-size: 19pt; line-height: 1; letter-spacing: -.02em; color: ${C.emerald};
+  font-size: 19pt; line-height: 1; letter-spacing: -.02em; color: ${C.navy};
 }
 .eyebrow {
   font-family: "Bricolage", sans-serif; font-weight: 800;
   font-size: 7pt; letter-spacing: .18em; text-transform: uppercase;
-  color: ${C.goldDeep}; margin-top: 5px;
+  color: ${C.amberInk}; margin-top: 5px;
 }
 .mast-contact { text-align: right; font-size: 8pt; line-height: 1.7; color: ${C.inkSoft}; }
-.mast-contact .strong { font-weight: 700; color: ${C.emerald}; }
+.mast-contact .strong { font-weight: 700; color: ${C.navy}; }
 
 /* Two segments, because a border cannot be two colours. Emerald into gold. */
 .mast-rule { display: flex; height: 4px; margin-top: 12px; }
-.mast-rule span:first-child { width: 22%; background: ${C.emerald}; }
-.mast-rule span:last-child { flex: 1; background: ${C.gold}; }
+.mast-rule span:first-child { width: 22%; background: ${C.navy}; }
+.mast-rule span:last-child { flex: 1; background: ${C.orange}; }
 
 /* ---- body ---- */
 .body { flex: 1; padding-top: 22px; }
@@ -219,22 +221,22 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .subject {
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 40;
-  font-size: 11.5pt !important; letter-spacing: -.015em; color: ${C.emerald};
+  font-size: 11.5pt !important; letter-spacing: -.015em; color: ${C.navy};
   margin-bottom: 14px !important; display: flex; align-items: baseline; gap: 8px;
 }
-.mark { width: 8px; height: 8px; background: ${C.gold}; flex: 0 0 8px; }
+.mark { width: 8px; height: 8px; background: ${C.orange}; flex: 0 0 8px; }
 .salutation { margin-bottom: 14px !important; }
 .prompt { color: ${C.inkMuted} !important; }
 
 /* ---- the benefit panel ---- */
 .panel {
-  background: ${C.cream}; border-left: 4px solid ${C.gold};
+  background: ${C.cream}; border-left: 4px solid ${C.orange};
   padding: 13px 16px; margin: 4px 0 12px;
 }
 .panel-head {
   font-family: "Bricolage", sans-serif; font-weight: 800;
   font-size: 7.5pt; letter-spacing: .18em; text-transform: uppercase;
-  color: ${C.goldDeep}; margin-bottom: 8px;
+  color: ${C.amberInk}; margin-bottom: 8px;
 }
 .panel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .panel-list li {
@@ -243,8 +245,8 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 }
 .panel-list li.yes::before {
   content: ""; position: absolute; left: 0; top: 4px;
-  width: 9px; height: 5px; border-left: 2px solid ${C.emerald};
-  border-bottom: 2px solid ${C.emerald}; transform: rotate(-45deg);
+  width: 9px; height: 5px; border-left: 2px solid ${C.navy};
+  border-bottom: 2px solid ${C.navy}; transform: rotate(-45deg);
 }
 .panel-list li.no { color: ${C.inkMuted}; }
 .panel-list li.no::before {
