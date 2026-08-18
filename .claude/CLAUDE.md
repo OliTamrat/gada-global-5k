@@ -305,6 +305,43 @@ that from the benefit's tier list; nothing is hard-coded per level.
    `info@gadaglobalrun.com`. Whichever is right, the two must be reconciled
    before the flyer goes out or sponsor enquiries will land nowhere.
 
+### The approach letter — `/sponsors/letter`
+
+There is **no brochure in this repo**, and there never was. The only outreach
+documents are the three proposals (`GADA_GLOBAL_5K_BUSINESS_PROPOSAL.md`,
+`public/proposal.html`, `proposal/index.html`), and all three still carry the
+**old venue and the 7:30 AM start** — deliberately untouched because they may
+already be with sponsors. Do not point anyone at them as current.
+
+`/sponsors/letter` is the letterheaded approach letter for businesses: fill in
+the business, the contact and the level, then print it to sign or copy it as an
+email. It is linked from `/promo` and is `noindex`, like the rest of the
+organizer tooling.
+
+**It is generated, not a template** (ADR-0007). Nothing about the race is
+retyped into it: the date, venue and times come from `EVENT` in
+`src/lib/email.ts`, the levels and benefits from `src/lib/sponsors.ts`. A
+`.docx` or a markdown draft would be a fourth document free to go stale the way
+the three proposals did.
+
+Three things that are load-bearing rather than incidental:
+
+- **The benefit list is derived, never described.** The first draft wrote it as
+  prose — "the higher levels add your logo to the race t-shirt" — which is true
+  in a Bronze letter and false in a Gold one. `letterBenefits()` reads
+  `SPONSOR_BENEFITS`, lists what the level includes, and turns each benefit it
+  does not reach into a signpost naming the cheapest level that does.
+- **It fits on one sheet, and that is measured**, not assumed. Print margins are
+  0.75in at the sides and 0.6in top and bottom, built from the 0.4in `@page`
+  plus the sheet's own print padding. The tightest variant (all four levels, a
+  long business name) leaves 0.28in spare. Adding a paragraph means re-checking
+  it in a browser under print media — the sheet's own height is the check.
+- **The screen-only warning must never print.** It names the ADR-0006 price
+  problem and the three things deliberately left out of the letter: how many
+  runners to expect, the artwork deadline, and a postal address on the
+  letterhead (it reads "Washington, DC" — the venue address is the park's, not
+  the organization's).
+
 Enquiries are **email, not checkout** — deliberately. A sponsor has to send
 logo artwork and agree a printing deadline, so a pay-now button would just
 leave the organizers chasing files. `sponsorMailto()` pre-fills the level in

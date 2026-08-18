@@ -12,3 +12,4 @@ settled decisions.
 | 0004 | The browser never names a price |
 | 0005 | Four content decisions taken from timeout defaults — reconfirm before print |
 | 0006 | Sponsor tiers are placeholders from a sample flyer |
+| 0007 | The sponsor letter is generated from the code, not a template file |
