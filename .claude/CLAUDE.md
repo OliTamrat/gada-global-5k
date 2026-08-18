@@ -350,6 +350,27 @@ Three things that are load-bearing rather than incidental:
   letterhead (it reads "Washington, DC" — the venue address is the park's, not
   the organization's).
 
+### The Word documents — `design/letter/`
+
+The page prints and copies; **`design/letter/build.mjs` produces the two `.docx`
+files an organizer actually attaches to an email.** `--blank` gives the
+letterhead on its own — the file that outlives this letter, so the next
+thank-you or permit cover note starts from the right masthead — and the default
+gives the sponsorship draft. `--tier gold` proposes a named level.
+
+Same rule as the page: **the offer is not typed into the script.** It parses
+`src/lib/sponsors.ts` and `src/lib/email.ts`, and every extractor throws if it
+matches nothing, so a rename fails the build loudly rather than shipping a
+letter with gaps. Outputs are gitignored — a committed `.docx` is a second copy
+of the offer free to drift from the first, which is exactly how the three
+proposals went stale.
+
+`docx` is installed with `--no-save --no-package-lock`; it is not a dependency
+of the site. **LibreOffice cannot render these in the agent sandbox** — only
+`libreoffice-core` is present, with no writer module, so `soffice --convert-to
+pdf` fails on any file at all, including a plain `.txt`. Verify with
+`docx-preview` driven in Chromium instead.
+
 Enquiries are **email, not checkout** — deliberately. A sponsor has to send
 logo artwork and agree a printing deadline, so a pay-now button would just
 leave the organizers chasing files. `sponsorMailto()` pre-fills the level in
