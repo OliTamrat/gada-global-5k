@@ -50,7 +50,6 @@ const { tiers, benefits } = readSponsors();
 const domain = readDomain();
 const org = event.organization;
 const orgMidSentence = org.replace(/\.$/, "");
-const weekday = (event.date.match(/^([A-Za-z]+),/) || [, ""])[1];
 const dateNoWeekday = event.date.replace(/^[A-Za-z]+,\s*/, "");
 
 const LOGO = dataUri(repoPath("public/images/brand/gada-global-logo.png"), "image/png");
@@ -117,8 +116,9 @@ const letterBody = `
   <p>On ${esc(event.date)}, ${esc(org)} is holding the first ${esc(event.name)} at
   the ${esc(event.location)}, ${esc(event.address)}. Packet pickup opens at
   ${esc(event.packetPickup)}, the race starts at ${esc(event.startTime)}, and a
-  cultural festival runs until noon. It is a community race celebrating Oromo
-  heritage and the Irrecha festival, open to runners and walkers of every age.</p>
+  community festival runs until noon. It is a community race run by a licensed
+  Washington DC company, open to runners and walkers of every age and
+  background.</p>
 
   <p>The morning is built to keep people in one place for five hours rather than
   five minutes. Families arrive at ${esc(event.packetPickup)} and stay through the

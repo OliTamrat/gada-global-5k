@@ -43,7 +43,6 @@ import {
   readRegistration,
   readSponsors,
   repoPath,
-  unlockedBy,
 } from "../lib/source.mjs";
 import { paletteFromArgs } from "../lib/palette.mjs";
 
@@ -70,10 +69,7 @@ const { tiers, benefits } = readSponsors();
 const domain = readDomain();
 const entry = readRegistration();
 const dateNoWeekday = event.date.replace(/^[A-Za-z]+,\s*/, "");
-// "Gada Global Inc." already ends in a full stop; a sentence that ends with it
-// must not gain a second one.
 const org = event.organization;
-const orgMidSentence = org.replace(/\.$/, "");
 const weekday = (event.date.match(/^([A-Za-z]+),/) || [, ""])[1];
 
 const LOGO = dataUri(repoPath("public/images/brand/gada-global-logo.png"), "image/png");
@@ -203,13 +199,13 @@ const atAGlance = `
     <ul class="reasons">
       <li>Five hours in one place, not five seconds on a roadside.</li>
       <li>The t-shirt leaves with them and gets worn all year.</li>
-      <li>A community, not an audience &mdash; and you are standing in it.</li>
+      <li>Neighbours, not passing traffic &mdash; and your name is in front of them.</li>
     </ul>
 
     <p class="glance-note">
       A five-hour morning, not a five-minute one. Families arrive at
       ${esc(event.packetPickup)} for packet pickup and stay through the awards at
-      ${esc(event.awardsTime)} and the cultural festival after it.
+      ${esc(event.awardsTime)} and the community festival after it.
     </p>
   </section>`;
 
@@ -260,10 +256,10 @@ const overview = `
     <div class="sec-rule"></div>
 
     <p class="lede">
-      The ${esc(event.name)} is a community race celebrating Oromo heritage and
-      the Irrecha festival, run by ${esc(orgMidSentence)}. The first one is on
-      ${esc(weekday)}, ${esc(dateNoWeekday)} at the ${esc(event.location)} in
-      Washington DC.
+      The ${esc(event.name)} is a community road race run by ${esc(org)},
+      a licensed Washington DC company. The first one is
+      on ${esc(weekday)}, ${esc(dateNoWeekday)} at the ${esc(event.location)},
+      and it is open to runners and walkers of every age and background.
     </p>
     <p>
       It is a race and a festival on the same morning. Packet pickup opens at
@@ -283,14 +279,14 @@ const overview = `
     <div class="audience">
       <div class="aud"><div class="aud-node">01</div><div class="aud-label">Runners and their families</div></div>
       <div class="aud-line" aria-hidden="true"></div>
-      <div class="aud"><div class="aud-node hot">02</div><div class="aud-label">The DC Oromo community</div></div>
+      <div class="aud"><div class="aud-node hot">02</div><div class="aud-label">Neighbours and spectators</div></div>
       <div class="aud-line" aria-hidden="true"></div>
       <div class="aud"><div class="aud-node">03</div><div class="aud-label">Local businesses and neighbours</div></div>
     </div>
 
     <p class="overview-foot">
-      Sponsoring this race is a visible statement to that community, made in
-      front of the people in it.
+      Sponsoring this race puts your business in front of your own
+      neighbourhood, on a morning it will remember.
     </p>
   </section>`;
 
@@ -305,7 +301,7 @@ const theMorning = `
       ${disc("02", "Opening ceremony", "8:15 AM")}
       ${disc("03", "The 5K", `${event.startTime} start, three waves`)}
       ${disc("04", "Awards", `${event.awardsTime}, in front of the crowd`)}
-      ${disc("05", "Cultural festival", "Music, food and dance until noon")}
+      ${disc("05", "Community festival", "Music, food and dance until noon")}
     </div>
 
     <p class="morning-note">
@@ -481,6 +477,12 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .qr svg { width: 100%; height: 100%; display: block; }
 .qr-text strong { display: block; font-size: 7.4pt; color: ${C.onDark}; }
 .qr-text span { display: block; font-size: 6.8pt; line-height: 1.45; color: ${C.onDarkMuted}; margin-top: 2px; }
+
+/* .kicker is set for the cream panel it mostly appears on. "The morning" uses
+   the same class on the DARK panel, where that colour is the field itself —
+   it rendered navy on navy and the heading was invisible in the PDF. A class
+   shared across two fields needs the field-specific override. */
+.navy .kicker { color: ${C.accentSoft}; }
 
 .morning-mark {
   position: absolute; left: -1.5in; bottom: -1.3in;

@@ -37,8 +37,8 @@ const WHY = [
     ),
   },
   {
-    title: "A community, not an audience",
-    body: "This race celebrates Oromo heritage and the Irrecha festival. Sponsoring it is a visible statement to that community, made in front of the people in it.",
+    title: "Neighbours, not passing traffic",
+    body: "This is a neighbourhood morning: families, runners and local businesses in one place. Sponsoring it puts your name in front of the people who live here, not people driving past.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
     ),

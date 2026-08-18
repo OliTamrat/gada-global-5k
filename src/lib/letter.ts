@@ -98,7 +98,7 @@ export function letterParagraphs(fields: LetterFields): string[] {
       }, and each is a floor rather than a fixed price.`;
 
   return [
-    `On ${EVENT.date}, ${EVENT.organization} is holding the first ${EVENT.name} at the ${EVENT.location}, ${EVENT.address}. Packet pickup opens at ${EVENT.packetPickup}, the race starts at ${EVENT.startTime}, and a cultural festival runs until noon. It is a community race celebrating Oromo heritage and the Irrecha festival, open to runners and walkers of every age.`,
+    `On ${EVENT.date}, ${EVENT.organization} is holding the first ${EVENT.name} at the ${EVENT.location}, ${EVENT.address}. Packet pickup opens at ${EVENT.packetPickup}, the race starts at ${EVENT.startTime}, and a community festival runs until noon. It is a community race run by a licensed Washington DC company, open to runners and walkers of every age and background.`,
 
     `The morning is built to keep people in one place for five hours rather than five minutes. Families arrive at ${EVENT.packetPickup} and stay through the awards at ${EVENT.awardsTime} and the festival after it. Prize money of $1,200 goes to the top three men and the top three women, which brings out serious local runners alongside them.`,
 

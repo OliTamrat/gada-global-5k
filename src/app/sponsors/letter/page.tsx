@@ -52,11 +52,11 @@ export default function SponsorLetterPage() {
           </p>
           <ul className="text-[14px] leading-[1.75] text-charcoal/80 space-y-2 list-disc pl-5">
             <li>
-              <strong>The sponsorship prices are still placeholders.</strong>{" "}
-              The four levels and their amounts came from a sample flyer used
-              as a design reference, not from an offer the organizers have
-              agreed. Confirm them before this letter goes to a business —
-              a price in writing is a price you will be held to.
+              <strong>Silver and Bronze unlock the same two benefits.</strong>{" "}
+              The prices are confirmed ($5,000 / $2,500 / $1,000 / $500) but
+              the benefit list is still the sample flyer&rsquo;s, so a business
+              has no reason to pay $1,000 rather than $500. Settle that before
+              this goes out widely.
             </li>
             <li>
               <strong>Add how many runners you expect.</strong> It is the first

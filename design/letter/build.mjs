@@ -97,7 +97,7 @@ function letterParagraphs(event, tiers, tier) {
     : `We would like to invite ${FILL.business} to sponsor the race. There are four levels, from ${tiers[tiers.length - 1].amount}, and each is a floor rather than a fixed price.`;
 
   return [
-    `On ${event.date}, ${event.organization} is holding the first ${event.name} at the ${event.location}, ${event.address}. Packet pickup opens at ${event.packetPickup}, the race starts at ${event.startTime}, and a cultural festival runs until noon. It is a community race celebrating Oromo heritage and the Irrecha festival, open to runners and walkers of every age.`,
+    `On ${event.date}, ${event.organization} is holding the first ${event.name} at the ${event.location}, ${event.address}. Packet pickup opens at ${event.packetPickup}, the race starts at ${event.startTime}, and a community festival runs until noon. It is a community race run by a licensed Washington DC company, open to runners and walkers of every age and background.`,
     `The morning is built to keep people in one place for five hours rather than five minutes. Families arrive at ${event.packetPickup} and stay through the awards at ${event.awardsTime} and the festival after it. Prize money of $1,200 goes to the top three men and the top three women, which brings out serious local runners alongside them.`,
     levelSentence,
     `If this is something ${FILL.business} would consider, a reply to this letter is all it takes to start. We will confirm the amount, send you the artwork specification and the printing deadline, and you will hear from us again after race day with photographs of where your name appeared. If you would rather talk it through first, write to ${event.supportEmail} and we will call you.`,

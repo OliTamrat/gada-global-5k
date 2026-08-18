@@ -55,23 +55,25 @@ two-thirds empty.
 
 ## Design notes
 
-The visual language is a near-black field, two-tone display type, numbered
-discs and a hairline rule under every heading. The palette is the site's own
-(`src/app/globals.css`), and three fields alternate — charcoal, deep green,
-cream — so no two adjacent panels share a colour and the folds stay legible.
+The visual language is a dark field, two-tone display type, numbered discs and
+a hairline rule under every heading. **The palette is a parameter**:
+`design/lib/palette.mjs` holds `navy` (midnight navy and amber) and `ink`
+(near-black and a single amber, matching the website), and every script takes
+`--palette <id>`. Panels alternate dark and light so no two neighbours share a
+field and the folds stay legible.
 
-**The cover field is charcoal rather than deep green** because the two display
-colours have to sit on it: Oromo red on dark green does not reach 3:1, and the
-cover depends on that pair. Colour is used at display size only, so nothing
-here needs a reader to tell two similar hues apart, and a black-and-white
-office printer degrades it to greys rather than losing information.
+Colour is used at display size only, so nothing here needs a reader to tell two
+similar hues apart, and a black-and-white office printer degrades it to greys
+rather than losing information. Each palette carries its own readable-on-cream
+weight of its accent — amber is 1.8:1 on a light sheet and would vanish as
+label text at its display value.
 
 **The PDF is vector**, not a raster of the PNGs — nothing in this design uses
 `mix-blend-mode`, CSS masks or backdrop filters, which is what forces other
 Chromium print jobs to raster. Text stays selectable and a print shop can pull
 it straight in.
 
-Anton and DM Sans are vendored under `fonts/` (SIL OFL) and embedded in the
+Fraunces, Bricolage Grotesque and DM Sans are vendored under `fonts/` (SIL OFL) and embedded in the
 HTML as data URIs, so the file renders identically on any machine and needs no
 network.
 
@@ -79,8 +81,9 @@ network.
 
 The same cautions as the letter, none of which appear on the leaflet:
 
-1. **The sponsorship prices are placeholders** (ADR-0006) — from a sample
-   flyer, not an agreed offer.
+1. **The prices are confirmed; the benefits are not.** Silver and Bronze
+   still unlock the same two, so the levels table shows a business no reason
+   to pay $1,000 rather than $500.
 2. **No runner-count figure appears**, because nobody has a real one for a
    first running. It is the first thing a business asks; add it when it exists.
 3. **No artwork deadline** — the leaflet says to ask, rather than guessing.

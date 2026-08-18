@@ -13,3 +13,4 @@ settled decisions.
 | 0005 | Four content decisions taken from timeout defaults — reconfirm before print |
 | 0006 | Sponsor tiers are placeholders from a sample flyer |
 | 0007 | The sponsor letter is generated from the code, not a template file |
+| 0008 | Confirmed sponsorship prices, and sponsorship copy that names no community |

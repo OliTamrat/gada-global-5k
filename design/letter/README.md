@@ -56,9 +56,10 @@ up in one pass.
 
 The same four things the web page warns about, none of which print:
 
-1. **The sponsorship prices are still placeholders** (ADR-0006) — they came
-   from a sample flyer, not an agreed offer. A price in writing is a price you
-   will be held to.
+1. **The prices are confirmed; the benefits are not.** $5,000 / $2,500 /
+   $1,000 / $500 are the organizers' own figures. The four benefits are still
+   the sample flyer's, and Silver and Bronze unlock the same two — so nothing
+   justifies the $500 difference. Settle that before this goes out widely.
 2. **Add how many runners you expect.** It is the first question a business
    asks and the most persuasive line in the letter. It is left out because
    nobody has a real number for a first running.

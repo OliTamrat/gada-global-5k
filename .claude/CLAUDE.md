@@ -260,14 +260,25 @@ the only place the levels and benefits are written down. The page, the
 `/api/qr/sponsors` code all read from it, so they cannot drift apart from each
 other — or from the printed flyer, as long as the file is kept in step with it.
 
-Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
-Bronze $250+.
+Four levels: **Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500** —
+confirmed by the organizers 2026-08 (ADR-0008), replacing the flyer's
+placeholder figures. Each is a minimum commitment, not the flyer's open-ended
+`+`.
 
-**The figures on the page are placeholders.** The four levels, the prices and
-the four benefits came from a *sample* sponsorship flyer used as a visual and
-structural reference — not from Gada Global's own agreed offer. Nobody has
-signed these off. Confirm the real levels, prices and benefits with the
-organizers before the page is promoted or anything is printed from it.
+**The BENEFITS are still the flyer's and still unconfirmed.** Only the prices
+were signed off. Silver and Bronze unlock the same two benefits, so a business
+has no reason to pay $1,000 rather than $500 — settle that before the page is
+promoted or anything is printed.
+
+**The sponsorship materials name no particular community** (ADR-0008). They
+describe a community road race run by Gada Global Inc., a licensed Washington DC
+company, open to runners and walkers of every age and background. The
+organizers' reasoning: some people do not want to be part of the Irrecha
+celebration, and a business being asked for money should read a welcome rather
+than a qualifier. **The rest of the site was deliberately left alone** — the
+homepage, about page, schedule, FAQ, shop copy, email footer and metadata all
+still carry the heritage framing, because taking it site-wide is a whole-brand
+decision rather than a sponsorship one.
 
 Everything is editable from `src/lib/sponsors.ts` alone: prices, level names,
 blurbs, and which levels unlock which benefits. Adding or removing a benefit
@@ -295,7 +306,7 @@ that from the benefit's tier list; nothing is hard-coded per level.
 **Two things to settle with the organizers before this is promoted widely:**
 
 1. **Silver and Bronze currently unlock exactly the same two benefits**, so
-   there is no reason to pay $500 rather than $250. This is carried over from
+   there is no reason to pay $1,000 rather than $500. This is carried over from
    the flyer deliberately rather than silently patched. Moving
    `Logo on website & social media` down to include `silver` fixes it in one
    line and costs nothing to give.
@@ -344,11 +355,11 @@ Three things that are load-bearing rather than incidental:
   the branding silently not existing on paper. Colour is accent only, never
   carrying meaning on its own, so a black-and-white office printer degrades it to
   greys rather than losing information.
-- **The screen-only warning must never print.** It names the ADR-0006 price
-  problem and the three things deliberately left out of the letter: how many
-  runners to expect, the artwork deadline, and a postal address on the
-  letterhead (it reads "Washington, DC" — the venue address is the park's, not
-  the organization's).
+- **The screen-only warning must never print.** It names the unresolved
+  Silver/Bronze benefit collision and the three things deliberately left out of
+  the letter: how many runners to expect, the artwork deadline, and a postal
+  address on the letterhead (it reads "Washington, DC" — the venue address is
+  the park's, not the organization's).
 
 ### The Word documents — `design/letter/`
 
@@ -374,7 +385,8 @@ pdf` fails on any file at all, including a plain `.txt`. Verify with
 ### The printed letterhead — `design/letterhead/`
 
 `build.mjs` emits `letterhead.html` and `letter.html`; `render.mjs` turns them
-into **`Gada-Global-Letterhead.pdf`** and **`Gada-Global-5K-Sponsor-Letter.pdf`**.
+into **`Gada-Global-Letterhead-<palette>.pdf`** and
+**`Gada-Global-5K-Sponsor-Letter-<palette>.pdf`**.
 Same palette and faces as the tri-fold, so the leaflet a business is handed and
 the letter it is posted look like one organization.
 
@@ -436,11 +448,6 @@ with red and green display type read worse. The third attempt was four covers
 rendered side by side and one question, and it settled in a single message.
 When a colour note comes back twice, stop arguing from contrast ratios and
 render options.
-
-**When a colour note comes back twice, stop guessing and show options.** Two
-rounds of reasoning about contrast ratios produced two rejected palettes; one
-render of four covers settled it in a single message. Colour is not a thing to
-argue toward in prose.
 
 Navy carries the front cover, the back cover and the schedule panel; cream
 carries the rest, alternating so no two adjacent panels share a field and the
