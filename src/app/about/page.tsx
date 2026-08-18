@@ -62,10 +62,10 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global Run</span>
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] text-white mb-6 tracking-tight">
-            Every Finish Line Represents<br />Determination, Resilience &amp; Hope
+            Professional Race Production,<br />Rooted in Oromo Heritage
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
-            A community-driven running organization celebrating cultural heritage, promoting healthy lifestyles, and uniting diverse communities through the transformative power of running.
+            Gada Global Inc. produces timed road races and cultural programming in the Washington DC metropolitan area. We design, staff and operate each event end to end — registration, course operations, live timing and post-event reporting.
           </p>
         </div>
       </section>
@@ -136,17 +136,17 @@ export default function AboutPage() {
                 </div>
                 <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Mission</span>
                 <p className="text-base md:text-[16px] leading-[1.85] text-white/88 mb-4">
-                  Gada Global Run is committed to organizing world-class running events that promote health, unity, and community engagement.
+                  We operate to a professional standard: permitted courses, staffed race-day operations, published results within minutes of the finish, and a written report to every partner after the event.
                 </p>
                 <ul className="space-y-2.5">
                   {[
-                    "Promote healthy lifestyles through running and physical activity",
+                    "Produce safe, well-run events that people return to year after year",
                     "Bring communities together regardless of age, background, or ability",
                     "Celebrate Oromo culture while welcoming participants from every community",
                     "Support current and former athletes with recognition and mentorship",
                     "Inspire youth to pursue healthy, disciplined, and active lives",
-                    "Partner with businesses and nonprofits to strengthen community wellness",
-                    "Build sustainable events that contribute to social and economic growth",
+                    "Give corporate and nonprofit partners measurable visibility and access",
+                    "Operate sustainably, reinvesting in the events and the communities they serve",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-[16px] md:text-[14px] text-white/78">
                       <span className="w-4 h-4 rounded-full yellow-card flex items-center justify-center mt-1 shrink-0">

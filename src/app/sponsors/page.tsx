@@ -11,12 +11,12 @@ const SITE = siteUrl();
 export const metadata: Metadata = {
   title: "Sponsor the Gada Global 5K | Gada Global Run",
   description:
-    "Sponsorship levels and benefits for the Gada Global 5K on October 3, 2026 in Washington DC. Platinum, Gold, Silver and Bronze levels from $250.",
+    "Sponsorship and partnership levels for the Gada Global 5K on October 3, 2026 in Washington DC. Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500.",
   alternates: { canonical: `${SITE}/sponsors` },
   openGraph: {
     title: "Sponsor the Gada Global 5K",
     description:
-      "Back the inaugural Gada Global 5K. Four sponsorship levels, starting at $250.",
+      "Partner with the inaugural Gada Global 5K. Four levels from $500 to $5,000.",
     url: `${SITE}/sponsors`,
   },
 };
@@ -92,7 +92,7 @@ export default async function SponsorsPage({
             Your Name on the Shirt,<br />the Banner and the Stage
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
-            {`Back the inaugural Gada Global 5K on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four levels, starting at $250.`}
+            {`Back the inaugural Gada Global 5K on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four partnership levels, $500 to $5,000.`}
           </p>
         </div>
       </section>

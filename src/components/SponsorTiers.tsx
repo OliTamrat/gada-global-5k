@@ -49,6 +49,30 @@ const ICONS: Record<BenefitIcon, ReactNode> = {
       <path d="M5 11a7 7 0 0014 0M12 18v4M8 22h8" />
     </svg>
   ),
+  bib: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="5" width="16" height="14" rx="2" />
+      <path d="M8 10h8M8 14h5" />
+    </svg>
+  ),
+  booth: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 9l2-5h14l2 5" />
+      <path d="M4 9h16v11H4z" />
+      <path d="M3 9a2.5 2.5 0 005 0 2.5 2.5 0 005 0 2.5 2.5 0 005 0 2.5 2.5 0 003 0" />
+    </svg>
+  ),
+  ticket: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 8V6h18v2a2.5 2.5 0 000 5v2H3v-2a2.5 2.5 0 000-5z" />
+      <path d="M14 6v13" strokeDasharray="2 3" />
+    </svg>
+  ),
+  chart: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+    </svg>
+  ),
 };
 
 export function SponsorTiers({

@@ -78,7 +78,7 @@ export const LINK_SECTIONS: LinkSection[] = [
       {
         href: "/sponsors",
         label: "Become a Sponsor",
-        blurb: "Sponsor levels and benefits from $250",
+        blurb: "Partnership levels and benefits, $500 to $5,000",
         icon: "handshake",
         tint: "bg-green-deep/25 text-green-light",
       },

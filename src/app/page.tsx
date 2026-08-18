@@ -532,9 +532,10 @@ export default function Home() {
                     Put Your Business in Front of the Whole Race
                   </h3>
                   <p className="text-[16px] md:text-[15px] text-white/78 leading-[1.8] max-w-[520px] mx-auto">
-                    Four levels, starting at $250. Your logo goes on the race
-                    t-shirt, the banner, the website and the stage &mdash; in front
-                    of everyone on site from packet pickup through the festival.
+                    Four partnership levels from $500 to $5,000 &mdash; brand
+                    placement on the race shirt, bib and venue signage, exhibitor
+                    space at the festival, and category exclusivity at the top
+                    level. Every level includes complimentary entries for your team.
                   </p>
                 </div>
 

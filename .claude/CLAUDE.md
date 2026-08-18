@@ -260,14 +260,16 @@ the only place the levels and benefits are written down. The page, the
 `/api/qr/sponsors` code all read from it, so they cannot drift apart from each
 other — or from the printed flyer, as long as the file is kept in step with it.
 
-Four levels, mirroring the flyer: Platinum $2,000+, Gold $1,000+, Silver $500+,
-Bronze $250+.
+Four levels, confirmed by the organizers 2026-08: **Platinum $5,000, Gold
+$2,500, Silver $1,000, Bronze $500** — with a benefit ladder where every level
+unlocks something the level below does not (Platinum 8 of 8, Gold 6, Silver 4,
+Bronze 3). The earlier figures were placeholders from a sample flyer; ADR-0006
+records the change.
 
-**The figures on the page are placeholders.** The four levels, the prices and
-the four benefits came from a *sample* sponsorship flyer used as a visual and
-structural reference — not from Gada Global's own agreed offer. Nobody has
-signed these off. Confirm the real levels, prices and benefits with the
-organizers before the page is promoted or anything is printed from it.
+**The figures are the organizers' own, set in 2026-08.** Prices live in
+`src/lib/sponsors.ts` and are repeated in the sponsors page copy, the FAQ
+answer, the link-in-bio blurb and the printed brochure — change all of them
+together.
 
 Everything is editable from `src/lib/sponsors.ts` alone: prices, level names,
 blurbs, and which levels unlock which benefits. Adding or removing a benefit
@@ -292,18 +294,10 @@ shows a muted icon and a link to the cheapest level that unlocks it — so every
 "no" is a route to a higher level instead of a rejection. `unlockedBy()` derives
 that from the benefit's tier list; nothing is hard-coded per level.
 
-**Two things to settle with the organizers before this is promoted widely:**
-
-1. **Silver and Bronze currently unlock exactly the same two benefits**, so
-   there is no reason to pay $500 rather than $250. This is carried over from
-   the flyer deliberately rather than silently patched. Moving
-   `Logo on website & social media` down to include `silver` fixes it in one
-   line and costs nothing to give.
-2. **The flyer's contact details do not match the site.** It prints
-   `info@gadaaglobal5k.org` and `www.gadaaglobal5k.org` (note the double "a"),
-   neither of which is this project's domain. The code uses
-   `info@gadaglobalrun.com`. Whichever is right, the two must be reconciled
-   before the flyer goes out or sponsor enquiries will land nowhere.
+**Resolved:** Silver and Bronze no longer unlock the same benefits — Silver
+adds a stage mention and four complimentary entries against Bronze's two. All
+contact details are `info@gadaglobalrun.com`; the sample flyer's
+`gadaaglobal5k.org` is not used anywhere.
 
 Enquiries are **email, not checkout** — deliberately. A sponsor has to send
 logo artwork and agree a printing deadline, so a pay-now button would just
