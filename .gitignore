@@ -48,3 +48,8 @@ next-env.d.ts
 # .docx is a second copy of the offer, free to drift from src/lib/sponsors.ts.
 Gada-Global-Letterhead*.docx
 Gada-Global-5K-Sponsor-Letter*.docx
+
+# Generated brochure artefacts — outputs of design/trifold/build.mjs
+design/trifold/brochure.html
+design/trifold/*.pdf
+design/trifold/*.png

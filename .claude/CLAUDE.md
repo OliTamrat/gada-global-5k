@@ -371,6 +371,46 @@ of the site. **LibreOffice cannot render these in the agent sandbox** — only
 pdf` fails on any file at all, including a plain `.txt`. Verify with
 `docx-preview` driven in Chromium instead.
 
+### The printed tri-fold — `design/trifold/`
+
+**The leaflet a business is handed across a counter.** US Letter landscape, two
+sides, three panels each, no bleed so it prints on an office printer. `build.mjs`
+emits the HTML, `render.mjs` turns it into a vector PDF and two 288dpi PNGs.
+
+Panel order, left to right on the flat sheet — the thing that is easy to get
+wrong and expensive to get wrong:
+
+| Side | Left | Middle | Right |
+|---|---|---|---|
+| Outside | Back cover (contact, levels, QR) | At a glance | **Front cover** |
+| Inside | Overview | The morning | Sponsorship levels |
+
+Roll fold, so the tuck-in panel is cut fractionally narrower. Every panel is
+self-contained: letting a block span two panels uses the spread better and puts
+a sentence, or a table column, on a crease.
+
+Same rule as everything else under `design/` — **the offer is not typed in.**
+`design/lib/source.mjs` parses `src/lib/sponsors.ts` and `src/lib/email.ts`, and
+throws when an extractor matches nothing. The levels table is derived from
+`SPONSOR_BENEFITS`, never described.
+
+**`render.mjs` fails the build on overflow or anything crossing a fold**, which
+is what makes it safe to send to a printer. Decorative shapes are exempt —
+they are meant to run off the edge, are marked `aria-hidden`, and the check
+hides them before measuring. With them visible the disc behind the schedule
+reported 125px of overflow on a panel that was two-thirds empty.
+
+The cover field is **charcoal, not the deep green**, because Oromo red on dark
+green does not reach 3:1 and the cover depends on that pair. Three fields
+alternate across the panels so no two neighbours share a colour and the folds
+stay legible. Anton and DM Sans are vendored under `design/trifold/fonts/` and
+embedded as data URIs.
+
+> **Note for whoever merges this:** PR #32 adds a *different* tri-fold at
+> `design/brochure/`, generated from Python. This one lives at
+> `design/trifold/` so the two do not collide on a filename. Pick one before
+> either is printed — two leaflets is how the offer ends up stated twice.
+
 Enquiries are **email, not checkout** — deliberately. A sponsor has to send
 logo artwork and agree a printing deadline, so a pay-now button would just
 leave the organizers chasing files. `sponsorMailto()` pre-fills the level in

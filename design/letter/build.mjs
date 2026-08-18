@@ -38,11 +38,15 @@ import {
   WidthType,
 } from "docx";
 import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 
-const HERE = dirname(fileURLToPath(import.meta.url));
-const REPO = resolve(HERE, "../..");
+import {
+  readDomain,
+  readEvent,
+  readSponsors,
+  repoPath,
+  unlockedBy,
+} from "../lib/source.mjs";
 
 /* ------------------------------------------------------------ the brand */
 
@@ -61,85 +65,6 @@ const CREAM = "FAF6EE";
 const PAGE = { width: 12240, height: 15840 };
 const MARGIN = { top: 900, bottom: 900, left: 1080, right: 1080 };
 const CONTENT_WIDTH = PAGE.width - MARGIN.left - MARGIN.right; // 10080 DXA = 7in
-
-/* ------------------------------------------- the facts, read from source */
-
-function source(file) {
-  return readFileSync(resolve(REPO, file), "utf8");
-}
-
-/**
- * `EVENT` out of src/lib/email.ts.
- *
- * Regex over source rather than an import because this script is plain node
- * and that file is TypeScript inside a Next app. Every extractor below throws
- * if it matches nothing, so a rename fails loudly here instead of silently
- * producing a letter with blanks in it.
- */
-function readEvent() {
-  const src = source("src/lib/email.ts");
-  const block = src.match(/export const EVENT = \{([\s\S]*?)\} as const;/);
-  if (!block) throw new Error("EVENT extractor matched nothing in src/lib/email.ts");
-  const event = {};
-  for (const [, key, value] of block[1].matchAll(/(\w+):\s*"([^"]+)"/g)) {
-    event[key] = value;
-  }
-  for (const key of ["name", "date", "startTime", "packetPickup", "awardsTime", "location", "address", "organization", "supportEmail"]) {
-    if (!event[key]) throw new Error(`EVENT.${key} missing — check src/lib/email.ts`);
-  }
-  return event;
-}
-
-/** The levels and the benefit matrix out of src/lib/sponsors.ts. */
-function readSponsors() {
-  const src = source("src/lib/sponsors.ts");
-
-  const tiersBlock = src.match(/SPONSOR_TIERS[^=]*=\s*\[([\s\S]*?)\n\];/);
-  if (!tiersBlock) throw new Error("SPONSOR_TIERS extractor matched nothing");
-  const tiers = [];
-  for (const chunk of tiersBlock[1].split(/\}\s*,\s*\{/)) {
-    const id = chunk.match(/id:\s*"([^"]+)"/);
-    const name = chunk.match(/name:\s*"([^"]+)"/);
-    const amount = chunk.match(/amount:\s*"([^"]+)"/);
-    const blurb = chunk.match(/blurb:\s*\n?\s*"([^"]+)"/);
-    if (id && name && amount) {
-      tiers.push({ id: id[1], name: name[1], amount: amount[1], blurb: blurb ? blurb[1] : "" });
-    }
-  }
-  if (tiers.length < 2) throw new Error("SPONSOR_TIERS extractor found fewer than two levels");
-
-  const benefitsBlock = src.match(/SPONSOR_BENEFITS[^=]*=\s*\[([\s\S]*?)\n\];/);
-  if (!benefitsBlock) throw new Error("SPONSOR_BENEFITS extractor matched nothing");
-  const benefits = [];
-  for (const chunk of benefitsBlock[1].split(/\}\s*,\s*\{/)) {
-    const label = chunk.match(/label:\s*\n?\s*"([^"]+)"/);
-    const list = chunk.match(/tiers:\s*\[([^\]]*)\]/);
-    if (label && list) {
-      benefits.push({
-        label: label[1],
-        tiers: [...list[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]),
-      });
-    }
-  }
-  if (!benefits.length) throw new Error("SPONSOR_BENEFITS extractor found no benefits");
-
-  return { tiers, benefits };
-}
-
-function readSiteDomain() {
-  const src = source("src/lib/site.ts");
-  const fallback = src.match(/"(https:\/\/[^"]+)"/);
-  if (!fallback) throw new Error("site origin extractor matched nothing in src/lib/site.ts");
-  return fallback[1].replace(/^https?:\/\//, "");
-}
-
-/** The cheapest level that unlocks a benefit — mirrors `unlockedBy()`. */
-function unlockedBy(benefit, tiers) {
-  for (let i = tiers.length - 1; i >= 0; i--) {
-    if (benefit.tiers.includes(tiers[i].id)) return tiers[i];
-  }
-  return tiers[0];
-}
 
 /* ------------------------------------------------------------ the words */
 
@@ -183,7 +108,7 @@ const body = (text, opts = {}) =>
 
 /** The masthead: logo and legal name left, reply address right. */
 function letterhead(event, domain) {
-  const logo = readFileSync(resolve(REPO, "public/images/brand/gada-global-logo.png"));
+  const logo = readFileSync(repoPath("public/images/brand/gada-global-logo.png"));
 
   return new Table({
     width: { size: CONTENT_WIDTH, type: WidthType.DXA },
@@ -403,7 +328,7 @@ function spacer(after = 0) {
  */
 function buildBlank() {
   const event = readEvent();
-  const domain = readSiteDomain();
+  const domain = readDomain();
 
   return new Document({
     creator: event.organization,
@@ -455,7 +380,7 @@ function pageFooter(event, domain) {
 function build(tierId) {
   const event = readEvent();
   const { tiers, benefits } = readSponsors();
-  const domain = readSiteDomain();
+  const domain = readDomain();
 
   const tier = tierId ? tiers.find((t) => t.id === tierId) : undefined;
   if (tierId && !tier) {
