@@ -16,12 +16,18 @@
  */
 
 import { chromium } from "playwright-core";
+import { paletteFromArgs } from "../lib/palette.mjs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pathToFileURL } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(HERE, "brochure.html");
+// Both palettes are live options, so neither gets the unqualified filename —
+// two PDFs called "brochure.pdf" in a downloads folder is how the wrong one
+// reaches a printer.
+const PALETTE = paletteFromArgs();
+const stem = `Gada-Global-5K-Sponsorship-Brochure-${PALETTE.id}`;
 
 const executablePath =
   process.env.CHROMIUM_PATH ||
@@ -91,7 +97,7 @@ problems.push(...overflow);
 
 /* ---- the PDF ---- */
 await page.pdf({
-  path: resolve(HERE, "Gada-Global-5K-Sponsorship-Brochure.pdf"),
+  path: resolve(HERE, `${stem}.pdf`),
   width: "11in",
   height: "8.5in",
   printBackground: true,
@@ -102,7 +108,7 @@ await page.pdf({
 const sheets = await page.$$(".sheet");
 for (let i = 0; i < sheets.length; i++) {
   const name = i === 0 ? "outside" : "inside";
-  await sheets[i].screenshot({ path: resolve(HERE, `brochure-${name}.png`) });
+  await sheets[i].screenshot({ path: resolve(HERE, `brochure-${PALETTE.id}-${name}.png`) });
 }
 
 await browser.close();
@@ -112,4 +118,4 @@ if (problems.length) {
   for (const p of problems) console.error(`  - ${p}`);
   process.exit(1);
 }
-console.log(`wrote Gada-Global-5K-Sponsorship-Brochure.pdf and ${sheets.length} PNGs`);
+console.log(`wrote ${stem}.pdf and ${sheets.length} PNGs`);

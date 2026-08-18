@@ -8,6 +8,7 @@
  */
 
 import { chromium } from "playwright-core";
+import { paletteFromArgs } from "../lib/palette.mjs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -17,9 +18,20 @@ const executablePath =
   process.env.CHROMIUM_PATH ||
   "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
 
+// Suffixed by palette for the same reason as the brochure: both are live
+// options and neither should hold the unqualified name.
+const PALETTE = paletteFromArgs();
 const JOBS = [
-  { src: "letterhead.html", out: "Gada-Global-Letterhead.pdf", png: "letterhead.png" },
-  { src: "letter.html", out: "Gada-Global-5K-Sponsor-Letter.pdf", png: "letter.png" },
+  {
+    src: "letterhead.html",
+    out: `Gada-Global-Letterhead-${PALETTE.id}.pdf`,
+    png: `letterhead-${PALETTE.id}.png`,
+  },
+  {
+    src: "letter.html",
+    out: `Gada-Global-5K-Sponsor-Letter-${PALETTE.id}.pdf`,
+    png: `letter-${PALETTE.id}.png`,
+  },
 ];
 
 const browser = await chromium.launch({ executablePath });

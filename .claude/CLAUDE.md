@@ -416,13 +416,26 @@ they are meant to run off the edge, are marked `aria-hidden`, and the check
 hides them before measuring. With them visible the disc behind the schedule
 reported 125px of overflow on a panel that was two-thirds empty.
 
-**The palette is midnight navy and amber, and it was CHOSEN, not reasoned to.**
-Two attempts missed — the site's charcoal read "heavy and dull", and a
-gold field with red and green display type read worse. The third attempt was
-four covers rendered side by side and a question; navy + amber won. It is also
-the palette of the proposal decks this leaflet was modelled on, which is the
-reference that should have been followed from the start rather than derived
-from the website's tokens.
+**The palette is a PARAMETER, and two are live.** `design/lib/palette.mjs`
+holds both; every build script takes `--palette navy` or `--palette ink` and
+produces the whole set either way, and every output carries the palette in its
+filename so two files called `brochure.pdf` cannot end up in one downloads
+folder with the wrong one going to the printer.
+
+- **navy** — midnight navy and amber, the palette of the proposal decks this
+  work was modelled on. Cover headline is orange over amber.
+- **ink** — near-black and a single amber, matching gadaglobalrun.com exactly,
+  so print and web are the same. Cover headline is white over amber.
+
+Adding a third is this file and nothing else: the build scripts use token
+*names* (`field`, `d1`, `d2`, `accent`, `accentInk`, `onDark`…), never hex.
+
+**It was chosen, not reasoned to, and that is the transferable part.** Two
+attempts missed — the site's charcoal read "heavy and dull", and a gold field
+with red and green display type read worse. The third attempt was four covers
+rendered side by side and one question, and it settled in a single message.
+When a colour note comes back twice, stop arguing from contrast ratios and
+render options.
 
 **When a colour note comes back twice, stop guessing and show options.** Two
 rounds of reasoning about contrast ratios produced two rejected palettes; one

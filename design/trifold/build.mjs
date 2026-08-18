@@ -45,6 +45,7 @@ import {
   repoPath,
   unlockedBy,
 } from "../lib/source.mjs";
+import { paletteFromArgs } from "../lib/palette.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -53,32 +54,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 // src/app/globals.css, unchanged. The field is charcoal rather than the deep
 // green because the two display colours have to sit on it at 3:1 or better —
 // Oromo red on dark green does not, and the whole cover depends on that pair.
-const C = {
-  // Midnight navy and amber — chosen from a four-way comparison after two
-  // guesses missed. It is the palette of the proposal decks this leaflet was
-  // modelled on, which is the reference that should have been followed from
-  // the start rather than reasoned toward from the website's tokens.
-  navy: "#131C3A",
-  navySoft: "#1B2650",
-  navyDeep: "#0D1428",
-
-  orange: "#F08A24",
-  amber: "#FFD166",
-  // Amber on cream is 1.8:1 and unreadable; this is the same hue dropped to a
-  // weight that clears 4.5:1, for labels on the light panels.
-  amberInk: "#B4630C",
-
-  cream: "#FAF7F0",
-  paper: "#FFFFFF",
-  ink: "#16182A",
-  inkSoft: "#4C4F62",
-  inkMuted: "#8A8D9C",
-  rule: "#E2DED2",
-  // Text on navy. Not pure white — a blue-tinted cream sits in the field
-  // rather than glaring out of it.
-  onNavy: "#E8ECF7",
-  onNavyMuted: "#A7B0CC",
-};
+const C = paletteFromArgs();
 
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -116,7 +92,7 @@ const LOGO = dataUri(repoPath("public/images/brand/gada-global-logo.png"), "imag
 const QR = await QRCode.toString(`https://${domain}/sponsors`, {
   type: "svg",
   margin: 1,
-  color: { dark: C.navyDeep, light: "#ffffff" },
+  color: { dark: C.fieldDeep, light: "#ffffff" },
 });
 // Fraunces for the big words and Bricolage for the labels, both variable.
 // Anton was the first choice and it is a competent poster face that a hundred
@@ -180,7 +156,7 @@ function levelsTable() {
     </table>`;
 }
 
-const CHECK = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.6" fill="none" stroke="${C.green}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const CHECK = `<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.6" fill="none" stroke="${C.field}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 /* ---------------------------------------------------------------- panels */
 
@@ -410,7 +386,7 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 /* Three panels, alternating dark and light across every fold. Two adjacent
    panels in one colour read as a single wide page and the reader cannot see
    where it folds. */
-.navy   { background: ${C.navy}; color: ${C.onNavy}; }
+.navy   { background: ${C.field}; color: ${C.onDark}; }
 .cream  { background: ${C.cream}; color: ${C.ink}; }
 
 /* ---- front cover ---- */
@@ -421,9 +397,9 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .cover-logo { width: 44px; height: 44px; object-fit: contain; }
 .powered { line-height: 1.3; }
 .powered span {
-  display: block; font-size: 6.5pt; letter-spacing: .22em; text-transform: uppercase; color: ${C.amber}; font-family: "Bricolage", sans-serif;
+  display: block; font-size: 6.5pt; letter-spacing: .22em; text-transform: uppercase; color: ${C.accentSoft}; font-family: "Bricolage", sans-serif;
 }
-.powered strong { display: block; font-size: 8pt; color: ${C.onNavy}; font-weight: 700; }
+.powered strong { display: block; font-size: 8pt; color: ${C.onDark}; font-weight: 700; }
 
 /* One shape, cropped by the panel edge — depth without a photograph nobody
    has taken yet. */
@@ -433,7 +409,7 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   /* One warm disc, cropped by the panel edge — depth without a photograph
      nobody has taken yet, and on gold it reads as light rather than as a
      smudge. */
-  background: ${C.navySoft}; z-index: 0;
+  background: ${C.fieldSoft}; z-index: 0;
 }
 .cover-mark::after {
   content: ""; position: absolute; inset: 0.45in; border-radius: 50%;
@@ -452,12 +428,12 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   font-variation-settings: "wdth" 75, "wght" 800, "opsz" 96;
   text-transform: uppercase; line-height: .84; letter-spacing: -.015em;
 }
-.d1 { font-size: 40pt; color: ${C.orange}; }
-.d2 { font-size: 40pt; color: ${C.amber}; }
-.cover-rule { width: 1.5in; height: 4px; background: ${C.orange}; margin: 15px 0 12px; }
-.cover-meta { font-size: 8pt; line-height: 1.7; color: ${C.onNavyMuted}; }
+.d1 { font-size: 40pt; color: ${C.d1}; }
+.d2 { font-size: 40pt; color: ${C.d2}; }
+.cover-rule { width: 1.5in; height: 4px; background: ${C.accent}; margin: 15px 0 12px; }
+.cover-meta { font-size: 8pt; line-height: 1.7; color: ${C.onDarkMuted}; }
 .cover-event {
-  color: ${C.amber}; font-weight: 700; letter-spacing: .12em; font-family: "Bricolage", sans-serif;
+  color: ${C.accentSoft}; font-weight: 700; letter-spacing: .12em; font-family: "Bricolage", sans-serif;
   text-transform: uppercase; font-size: 7.5pt; margin-bottom: 2px;
 }
 
@@ -466,13 +442,13 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 144;
   text-transform: uppercase; font-size: 23pt; line-height: .9; letter-spacing: -.02em;
-  margin: 0; color: ${C.navy};
+  margin: 0; color: ${C.field};
 }
-.glance-rule { width: .85in; height: 3px; background: ${C.orange}; margin: 13px 0 18px; }
+.glance-rule { width: .85in; height: 3px; background: ${C.accent}; margin: 13px 0 18px; }
 .facts { margin: 0; display: grid; gap: 12px; }
 .facts > div { display: grid; gap: 2px; }
 .facts dt {
-  font-size: 6.4pt; letter-spacing: .18em; text-transform: uppercase; color: ${C.amberInk}; font-weight: 700; font-family: "Bricolage", sans-serif;
+  font-size: 6.4pt; letter-spacing: .18em; text-transform: uppercase; color: ${C.accentInk}; font-weight: 700; font-family: "Bricolage", sans-serif;
 }
 .facts dd { margin: 0; font-size: 8.4pt; line-height: 1.5; color: ${C.ink}; }
 .glance-note {
@@ -482,7 +458,7 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 
 .glance-sub {
   margin: 20px 0 9px; font-size: 6.6pt; letter-spacing: .2em; text-transform: uppercase;
-  color: ${C.amberInk}; font-weight: 700;
+  color: ${C.accentInk}; font-weight: 700;
 }
 .reasons { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
 .reasons li {
@@ -491,7 +467,7 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 }
 .reasons li::before {
   content: ""; position: absolute; left: 0; top: 6px;
-  width: 5px; height: 5px; background: ${C.orange};
+  width: 5px; height: 5px; background: ${C.accent};
 }
 
 .qr-block { display: flex; align-items: center; gap: 11px; margin-top: 16px; }
@@ -503,13 +479,13 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   background: #fff; padding: 4px; border-radius: 3px;
 }
 .qr svg { width: 100%; height: 100%; display: block; }
-.qr-text strong { display: block; font-size: 7.4pt; color: ${C.onNavy}; }
-.qr-text span { display: block; font-size: 6.8pt; line-height: 1.45; color: ${C.onNavyMuted}; margin-top: 2px; }
+.qr-text strong { display: block; font-size: 7.4pt; color: ${C.onDark}; }
+.qr-text span { display: block; font-size: 6.8pt; line-height: 1.45; color: ${C.onDarkMuted}; margin-top: 2px; }
 
 .morning-mark {
   position: absolute; left: -1.5in; bottom: -1.3in;
   width: 3.4in; height: 3.4in; border-radius: 50%;
-  background: ${C.navySoft}; z-index: 0;
+  background: ${C.fieldSoft}; z-index: 0;
 }
 /* NOT a bare .morning > * selector — that has the same specificity as
    .morning-mark and comes later, so it overrode position:absolute and the
@@ -521,13 +497,13 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .disc-item { display: flex; align-items: center; gap: 11px; }
 .disc {
   width: 30px; height: 30px; border-radius: 50%; flex: 0 0 30px;
-  display: grid; place-items: center; background: ${C.orange}; color: ${C.navyDeep};
+  display: grid; place-items: center; background: ${C.accent}; color: ${C.fieldDeep};
   font-size: 7.6pt; font-weight: 800; font-family: "Bricolage", sans-serif;
 }
-.disc-title { font-size: 8.4pt; font-weight: 700; color: ${C.onNavy}; }
-.disc-sub { font-size: 7.2pt; color: ${C.onNavyMuted}; }
+.disc-title { font-size: 8.4pt; font-weight: 700; color: ${C.onDark}; }
+.disc-sub { font-size: 7.2pt; color: ${C.onDarkMuted}; }
 .morning-note {
-  margin: auto 0 0; font-size: 7.8pt; line-height: 1.65; color: ${C.amber};
+  margin: auto 0 0; font-size: 7.8pt; line-height: 1.65; color: ${C.accentSoft};
   border-top: 1px solid rgba(232,236,247,.2); padding-top: 14px;
 }
 
@@ -536,14 +512,14 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 144;
   text-transform: uppercase; font-size: 23pt; line-height: .9; letter-spacing: -.02em;
-  margin: 0; color: ${C.navy};
+  margin: 0; color: ${C.field};
 }
-.sec-rule { width: .8in; height: 3px; background: ${C.orange}; margin: 13px 0 15px; }
+.sec-rule { width: .8in; height: 3px; background: ${C.accent}; margin: 13px 0 15px; }
 .lede { margin: 0 0 10px; font-size: 8.4pt; line-height: 1.6; color: ${C.ink}; }
 .overview p { margin: 0 0 10px; font-size: 8pt; line-height: 1.6; color: ${C.inkSoft}; }
 .sub {
   margin: 16px 0 11px; font-size: 6.8pt; letter-spacing: .2em; text-transform: uppercase;
-  color: ${C.amberInk}; font-weight: 700; font-family: "Bricolage", sans-serif;
+  color: ${C.accentInk}; font-weight: 700; font-family: "Bricolage", sans-serif;
 }
 
 .stats {
@@ -555,7 +531,7 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .stat-n {
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 90;
-  font-size: 17pt; line-height: 1; color: ${C.navy};
+  font-size: 17pt; line-height: 1; color: ${C.field};
 }
 .stat-l { font-size: 6.4pt; letter-spacing: .1em; text-transform: uppercase; color: ${C.inkMuted}; margin-top: 4px; }
 
@@ -563,22 +539,22 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .aud { display: grid; justify-items: center; gap: 7px; width: .8in; text-align: center; }
 .aud-node {
   width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
-  background: ${C.navy}; color: ${C.onNavy}; font-size: 7.4pt; font-weight: 700;
+  background: ${C.field}; color: ${C.onDark}; font-size: 7.4pt; font-weight: 700;
 }
-.aud-node.hot { background: ${C.orange}; color: ${C.navyDeep}; }
+.aud-node.hot { background: ${C.accent}; color: ${C.fieldDeep}; }
 .aud-node { font-family: "Bricolage", sans-serif; font-weight: 800; }
 .aud-label { font-size: 6.5pt; line-height: 1.4; color: ${C.inkSoft}; }
 .aud-line { height: 1px; background: ${C.rule}; flex: 1; margin-top: 15px; }
 .overview-foot {
   margin: auto 0 0 !important; font-size: 7.6pt; line-height: 1.6; color: ${C.inkSoft} !important;
-  border-left: 3px solid ${C.orange}; background: ${C.paper}; padding: 11px 12px;
+  border-left: 3px solid ${C.accent}; background: ${C.paper}; padding: 11px 12px;
 }
 
 /* ---- levels ---- */
 .levels { width: 100%; border-collapse: collapse; margin: 2px 0 14px; table-layout: fixed; }
 .levels col.spec { width: 40%; }
 .levels th, .levels td { padding: 6px 1px; }
-.levels thead th { border-bottom: 2px solid ${C.navy}; text-align: center; vertical-align: bottom; }
+.levels thead th { border-bottom: 2px solid ${C.field}; text-align: center; vertical-align: bottom; }
 .levels thead th:first-child { border-bottom-color: transparent; }
 .lvl {
   /* Condensed here too. "PLATINUM" is the widest cell in the table and the
@@ -587,9 +563,9 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   display: block; font-family: "Bricolage", sans-serif; font-weight: 800;
   font-variation-settings: "wdth" 78, "wght" 800;
   text-transform: uppercase; letter-spacing: -.01em;
-  font-size: 7.8pt; color: ${C.navy}; line-height: 1;
+  font-size: 7.8pt; color: ${C.field}; line-height: 1;
 }
-.amt { display: block; font-size: 6.6pt; font-weight: 700; color: ${C.amberInk}; margin-top: 3px; }
+.amt { display: block; font-size: 6.6pt; font-weight: 700; color: ${C.accentInk}; margin-top: 3px; }
 .levels tbody th {
   text-align: left; font-size: 7pt; font-weight: 400; line-height: 1.35; color: ${C.inkSoft};
   border-bottom: 1px solid ${C.rule}; padding-right: 5px;
@@ -610,11 +586,11 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
 .tier-blurb-head span:first-child {
   font-size: 6.8pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: ${C.ink};
 }
-.tier-blurb-head span:last-child { font-size: 7.4pt; font-weight: 700; color: ${C.amberInk}; }
+.tier-blurb-head span:last-child { font-size: 7.4pt; font-weight: 700; color: ${C.accentInk}; }
 .tier-blurb p { margin: 0; font-size: 7pt; line-height: 1.45; color: ${C.inkSoft}; }
 .levels-note {
   margin: auto 0 0; font-size: 7.4pt; line-height: 1.55; color: ${C.inkSoft};
-  background: ${C.paper}; border-left: 3px solid ${C.orange}; padding: 10px 12px;
+  background: ${C.paper}; border-left: 3px solid ${C.accent}; padding: 10px 12px;
 }
 
 /* ---- back cover ---- */
@@ -623,10 +599,10 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   font-family: "Fraunces", Georgia, serif; font-weight: 900;
   font-variation-settings: "SOFT" 45, "WONK" 1, "opsz" 144;
   text-transform: uppercase; font-size: 25pt; line-height: .9; letter-spacing: -.02em;
-  margin: 16px 0 0; color: ${C.amber};
+  margin: 16px 0 0; color: ${C.accentSoft};
 }
-.back-rule { width: .85in; height: 3px; background: ${C.orange}; margin: 13px 0 15px; }
-.back-lede { margin: 0 0 15px; font-size: 8.4pt; line-height: 1.6; color: ${C.onNavyMuted}; }
+.back-rule { width: .85in; height: 3px; background: ${C.accent}; margin: 13px 0 15px; }
+.back-lede { margin: 0 0 15px; font-size: 8.4pt; line-height: 1.6; color: ${C.onDarkMuted}; }
 .mini-levels {
   display: grid; gap: 0; border-top: 1px solid rgba(232,236,247,.2); margin-bottom: 15px;
 }
@@ -635,19 +611,19 @@ body { font-family: "DM Sans", sans-serif; -webkit-font-smoothing: antialiased; 
   border-bottom: 1px solid rgba(232,236,247,.2); padding: 6px 0;
 }
 .mini-level span:first-child {
-  font-size: 7pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: ${C.onNavy};
+  font-size: 7pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: ${C.onDark};
 }
-.mini-level span:last-child { font-size: 8pt; font-weight: 700; color: ${C.amber}; }
+.mini-level span:last-child { font-size: 8pt; font-weight: 700; color: ${C.accentSoft}; }
 .back-steps {
-  margin: 0 0 15px; font-size: 7.6pt; line-height: 1.6; color: ${C.navyDeep};
-  background: ${C.amber}; border-left: 3px solid ${C.orange}; padding: 11px 12px;
+  margin: 0 0 15px; font-size: 7.6pt; line-height: 1.6; color: ${C.fieldDeep};
+  background: ${C.accentSoft}; border-left: 3px solid ${C.accent}; padding: 11px 12px;
 }
 .back-contact { display: grid; gap: 7px; }
 .contact-row { display: grid; grid-template-columns: .52in 1fr; align-items: baseline; gap: 8px; }
 .contact-label {
-  font-size: 6.4pt; letter-spacing: .18em; text-transform: uppercase; color: ${C.onNavyMuted}; font-weight: 700;
+  font-size: 6.4pt; letter-spacing: .18em; text-transform: uppercase; color: ${C.onDarkMuted}; font-weight: 700;
 }
-.contact-value { font-size: 8pt; font-weight: 700; color: ${C.onNavy}; word-break: break-word; }
+.contact-value { font-size: 8pt; font-weight: 700; color: ${C.onDark}; word-break: break-word; }
 .back-foot {
   margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(232,236,247,.2);
   font-size: 6.4pt; letter-spacing: .16em; text-transform: uppercase; color: ${C.inkMuted};

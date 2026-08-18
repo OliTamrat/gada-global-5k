@@ -47,6 +47,7 @@ import {
   repoPath,
   unlockedBy,
 } from "../lib/source.mjs";
+import { paletteFromArgs } from "../lib/palette.mjs";
 
 /* ------------------------------------------------------------ the brand */
 
@@ -57,13 +58,16 @@ import {
 // Midnight navy and amber, chosen from a four-way comparison after two
 // guesses missed. GREEN is a legacy name for the dark tone and now holds the
 // navy — renaming it would touch every call site for no behavioural gain.
-const GOLD = "F08A24";
-const GOLD_DEEP = "B4630C";
-const GREEN = "131C3A";
-const CHARCOAL = "16182A";
-const INK_SOFT = "4C4F62";
-const INK_MUTED = "8A8D9C";
-const CREAM = "FAF7F0";
+const PALETTE = paletteFromArgs();
+// Word wants hex without the leading hash.
+const hex = (v) => v.replace("#", "");
+const GOLD = hex(PALETTE.accent);
+const GOLD_DEEP = hex(PALETTE.accentInk);
+const GREEN = hex(PALETTE.field);
+const CHARCOAL = hex(PALETTE.ink);
+const INK_SOFT = hex(PALETTE.inkSoft);
+const INK_MUTED = hex(PALETTE.inkMuted);
+const CREAM = hex(PALETTE.cream);
 
 // US Letter in DXA (1440 = 1in). docx-js defaults to A4, which would reflow
 // the whole letter and is invisible until it prints wrong.
@@ -459,8 +463,8 @@ const out = resolve(
   process.cwd(),
   outArg ??
     (blank
-      ? "Gada-Global-Letterhead.docx"
-      : `Gada-Global-5K-Sponsor-Letter${tierArg ? `-${tierArg}` : ""}.docx`),
+      ? `Gada-Global-Letterhead-${PALETTE.id}.docx`
+      : `Gada-Global-5K-Sponsor-Letter-${tierArg ? `${tierArg}-` : ""}${PALETTE.id}.docx`),
 );
 
 const buffer = await Packer.toBuffer(blank ? buildBlank() : build(tierArg));
