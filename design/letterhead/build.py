@@ -124,63 +124,64 @@ FOOT = """
     </div>
   </footer>"""
 
-LETTER = f"""
-  <div class="body">
-    <div class="meta">
-      [Date]<br><br>
-      [Recipient name, title]<br>
-      [Organization]<br>
-      [Street address]<br>
-      [City, State ZIP]
-    </div>
+# ── The model letter, as content rather than markup ──────────────────────
+# The HTML sheet and the editable Word file are both generated from this list,
+# so a change of wording lands on the printed sheet and in the file the
+# organizers actually type into, together. Keeping two copies of a letter is how
+# a sponsor ends up quoting a sentence that no longer exists.
+LETTER_BLOCKS = [
+    ("meta", ["[Date]", "", "[Recipient name, title]", "[Organization]",
+              "[Street address]", "[City, State ZIP]"]),
+    ("subject", "Re: Partnership in the Gada Global 5K Run \u2014 Saturday, October 3, 2026"),
+    ("p", "Dear [Name],"),
+    ("p", "Gada Global Inc. produces timed road races and cultural programming in the "
+          "Washington DC metropolitan area. On Saturday, October 3, 2026 we will hold the "
+          "Gada Global 5K Run at the Rock Creek Park Tennis Center \u2014 a field of up to "
+          "500 runners, a five-hour programme from packet pickup at 7:00 AM through a "
+          "cultural festival at noon, and a $1,200 prize purse. I am writing to invite "
+          "[Organization] to partner with us."),
+    ("p", "Partnership places your brand in front of runners, their families and supporters "
+          "for the whole morning rather than for a moment: on the official race shirt every "
+          "entrant receives, on venue signage from before the first arrival, from the stage "
+          "at the ceremony and the awards, and across the event\u2019s website and social "
+          "channels. Four levels are available:"),
+    ("levels", LEVELS_LINE),
+    ("p", "Each level includes complimentary entries for your team, and the top level "
+          "carries category exclusivity, presenting billing and a written post-event report. "
+          "In-kind contributions \u2014 water, food, printing, medical cover or prize goods "
+          "\u2014 can be credited against a level. The full offer is at "
+          "gadaglobalrun.com/sponsors."),
+    ("p", "I would welcome the chance to discuss which level fits your goals. Shirt and bib "
+          "printing close well before race day, so an early decision secures the widest "
+          "placement. Please reply to this letter or write to info@gadaglobalrun.com and we "
+          "will send the agreement and the current artwork deadline."),
+    ("sign", ["With thanks,", "[Name]", "[Title] \u00b7 Gada Global Inc.",
+              "info@gadaglobalrun.com"]),
+]
 
-    <div class="subject">Re: Partnership in the Gada Global 5K Run — Saturday, October 3, 2026</div>
+NB = lambda s: s.replace(" \u00b7 ", " &nbsp;\u00b7&nbsp; ")
 
-    <p>Dear [Name],</p>
 
-    <p>
-      Gada Global Inc. produces timed road races and cultural programming in the
-      Washington DC metropolitan area. On Saturday, October 3, 2026 we will hold
-      the Gada Global 5K Run at the Rock Creek Park Tennis Center — a field of up
-      to 500 runners, a five-hour programme from packet pickup at 7:00 AM through
-      a cultural festival at noon, and a $1,200 prize purse. I am writing to
-      invite [Organization] to partner with us.
-    </p>
+def letter_html():
+    """LETTER_BLOCKS -> the markup the printed sheet uses."""
+    out = []
+    for kind, value in LETTER_BLOCKS:
+        if kind == "meta":
+            out.append('<div class="meta">%s</div>' % "<br>".join(value))
+        elif kind == "subject":
+            out.append('<div class="subject">%s</div>' % value)
+        elif kind == "p":
+            out.append("<p>%s</p>" % value)
+        elif kind == "levels":
+            out.append('<div class="levels">%s</div>' % value)
+        elif kind == "sign":
+            rest = "<br>".join(NB(line) for line in value[1:])
+            out.append('<div class="sign">%s<div class="line"></div>%s</div>'
+                       % (value[0], rest))
+    return '<div class="body">%s</div>' % "".join(out)
 
-    <p>
-      Partnership places your brand in front of runners, their families and
-      supporters for the whole morning rather than for a moment: on the official
-      race shirt every entrant receives, on venue signage from before the first
-      arrival, from the stage at the ceremony and the awards, and across the
-      event's website and social channels. Four levels are available:
-    </p>
 
-    <div class="levels">{LEVELS_LINE}</div>
-
-    <p>
-      Each level includes complimentary entries for your team, and the top level
-      carries category exclusivity, presenting billing and a written post-event
-      report. In-kind contributions — water, food, printing, medical cover or
-      prize goods — can be credited against a level. The full offer is at
-      gadaglobalrun.com/sponsors.
-    </p>
-
-    <p>
-      I would welcome the chance to discuss which level fits your goals. Shirt and
-      bib printing close well before race day, so an early decision secures the
-      widest placement. Please reply to this letter or write to
-      info@gadaglobalrun.com and we will send the agreement and the current
-      artwork deadline.
-    </p>
-
-    <div class="sign">
-      With thanks,
-      <div class="line"></div>
-      [Name]<br>
-      [Title] &nbsp;·&nbsp; Gada Global Inc.<br>
-      info@gadaglobalrun.com
-    </div>
-  </div>"""
+LETTER = letter_html()
 
 BLANK = '<div class="body"></div>'
 
@@ -188,7 +189,13 @@ SHELL = """<!doctype html><meta charset="utf-8"><style>%s</style>
 <body><div class="watermark"><img src="%s" alt=""></div>
 <div class="sheet">%s%s%s</div></body>"""
 
-(OUT / "letterhead-blank.html").write_text(SHELL % (CSS, DC, HEAD, BLANK, FOOT))
-(OUT / "letterhead-letter.html").write_text(SHELL % (CSS, DC, HEAD, LETTER, FOOT))
-print(f"levels from sponsors.ts: {LEVELS_LINE}")
-print("letterhead-blank.html, letterhead-letter.html written")
+def main():
+    (OUT / "letterhead-blank.html").write_text(SHELL % (CSS, DC, HEAD, BLANK, FOOT))
+    (OUT / "letterhead-letter.html").write_text(SHELL % (CSS, DC, HEAD, LETTER, FOOT))
+    print(f"levels from sponsors.ts: {LEVELS_LINE}")
+    print("letterhead-blank.html, letterhead-letter.html written")
+
+
+# Guarded so docx.py can import LETTER_BLOCKS without writing files as a side effect.
+if __name__ == "__main__":
+    main()
