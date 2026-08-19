@@ -48,11 +48,11 @@ body{background:var(--paper);color:var(--ink);font-family:"Mono",monospace;
      position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
 
 /* Washington, faint enough that a photocopier will mostly ignore it. */
-.watermark{position:absolute;right:-60px;bottom:96px;width:520px;height:420px;
-  overflow:hidden;pointer-events:none;opacity:.09;
-  -webkit-mask-image:radial-gradient(70% 70% at 62% 60%,#000 20%,transparent 78%);
-  mask-image:radial-gradient(70% 70% at 62% 60%,#000 20%,transparent 78%)}
-.watermark img{width:100%;height:100%;object-fit:cover;object-position:56% 30%;
+.watermark{position:absolute;right:26px;bottom:150px;width:560px;height:500px;
+  overflow:hidden;pointer-events:none;opacity:.095;
+  -webkit-mask-image:radial-gradient(46% 46% at 58% 50%,#000 8%,rgba(0,0,0,.5) 46%,transparent 70%);
+  mask-image:radial-gradient(46% 46% at 58% 50%,#000 8%,rgba(0,0,0,.5) 46%,transparent 70%)}
+.watermark img{width:100%;height:100%;object-fit:cover;object-position:56% 34%;
   filter:grayscale(1) contrast(1.2) brightness(.9)}
 
 .sheet{position:absolute;inset:0;padding:52px 68px 0;display:flex;flex-direction:column}
