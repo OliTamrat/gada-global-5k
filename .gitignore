@@ -48,3 +48,4 @@ next-env.d.ts
 design/brochure/*.html
 design/brochure/*.png
 design/brochure/*.pdf
+design/brochure/assets/

@@ -37,6 +37,33 @@ for m in re.finditer(
 if len(TIERS) < 2 or len(BEN) < 2:
     sys.exit(f"sponsors.ts extractor matched {len(TIERS)} tiers / {len(BEN)} benefits — fix the regex")
 
+
+DC   = "../../public/images/course/washington-monument.jpg"
+PARK = "../../public/images/course/rock-creek.jpg"
+# Optional: a closer running frame, if one has been dropped in locally.
+RUNNER = "assets/runner.jpg" if (OUT / "assets/runner.jpg").exists() else PARK
+
+def ground(src, *, pos="50% 40%", bright=".42", grade=".85", scrim="", extra=""):
+    """A photograph used as a panel's ground rather than a flat fill.
+
+    Desaturated, crushed and graded to the same gold as the rest of the piece,
+    then covered by a scrim so type keeps its contrast. The panels read as one
+    continuous exposure instead of separate blocks of colour.
+    """
+    return f'''
+      <img src="{src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+        object-position:{pos};filter:grayscale(1) contrast(1.45) brightness({bright})">
+      <div style="position:absolute;inset:0;background:linear-gradient(190deg,#FFC634 0%,#A96F12 58%,#2A1A04 100%);
+        mix-blend-mode:color;opacity:{grade}"></div>
+      <div style="position:absolute;inset:0;background:{scrim}"></div>{extra}'''
+
+# Scrims: dark panels need the photograph pushed right back behind the text;
+# the cream interior needs it lifted almost to white.
+DARK_SCRIM  = ("linear-gradient(168deg,rgba(7,7,3,.90) 0%,rgba(7,7,3,.62) 34%,"
+               "rgba(7,7,3,.42) 58%,rgba(7,7,3,.80) 88%,rgba(7,7,3,.93) 100%)")
+PAPER_SCRIM = ("linear-gradient(180deg,rgba(247,243,233,.96) 0%,rgba(247,243,233,.93) 55%,"
+               "rgba(247,243,233,.74) 100%)")
+
 CSS = """
 @font-face { font-family:"Shoulders"; src:url("BigShoulders-Bold.ttf"); font-weight:700; }
 @font-face { font-family:"Shoulders"; src:url("BigShoulders-Regular.ttf"); font-weight:400; }
@@ -74,7 +101,9 @@ def qr_block(dark=True):
 
 # ══════════════════════════════════ OUTSIDE ══════════════════════════════
 BACK = f"""
-<div class="panel p-narrow" style="background:var(--ground);padding:40px 34px">
+<div class="panel p-narrow" style="background:var(--ground)">
+  {ground(DC, pos="66% 40%", bright=".72", grade=".8", scrim=DARK_SCRIM)}
+  <div style="position:relative;padding:40px 34px;height:100%">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
     <img src="../../public/images/brand/gada-global-logo.png" style="width:56px;height:48px;object-fit:contain">
     <div>
@@ -114,10 +143,13 @@ BACK = f"""
       GADA GLOBAL INC. &nbsp;·&nbsp; ALL RIGHTS RESERVED
     </div>
   </div>
+  </div>
 </div>"""
 
 GLANCE = f"""
-<div class="panel p-wide" style="background:#101008;padding:40px 32px">
+<div class="panel p-wide" style="background:#101008">
+  {ground(PARK, pos="46% 62%", bright=".70", grade=".82", scrim=DARK_SCRIM)}
+  <div style="position:relative;padding:40px 32px;height:100%">
   <div class="eyebrow" style="color:var(--gold);margin-bottom:14px">The Event at a Glance</div>
   <h2 style="font-size:34px;line-height:.95;color:#fff;margin-bottom:22px">
     Saturday<br>3 October<br><span style="color:var(--red)">2026</span></h2>
@@ -160,6 +192,7 @@ GLANCE = f"""
       Timed event with live public results, age-group rankings and a
       $1,200 purse split evenly between the men's and women's fields.
     </div>
+  </div>
   </div>
 </div>"""
 
@@ -231,7 +264,9 @@ def check(on, dark=False):
             'border:1px solid rgba(18,16,12,.22)"></span>')
 
 WHY = f"""
-<div class="panel p-narrow" style="background:var(--paper);padding:40px 30px;color:var(--ink)">
+<div class="panel p-narrow" style="background:var(--paper);color:var(--ink)">
+  {ground(RUNNER, pos="52% 34%", bright=".55", grade=".8", scrim=PAPER_SCRIM)}
+  <div style="position:relative;padding:40px 30px;height:100%">
   <div class="eyebrow" style="color:var(--gold-deep);margin-bottom:12px">Why Partner</div>
   <h2 style="font-size:29px;line-height:1.02;margin-bottom:8px">An audience that<br>stays all morning</h2>
   <p style="font-size:10.5px;line-height:1.8;color:rgba(18,16,12,.72);margin-bottom:20px">
@@ -256,6 +291,7 @@ WHY = f"""
       against a level. Tell us what you can supply.
     </p>
   </div>
+  </div>
 </div>"""
 
 def tier_col(t, i):
@@ -271,7 +307,9 @@ def tier_col(t, i):
     </th>"""
 
 LEVELS = f"""
-<div class="panel" style="width:736px;background:var(--paper);padding:40px 34px;color:var(--ink)">
+<div class="panel" style="width:736px;background:var(--paper);color:var(--ink)">
+  {ground(DC, pos="54% 34%", bright=".58", grade=".78", scrim=PAPER_SCRIM)}
+  <div style="position:relative;padding:40px 34px;height:100%">
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px">
     <div>
       <div class="eyebrow" style="color:var(--gold-deep);margin-bottom:10px">Partnership Levels</div>
@@ -318,6 +356,7 @@ LEVELS = f"""
     <div style="width:92px;height:92px;padding:7px;background:#fff;flex:none">
       <img src="sponsors-qr.png" style="width:100%;height:100%;display:block">
     </div>
+  </div>
   </div>
 </div>"""
 
