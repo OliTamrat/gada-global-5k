@@ -1,21 +1,21 @@
 /**
- * Sponsorship levels and what each one actually buys.
+ * Sponsorship levels and what each one buys.
  *
- * PLACEHOLDER FIGURES. The four levels, the prices and the four benefits were
- * taken from a sample sponsorship flyer used as a reference, not from Gada
- * Global's own agreed offer. They are plausible and internally consistent, and
- * the page works, but nobody has signed off on them — confirm the real levels,
- * prices and benefits with the organizers before this is promoted or printed.
+ * Prices confirmed by the organizers 2026-08: Platinum $5,000, Gold $2,500,
+ * Silver $1,000, Bronze $500. They replace the placeholder figures that had
+ * been carried over from a sample flyer (see ADR-0006).
  *
  * Everything is editable from this one file. The /sponsors page, the about-page
- * section, the enquiry links and the QR target all read from it, so changing a
- * price or moving a benefit between levels needs no other edit. Adding or
- * removing a benefit needs an entry in SPONSOR_BENEFITS and a matching glyph in
- * SponsorTiers' ICONS map; the coverage meter sizes itself.
+ * section, the enquiry links, the printed brochure and the QR target all read
+ * from it, so changing a price or moving a benefit between levels needs no
+ * other edit. Adding or removing a benefit needs an entry in SPONSOR_BENEFITS
+ * and a matching glyph in SponsorTiers' ICONS map; the coverage meter sizes
+ * itself.
  *
- * The design is the site's own — charcoal surfaces, one yellow accent, an
- * accordion with a coverage meter. Deliberately not the reference flyer's
- * four-column table, medallions or metal colour coding.
+ * Every level unlocks something the level below does not. That is a deliberate
+ * constraint, not a coincidence — the previous offer had Silver and Bronze
+ * unlocking identical benefits, which gave a business no reason to pay the
+ * difference.
  */
 
 export type SponsorTierId = "platinum" | "gold" | "silver" | "bronze";
@@ -23,14 +23,13 @@ export type SponsorTierId = "platinum" | "gold" | "silver" | "bronze";
 export interface SponsorTier {
   id: SponsorTierId;
   name: string;
-  /** Display amount. Every level is a floor, not a fixed price. */
+  /** Display amount. Each level is a minimum commitment, not a ceiling. */
   amount: string;
-  /** One line on who the level suits. */
+  /** One line on who the level suits, written for a decision-maker. */
   blurb: string;
   /**
-   * Weight of the yellow accent rail, 0-1. Hierarchy is carried by this and by
-   * the coverage meter — deliberately not by platinum/gold/silver/bronze metal
-   * gradients, which would be mimicking the flyer rather than designing.
+   * Weight of the accent rail, 0-1. Hierarchy is carried by this and by the
+   * coverage meter rather than by metal gradients.
    */
   weight: number;
 }
@@ -40,34 +39,39 @@ export const SPONSOR_TIERS: SponsorTier[] = [
   {
     id: "platinum",
     name: "Platinum",
-    amount: "$2,000+",
-    blurb: "Everywhere the race puts a name: the shirt, the banner, the site and the stage.",
+    amount: "$5,000",
+    blurb:
+      "Presenting partner. Category exclusivity, top billing on every asset the event produces, and a post-event performance report.",
     weight: 1,
   },
   {
     id: "gold",
     name: "Gold",
-    amount: "$1,000+",
-    blurb: "Your logo on the shirt runners keep and wear long after race day.",
-    weight: 0.7,
+    amount: "$2,500",
+    blurb:
+      "Brand on the race shirt runners keep, exhibitor space at the festival, and named recognition from the stage.",
+    weight: 0.72,
   },
   {
     id: "silver",
     name: "Silver",
-    amount: "$500+",
-    blurb: "On-site presence from packet pickup through the awards.",
-    weight: 0.46,
+    amount: "$1,000",
+    blurb:
+      "Course and venue signage across the five-hour programme, with a stage mention at the awards.",
+    weight: 0.48,
   },
   {
     id: "bronze",
     name: "Bronze",
-    amount: "$250+",
-    blurb: "A local business standing visibly behind the race.",
+    amount: "$500",
+    blurb:
+      "Community-supporter listing — venue signage, digital listing and complimentary entries for your team.",
     weight: 0.3,
   },
 ];
 
-export type BenefitIcon = "shirt" | "banner" | "globe" | "mic";
+export type BenefitIcon =
+  | "shirt" | "banner" | "globe" | "mic" | "bib" | "booth" | "ticket" | "chart";
 
 export interface SponsorBenefit {
   id: string;
@@ -78,42 +82,69 @@ export interface SponsorBenefit {
   tiers: SponsorTierId[];
 }
 
-/**
- * NOTE while these are placeholders: `silver` and `bronze` currently unlock the
- * same two benefits, so there is no reason to pick Silver. If the real offer
- * keeps four levels, give each one something the level below does not have.
- */
 export const SPONSOR_BENEFITS: SponsorBenefit[] = [
   {
-    id: "tshirt",
-    label: "Your logo on the race t-shirt",
+    id: "exclusive",
+    label: "Category exclusivity and presenting billing",
     detail:
-      "Printed on the official race t-shirt that every registered runner receives at packet pickup and wears on the course.",
+      "Sole sponsor in your business category, and the presenting line on the event name wherever it appears — site, signage, email and press.",
+    icon: "chart",
+    tiers: ["platinum"],
+  },
+  {
+    id: "tshirt",
+    label: "Logo on the official race shirt",
+    detail:
+      "Printed on the shirt every registered runner receives at packet pickup. Platinum takes the primary position; Gold is placed alongside.",
     icon: "shirt",
     tiers: ["platinum", "gold"],
   },
   {
-    id: "banner",
-    label: "Logo on the event banner and signage",
+    id: "bib",
+    label: "Logo on the race bib",
     detail:
-      "On the event banner and on-site signage at the Rock Creek Park Tennis Center, in front of everyone arriving from 7:00 AM through the festival at noon.",
+      "On the bib worn by every finisher, and therefore in every finish-line and podium photograph taken on the day.",
+    icon: "bib",
+    tiers: ["platinum"],
+  },
+  {
+    id: "booth",
+    label: "Exhibitor space at the cultural festival",
+    detail:
+      "A staffed table or tent in the festival area from the awards at 10:00 through noon, with direct access to runners and families.",
+    icon: "booth",
+    tiers: ["platinum", "gold"],
+  },
+  {
+    id: "banner",
+    label: "Banner and on-site signage",
+    detail:
+      "Your banner at the Rock Creek Park Tennis Center from before 7:00 AM packet pickup through the festival at noon — a five-hour presence, not a five-second impression.",
     icon: "banner",
     tiers: ["platinum", "gold", "silver", "bronze"],
   },
   {
-    id: "web",
-    label: "Logo on the website and social posts",
+    id: "stage",
+    label: "Named from the stage",
     detail:
-      "Your logo on gadaglobalrun.com and in the event's social media posts in the run-up to race day and afterwards.",
-    icon: "globe",
-    tiers: ["platinum"],
+      "Read out at the 8:15 opening ceremony and again at the 10:00 awards, while the field and their families are gathered.",
+    icon: "mic",
+    tiers: ["platinum", "gold", "silver"],
   },
   {
-    id: "stage",
-    label: "Named from the stage at the ceremony and awards",
+    id: "web",
+    label: "Placement on the website and social channels",
     detail:
-      "Your business named from the stage at the 8:15 AM opening ceremony and again at the 10:00 AM awards, while the crowd is gathered.",
-    icon: "mic",
+      "Your logo on gadaglobalrun.com and in the event's social campaign before, during and after race day, with a link to your site.",
+    icon: "globe",
+    tiers: ["platinum", "gold", "silver", "bronze"],
+  },
+  {
+    id: "entries",
+    label: "Complimentary entries for your team",
+    detail:
+      "Ten entries at Platinum, six at Gold, four at Silver, two at Bronze — for staff, clients or family, in any wave.",
+    icon: "ticket",
     tiers: ["platinum", "gold", "silver", "bronze"],
   },
 ];
@@ -136,10 +167,13 @@ export function isSponsorTier(value: unknown): value is SponsorTierId {
   );
 }
 
-/** How many of the four a level unlocks — drives the coverage meter. */
+/** How many benefits a level unlocks — drives the coverage meter. */
 export function includedCount(tier: SponsorTierId): number {
   return SPONSOR_BENEFITS.filter((b) => b.tiers.includes(tier)).length;
 }
+
+/** Total benefits on offer, so the meter never hard-codes a count. */
+export const SPONSOR_BENEFIT_COUNT = SPONSOR_BENEFITS.length;
 
 export const SPONSOR_EMAIL = "info@gadaglobalrun.com";
 
@@ -151,13 +185,13 @@ export function sponsorMailto(tier?: SponsorTier): string {
   const body = [
     tier
       ? `We would like to sponsor the Gada Global 5K at the ${tier.name} level (${tier.amount}).`
-      : "We would like to sponsor the Gada Global 5K.",
+      : "We would like to discuss sponsoring the Gada Global 5K.",
     "",
-    "Business name:",
-    "Contact name:",
+    "Organization:",
+    "Contact name and title:",
     "Phone:",
     "",
-    "Please send us the next steps and the artwork deadline.",
+    "Please send the sponsorship agreement and the artwork deadline.",
   ].join("\n");
   return `mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

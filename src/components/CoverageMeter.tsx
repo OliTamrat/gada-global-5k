@@ -26,7 +26,11 @@ export function CoverageMeter({
       {SPONSOR_BENEFITS.map((_, i) => (
         <span
           key={i}
-          className="h-[5px] w-5 md:w-6 rounded-full transition-colors"
+          // Segment width follows the number of benefits, so the meter stays
+          // the same overall length whether the offer has four or eight.
+          className={`h-[5px] rounded-full transition-colors ${
+            SPONSOR_BENEFITS.length > 5 ? "w-3 md:w-3.5" : "w-5 md:w-6"
+          }`}
           style={{
             background:
               i < filled

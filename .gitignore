@@ -43,3 +43,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Brochure build output — regenerate with design/brochure/build.py
+design/brochure/*.html
+design/brochure/*.png
+design/brochure/*.pdf
+design/brochure/assets/
+design/letterhead/*.html
+design/letterhead/*.png
+design/letterhead/*.pdf
