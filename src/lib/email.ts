@@ -3,25 +3,9 @@
 
 import { WAVE_META, coerceWave, type Wave } from "@/lib/waves";
 import { siteUrl } from "@/lib/site";
+import { EVENT } from "@/lib/event";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-
-export const EVENT = {
-  name: "Gada Global 5K",
-  // The public-facing brand. "Gada Global Inc." below is the registered legal
-  // entity the brand operates under — use it only where the legal name is
-  // required, never as a heading a runner reads.
-  brand: "Gada Global Run",
-  date: "Saturday, October 3, 2026",
-  startTime: "9:00 AM",
-  packetPickup: "7:00 AM",
-  awardsTime: "10:00 AM",
-  programHours: "7:00 AM to 12:00 PM",
-  location: "Rock Creek Park Tennis Center",
-  address: "5220 16th St NW, Washington, DC 20011",
-  organization: "Gada Global Inc.",
-  supportEmail: "info@gadaglobalrun.com",
-} as const;
 
 export interface RegistrationConfirmation {
   firstName: string;
@@ -281,7 +265,7 @@ function buildHtml(d: RegistrationConfirmation): string {
                   <a href="mailto:${esc(EVENT.supportEmail)}" style="color:#E8B930;font-weight:600;text-decoration:none;">${esc(EVENT.supportEmail)}</a>
                 </p>
                 <p style="margin:0 0 4px 0;color:#6b6459;font-size:12px;line-height:1.6;">
-                  ${esc(EVENT.brand)} &bull; Celebrating Oromo heritage through running.
+                  ${esc(EVENT.brand)} &bull; ${esc(EVENT.tagline)}
                 </p>
                 <p style="margin:0 0 4px 0;color:#5a544c;font-size:11px;line-height:1.6;">
                   &copy; 2026 ${esc(EVENT.organization)} All rights reserved. You are receiving

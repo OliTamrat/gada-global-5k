@@ -1,12 +1,14 @@
-# Gada Global 5K — overview
+# Gada Global Peace Run — overview
 
-Marketing site, registration, and race-day timing for an annual community
-5K celebrating Oromo heritage and the Irrecha festival, run by Gada Global
+Marketing site, registration, and race-day timing for an annual, timed 5K
+road race open to every community, run by Gada Global
 Inc. Saturday, October 3, 2026, Rock Creek Park Tennis Center, Washington
 DC — race start 9:00 AM. (The venue moved from Rock Creek Parkway in July
 2026; anything describing a point-to-point parkway course is stale.)
 
-Registration tiers live in `src/lib/registration.ts` (Early Bird /
+The event's name and public details live in `src/lib/event.ts` — the one
+place to change them (see `decisions/0007`). Registration tiers live in
+`src/lib/registration.ts` (Early Bird /
 Standard / Race Week); prize purse is $1,200 — top three men and top three
 women. Domain: **gadaglobalrun.com** — site canonical on the www host,
 email on the apex (`info@gadaglobalrun.com`; Resend verifies the apex).

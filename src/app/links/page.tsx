@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { LINK_SECTIONS, activeSocials, type SiteLink, type SocialLink } from "@/lib/links";
 import { LINK_ICONS } from "@/components/LinkIcons";
 import { ShareButton } from "@/components/ShareButton";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 import { siteUrl } from "@/lib/site";
 
 const SITE = siteUrl();
@@ -12,11 +12,11 @@ const SITE = siteUrl();
 export const metadata: Metadata = {
   title: "Gada Global Run — All Links",
   description:
-    "Register for the Gada Global 5K, shop merch, check live results, and find out how to collect your race bib.",
+    "Register for the Gada Global Peace Run, shop merch, check live results, and find out how to collect your race bib.",
   alternates: { canonical: `${SITE}/links` },
   openGraph: {
     title: "Gada Global Run — All Links",
-    description: "Everything for the Gada Global 5K in one place.",
+    description: "Everything for the Gada Global Peace Run in one place.",
     url: `${SITE}/links`,
   },
 };
@@ -137,7 +137,7 @@ export default function LinksPage() {
             {EVENT.brand}
           </h1>
           <p className="text-[14px] leading-[1.65] text-white/60 mt-2.5 max-w-[330px] mx-auto">
-            Celebrating Oromo heritage through running.
+            {EVENT.tagline}
           </p>
           <div className="inline-flex items-center gap-2 mt-4 rounded-full bg-white/8 border border-white/12 px-4 py-2">
             <span className="w-1.5 h-1.5 rounded-full bg-yellow" />

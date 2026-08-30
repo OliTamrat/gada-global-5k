@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Promo Kit | Gada Global 5K",
+  title: "Promo Kit | Gada Global Peace Run",
   description:
-    "QR codes and shareable links for Gada Global 5K posters, flyers, and social media.",
+    "QR codes and shareable links for Gada Global Peace Run posters, flyers, and social media.",
   robots: { index: false, follow: false },
 };
 

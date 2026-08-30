@@ -1,4 +1,4 @@
-# Gada Global 5K — Project Guidelines
+# Gada Global Peace Run — Project Guidelines
 
 ## Golden Rules
 - **NEVER use emojis in any UI** — use SVG icons or text instead
@@ -18,9 +18,17 @@ levels, ADR numbering) are enforced by `scripts/docs-truth.mjs`, run by
 
 ## What this is
 
-Marketing site, registration, and race-day timing system for the **Gada Global 5K**, an
-annual community race celebrating Oromo heritage and the Irrecha festival, run by
+Marketing site, registration, and race-day timing system for the **Gada Global Peace
+Run**, an annual professionally timed 5K road race in Rock Creek Park, Washington DC,
+open to runners and walkers of every background, age and ability. Run by
 **Gada Global Inc.**
+
+**The event's name and public details live in `src/lib/event.ts` — change them there
+and nowhere else.** It was renamed from "Gada Global 5K — Irrecha Celebration Run" in
+2026-08 and repositioned as a business event rather than a cultural celebration; the
+race is still held on the Irreechaa weekend but is not an Irreechaa event, and the
+copy must not reintroduce that framing. `docs/decisions/0007` records why, and
+`scripts/docs-truth.mjs` fails if this file names an event `event.ts` does not.
 
 **Stack:** Next.js 16.2.9 (App Router, Turbopack), React 19, Tailwind v4, Stripe,
 Postgres via `pg`, Resend for email, `qrcode` for generated QR codes.
@@ -43,7 +51,7 @@ only alongside actual scanning code.
 | Opening ceremony | 8:15 AM |
 | Race start | **9:00 AM** |
 | Awards | 10:00 AM |
-| Cultural festival | 10:45 AM – 12:00 PM |
+| Community gathering | 10:45 AM – 12:00 PM (**what actually runs here is unconfirmed** — the cultural festival is a separate day, so the slot is named neutrally on the site) |
 | Program window | 7:00 AM to noon |
 | Prizes | $300 / $200 / $100 for top three **men** and top three **women** — $1,200 purse |
 | Registration tiers | Early Bird **$45**, Standard **$48**, Race Week **$50** (`src/lib/registration.ts` is the source of truth) |
@@ -207,11 +215,11 @@ never created, which produced a successful payment with no bib and no email.
    preview deployments can send test confirmations.
 
 **No longer needed as of 2026-08-01** — the domain is verified, so
-`REGISTRATION_FROM_EMAIL="Gada Global 5K <info@gadaglobalrun.com>"` now sends to any
+`REGISTRATION_FROM_EMAIL="Gada Global Peace Run <info@gadaglobalrun.com>"` now sends to any
 recipient. Kept for reference only:
 
 **Shortcut for testing before DNS is ready:** set
-`REGISTRATION_FROM_EMAIL="Gada Global 5K <onboarding@resend.dev>"` and register with
+`REGISTRATION_FROM_EMAIL="Gada Global Peace Run <onboarding@resend.dev>"` and register with
 **`gadaglobalrun@gmail.com`** as the runner email. An unverified Resend account can only
 send to its own signup address, so that specific address is the only one that will
 receive anything until the domain verifies.
@@ -225,8 +233,12 @@ receive anything until the domain verifies.
 - The 5K route is described generically ("looping through the surrounding park roads
   and trails"). Replace with the real route once mapped.
 - Proposal documents (`GADA_GLOBAL_5K_BUSINESS_PROPOSAL.md`, `public/proposal.html`,
-  `proposal/index.html`) still carry the old venue and 7:30 AM start. Intentionally
-  untouched — they may already be with sponsors.
+  `proposal/index.html`) still carry the old venue, a 7:30 AM start, **the old event
+  name and the Irreechaa framing**. Intentionally untouched — they may already be with
+  sponsors, and rewriting a document someone is holding is worse than one that is
+  visibly of its date. Reissue deliberately or not at all (ADR-0007).
+- **Physical goods may carry the old name or Irreechaa artwork** — medals, shirts and
+  anything already at a printer. Check proofs before reordering.
 
 ---
 

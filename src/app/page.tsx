@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Countdown } from "@/components/Countdown";
+import { EVENT } from "@/lib/event";
 import { Particles } from "@/components/Particles";
 import { HeroVideo } from "@/components/HeroVideo";
 import { WordRotator } from "@/components/WordRotator";
@@ -31,7 +32,7 @@ const Icons = {
 };
 
 const eventPortfolio = [
-  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. October 3, 2026 at the Rock Creek Park Tennis Center, DC.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg> },
+  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual road race, open to every community. October 3, 2026 at the Rock Creek Park Tennis Center, DC.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8L12 14l5.5-6M12 14v8"/></svg> },
   { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> },
   { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg> },
   { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels.", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> },
@@ -52,11 +53,10 @@ export default function Home() {
         <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-32 pb-12 lg:pt-24 lg:pb-0">
           <div className="max-w-[780px]">
             <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.8rem,5.5vw,4.8rem)] font-bold leading-[1.08] text-white mb-16 lg:mb-10 tracking-tight">
-              <span className="block hero-line">Let&apos;s celebrate</span>
-              <span className="block hero-line"><span className="text-yellow">Oromo</span> heritage</span>
+              <span className="block hero-line">Run for <span className="text-yellow">peace</span>.</span>
+              <span className="block hero-line">Run with</span>
               <span className="block hero-line">
-                through{" "}
-                <WordRotator words={["running.", "unity.", "movement."]} holdDuration={2800} className="text-yellow hero-accent min-w-[200px]" />
+                <WordRotator words={["Washington DC.", "your family.", "everyone."]} holdDuration={2800} className="text-yellow hero-accent min-w-[200px]" />
               </span>
             </h1>
             <div className="hero-cta-enter grid grid-cols-2 sm:flex sm:flex-wrap gap-3 max-w-[400px] sm:max-w-none">
@@ -104,7 +104,7 @@ export default function Home() {
             <div className="dark-card rounded-2xl p-6 flex flex-col min-h-[160px]">
               <div className="flex items-center gap-2 mb-4"><div className="w-8 h-8 rounded-full bg-green-deep/20 flex items-center justify-center text-green-light">{Icons.medal}</div><div><div className="text-sm font-bold text-white">Event Highlights</div><div className="text-[12px] text-white/78">3 Key Features</div></div></div>
               <div className="space-y-3 flex-1">
-                {[{ badge: "5K", label: "Rock Creek Tennis Center", sub: "Washington, DC" },{ badge: "IRR", label: "Irrecha Celebration", sub: "Oct 3, 2026" },{ badge: "COM", label: "Community Festival", sub: "Music, Food, Dance" }].map((item) => (
+                {[{ badge: "5K", label: "Rock Creek Tennis Center", sub: "Washington, DC" },{ badge: "RUN", label: "Timed 5K Run & Walk", sub: "Oct 3, 2026" },{ badge: "ALL", label: "Open to Every Community", sub: "All ages and abilities" }].map((item) => (
                   <div key={item.label} className="flex items-center gap-3"><span className="w-8 h-5 rounded bg-yellow/15 text-yellow text-[11px] font-black flex items-center justify-center tracking-wider">{item.badge}</span><div className="flex-1 min-w-0"><div className="text-xs font-semibold text-white truncate">{item.label}</div><div className="text-[12px] text-white/75">{item.sub}</div></div></div>
                 ))}
               </div>
@@ -122,22 +122,22 @@ export default function Home() {
           <ScrollReveal>
             <div className="relative h-[380px] md:h-[520px]">
               <Image src="https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=600&q=80" alt="Runners at sunrise" width={480} height={460} className="w-[78%] h-[88%] object-cover rounded-2xl shadow-[0_24px_64px_rgba(0,0,0,0.12)]" />
-              <Image src="/images/finisher-medal.jpg" alt="Gada 5K Run finisher medal" width={240} height={320} className="absolute -bottom-4 right-0 w-[48%] h-[70%] object-contain bg-black rounded-2xl border-4 border-cream shadow-[0_16px_48px_rgba(0,0,0,0.15)] p-2" />
+              <Image src="/images/course/rock-creek.jpg" alt="The course through Rock Creek Park" width={240} height={320} className="absolute -bottom-4 right-0 w-[48%] h-[70%] object-cover rounded-2xl border-4 border-cream shadow-[0_16px_48px_rgba(0,0,0,0.15)]" />
               <div className="absolute top-6 right-8 yellow-card w-[88px] h-[88px] rounded-full flex flex-col items-center justify-center font-black text-xl leading-none shadow-[0_8px_24px_rgba(245,200,66,0.3)]">5K<small className="text-[0.5rem] font-bold tracking-wider uppercase mt-0.5">Run/Walk</small></div>
             </div>
           </ScrollReveal>
           <ScrollReveal>
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">About the Event</span>
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-6">Celebrating Oromo Heritage Through Movement</h2>
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-6">A Timed 5K, Open to Everyone</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/88 max-w-[520px] mb-10">
-              The Gada Global 5K is more than a race &mdash; it&apos;s a celebration of the Oromo people&apos;s rich cultural heritage, timed with the annual <strong className="text-charcoal">Irrecha</strong> thanksgiving festival. Experience the power of community as we run together through one of Washington DC&apos;s most beautiful parkways.
+              The Gada Global Peace Run is a professionally timed 5K road race produced by <strong className="text-charcoal">Gada Global Inc.</strong> &mdash; a permitted course, staffed race-day operations, wave starts and published results. It is held each autumn in Rock Creek Park, and it is open to runners and walkers of every background, age and ability.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { icon: Icons.leaf, title: "Irrecha Festival", desc: "Celebrating the Oromo thanksgiving to Waaqa at the water\u2019s edge" },
-                { icon: Icons.trophy, title: "5K Run & Walk", desc: "Scenic route through Rock Creek Park for all fitness levels" },
-                { icon: Icons.music, title: "Cultural Program", desc: "Live music, traditional dance, and Oromo cuisine" },
-                { icon: Icons.users, title: "Community Unity", desc: "Bringing together the global Oromo diaspora" },
+                { icon: Icons.trophy, title: "Timed 5K Run & Walk", desc: "Flat, paved course through Rock Creek Park, scored for every finisher" },
+                { icon: Icons.users, title: "Open to All Ages", desc: "Runners and walkers from age five up, with a Kids & Family wave" },
+                { icon: Icons.users, title: "A Morning, Not an Hour", desc: "Doors at 7:00 AM and the program open until noon \u2014 come for the whole thing" },
+                { icon: Icons.leaf, title: "Built Around Peace", desc: "Named for a tradition of consensus, dialogue and shared leadership" },
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
                   <div className="w-10 h-10 rounded-xl bg-yellow/15 flex items-center justify-center text-gold-dim mb-3">{card.icon}</div>
@@ -172,7 +172,7 @@ export default function Home() {
                 visual: (
                   <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5 px-3">
                     {/* Race bib: pin holes at the corners, event band, dominant
-                        number, and a perforated tear-off strip for the chip. */}
+                        number, and the tear-off stub with the scan code. */}
                     <div className="relative w-full max-w-[172px] bg-white rounded-[5px] shadow-[0_6px_18px_rgba(0,0,0,0.28)] rotate-[-1.5deg] overflow-hidden">
                       {/* pin holes */}
                       <span className="absolute top-[5px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
@@ -183,7 +183,7 @@ export default function Home() {
                       {/* event band */}
                       <div className="bg-charcoal px-2 pt-[7px] pb-[5px] text-center">
                         <div className="text-[7px] font-black tracking-[2.5px] uppercase text-yellow leading-none">
-                          Gada Global 5K
+                          {EVENT.name}
                         </div>
                         <div className="text-[6px] font-semibold tracking-[1.2px] uppercase text-white/55 leading-none mt-[3px]">
                           Oct 3, 2026 &bull; Washington DC
@@ -200,7 +200,7 @@ export default function Home() {
                       {/* perforated tear strip */}
                       <div className="border-t border-dashed border-charcoal/25 bg-charcoal/[0.04] px-2 py-[4px] flex items-center justify-between">
                         <span className="text-[6px] font-bold tracking-[1px] uppercase text-charcoal/50">
-                          Timing Chip
+                          Scan Code
                         </span>
                         <span className="flex gap-[2px]" aria-hidden="true">
                           {[3, 2, 4, 2, 3, 5, 2].map((w, i) => (
@@ -219,24 +219,41 @@ export default function Home() {
               {
                 icon: Icons.medal,
                 title: "Finisher Medal",
-                desc: "Custom Gada 5K medal celebrating heritage and Irrecha",
+                desc: "Custom finisher medal, awarded to everyone who crosses the line",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light">
-                    <Image src="/images/finisher-medal.jpg" alt="Finisher medal" fill className="object-contain p-4 drop-shadow-[0_4px_12px_rgba(245,200,66,0.3)]" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light flex items-center justify-center">
+                    {/* The medal is the event emblem struck in gold, which is
+                        what a finisher medal actually is. Built from the brand
+                        mark rather than a photograph, so it cannot go stale the
+                        way the previous shot did — that one still carried the
+                        old event name. The disc is gold because the emblem is
+                        navy: on a dark face it would disappear. */}
+                    <div className="flex flex-col items-center">
+                      <span className="w-[14px] h-[15px] rounded-[2px] bg-gradient-to-b from-yellow/80 to-yellow/30" aria-hidden="true" />
+                      <div className="-mt-[2px] w-[88px] h-[88px] rounded-full bg-gradient-to-br from-[#F7D45F] to-[#C99A1E] ring-[3px] ring-[#E8BC3E] shadow-[0_8px_22px_rgba(0,0,0,0.45)] flex items-center justify-center">
+                        <Image
+                          src="/images/brand/gada-global-logo.png"
+                          alt="Finisher medal carrying the Gada Global emblem"
+                          width={425}
+                          height={360}
+                          className="w-[60px] h-auto object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.28)]"
+                        />
+                      </div>
+                    </div>
                   </div>
                 ),
               },
               {
                 icon: Icons.shirt,
                 title: "Official Race Tee",
-                desc: "The Gada Global 5K emblem tee — One World, One Goal",
+                desc: "The Gada Global Peace Run emblem tee — One World, One Goal",
                 visual: (
                   <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/8 to-white/[0.02]">
                     {/* Transparent cutout: the flat-lay shot is a white tee on a
                         light background, which all but vanishes on a dark card. */}
                     <Image
                       src="/products/race-day-tee-cutout.png"
-                      alt="Official Gada Global 5K race tee"
+                      alt="Official Gada Global Peace Run race tee"
                       fill
                       className="object-contain object-center p-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]"
                     />
@@ -302,7 +319,7 @@ export default function Home() {
               Our Event Portfolio
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
-              The Gada Global 5K is just the beginning. Gada Global Run organizes events that bring people together and promote healthy living across all communities.
+              The Peace Run is just the beginning. Gada Global Run organizes events that bring people together and promote healthy living across all communities.
             </p>
           </ScrollReveal>
 
@@ -326,7 +343,7 @@ export default function Home() {
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Start With the 5K</h3>
                 <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
-                  The inaugural Gada Global 5K on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
+                  The inaugural Gada Global Peace Run on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
@@ -412,19 +429,19 @@ export default function Home() {
         <InteractiveSchedule />
       </section>
 
-      {/* ══ CULTURE BANNER ══ */}
+      {/* ══ WHY 'PEACE RUN' ══ */}
       <section className="text-white text-center py-16 md:py-20 px-6 md:px-16 lg:px-20" style={{ background: `linear-gradient(135deg, rgba(27,94,32,0.92), rgba(13,59,15,0.95)), url('https://images.unsplash.com/photo-1547483238-2cbf881a559f?w=1600&q=80') center/cover` }}>
         <ScrollReveal>
-          <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Irrecha &amp; Oromo Heritage</span>
-          <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white max-w-[600px] mx-auto mb-5 tracking-tight">More Than a Race,<br />It&apos;s a Celebration</h2>
-          <p className="text-base md:text-[16px] leading-[1.85] text-white/92 max-w-[500px] mx-auto mb-14">Irrecha is the Oromo people&apos;s thanksgiving festival, honoring Waaqa (God) and the renewal of life.</p>
+          <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-light mb-5 block">Why We Run</span>
+          <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-white max-w-[600px] mx-auto mb-5 tracking-tight">A Race Named<br />for Peace</h2>
+          <p className="text-base md:text-[16px] leading-[1.85] text-white/92 max-w-[500px] mx-auto mb-14">Gada Global Inc. takes its name from the Gadaa system, a governance tradition recognised by UNESCO and built on consensus, accountability and the peaceful handover of authority. Those are the values we produce this race around, and they belong to everyone who lines up.</p>
         </ScrollReveal>
         <ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[920px] mx-auto">
             {[
-              { icon: Icons.tree, title: "The Odaa Tree", desc: "Sacred symbol of the Gada system \u2014 democratic governance, one of Africa\u2019s oldest traditions." },
-              { icon: Icons.droplet, title: "Water Blessing", desc: "Thanksgiving at the water\u2019s edge, symbolizing renewal, peace, and harmony with nature." },
-              { icon: Icons.globe, title: "Global Diaspora", desc: "Connecting Oromo communities worldwide through sport, culture, and shared identity." },
+              { icon: Icons.tree, title: "Common Ground", desc: "One start line and one finish line, whatever your background, faith or first language." },
+              { icon: Icons.droplet, title: "Dialogue Over Division", desc: "Consensus is how the Gadaa tradition settles differences. A shared course does something similar." },
+              { icon: Icons.globe, title: "Open to the Region", desc: "Runners, walkers and families from across Washington DC, Maryland and Virginia \u2014 and anyone visiting." },
             ].map((item) => (
               <div key={item.title} className="p-8 rounded-2xl bg-white/8 border border-white/10 backdrop-blur-sm hover:bg-white/12 transition-colors">
                 <div className="text-yellow mb-5">{item.icon}</div>
@@ -445,7 +462,7 @@ export default function Home() {
               One Race, Every Community
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
-              The Gada Global 5K is open to all runners, walkers, and supporters regardless of background. While we celebrate Oromo heritage, this event is designed to bring together the full diversity of Washington DC &mdash; because running has no borders.
+              The Gada Global Peace Run is open to all runners, walkers and supporters, whatever their background or beliefs. It is a public road race, not a celebration of any one community &mdash; it is designed to bring together the full diversity of Washington DC, because running has no borders.
             </p>
           </ScrollReveal>
 

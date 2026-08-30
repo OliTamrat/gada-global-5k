@@ -49,7 +49,7 @@ export const products: Product[] = [
     id: "race-day-tee",
     name: "Race Day Tee",
     description:
-      "The official Gada Global 5K tee, carrying the globe-and-runners emblem with 'Run Together, Achieve Together, Inspire Together' and 'One World, One Goal'. Soft cotton, front print.",
+      "The official Gada Global Peace Run tee, carrying the globe-and-runners emblem with 'Run Together, Achieve Together, Inspire Together' and 'One World, One Goal'. Soft cotton, front print.",
     price: 3500,
     image: "/products/race-day-tee.jpg",
     color: "from-[#1B4A8B] to-[#4CAF50]",

@@ -7,7 +7,7 @@ const schedule = [
   {
     time: "7:00 AM",
     title: "Packet Pickup Opens",
-    desc: "Collect your race bib and official Gada Global 5K t-shirt at the start/finish area at the Rock Creek Park Tennis Center, 5220 16th St NW.",
+    desc: "Collect your race bib and official Gada Global Peace Run t-shirt at the start/finish area at the Rock Creek Park Tennis Center, 5220 16th St NW.",
     details: ["Bring photo ID and registration confirmation", "T-shirt exchange available for sizing", "Course maps and safety briefing provided", "Water and light refreshments available"],
     duration: "7:00 - 8:15 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>,
@@ -34,7 +34,7 @@ const schedule = [
   {
     time: "10:00 AM",
     title: "Awards Ceremony",
-    desc: "Cash prizes for the top three men and top three women: 300 dollars for first, 200 for second, and 100 for third in each category. Every finisher receives the official Gada Global 5K medal.",
+    desc: "Cash prizes for the top three men and top three women: 300 dollars for first, 200 for second, and 100 for third in each category. Every finisher receives the official Gada Global Peace Run medal.",
     details: ["Men's top 3: $300, $200, $100 cash", "Women's top 3: $300, $200, $100 cash", "Age group awards: 14-19, 20-29, 30-39, 40-49, 50+", "Finisher medals for all participants"],
     duration: "10:00 - 10:45 AM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4a2 2 0 01-2-2V4h4M18 9h2a2 2 0 002-2V4h-4M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22h10c0-2-0.85-3.25-2.03-3.79A1.06 1.06 0 0114 17v-2.34"/><path d="M18 2H6v7a6 6 0 1012 0V2z"/></svg>,
@@ -42,9 +42,9 @@ const schedule = [
   },
   {
     time: "10:45 AM",
-    title: "Irrecha Cultural Festival",
-    desc: "The heart of the event. Enjoy live traditional Oromo music, dance performances, authentic Ethiopian food, a kids zone, and community gathering.",
-    details: ["Live traditional Oromo music and dance", "Ethiopian food vendors: injera, kitfo, coffee ceremony", "Kids zone with face painting and activities", "Community vendor booths and cultural exhibits"],
+    title: "Community Gathering",
+    desc: "The morning stays open after the awards \u2014 time for runners, families and supporters to gather, take photographs and meet the people they ran with before the program closes at noon.",
+    details: ["Open to runners, families and spectators", "Photographs with finishers and award winners", "Race information desk stays staffed", "Program closes at 12:00 PM"],
     duration: "10:45 AM - 12:00 PM",
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
     color: "yellow" as const,

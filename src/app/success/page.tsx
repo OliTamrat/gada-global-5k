@@ -28,7 +28,7 @@ function SuccessContent() {
         <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/68 mb-6">
           {isRegistration ? (
             <>
-              Welcome to the Gada Global 5K{name ? `, ${name}` : ""}! You&apos;ll
+              Welcome to the Gada Global Peace Run{name ? `, ${name}` : ""}! You&apos;ll
               receive a confirmation email with your race details shortly.
             </>
           ) : (

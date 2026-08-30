@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getRaceEntry } from "@/lib/race";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 import { WAVE_META } from "@/lib/waves";
 import { PrintButton } from "@/components/PrintButton";
 
@@ -10,7 +10,7 @@ import { PrintButton } from "@/components/PrintButton";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Race Bib | Gada Global 5K",
+  title: "Race Bib | Gada Global Peace Run",
   robots: { index: false, follow: false },
 };
 

@@ -115,14 +115,14 @@ BACK = f"""
 
   <div class="eyebrow" style="color:var(--gold);margin-bottom:12px">The Organization</div>
   <p style="font-size:11px;line-height:1.85;color:rgba(255,255,255,.85)">
-    Gada Global Inc. produces timed road races and cultural programming in the
+    Gada Global Inc. produces timed road races and community events in the
     Washington DC metropolitan area. We design, staff and operate each event
     end to end — registration and payments, course operations, wave starts,
     live public results, and a written report to every partner afterwards.
   </p>
   <p style="font-size:11px;line-height:1.85;color:rgba(255,255,255,.85);margin-top:12px">
-    The Gada Global 5K Run is our flagship event, held each October alongside
-    Irrecha, the Oromo thanksgiving festival.
+    The Gada Global Peace Run is our flagship event, held each October in Rock
+    Creek Park — a timed 5K open to runners and walkers of every community.
   </p>
 
   <div style="height:1px;background:rgba(255,255,255,.16);margin:24px 0"></div>
@@ -246,8 +246,8 @@ VALUE = [
      "Every registered runner receives the official race shirt. Logos printed on it are worn "
      "around the DC metro area long after October 3."),
     ("A defined, reachable audience",
-     "Runners and families across the Washington DC metropolitan area, and the Oromo diaspora "
-     "community the event was founded to serve."),
+     "Runners, walkers and families from across the Washington DC metropolitan area \u2014 a "
+     "broad regional field rather than a single community."),
     ("Reported, not estimated",
      "Registration, results and merchandise run on our own platform. Platinum partners receive "
      "a written post-event report — field size, demographics and campaign placement."),
