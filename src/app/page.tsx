@@ -130,7 +130,7 @@ export default function Home() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">About the Event</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight mb-6">A Timed 5K, Open to Everyone</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/88 max-w-[520px] mb-10">
-              The Gada Global Peace Run is a professionally timed 5K road race produced by <strong className="text-charcoal">Gada Global Inc.</strong> &mdash; a permitted course, staffed race-day operations, wave starts and published results. It is held each autumn in Rock Creek Park, and it is open to runners and walkers of every background, age and ability.
+              The Gada Global 5K Peace Run is a professionally timed 5K road race produced by <strong className="text-charcoal">Gada Global Inc.</strong> &mdash; a permitted course, staffed race-day operations, wave starts and published results. It is held each autumn in Rock Creek Park, and it is open to runners and walkers of every background, age and ability.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
@@ -246,14 +246,14 @@ export default function Home() {
               {
                 icon: Icons.shirt,
                 title: "Official Race Tee",
-                desc: "The Gada Global Peace Run emblem tee — One World, One Goal",
+                desc: "The Gada Global 5K Peace Run emblem tee — One World, One Goal",
                 visual: (
                   <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-white/8 to-white/[0.02]">
                     {/* Transparent cutout: the flat-lay shot is a white tee on a
                         light background, which all but vanishes on a dark card. */}
                     <Image
                       src="/products/race-day-tee-cutout.png"
-                      alt="Official Gada Global Peace Run race tee"
+                      alt="Official Gada Global 5K Peace Run race tee"
                       fill
                       className="object-contain object-center p-2 drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]"
                     />
@@ -319,7 +319,7 @@ export default function Home() {
               Our Event Portfolio
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
-              The Peace Run is just the beginning. Gada Global Run organizes events that bring people together and promote healthy living across all communities.
+              The Peace Run is just the beginning. Gada Global organizes events that bring people together and promote healthy living across all communities.
             </p>
           </ScrollReveal>
 
@@ -343,7 +343,7 @@ export default function Home() {
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Start With the 5K</h3>
                 <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
-                  The inaugural Gada Global Peace Run on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
+                  The inaugural Gada Global 5K Peace Run on October 3, 2026 launches our mission. Whether you&apos;re chasing a personal record or running your very first race, this is where it begins.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
@@ -462,7 +462,7 @@ export default function Home() {
               One Race, Every Community
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[560px] mx-auto">
-              The Gada Global Peace Run is open to all runners, walkers and supporters, whatever their background or beliefs. It is a public road race, not a celebration of any one community &mdash; it is designed to bring together the full diversity of Washington DC, because running has no borders.
+              The Gada Global 5K Peace Run is open to all runners, walkers and supporters, whatever their background or beliefs. It is a public road race, not a celebration of any one community &mdash; it is designed to bring together the full diversity of Washington DC, because running has no borders.
             </p>
           </ScrollReveal>
 

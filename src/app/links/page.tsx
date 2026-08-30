@@ -10,13 +10,13 @@ import { siteUrl } from "@/lib/site";
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Gada Global Run — All Links",
+  title: `${EVENT.lockup} — All Links`,
   description:
-    "Register for the Gada Global Peace Run, shop merch, check live results, and find out how to collect your race bib.",
+    "Register for the Gada Global 5K Peace Run, shop merch, check live results, and find out how to collect your race bib.",
   alternates: { canonical: `${SITE}/links` },
   openGraph: {
-    title: "Gada Global Run — All Links",
-    description: "Everything for the Gada Global Peace Run in one place.",
+    title: `${EVENT.lockup} — All Links`,
+    description: "Everything for the Gada Global 5K Peace Run in one place.",
     url: `${SITE}/links`,
   },
 };

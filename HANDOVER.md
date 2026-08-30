@@ -1,4 +1,4 @@
-# Gada Global Peace Run — Project Handover
+# Gada Global 5K Peace Run — Project Handover
 
 **Prepared by:** DAPS Analytics PLC
 **Prepared for:** Gada Global Inc.
@@ -10,7 +10,7 @@
 
 ## 1. Summary
 
-The Gada Global Peace Run digital platform is **built, deployed and live**, taking real payments.
+The Gada Global 5K Peace Run digital platform is **built, deployed and live**, taking real payments.
 
 > **Renamed 2026-08.** The event was the "Gada Global 5K — Irrecha Celebration Run"
 > and was repositioned as a business event open to every community. The name lives in
@@ -148,7 +148,7 @@ Confirmed from production on August 3, 2026:
 |---|---|
 | Database | Connected — all 7 tables and the bib sequence present |
 | Stripe | **Live mode** — key and webhook secret in place |
-| Email | Sending as `Gada Global Peace Run <info@gadaglobalrun.com>` |
+| Email | Sending as `Gada Global 5K Peace Run <info@gadaglobalrun.com>` |
 | Race-day passcode | Set |
 | Domain | https://www.gadaglobalrun.com |
 
@@ -192,7 +192,7 @@ facts throughout — these are recorded so the two documents read together.
 
 | | Proposal (June 26) | Current |
 |---|---|---|
-| Event name | Gada Global 5K (Irrecha Celebration Run) | Gada Global Peace Run |
+| Event name | Gada Global 5K (Irrecha Celebration Run) | Gada Global 5K Peace Run |
 | Venue | Rock Creek Parkway | Rock Creek Park Tennis Center, 5220 16th St NW |
 | Course | Point-to-point | Start and finish in the same place |
 | Race start | 7:30 AM | 9:00 AM |

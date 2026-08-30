@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
  * own site can be encoded.
  */
 const TARGETS: Record<string, { path: string; label: string }> = {
-  home: { path: "/", label: "Gada Global Peace Run" },
+  home: { path: "/", label: "Gada Global 5K Peace Run" },
   register: { path: "/register", label: "Register" },
   results: { path: "/race", label: "Live Results" },
   shop: { path: "/shop", label: "Shop" },

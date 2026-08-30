@@ -1,4 +1,4 @@
-# Gada Global Peace Run — overview
+# Gada Global | 5K Peace Run — overview
 
 Marketing site, registration, and race-day timing for an annual, timed 5K
 road race open to every community, run by Gada Global

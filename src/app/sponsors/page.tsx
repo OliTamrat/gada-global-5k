@@ -9,14 +9,14 @@ import { EVENT } from "@/lib/event";
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Sponsor the Gada Global Peace Run | Gada Global Run",
+  title: "Sponsor the 5K Peace Run | Gada Global",
   description:
-    "Sponsorship and partnership levels for the Gada Global Peace Run on October 3, 2026 in Washington DC. Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500.",
+    "Sponsorship and partnership levels for the Gada Global 5K Peace Run on October 3, 2026 in Washington DC. Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500.",
   alternates: { canonical: `${SITE}/sponsors` },
   openGraph: {
-    title: "Sponsor the Gada Global Peace Run",
+    title: "Sponsor the Gada Global 5K Peace Run",
     description:
-      "Partner with the inaugural Gada Global Peace Run. Four levels from $500 to $5,000.",
+      "Partner with the inaugural Gada Global 5K Peace Run. Four levels from $500 to $5,000.",
     url: `${SITE}/sponsors`,
   },
 };

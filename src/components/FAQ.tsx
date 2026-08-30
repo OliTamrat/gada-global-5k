@@ -5,7 +5,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 const faqs = [
   { q: "How do I register?", a: "Visit our Register page and select your pricing tier. Fill in your details, choose your t-shirt size, and complete payment through our secure Stripe checkout. You'll receive a confirmation email with your race details." },
-  { q: "Can beginners participate?", a: "The Gada Global Peace Run is designed for all fitness levels. Whether you're a seasoned runner or this is your very first race, you are welcome. The course is flat, paved, and beginner-friendly." },
+  { q: "Can beginners participate?", a: "The Gada Global 5K Peace Run is designed for all fitness levels. Whether you're a seasoned runner or this is your very first race, you are welcome. The course is flat, paved, and beginner-friendly." },
   { q: "Are walkers welcome?", a: "Yes. Walkers are absolutely welcome and encouraged. There is no minimum pace requirement. The course will remain open and supported for all participants." },
   { q: "Are there cash prizes?", a: "Yes. The top three men and the top three women each receive cash awards: $300 for first place, $200 for second, and $100 for third, for a total purse of $1,200. Winners are announced at the awards ceremony at 10:00 AM. Age group awards and finisher medals are presented alongside the cash prizes." },
   { q: "What time does the event start?", a: "Packet pickup opens at 7:00 AM, the opening ceremony begins at 8:15 AM, and the 5K starts at 9:00 AM. The awards ceremony follows at 10:00 AM, and the morning program stays open until noon." },

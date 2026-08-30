@@ -51,8 +51,14 @@ export function Navbar() {
           priority
           className="h-12 md:h-14 w-auto"
         />
-        <span className="font-black text-lg md:text-xl tracking-[2.5px] text-yellow leading-none">
-          GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+        <span className="flex items-center gap-2.5 md:gap-3 leading-none">
+          <span className="font-black text-lg md:text-xl tracking-[2.5px] text-yellow">
+            GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+          </span>
+          <span className="hidden sm:block w-px h-6 md:h-7 bg-white/25" aria-hidden="true" />
+          <span className="hidden sm:block font-semibold text-[11px] md:text-[12px] tracking-[2px] uppercase text-white/70">
+            5K Peace Run
+          </span>
         </span>
       </Link>
 

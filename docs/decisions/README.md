@@ -12,4 +12,4 @@ settled decisions.
 | 0004 | The browser never names a price |
 | 0005 | Four content decisions taken from timeout defaults — reconfirm before print |
 | 0006 | Sponsor tiers are placeholders from a sample flyer |
-| 0007 | The event is the Gada Global Peace Run, and is not an Irreechaa event |
+| 0007 | The event is the Gada Global 5K Peace Run, and is not an Irreechaa event |

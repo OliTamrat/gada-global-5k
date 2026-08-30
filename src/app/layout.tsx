@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gada Global Peace Run | 5K in Washington DC - October 3, 2026",
+  title: "Gada Global | 5K Peace Run — Washington DC, October 3, 2026",
   description:
     "A professionally timed 5K road race in Rock Creek Park, open to runners and walkers of every background, age and ability. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.",
 };

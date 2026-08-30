@@ -84,7 +84,7 @@ export const LINK_SECTIONS: LinkSection[] = [
       },
       {
         href: "/about",
-        label: "About Gada Global Run",
+        label: "About Gada Global",
         blurb: "Who we are and why we run",
         icon: "info",
         tint: "bg-white/8 text-white/75",

@@ -204,7 +204,7 @@ def main() -> None:
     add_para(blank)
     blank.save(OUT / "gada-5k-letterhead-blank.docx")
 
-    letter = new_sheet(background, "Gada Global Peace Run — sponsorship request")
+    letter = new_sheet(background, "Gada Global 5K Peace Run — sponsorship request")
     fill_letter(letter)
     letter.save(OUT / "gada-5k-letterhead-letter.docx")
 

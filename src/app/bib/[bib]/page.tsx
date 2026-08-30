@@ -10,7 +10,7 @@ import { PrintButton } from "@/components/PrintButton";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Race Bib | Gada Global Peace Run",
+  title: "Race Bib | Gada Global 5K Peace Run",
   robots: { index: false, follow: false },
 };
 

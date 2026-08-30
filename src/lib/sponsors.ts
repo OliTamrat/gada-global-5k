@@ -180,12 +180,12 @@ export const SPONSOR_EMAIL = "info@gadaglobalrun.com";
 /** Pre-fills the enquiry so the organizers get the level in the subject line. */
 export function sponsorMailto(tier?: SponsorTier): string {
   const subject = tier
-    ? `${tier.name} sponsorship (${tier.amount}) — Gada Global Peace Run`
-    : "Sponsorship enquiry — Gada Global Peace Run";
+    ? `${tier.name} sponsorship (${tier.amount}) — Gada Global 5K Peace Run`
+    : "Sponsorship enquiry — Gada Global 5K Peace Run";
   const body = [
     tier
-      ? `We would like to sponsor the Gada Global Peace Run at the ${tier.name} level (${tier.amount}).`
-      : "We would like to discuss sponsoring the Gada Global Peace Run.",
+      ? `We would like to sponsor the Gada Global 5K Peace Run at the ${tier.name} level (${tier.amount}).`
+      : "We would like to discuss sponsoring the Gada Global 5K Peace Run.",
     "",
     "Organization:",
     "Contact name and title:",

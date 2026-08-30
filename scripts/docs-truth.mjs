@@ -45,16 +45,22 @@ for (const level of levels) {
 }
 
 // --- event name: src/lib/event.ts is the only place it is written -------
-// The rename to "Gada Global Peace Run" touched 39 literals across 18 files
+// The rename to "Gada Global 5K Peace Run" touched 39 literals across 18 files
 // because nothing owned the name. Now event.ts does, and the prose has to
 // agree with it. See docs/decisions/0007.
+// Two forms are legitimate: the lockup "Gada Global | 5K Peace Run" for titles
+// and headings, and the prose name for sentences. A doc must use one of them.
 const eventSrc = read("src/lib/event.ts");
-const eventName = eventSrc.match(/name:\s*"([^"]+)"/);
-if (!eventName) fail("event.ts name extractor matched nothing — fix the regex, not the docs");
-else {
+const eventName = eventSrc.match(/\bname:\s*"([^"]+)"/);
+const eventLockup = eventSrc.match(/lockup:\s*"([^"]+)"/);
+if (!eventName || !eventLockup) {
+  fail("event.ts name/lockup extractor matched nothing — fix the regex, not the docs");
+} else {
+  const forms = [eventName[1], eventLockup[1]];
   for (const doc of ["README.md", ".claude/CLAUDE.md", "docs/overview.md"]) {
-    if (!read(doc).includes(eventName[1])) {
-      fail(`${doc} does not name the event "${eventName[1]}" that event.ts defines`);
+    const text = read(doc);
+    if (!forms.some((f) => text.includes(f))) {
+      fail(`${doc} names neither "${forms[0]}" nor "${forms[1]}", the forms event.ts defines`);
     }
   }
 }
