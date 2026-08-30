@@ -53,11 +53,10 @@ export default function Home() {
         <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 lg:px-20 pt-32 pb-12 lg:pt-24 lg:pb-0">
           <div className="max-w-[780px]">
             <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.8rem,5.5vw,4.8rem)] font-bold leading-[1.08] text-white mb-16 lg:mb-10 tracking-tight">
-              <span className="block hero-line">One race.</span>
-              <span className="block hero-line"><span className="text-yellow">Every</span> community.</span>
+              <span className="block hero-line">Run for <span className="text-yellow">peace</span>.</span>
+              <span className="block hero-line">Run with</span>
               <span className="block hero-line">
-                Running for{" "}
-                <WordRotator words={["peace.", "unity.", "everyone."]} holdDuration={2800} className="text-yellow hero-accent min-w-[200px]" />
+                <WordRotator words={["Washington DC.", "your family.", "everyone."]} holdDuration={2800} className="text-yellow hero-accent min-w-[200px]" />
               </span>
             </h1>
             <div className="hero-cta-enter grid grid-cols-2 sm:flex sm:flex-wrap gap-3 max-w-[400px] sm:max-w-none">
@@ -123,7 +122,7 @@ export default function Home() {
           <ScrollReveal>
             <div className="relative h-[380px] md:h-[520px]">
               <Image src="https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=600&q=80" alt="Runners at sunrise" width={480} height={460} className="w-[78%] h-[88%] object-cover rounded-2xl shadow-[0_24px_64px_rgba(0,0,0,0.12)]" />
-              <Image src="/images/finisher-medal.jpg" alt="Gada 5K Run finisher medal" width={240} height={320} className="absolute -bottom-4 right-0 w-[48%] h-[70%] object-contain bg-black rounded-2xl border-4 border-cream shadow-[0_16px_48px_rgba(0,0,0,0.15)] p-2" />
+              <Image src="/images/course/rock-creek.jpg" alt="The course through Rock Creek Park" width={240} height={320} className="absolute -bottom-4 right-0 w-[48%] h-[70%] object-cover rounded-2xl border-4 border-cream shadow-[0_16px_48px_rgba(0,0,0,0.15)]" />
               <div className="absolute top-6 right-8 yellow-card w-[88px] h-[88px] rounded-full flex flex-col items-center justify-center font-black text-xl leading-none shadow-[0_8px_24px_rgba(245,200,66,0.3)]">5K<small className="text-[0.5rem] font-bold tracking-wider uppercase mt-0.5">Run/Walk</small></div>
             </div>
           </ScrollReveal>
@@ -137,7 +136,7 @@ export default function Home() {
               {[
                 { icon: Icons.trophy, title: "Timed 5K Run & Walk", desc: "Flat, paved course through Rock Creek Park, scored for every finisher" },
                 { icon: Icons.users, title: "Open to All Ages", desc: "Runners and walkers from age five up, with a Kids & Family wave" },
-                { icon: Icons.music, title: "Post-Race Festival", desc: "Music, food and a kids zone once the awards are handed out" },
+                { icon: Icons.users, title: "A Morning, Not an Hour", desc: "Doors at 7:00 AM and the program open until noon \u2014 come for the whole thing" },
                 { icon: Icons.leaf, title: "Built Around Peace", desc: "Named for a tradition of consensus, dialogue and shared leadership" },
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
@@ -173,7 +172,7 @@ export default function Home() {
                 visual: (
                   <div className="h-[140px] rounded-xl bg-gradient-to-br from-yellow/15 to-yellow/5 border border-yellow/20 flex items-center justify-center mb-5 px-3">
                     {/* Race bib: pin holes at the corners, event band, dominant
-                        number, and a perforated tear-off strip for the chip. */}
+                        number, and the tear-off stub with the scan code. */}
                     <div className="relative w-full max-w-[172px] bg-white rounded-[5px] shadow-[0_6px_18px_rgba(0,0,0,0.28)] rotate-[-1.5deg] overflow-hidden">
                       {/* pin holes */}
                       <span className="absolute top-[5px] left-[6px] w-[5px] h-[5px] rounded-full bg-charcoal/15 ring-1 ring-charcoal/10" />
@@ -201,7 +200,7 @@ export default function Home() {
                       {/* perforated tear strip */}
                       <div className="border-t border-dashed border-charcoal/25 bg-charcoal/[0.04] px-2 py-[4px] flex items-center justify-between">
                         <span className="text-[6px] font-bold tracking-[1px] uppercase text-charcoal/50">
-                          Timing Chip
+                          Scan Code
                         </span>
                         <span className="flex gap-[2px]" aria-hidden="true">
                           {[3, 2, 4, 2, 3, 5, 2].map((w, i) => (
@@ -222,8 +221,8 @@ export default function Home() {
                 title: "Finisher Medal",
                 desc: "Custom finisher medal, awarded to everyone who crosses the line",
                 visual: (
-                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light">
-                    <Image src="/images/finisher-medal.jpg" alt="Finisher medal" fill className="object-contain p-4 drop-shadow-[0_4px_12px_rgba(245,200,66,0.3)]" />
+                  <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light flex items-center justify-center">
+                    <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-yellow drop-shadow-[0_4px_12px_rgba(245,200,66,0.3)]" aria-label="Finisher medal" role="img"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
                   </div>
                 ),
               },

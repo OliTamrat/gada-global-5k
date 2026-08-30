@@ -51,7 +51,7 @@ only alongside actual scanning code.
 | Opening ceremony | 8:15 AM |
 | Race start | **9:00 AM** |
 | Awards | 10:00 AM |
-| Post-race festival | 10:45 AM – 12:00 PM |
+| Community gathering | 10:45 AM – 12:00 PM (**what actually runs here is unconfirmed** — the cultural festival is a separate day, so the slot is named neutrally on the site) |
 | Program window | 7:00 AM to noon |
 | Prizes | $300 / $200 / $100 for top three **men** and top three **women** — $1,200 purse |
 | Registration tiers | Early Bird **$45**, Standard **$48**, Race Week **$50** (`src/lib/registration.ts` is the source of truth) |

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const WHY = [
   {
     title: "A captive morning",
-    body: "Runners, families and supporters are on site from 7:00 AM packet pickup through the post-race festival at noon. Your signage is in front of them for five hours, not five seconds.",
+    body: "Runners, families and supporters are on site from 7:00 AM packet pickup through the close of the program at noon. Your signage is in front of them for five hours, not five seconds.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
     ),
