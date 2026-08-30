@@ -222,7 +222,24 @@ export default function Home() {
                 desc: "Custom finisher medal, awarded to everyone who crosses the line",
                 visual: (
                   <div className="h-[140px] rounded-xl overflow-hidden mb-5 relative bg-gradient-to-br from-yellow/10 to-charcoal-light flex items-center justify-center">
-                    <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-yellow drop-shadow-[0_4px_12px_rgba(245,200,66,0.3)]" aria-label="Finisher medal" role="img"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                    {/* The medal is the event emblem struck in gold, which is
+                        what a finisher medal actually is. Built from the brand
+                        mark rather than a photograph, so it cannot go stale the
+                        way the previous shot did — that one still carried the
+                        old event name. The disc is gold because the emblem is
+                        navy: on a dark face it would disappear. */}
+                    <div className="flex flex-col items-center">
+                      <span className="w-[14px] h-[15px] rounded-[2px] bg-gradient-to-b from-yellow/80 to-yellow/30" aria-hidden="true" />
+                      <div className="-mt-[2px] w-[88px] h-[88px] rounded-full bg-gradient-to-br from-[#F7D45F] to-[#C99A1E] ring-[3px] ring-[#E8BC3E] shadow-[0_8px_22px_rgba(0,0,0,0.45)] flex items-center justify-center">
+                        <Image
+                          src="/images/brand/gada-global-logo.png"
+                          alt="Finisher medal carrying the Gada Global emblem"
+                          width={425}
+                          height={360}
+                          className="w-[60px] h-auto object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.28)]"
+                        />
+                      </div>
+                    </div>
                   </div>
                 ),
               },
