@@ -1,14 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 import { siteUrl } from "@/lib/site";
 
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Your Race Bib | Gada Global 5K",
+  title: "Your Race Bib | Gada Global Peace Run",
   description:
-    "How to get your Gada Global 5K race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
+    "How to get your Gada Global Peace Run race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
   alternates: { canonical: `${SITE}/bib` },
 };
 
@@ -137,7 +137,7 @@ export default function BibPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3.5 justify-center items-center">
             <a
-              href={`mailto:${EVENT.supportEmail}?subject=${encodeURIComponent("Resend my bib link — Gada Global 5K")}`}
+              href={`mailto:${EVENT.supportEmail}?subject=${encodeURIComponent(`Resend my bib link — ${EVENT.name}`)}`}
               className="inline-flex items-center gap-2.5 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline"
             >
               Resend My Bib Link

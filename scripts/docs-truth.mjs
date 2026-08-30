@@ -44,6 +44,21 @@ for (const level of levels) {
   if (!adr6.includes(level)) fail(`sponsor level "${level}" exists in sponsors.ts but ADR-0006 does not name it`);
 }
 
+// --- event name: src/lib/event.ts is the only place it is written -------
+// The rename to "Gada Global Peace Run" touched 39 literals across 18 files
+// because nothing owned the name. Now event.ts does, and the prose has to
+// agree with it. See docs/decisions/0007.
+const eventSrc = read("src/lib/event.ts");
+const eventName = eventSrc.match(/name:\s*"([^"]+)"/);
+if (!eventName) fail("event.ts name extractor matched nothing — fix the regex, not the docs");
+else {
+  for (const doc of ["README.md", ".claude/CLAUDE.md", "docs/overview.md"]) {
+    if (!read(doc).includes(eventName[1])) {
+      fail(`${doc} does not name the event "${eventName[1]}" that event.ts defines`);
+    }
+  }
+}
+
 // --- ADRs: sequential, indexed ------------------------------------------
 const adrs = readdirSync("docs/decisions").filter((f) => /^\d{4}-.*\.md$/.test(f)).sort();
 const nums = adrs.map((f) => parseInt(f.slice(0, 4), 10));

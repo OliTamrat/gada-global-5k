@@ -4,19 +4,19 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { SponsorTiers } from "@/components/SponsorTiers";
 import { sponsorMailto, SPONSOR_EMAIL, isSponsorTier } from "@/lib/sponsors";
 import { siteUrl } from "@/lib/site";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Sponsor the Gada Global 5K | Gada Global Run",
+  title: "Sponsor the Gada Global Peace Run | Gada Global Run",
   description:
-    "Sponsorship and partnership levels for the Gada Global 5K on October 3, 2026 in Washington DC. Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500.",
+    "Sponsorship and partnership levels for the Gada Global Peace Run on October 3, 2026 in Washington DC. Platinum $5,000, Gold $2,500, Silver $1,000, Bronze $500.",
   alternates: { canonical: `${SITE}/sponsors` },
   openGraph: {
-    title: "Sponsor the Gada Global 5K",
+    title: "Sponsor the Gada Global Peace Run",
     description:
-      "Partner with the inaugural Gada Global 5K. Four levels from $500 to $5,000.",
+      "Partner with the inaugural Gada Global Peace Run. Four levels from $500 to $5,000.",
     url: `${SITE}/sponsors`,
   },
 };
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const WHY = [
   {
     title: "A captive morning",
-    body: "Runners, families and supporters are on site from 7:00 AM packet pickup through the cultural festival at noon. Your signage is in front of them for five hours, not five seconds.",
+    body: "Runners, families and supporters are on site from 7:00 AM packet pickup through the post-race festival at noon. Your signage is in front of them for five hours, not five seconds.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
     ),
@@ -38,7 +38,7 @@ const WHY = [
   },
   {
     title: "A community, not an audience",
-    body: "This race celebrates Oromo heritage and the Irrecha festival. Sponsoring it is a visible statement to that community, made in front of the people in it.",
+    body: "The field is drawn from across the DC region \u2014 runners, walkers, families and spectators who have chosen to spend the morning together. Sponsoring it puts your name in front of a broad local audience, not a narrow one.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
     ),
@@ -92,7 +92,7 @@ export default async function SponsorsPage({
             Your Name on the Shirt,<br />the Banner and the Stage
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
-            {`Back the inaugural Gada Global 5K on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four partnership levels, $500 to $5,000.`}
+            {`Back the inaugural ${EVENT.name} on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four partnership levels, $500 to $5,000.`}
           </p>
         </div>
       </section>

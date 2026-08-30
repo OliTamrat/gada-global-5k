@@ -33,7 +33,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-[16px] md:text-[14px] leading-[1.85] max-w-[280px] text-white/88">
-              Celebrating Oromo heritage through the power of running. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.
+              A professionally timed 5K road race, open to every community. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.
             </p>
           </div>
 

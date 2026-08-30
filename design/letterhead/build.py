@@ -103,7 +103,7 @@ HEAD = f"""
       </div>
     </div>
     <div class="head-right">
-      <div><b>GADA GLOBAL 5K RUN</b></div>
+      <div><b>GADA GLOBAL PEACE RUN</b></div>
       <div>Saturday, October 3, 2026</div>
       <div>Rock Creek Park Tennis Center</div>
     </div>
@@ -132,12 +132,12 @@ FOOT = """
 LETTER_BLOCKS = [
     ("meta", ["[Date]", "", "[Recipient name, title]", "[Organization]",
               "[Street address]", "[City, State ZIP]"]),
-    ("subject", "Re: Partnership in the Gada Global 5K Run \u2014 Saturday, October 3, 2026"),
+    ("subject", "Re: Partnership in the Gada Global Peace Run \u2014 Saturday, October 3, 2026"),
     ("p", "Dear [Name],"),
     ("p", "Gada Global Inc. produces timed road races and cultural programming in the "
           "Washington DC metropolitan area. On Saturday, October 3, 2026 we will hold the "
-          "Gada Global 5K Run at the Rock Creek Park Tennis Center \u2014 a field of up to "
-          "500 runners, a five-hour programme from packet pickup at 7:00 AM through a "
+          "Gada Global Peace Run at the Rock Creek Park Tennis Center \u2014 a field of up "
+          "to 500 runners, a five-hour programme from packet pickup at 7:00 AM through a "
           "cultural festival at noon, and a $1,200 prize purse. I am writing to invite "
           "[Organization] to partner with us."),
     ("p", "Partnership places your brand in front of runners, their families and supporters "

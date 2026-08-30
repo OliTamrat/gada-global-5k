@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { products, availableSizes, sizeLabel } from "@/lib/products";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 import { publicAsset } from "@/lib/site";
 
 export const dynamic = "force-dynamic";

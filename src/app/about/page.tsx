@@ -14,7 +14,7 @@ const values = [
 ];
 
 const events = [
-  { badge: "FLAGSHIP", title: "Gada Global Special Run (5K & 10K)", desc: "Our flagship annual race celebrating Oromo heritage and community unity. Inaugural event: October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC." },
+  { badge: "FLAGSHIP", title: "Gada Global Peace Run (5K)", desc: "Our flagship annual road race, open to every community. Inaugural event: October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC." },
   { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment." },
   { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health." },
   { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels." },
@@ -62,10 +62,10 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global Run</span>
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] text-white mb-6 tracking-tight">
-            Professional Race Production,<br />Rooted in Oromo Heritage
+            Professional Race Production<br />in Washington, DC
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[580px] mx-auto">
-            Gada Global Inc. produces timed road races and cultural programming in the Washington DC metropolitan area. We design, staff and operate each event end to end — registration, course operations, live timing and post-event reporting.
+            Gada Global Inc. produces timed road races and community events in the Washington DC metropolitan area. We design, staff and operate each event end to end — registration, course operations, live timing and post-event reporting.
           </p>
         </div>
       </section>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                   Rooted in the Gadaa System
                 </h2>
                 <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
-                  Gada Global Run is a community-driven running organization established under Gada Global Inc., dedicated to promoting healthy lifestyles, building stronger communities, and celebrating cultural diversity through professionally organized races, fitness events, and wellness initiatives.
+                  Gada Global Run is the events arm of Gada Global Inc., a registered company producing professionally organized races, fitness events and wellness initiatives. We are here to promote healthy lifestyles, build stronger neighbourhoods, and put on events where every community in the region feels expected rather than merely permitted.
                 </p>
                 <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
                   The name <strong className="text-charcoal">Gada</strong> comes from the <strong className="text-charcoal">Gadaa System</strong>, an indigenous democratic governance system developed by the Oromo people and recognized by <strong className="text-charcoal">UNESCO as Intangible Cultural Heritage of Humanity</strong>. Rooted in values of inclusive leadership, equality, accountability, justice, and respect for human dignity, Gadaa inspires our commitment to creating spaces where everyone is welcomed, valued, and empowered.
@@ -121,7 +121,7 @@ export default function AboutPage() {
                 </div>
                 <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-3 block">Our Vision</span>
                 <p className="text-base md:text-[16px] leading-[1.85] text-white/88">
-                  To become the leading community-driven running organization that inspires healthier lives, celebrates cultural heritage, empowers athletes, and unites diverse communities through the transformative power of running.
+                  To become the leading community-driven running organization that inspires healthier lives, empowers athletes, and brings diverse communities together through the transformative power of running.
                 </p>
                 <p className="text-[16px] md:text-[15px] leading-[1.85] text-white/78 mt-4">
                   We envision a future where every race strengthens friendships, promotes wellness, supports youth development, and creates opportunities for athletes while building lasting social and economic impact.
@@ -142,7 +142,7 @@ export default function AboutPage() {
                   {[
                     "Produce safe, well-run events that people return to year after year",
                     "Bring communities together regardless of age, background, or ability",
-                    "Celebrate Oromo culture while welcoming participants from every community",
+                    "Welcome participants from every community, background and ability",
                     "Support current and former athletes with recognition and mentorship",
                     "Inspire youth to pursue healthy, disciplined, and active lives",
                     "Give corporate and nonprofit partners measurable visibility and access",
@@ -193,7 +193,7 @@ export default function AboutPage() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Event Portfolio</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Our Events</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[520px] mx-auto">
-              From competitive races to community celebrations, Gada Global Run organizes events that bring people together and promote healthy living.
+              From competitive races to family fitness mornings, Gada Global Run organizes events that bring people together and promote healthy living.
             </p>
           </ScrollReveal>
 
@@ -217,10 +217,10 @@ export default function AboutPage() {
           <ScrollReveal>
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-gold-dim mb-5 block">A Legacy of Champions</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] tracking-tight mb-4">
-              The Oromo Running Tradition
+              A Legacy of Distance Running
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[600px] mb-14">
-              For decades, Oromo athletes have dominated the world stage in distance running, carrying the Ethiopian flag to Olympic glory. Gada Global Run honors this extraordinary legacy and inspires the next generation.
+              For decades, runners from the Ethiopian highlands have shaped distance running on the world stage. Gada Global Run takes its inspiration from that standard, and puts on races where the next generation — from anywhere — can find their own start line.
             </p>
           </ScrollReveal>
 
@@ -248,7 +248,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
                 <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
-                  From Abebe Bikila&apos;s barefoot marathon to today, Oromo runners have won 23 Olympic medals in distance events. Gada Global Run brings this spirit to Rock Creek Park.
+                  From Abebe Bikila&apos;s barefoot marathon in Rome to the track today, these runners changed what the sport looks like. Gada Global Run brings that spirit to Rock Creek Park — and opens the line to everybody.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
@@ -294,7 +294,7 @@ export default function AboutPage() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Ready to Run With Us?</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[440px] mx-auto mb-10">
-              Registration is open for the inaugural Gada Global 5K. Be part of something bigger than a race.
+              Registration is open for the inaugural Gada Global Peace Run. Be part of something bigger than a race.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/register" className="inline-flex items-center gap-3 bg-yellow text-charcoal px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl hover:bg-gold-light hover:shadow-[0_8px_32px_rgba(245,200,66,0.25)] hover:-translate-y-0.5 transition-all no-underline">Register for 5K</Link>

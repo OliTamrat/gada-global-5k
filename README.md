@@ -1,8 +1,13 @@
-# Gada Global 5K
+# Gada Global Peace Run
 
 Marketing site, registration, payment, and race-day timing system for the
-**Gada Global 5K** — an annual community race celebrating Oromo heritage and
-the Irrecha festival, run by **Gada Global Inc.**
+**Gada Global Peace Run** — an annual, professionally timed 5K road race in
+Rock Creek Park, Washington DC, open to runners and walkers of every
+background, age and ability. Run by **Gada Global Inc.**
+
+The race was called the Gada Global 5K, and was framed as an Irreechaa
+celebration, until 2026; `docs/decisions/0007` records why it is not. The
+name now lives in one place, `src/lib/event.ts`.
 
 Runners register and pay through Stripe Checkout, get a printable bib with a
 QR code, and are timed by wave rather than individually scanned at the

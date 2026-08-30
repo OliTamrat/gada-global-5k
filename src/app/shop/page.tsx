@@ -18,7 +18,7 @@ export default function ShopPage() {
             Race Day Gear
           </h1>
           <p className="text-base md:text-[16px] leading-[1.85] text-white/70 max-w-[480px] mx-auto">
-            Rep your Oromo pride with our limited-edition Gada Global 5K
+            Wear the race with our limited-edition Gada Global Peace Run
             collection. Youth sizes on every item, so the whole family can match.
             All proceeds support the event.
           </p>

@@ -3,7 +3,7 @@ import { getStripe } from "@/lib/stripe";
 import { tiers, type RegistrationData } from "@/lib/registration";
 import { query } from "@/lib/db";
 import { coerceWave, WAVE_META } from "@/lib/waves";
-import { EVENT } from "@/lib/email";
+import { EVENT } from "@/lib/event";
 import { publicAsset } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
       custom_text: {
         submit: {
           message:
-            "Entry includes your race bib, a finisher medal, the official event t-shirt, water stations on course, race photography, and access to the Irrecha cultural festival afterwards. The top three men and top three women share a $1,200 cash purse.",
+            "Entry includes your race bib, a finisher medal, the official event t-shirt, water stations on course, race photography, and access to the post-race festival afterwards. The top three men and top three women share a $1,200 cash purse.",
         },
         after_submit: {
           message: `Your confirmation email with your bib number and start wave arrives within a few minutes. Questions: ${EVENT.supportEmail}`,
