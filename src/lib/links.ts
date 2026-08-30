@@ -3,6 +3,8 @@
  * /links page. One place to update when a social account goes live.
  */
 
+import { EVENT } from "@/lib/event";
+
 export type LinkIcon =
   | "run"
   | "calendar"
@@ -90,9 +92,9 @@ export const LINK_SECTIONS: LinkSection[] = [
         tint: "bg-white/8 text-white/75",
       },
       {
-        href: "mailto:info@gadaglobalrun.com",
+        href: `mailto:${EVENT.supportEmail}`,
         label: "Contact Us",
-        blurb: "info@gadaglobalrun.com",
+        blurb: EVENT.supportEmail,
         icon: "mail",
         tint: "bg-white/8 text-white/75",
         external: true,

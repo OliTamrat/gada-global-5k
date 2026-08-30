@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { EVENT } from "@/lib/event";
 
 const faqs = [
   { q: "How do I register?", a: "Visit our Register page and select your pricing tier. Fill in your details, choose your t-shirt size, and complete payment through our secure Stripe checkout. You'll receive a confirmation email with your race details." },
@@ -11,9 +12,9 @@ const faqs = [
   { q: "What time does the event start?", a: "Packet pickup opens at 7:00 AM, the opening ceremony begins at 8:15 AM, and the 5K starts at 9:00 AM. The awards ceremony follows at 10:00 AM, and the morning program stays open until noon." },
   { q: "Is there a virtual option?", a: "We are exploring a virtual participation option for those who cannot attend in person. Check back closer to race day for updates on virtual registration." },
   { q: "Where do I park?", a: "Parking information will be shared via email to all registered participants closer to race day. Free parking is available at the Rock Creek Park Tennis Center, 5220 16th St NW, where the race starts and finishes." },
-  { q: "Are refunds available?", a: "Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at info@gadaglobalrun.com for transfer requests." },
+  { q: "Are refunds available?", a: `Registration fees are non-refundable, but transfers to another participant are allowed up to 7 days before race day. Contact us at ${EVENT.supportEmail} for transfer requests.` },
   { q: "Can children run, and how do I register them?", a: "Yes. Children are welcome from age 5. Each child needs their own registration — that is what gives them a bib, a finish time and a t-shirt. On the form, choose the Kids & Family start wave and a Youth t-shirt size. If you are running alongside your child, register yourself too and pick the same wave so you start together. Kids & Family sets off last, a few minutes after the other waves, so the course ahead is clear and nobody is weaving past children. Strollers are welcome in this wave." },
-  { q: "How can I become a sponsor?", a: "Four partnership levels: Platinum $5,000, Gold $2,500, Silver $1,000 and Bronze $500. Each lists exactly what it includes on our Sponsors page — brand placement, exhibitor space, stage recognition and complimentary entries — and the enquiry link arrives with your level already in the subject line. For a custom or multi-year package, email info@gadaglobalrun.com." },
+  { q: "How can I become a sponsor?", a: `Four partnership levels: Platinum $5,000, Gold $2,500, Silver $1,000 and Bronze $500. Each lists exactly what it includes on our Sponsors page — brand placement, exhibitor space, stage recognition and complimentary entries — and the enquiry link arrives with your level already in the subject line. For a custom or multi-year package, email ${EVENT.supportEmail}.` },
 ];
 
 export function FAQ() {
@@ -33,11 +34,11 @@ export function FAQ() {
               <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/78 mb-8 max-w-[320px]">
                 Everything you need to know before race day. Can&apos;t find your answer? Reach out to us directly.
               </p>
-              <a href="mailto:info@gadaglobalrun.com" className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
+              <a href={`mailto:${EVENT.supportEmail}`} className="inline-flex items-center gap-2 text-[14px] font-bold text-charcoal hover:text-gold-dim transition-colors no-underline">
                 <span className="w-8 h-8 rounded-lg yellow-card flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                 </span>
-                info@gadaglobalrun.com
+                {EVENT.supportEmail}
               </a>
             </div>
           </ScrollReveal>

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { query, isDatabaseConfigured } from "@/lib/db";
 import { isOpsConfigured } from "@/lib/ops-auth";
 import { isRaceDay, isOverridden, RACE_DAY_ISO } from "@/lib/race-window";
+import { EVENT } from "@/lib/event";
 
 export const dynamic = "force-dynamic";
 
@@ -218,7 +219,7 @@ function checkSiteUrl(): Check {
   if (!url) {
     return {
       status: "warn",
-      detail: "NEXT_PUBLIC_SITE_URL is not set — email links fall back to https://www.gadaglobalrun.com",
+      detail: `NEXT_PUBLIC_SITE_URL is not set — email links fall back to https://www.${EVENT.domain}`,
     };
   }
   return { status: "ok", detail: url };

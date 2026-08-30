@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { activeSocials } from "@/lib/links";
 import { LINK_ICONS } from "@/components/LinkIcons";
 import Image from "next/image";
+import { EVENT } from "@/lib/event";
 
 
 const socials = activeSocials();
@@ -66,7 +67,7 @@ export function Footer() {
             {
               title: "Contact",
               links: [
-                { href: "mailto:info@gadaglobalrun.com", label: "info@gadaglobalrun.com" },
+                { href: `mailto:${EVENT.supportEmail}`, label: EVENT.supportEmail },
                 { href: "/#event", label: "Race Day FAQ" },
               ],
             },
