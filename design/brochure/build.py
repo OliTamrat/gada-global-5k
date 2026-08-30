@@ -121,7 +121,7 @@ BACK = f"""
     live public results, and a written report to every partner afterwards.
   </p>
   <p style="font-size:11px;line-height:1.85;color:rgba(255,255,255,.85);margin-top:12px">
-    The Gada Global Peace Run is our flagship event, held each October in Rock
+    The Gada Global 5K Peace Run is our flagship event, held each October in Rock
     Creek Park — a timed 5K open to runners and walkers of every community.
   </p>
 

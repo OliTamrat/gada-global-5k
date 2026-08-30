@@ -4,25 +4,38 @@
 // their own name from an email module, and a rename touched 39 string literals
 // across 18 files. Everything that names the event now reads it from here.
 //
-// The event was renamed from "Gada Global 5K — Irrecha Celebration Run" to the
-// Gada Global Peace Run in 2026; see docs/decisions/0007. The race is held on
-// the Irreechaa weekend, but it is not an Irreechaa event: it is a public road
-// race open to every community, and the name and copy say so.
+// The event was renamed from "Gada Global 5K — Irrecha Celebration Run" to
+// Gada Global | 5K Peace Run in 2026; see docs/decisions/0007. The race is held
+// on the Irreechaa weekend, but it is not an Irreechaa event: it is a public
+// road race open to every community, and the name and copy say so.
+
+// The domain, once. supportEmail is derived from it so the two cannot drift —
+// site.ts already learned this lesson for the origin ("three files were each
+// carrying their own copy of this fallback"), and the address had the same
+// problem across six files.
+const DOMAIN = "gadaglobalrun.com";
 
 export const EVENT = {
-  /** Full public name. Use this in headings, metadata, emails and receipts. */
-  name: "Gada Global Peace Run",
-  /** For tight spaces — bib headers, QR labels, nav. */
-  shortName: "Peace Run",
-  /** The distance, kept separate: the name no longer carries it. */
+  // The brand and the event are separate things, locked up with a rule between
+  // them: Gada Global | 5K Peace Run. The pipe is a lockup device, so it goes
+  // in titles and on the wordmark but never mid-sentence — prose uses `name`.
+  /** The brand on its own. */
+  brand: "Gada Global",
+  /** The event on its own. */
+  eventName: "5K Peace Run",
+  /** Brand and event locked up — page titles, the wordmark, share cards. */
+  lockup: "Gada Global | 5K Peace Run",
+  /** Canonical prose name. Use this in sentences, emails and receipts. */
+  name: "Gada Global 5K Peace Run",
+  /** For tight spaces — bib headers, QR labels. */
+  shortName: "5K Peace Run",
+  /** The distance, kept separate so copy can state it on its own. */
   distance: "5K",
-  /** Name and distance together, for the places that need both. */
-  nameWithDistance: "Gada Global Peace Run 5K",
 
-  // The public-facing brand. "Gada Global Inc." below is the registered legal
-  // entity the brand operates under — use it only where the legal name is
-  // required, never as a heading a runner reads.
-  brand: "Gada Global Run",
+  /**
+   * The registered legal entity the brand operates under. Use it only where
+   * the legal name is required, never as a heading a runner reads.
+   */
   organization: "Gada Global Inc.",
 
   date: "Saturday, October 3, 2026",
@@ -32,7 +45,10 @@ export const EVENT = {
   programHours: "7:00 AM to 12:00 PM",
   location: "Rock Creek Park Tennis Center",
   address: "5220 16th St NW, Washington, DC 20011",
-  supportEmail: "info@gadaglobalrun.com",
+  /** Bare domain, for display in copy. */
+  domain: DOMAIN,
+  /** Where runners and sponsors write. Derived, so it tracks the domain. */
+  supportEmail: `info@${DOMAIN}`,
 
   /** One line, for footers and social bios. */
   tagline: "Run Together · Achieve Together · Inspire Together",

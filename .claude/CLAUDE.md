@@ -1,8 +1,12 @@
-# Gada Global Peace Run — Project Guidelines
+# Gada Global 5K Peace Run — Project Guidelines
 
 ## Golden Rules
 - **NEVER use emojis in any UI** — use SVG icons or text instead
 - No Claude attribution in commits
+- **The homepage hero's design and layout are settled.** Change the headline text
+  if asked; do not touch its structure, spacing, classes, the stat-card grid, the
+  video, the particles or the `WordRotator` mechanic. The rotator is on the third
+  line and the accent colour is `text-yellow` — keep both when rewording.
 
 ---
 
@@ -18,10 +22,16 @@ levels, ADR numbering) are enforced by `scripts/docs-truth.mjs`, run by
 
 ## What this is
 
-Marketing site, registration, and race-day timing system for the **Gada Global Peace
-Run**, an annual professionally timed 5K road race in Rock Creek Park, Washington DC,
-open to runners and walkers of every background, age and ability. Run by
-**Gada Global Inc.**
+Marketing site, registration, and race-day timing system for the
+**Gada Global | 5K Peace Run**, an annual professionally timed 5K road race in Rock
+Creek Park, Washington DC, open to runners and walkers of every background, age and
+ability. Run by **Gada Global Inc.**
+
+**The brand is `Gada Global`; the event is `5K Peace Run`.** They lock up with a rule
+between them — `Gada Global | 5K Peace Run` — which is what the wordmark, page titles
+and share cards use. The pipe is a lockup device, so it never appears mid-sentence:
+prose says "the Gada Global 5K Peace Run". Both halves and the lockup are fields on
+`EVENT` (`brand`, `eventName`, `lockup`, `name`).
 
 **The event's name and public details live in `src/lib/event.ts` — change them there
 and nowhere else.** It was renamed from "Gada Global 5K — Irrecha Celebration Run" in
@@ -215,11 +225,11 @@ never created, which produced a successful payment with no bib and no email.
    preview deployments can send test confirmations.
 
 **No longer needed as of 2026-08-01** — the domain is verified, so
-`REGISTRATION_FROM_EMAIL="Gada Global Peace Run <info@gadaglobalrun.com>"` now sends to any
+`REGISTRATION_FROM_EMAIL="Gada Global 5K Peace Run <info@gadaglobalrun.com>"` now sends to any
 recipient. Kept for reference only:
 
 **Shortcut for testing before DNS is ready:** set
-`REGISTRATION_FROM_EMAIL="Gada Global Peace Run <onboarding@resend.dev>"` and register with
+`REGISTRATION_FROM_EMAIL="Gada Global 5K Peace Run <onboarding@resend.dev>"` and register with
 **`gadaglobalrun@gmail.com`** as the runner email. An unverified Resend account can only
 send to its own signup address, so that specific address is the only one that will
 receive anything until the domain verifies.

@@ -1,4 +1,4 @@
-# 0007 — The event is the Gada Global Peace Run, and is not an Irreechaa event
+# 0007 — The event is the Gada Global 5K Peace Run, and is not an Irreechaa event
 
 **Status:** accepted (2026-08, organizers)
 **Supersedes:** the "Gada Global 5K — Irrecha Celebration Run" naming and the
@@ -6,9 +6,17 @@ cultural-celebration framing that came with it.
 
 ## Decision
 
-The event is named the **Gada Global Peace Run**. Its public copy describes a
-professionally produced road race open to every community, not a cultural or
-religious celebration.
+The brand is **Gada Global**; the event is the **5K Peace Run**. They lock up
+with a rule between them — **Gada Global | 5K Peace Run** — which is the form
+the wordmark, page titles and share cards use. The pipe is a lockup device, so
+it never appears mid-sentence: prose says "the Gada Global 5K Peace Run".
+
+Both halves, the lockup and the prose name are fields on `EVENT` (`brand`,
+`eventName`, `lockup`, `name`), and `scripts/docs-truth.mjs` requires the README,
+the briefing and the overview to use one of the two legitimate forms.
+
+The public copy describes a professionally produced road race open to every
+community, not a cultural or religious celebration.
 
 Concretely:
 

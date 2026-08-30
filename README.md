@@ -1,7 +1,7 @@
-# Gada Global Peace Run
+# Gada Global | 5K Peace Run
 
 Marketing site, registration, payment, and race-day timing system for the
-**Gada Global Peace Run** — an annual, professionally timed 5K road race in
+**Gada Global 5K Peace Run** — an annual, professionally timed 5K road race in
 Rock Creek Park, Washington DC, open to runners and walkers of every
 background, age and ability. Run by **Gada Global Inc.**
 

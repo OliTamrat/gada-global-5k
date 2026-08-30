@@ -18,6 +18,8 @@
  * difference.
  */
 
+import { EVENT } from "@/lib/event";
+
 export type SponsorTierId = "platinum" | "gold" | "silver" | "bronze";
 
 export interface SponsorTier {
@@ -135,7 +137,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     id: "web",
     label: "Placement on the website and social channels",
     detail:
-      "Your logo on gadaglobalrun.com and in the event's social campaign before, during and after race day, with a link to your site.",
+      `Your logo on ${EVENT.domain} and in the event's social campaign before, during and after race day, with a link to your site.`,
     icon: "globe",
     tiers: ["platinum", "gold", "silver", "bronze"],
   },
@@ -175,17 +177,17 @@ export function includedCount(tier: SponsorTierId): number {
 /** Total benefits on offer, so the meter never hard-codes a count. */
 export const SPONSOR_BENEFIT_COUNT = SPONSOR_BENEFITS.length;
 
-export const SPONSOR_EMAIL = "info@gadaglobalrun.com";
+export const SPONSOR_EMAIL = EVENT.supportEmail;
 
 /** Pre-fills the enquiry so the organizers get the level in the subject line. */
 export function sponsorMailto(tier?: SponsorTier): string {
   const subject = tier
-    ? `${tier.name} sponsorship (${tier.amount}) — Gada Global Peace Run`
-    : "Sponsorship enquiry — Gada Global Peace Run";
+    ? `${tier.name} sponsorship (${tier.amount}) — Gada Global 5K Peace Run`
+    : "Sponsorship enquiry — Gada Global 5K Peace Run";
   const body = [
     tier
-      ? `We would like to sponsor the Gada Global Peace Run at the ${tier.name} level (${tier.amount}).`
-      : "We would like to discuss sponsoring the Gada Global Peace Run.",
+      ? `We would like to sponsor the Gada Global 5K Peace Run at the ${tier.name} level (${tier.amount}).`
+      : "We would like to discuss sponsoring the Gada Global 5K Peace Run.",
     "",
     "Organization:",
     "Contact name and title:",

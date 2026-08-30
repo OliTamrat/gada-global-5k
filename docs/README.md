@@ -1,6 +1,6 @@
 # The knowledge base — OKM Phase 1
 
-Durable knowledge for the Gada Global Peace Run, on the OKM taxonomy. The agent
+Durable knowledge for the Gada Global 5K Peace Run, on the OKM taxonomy. The agent
 briefing (`.claude/CLAUDE.md` → `AGENTS.md`) stays the operational
 quick-reference; this tree holds what must survive it. Checkable claims are
 graded by `scripts/docs-truth.mjs` — zero dependencies, run by

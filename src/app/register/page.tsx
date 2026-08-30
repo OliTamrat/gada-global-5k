@@ -84,7 +84,7 @@ export default function RegisterPage() {
                 Join the Race
               </h1>
               <p className="text-[16px] leading-[1.8] text-white/72 max-w-[420px]">
-                Secure your spot at the inaugural Gada Global Peace Run. All registrations include your bib, a finisher medal and the official race t-shirt.
+                Secure your spot at the inaugural Gada Global 5K Peace Run. All registrations include your bib, a finisher medal and the official race t-shirt.
               </p>
             </div>
 
@@ -157,7 +157,7 @@ export default function RegisterPage() {
                   <ul className="space-y-3">
                     {[
                       "Official race bib",
-                      "Gada Global Peace Run finisher medal",
+                      "Gada Global 5K Peace Run finisher medal",
                       "Official race t-shirt",
                       "Cash prize eligibility: top 3 men and women",
                       "Water stations on course",

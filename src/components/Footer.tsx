@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { activeSocials } from "@/lib/links";
 import { LINK_ICONS } from "@/components/LinkIcons";
 import Image from "next/image";
+import { EVENT } from "@/lib/event";
 
 
 const socials = activeSocials();
@@ -28,8 +29,14 @@ export function Footer() {
                 height={360}
                 className="h-16 w-auto"
               />
-              <span className="font-black text-xl tracking-[2.5px] text-yellow leading-none">
-                GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+              <span className="flex items-center gap-3 leading-none">
+                <span className="font-black text-xl tracking-[2.5px] text-yellow">
+                  GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
+                </span>
+                <span className="w-px h-7 bg-white/25" aria-hidden="true" />
+                <span className="font-semibold text-[12px] tracking-[2px] uppercase text-white/70">
+                  5K Peace Run
+                </span>
               </span>
             </Link>
             <p className="text-[16px] md:text-[14px] leading-[1.85] max-w-[280px] text-white/88">
@@ -60,7 +67,7 @@ export function Footer() {
             {
               title: "Contact",
               links: [
-                { href: "mailto:info@gadaglobalrun.com", label: "info@gadaglobalrun.com" },
+                { href: `mailto:${EVENT.supportEmail}`, label: EVENT.supportEmail },
                 { href: "/#event", label: "Race Day FAQ" },
               ],
             },

@@ -6,9 +6,9 @@ import { siteUrl } from "@/lib/site";
 const SITE = siteUrl();
 
 export const metadata: Metadata = {
-  title: "Your Race Bib | Gada Global Peace Run",
+  title: "Your Race Bib | Gada Global 5K Peace Run",
   description:
-    "How to get your Gada Global Peace Run race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
+    "How to get your Gada Global 5K Peace Run race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
   alternates: { canonical: `${SITE}/bib` },
 };
 

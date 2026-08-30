@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px}
+  body{background:#141210;color:#FAF6EE;font-family:"DM Sans",system-ui,sans-serif;
+       position:relative;overflow:hidden;display:flex;flex-direction:column;
+       justify-content:space-between;padding:52px 68px}
+  /* warm glow, bottom-right, echoing the site's hero */
+  .glow{position:absolute;right:-160px;bottom:-220px;width:720px;height:720px;border-radius:50%;
+        background:radial-gradient(circle,rgba(245,200,66,.22) 0%,rgba(245,200,66,.06) 45%,transparent 70%)}
+  .top{display:flex;align-items:center;gap:22px;position:relative}
+  .top img{width:84px;height:71px;object-fit:contain}
+  .mark{display:flex;align-items:center;gap:20px}
+  .brand{font-weight:900;font-size:30px;letter-spacing:5px;color:#F5C842;line-height:1}
+  .brand span{color:#fff;font-weight:500;margin-left:8px}
+  .rule{width:2px;height:38px;background:rgba(255,255,255,.28)}
+  .event{font-weight:600;font-size:19px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  .mid{position:relative}
+  h1{font-weight:900;font-size:66px;line-height:1.06;letter-spacing:-1.8px}
+  h1 em{font-style:normal;color:#F5C842}
+  .sub{margin-top:18px;font-size:22px;line-height:1.45;color:rgba(250,246,238,.86);font-weight:400;max-width:790px}
+  .bar{display:flex;align-items:center;gap:0;position:relative;border-top:1px solid rgba(255,255,255,.14);padding-top:22px}
+  .cell{padding-right:44px;margin-right:44px;border-right:1px solid rgba(255,255,255,.14)}
+  .cell:last-child{border-right:0;margin-right:0;padding-right:0}
+  .k{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#E8B930;font-weight:700;margin-bottom:7px}
+  .v{font-size:21px;font-weight:700;color:#fff}
+</style>
+<body>
+  <div class="glow"></div>
+  <div class="top">
+    <div class="mark">
+      <img src="gada-global-logo.png" alt="">
+      <div class="brand">GADA<span>GLOBAL</span></div>
+      <div class="rule"></div>
+      <div class="event">5K Peace Run</div>
+    </div>
+  </div>
+  <div class="mid">
+    <h1>Run for <em>peace</em>.<br>Run with Washington&nbsp;DC.</h1>
+    <div class="sub">A professionally timed 5K road race in Rock Creek Park &mdash; open to runners and walkers of every background, age and ability.</div>
+  </div>
+  <div class="bar">
+    <div class="cell"><div class="k">Date</div><div class="v">Saturday, October 3, 2026</div></div>
+    <div class="cell"><div class="k">Start</div><div class="v">9:00 AM</div></div>
+    <div class="cell"><div class="k">Venue</div><div class="v">Rock Creek Park Tennis Center</div></div>
+  </div>
+</body>

@@ -14,7 +14,7 @@ const values = [
 ];
 
 const events = [
-  { badge: "FLAGSHIP", title: "Gada Global Peace Run (5K)", desc: "Our flagship annual road race, open to every community. Inaugural event: October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC." },
+  { badge: "FLAGSHIP", title: "Gada Global 5K Peace Run (5K)", desc: "Our flagship annual road race, open to every community. Inaugural event: October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC." },
   { badge: "FAMILY", title: "Family Fun Run & Kids Dash", desc: "A family-focused community event designed to get kids active and families moving together in a fun, non-competitive environment." },
   { badge: "CORPORATE", title: "Corporate Wellness Challenge", desc: "Teams from companies compete while promoting workplace wellness. A great team-building experience that supports employee health." },
   { badge: "UNITY", title: "Unity Run", desc: "Celebrating diversity and bringing communities together through running. Open to all backgrounds, abilities, and experience levels." },
@@ -60,7 +60,7 @@ export default function AboutPage() {
       <section className="bg-charcoal pt-28 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ background: `url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=80') center/cover no-repeat` }} />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global Run</span>
+          <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">About Gada Global</span>
           <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] text-white mb-6 tracking-tight">
             Professional Race Production<br />in Washington, DC
           </h1>
@@ -81,13 +81,13 @@ export default function AboutPage() {
                   Rooted in the Gadaa System
                 </h2>
                 <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
-                  Gada Global Run is the events arm of Gada Global Inc., a registered company producing professionally organized races, fitness events and wellness initiatives. We are here to promote healthy lifestyles, build stronger neighbourhoods, and put on events where every community in the region feels expected rather than merely permitted.
+                  Gada Global is the events arm of Gada Global Inc., a registered company producing professionally organized races, fitness events and wellness initiatives. We are here to promote healthy lifestyles, build stronger neighbourhoods, and put on events where every community in the region feels expected rather than merely permitted.
                 </p>
                 <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 mb-5">
                   The name <strong className="text-charcoal">Gada</strong> comes from the <strong className="text-charcoal">Gadaa System</strong>, an indigenous democratic governance system developed by the Oromo people and recognized by <strong className="text-charcoal">UNESCO as Intangible Cultural Heritage of Humanity</strong>. Rooted in values of inclusive leadership, equality, accountability, justice, and respect for human dignity, Gadaa inspires our commitment to creating spaces where everyone is welcomed, valued, and empowered.
                 </p>
                 <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85">
-                  Founded by visionary entrepreneurs, community leaders, and passionate athletes, Gada Global Run believes that every finish line represents more than a race &mdash; it represents determination, resilience, unity, and hope.
+                  Founded by visionary entrepreneurs, community leaders, and passionate athletes, Gada Global believes that every finish line represents more than a race &mdash; it represents determination, resilience, unity, and hope.
                 </p>
               </div>
               <div className="relative h-[360px] md:h-[440px]">
@@ -103,7 +103,7 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="mt-16 bg-charcoal rounded-2xl p-8 md:p-10 text-white text-center">
               <p className="text-base md:text-[16px] leading-[1.85] text-white/90 max-w-[640px] mx-auto italic">
-                &ldquo;Whether you are an elite runner, a first-time participant, or a family enjoying a walk together, you belong to Gada Global Run. We bring people together through the power of running to inspire healthier lives, meaningful connections, and positive impact &mdash; one step at a time.&rdquo;
+                &ldquo;Whether you are an elite runner, a first-time participant, or a family enjoying a walk together, you belong to Gada Global. We bring people together through the power of running to inspire healthier lives, meaningful connections, and positive impact &mdash; one step at a time.&rdquo;
               </p>
             </div>
           </ScrollReveal>
@@ -193,7 +193,7 @@ export default function AboutPage() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Event Portfolio</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Our Events</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[520px] mx-auto">
-              From competitive races to family fitness mornings, Gada Global Run organizes events that bring people together and promote healthy living.
+              From competitive races to family fitness mornings, Gada Global organizes events that bring people together and promote healthy living.
             </p>
           </ScrollReveal>
 
@@ -220,7 +220,7 @@ export default function AboutPage() {
               A Legacy of Distance Running
             </h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-charcoal/85 max-w-[600px] mb-14">
-              For decades, runners from the Ethiopian highlands have shaped distance running on the world stage. Gada Global Run takes its inspiration from that standard, and puts on races where the next generation — from anywhere — can find their own start line.
+              For decades, runners from the Ethiopian highlands have shaped distance running on the world stage. Gada Global takes its inspiration from that standard, and puts on races where the next generation — from anywhere — can find their own start line.
             </p>
           </ScrollReveal>
 
@@ -248,7 +248,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight mb-2">Continue the Legacy</h3>
                 <p className="text-[16px] md:text-[15px] text-white/90 leading-relaxed max-w-[480px]">
-                  From Abebe Bikila&apos;s barefoot marathon in Rome to the track today, these runners changed what the sport looks like. Gada Global Run brings that spirit to Rock Creek Park — and opens the line to everybody.
+                  From Abebe Bikila&apos;s barefoot marathon in Rome to the track today, these runners changed what the sport looks like. Gada Global brings that spirit to Rock Creek Park — and opens the line to everybody.
                 </p>
               </div>
               <Link href="/register" className="shrink-0 yellow-card px-8 py-3.5 rounded-xl font-bold text-[14px] tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(245,200,66,0.3)] transition-all no-underline">
@@ -266,7 +266,7 @@ export default function AboutPage() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Partner With Us</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white tracking-tight mb-4">Become a Sponsor</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/82 max-w-[520px] mx-auto">
-              Partner with Gada Global Run to connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
+              Partner with Gada Global to connect with thousands of participants while demonstrating your commitment to health, diversity, and community development.
             </p>
           </ScrollReveal>
 
@@ -294,7 +294,7 @@ export default function AboutPage() {
             <span className="text-[12px] font-bold tracking-[4px] uppercase text-yellow mb-5 block">Join the Movement</span>
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.15] text-white mb-5 max-w-[500px] mx-auto tracking-tight">Ready to Run With Us?</h2>
             <p className="text-base md:text-[16px] leading-[1.85] text-white/85 max-w-[440px] mx-auto mb-10">
-              Registration is open for the inaugural Gada Global Peace Run. Be part of something bigger than a race.
+              Registration is open for the inaugural Gada Global 5K Peace Run. Be part of something bigger than a race.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/register" className="inline-flex items-center gap-3 bg-yellow text-charcoal px-10 py-4 font-bold text-sm tracking-wider uppercase rounded-xl hover:bg-gold-light hover:shadow-[0_8px_32px_rgba(245,200,66,0.25)] hover:-translate-y-0.5 transition-all no-underline">Register for 5K</Link>
