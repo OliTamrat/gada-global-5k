@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     "Register for the Gada Global 5K Peace Run, shop merch, check live results, and find out how to collect your race bib.",
   alternates: { canonical: `${SITE}/links` },
   openGraph: {
-    title: `${EVENT.lockup} — All Links`,
+    // Prose name, not the lockup: share surfaces split on the pipe.
+    title: `${EVENT.name} — All Links`,
     description: "Everything for the Gada Global 5K Peace Run in one place.",
     url: `${SITE}/links`,
   },

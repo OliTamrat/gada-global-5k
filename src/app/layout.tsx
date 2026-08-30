@@ -5,6 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/CartDrawer";
+import { EVENT } from "@/lib/event";
+import { siteUrl } from "@/lib/site";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -18,10 +20,49 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const SITE = siteUrl();
+
+const SHARE_DESCRIPTION =
+  `${EVENT.summary} ${EVENT.date}, ${EVENT.location}, Washington DC. ` +
+  `Race start ${EVENT.startTime}.`;
+
+// Share surfaces get their own title, deliberately WITHOUT the pipe.
+// Several of them split a title on "|" and render only one side: the old card
+// went out as "Irrecha Celebration Run - October 3, 2026" from a title that
+// actually read "Gada Global 5K | Irrecha Celebration Run - October 3, 2026",
+// dropping the brand half entirely. The lockup stays on the browser tab, where
+// nothing chops it up.
+const SHARE_TITLE = `${EVENT.name} — ${EVENT.date}`;
+
 export const metadata: Metadata = {
-  title: "Gada Global | 5K Peace Run — Washington DC, October 3, 2026",
-  description:
-    "A professionally timed 5K road race in Rock Creek Park, open to runners and walkers of every background, age and ability. October 3, 2026 at the Rock Creek Park Tennis Center, Washington DC.",
+  // Without this, relative image paths in metadata never become the absolute
+  // URLs that scrapers require, and the card falls back to a bare icon.
+  metadataBase: new URL(SITE),
+  title: `${EVENT.lockup} — Washington DC, October 3, 2026`,
+  description: SHARE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: EVENT.brand,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
+    url: SITE,
+    locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: `${EVENT.name} — ${EVENT.date}, ${EVENT.location}, Washington DC`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
