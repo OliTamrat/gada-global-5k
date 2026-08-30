@@ -3,6 +3,10 @@
 ## Golden Rules
 - **NEVER use emojis in any UI** — use SVG icons or text instead
 - No Claude attribution in commits
+- **The homepage hero's design and layout are settled.** Change the headline text
+  if asked; do not touch its structure, spacing, classes, the stat-card grid, the
+  video, the particles or the `WordRotator` mechanic. The rotator is on the third
+  line and the accent colour is `text-yellow` — keep both when rewording.
 
 ---
 
