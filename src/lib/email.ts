@@ -71,7 +71,7 @@ function buildHtml(d: RegistrationConfirmation): string {
     "Your race t-shirt is in your packet at pickup either way.",
     `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral. Waves set off a few minutes apart so faster runners are not weaving through walkers and children.`,
     "Wear your bib on the front of your shirt so the finish-line volunteers can scan it.",
-    `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women. Park rules do not permit prize money to be handed out on park grounds, so winners are announced at the ceremony and collect in person afterwards.`,
+    `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
   ]
     .map(
@@ -312,7 +312,7 @@ function buildText(d: RegistrationConfirmation): string {
     "- Your race t-shirt is in your packet at pickup either way.",
     `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral.`,
     "- Wear your bib on the front of your shirt for finish-line scans.",
-    `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women, announced at the ceremony and collected in person afterwards.`,
+    `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,
     "",
     `Questions? ${EVENT.supportEmail}`,

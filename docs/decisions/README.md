@@ -13,4 +13,4 @@ settled decisions.
 | 0005 | Four content decisions taken from timeout defaults — reconfirm before print |
 | 0006 | Sponsor tiers are placeholders from a sample flyer |
 | 0007 | The event is the Gada Global 5K Peace Run, and is not an Irreechaa event |
-| 0008 | The NPS permit sets the schedule, the prizes and the sponsor offer |
+| 0008 | The NPS permit sets race-day times |

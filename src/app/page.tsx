@@ -136,7 +136,7 @@ export default function Home() {
               {[
                 { icon: Icons.trophy, title: "Timed 5K Run & Walk", desc: "Flat, paved course through Rock Creek Park, scored for every finisher" },
                 { icon: Icons.users, title: "Open to All Ages", desc: "Runners and walkers from age five up, with a Kids & Family wave" },
-                { icon: Icons.users, title: "An Early Start", desc: "Packet pickup from 6:30 AM, first wave at 7:45 \u2014 the park road reopens at 9:30" },
+                { icon: Icons.users, title: "An Early Start", desc: "Packet pickup from 6:30 AM, first wave at 7:45, packed up by 10:00" },
                 { icon: Icons.leaf, title: "Built Around Peace", desc: "Named for a tradition of consensus, dialogue and shared leadership" },
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">
@@ -550,8 +550,8 @@ export default function Home() {
                   </h3>
                   <p className="text-[16px] md:text-[15px] text-white/78 leading-[1.8] max-w-[520px] mx-auto">
                     Four partnership levels from $500 to $5,000 &mdash; brand
-                    placement on the race shirt, the race bib, the event banner
-                    and the runner packet, with category exclusivity at the top
+                    placement on the race shirt, bib and venue signage, exhibitor
+                    space at the festival, and category exclusivity at the top
                     level. Every level includes complimentary entries for your team.
                   </p>
                 </div>

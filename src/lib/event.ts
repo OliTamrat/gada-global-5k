@@ -39,23 +39,15 @@ export const EVENT = {
   organization: "Gada Global Inc.",
 
   date: "Saturday, October 3, 2026",
-
-  // ── Race-day times are set by the NPS permit, not by preference ────────
-  // Rock Creek Park permit conditions: the race must START no later than
-  // 8:00 AM, every racer must be off the road and the road reopened by
-  // 9:30 AM, all post-race activity finished by 10:30 AM, and the site clear
-  // by 11:00 AM. Setup may not begin before 6:00 AM. The schedule below
-  // beats each of those, so there is slack on every deadline.
-  // See docs/decisions/0008. Do not push these later without re-reading it.
+  // Race-day times are set by the Rock Creek Park permit: the race must START
+  // no later than 8:00 AM, the road must be reopened by 9:30, post-race
+  // activity finished by 10:30 and the site clear by 11:00. Setup cannot begin
+  // before 6:00. See docs/decisions/0008 before moving any of these later.
   /** First wave. Waves follow at 7:50 and 7:55 — all away before the 8:00 cap. */
   startTime: "7:45 AM",
   packetPickup: "6:30 AM",
   awardsTime: "9:15 AM",
-  /** What the public is invited to. Setup from 6:00 AM is staff only. */
   programHours: "6:30 AM to 10:00 AM",
-  /** Hard permit deadlines, for ops copy and the runbook. */
-  roadReopens: "9:30 AM",
-  siteClear: "10:00 AM",
   location: "Rock Creek Park Tennis Center",
   address: "5220 16th St NW, Washington, DC 20011",
   /** Bare domain, for display in copy. */

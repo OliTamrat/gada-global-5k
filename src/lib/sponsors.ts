@@ -51,7 +51,7 @@ export const SPONSOR_TIERS: SponsorTier[] = [
     name: "Gold",
     amount: "$2,500",
     blurb:
-      "Brand on the race shirt runners keep, your logo in the runner packet, and named recognition from the stage.",
+      "Brand on the race shirt runners keep, exhibitor space at the festival, and named recognition from the stage.",
     weight: 0.72,
   },
   {
@@ -110,21 +110,18 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     tiers: ["platinum"],
   },
   {
-    // NOT an exhibitor table: the Rock Creek Park permit forbids advertising
-    // and sales of any kind on park grounds, so a staffed booth cannot be
-    // sold at any level. See docs/decisions/0008.
     id: "booth",
-    label: "Logo in the runner packet",
+    label: "Exhibitor space at the cultural festival",
     detail:
-      "Printed in the packet handed to every entrant at pickup, so your name leaves the park with the field rather than sitting on a table inside it.",
+      "A staffed table or tent in the festival area from the awards at 9:15 until the program closes at 10:00, with direct access to runners and families.",
     icon: "booth",
     tiers: ["platinum", "gold"],
   },
   {
     id: "banner",
-    label: "Name on the event banner",
+    label: "Banner and on-site signage",
     detail:
-      "On the banner at the Rock Creek Park Tennis Center from before 6:30 AM pickup until the site clears at 10:00 — in front of the field, their families and every spectator for the whole morning. Park rules set the lettering at up to a third of the event-name size.",
+      "Your banner at the Rock Creek Park Tennis Center from before 6:30 AM packet pickup until the program closes at 10:00 — the whole morning, not a five-second impression.",
     icon: "banner",
     tiers: ["platinum", "gold", "silver", "bronze"],
   },
@@ -132,7 +129,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     id: "stage",
     label: "Named from the stage",
     detail:
-      "Read out at the 7:30 welcome and again at the 9:15 awards, while the field and their families are gathered.",
+      "Read out at the 7:30 opening ceremony and again at the 9:15 awards, while the field and their families are gathered.",
     icon: "mic",
     tiers: ["platinum", "gold", "silver"],
   },
