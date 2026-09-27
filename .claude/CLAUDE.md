@@ -57,14 +57,61 @@ only alongside actual scanning code.
 |---|---|
 | Date | Saturday, October 3, 2026 |
 | Venue | Rock Creek Park Tennis Center, 5220 16th St NW, Washington, DC 20011 |
-| Packet pickup | 7:00 AM |
-| Opening ceremony | 8:15 AM |
-| Race start | **9:00 AM** |
-| Awards | 10:00 AM |
-| Community gathering | 10:45 AM – 12:00 PM (**what actually runs here is unconfirmed** — the cultural festival is a separate day, so the slot is named neutrally on the site) |
-| Program window | 7:00 AM to noon |
+| Setup begins | 6:00 AM (earliest the permit allows) |
+| Packet pickup | 6:30 AM |
+| Welcome + course briefing | 7:30 AM |
+| Race start | **7:45 AM** — waves at 7:45 elite / 7:50 open / 7:55 kids |
+| Awards | 9:15 AM |
+| Road reopened | **9:30 AM — hard permit deadline** |
+| Site clear | 10:00 AM (permit allows 11:00) |
+| Program window | 6:30 AM to 10:00 AM |
 | Prizes | $300 / $200 / $100 for top three **men** and top three **women** — $1,200 purse |
 | Registration tiers | Early Bird **$45**, Standard **$48**, Race Week **$50** (`src/lib/registration.ts` is the source of truth) |
+
+## The NPS permit sets the schedule — read before moving any time
+
+Rock Creek Park issues the permit, and its conditions are not negotiable
+preferences. **ADR-0008 records them.** The ones that bite:
+
+| Condition | Value |
+|---|---|
+| Race must start | **no later than 8:00 AM** |
+| All racers off the road, road reopened | **9:30 AM** |
+| All post-race activity complete | **10:30 AM** |
+| Equipment out, site clean and clear | **11:00 AM** |
+| Setup may begin | no earlier than 6:00 AM |
+| Season | Labor Day through Memorial Day (Oct 3 2026 is inside it) |
+| Races per weekend | one |
+
+**Three conditions constrain more than the clock:**
+
+1. **No prize distribution on park grounds.** The form caps prizes at "under
+   $5 in value, such as ribbons or medals". The $1,200 purse is still
+   advertised, and the organizers' decision (2026-09) is that winners are
+   **announced at the awards and collect in person afterwards** — nothing is
+   handed over in the park. Every surface that names the purse says so:
+   the FAQ, the podium, the schedule, the Stripe checkout text and both
+   confirmation emails. **Not yet confirmed in writing by the permit
+   specialist — get that before race day.**
+2. **No advertising or sales of any kind on park grounds.** Sponsor
+   visibility is limited to name or logo on the event banner, at **no more
+   than one third** of the event-name lettering. This is why `sponsors.ts`
+   sells *runner-packet placement* rather than an exhibitor table — a
+   staffed booth cannot be sold at any level. No on-site merch table either;
+   the shop is online only.
+3. **No money collected on site.** Registration is entirely in advance;
+   on-site is sign-in and packet pickup only.
+
+Also required, and all cost or staffing: at least one **US Park Police
+officer** ($92–100/hr, **5-hour minimum**, billed after the permit issues),
+**$1M per incident / $3M aggregate** liability insurance naming the National
+Park Service as additional insured, **at least 4 marshals** in clearly marked
+shirts or armbands, first aid kits, a communications plan, traffic cones for
+the parking lot, and a declared generator — there is no electricity on site.
+Picnic Grove 24 is $65 via recreation.gov and October falls in its
+reservation season.
+
+Permit contact: Michael Brockmeier, michael_brockmeier@nps.gov, (703) 202-8513.
 
 The venue changed from Rock Creek Parkway in July 2026. Anything describing a
 point-to-point parkway course (Kennedy Center finish, Lincoln Memorial) is stale —
@@ -237,9 +284,10 @@ receive anything until the domain verifies.
 ### Open questions
 
 - Four content decisions were taken from timeout-default answers and never explicitly
-  confirmed: the $1,200 split across two divisions (vs. one combined top three), the
-  festival ending at noon (the source note read "7am-12am"), removing the Lincoln
-  Memorial card, and updating the website only. Re-confirm before print or promotion.
+  confirmed: the $1,200 split across two divisions (vs. one combined top three),
+  removing the Lincoln Memorial card, and updating the website only. Re-confirm before
+  print or promotion. (The programme end time is no longer an open question — the NPS
+  permit settles it; see ADR-0008.)
 - The 5K route is described generically ("looping through the surrounding park roads
   and trails"). Replace with the real route once mapped.
 - Proposal documents (`GADA_GLOBAL_5K_BUSINESS_PROPOSAL.md`, `public/proposal.html`,

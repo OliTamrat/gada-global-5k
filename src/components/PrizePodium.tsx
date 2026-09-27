@@ -119,7 +119,9 @@ export function PrizePodium() {
       <p className="text-center text-[13px] text-white/70 mt-5 leading-relaxed">
         Both divisions pay identically &mdash; {" "}
         <span className="text-white/90 font-semibold">$1,200 total</span> across six winners. Age group
-        awards and finisher medals are presented alongside the cash prizes.
+        awards and finisher medals are presented at the ceremony. Park rules do not allow prize
+        money to be handed out on park grounds, so cash winners are announced at the awards and
+        collect their prize in person afterwards.
       </p>
     </div>
   );

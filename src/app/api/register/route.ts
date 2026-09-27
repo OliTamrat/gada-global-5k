@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
       custom_text: {
         submit: {
           message:
-            "Entry includes your race bib, a finisher medal, the official event t-shirt, water stations on course, and race photography. The top three men and top three women share a $1,200 cash purse.",
+            `Entry includes your race bib, a finisher medal, the official event t-shirt, water stations on course, and race photography. The top three men and top three women share a $1,200 cash purse, announced at the awards and collected in person afterwards. Race day starts early: packet pickup ${EVENT.packetPickup}, first wave ${EVENT.startTime}.`,
         },
         after_submit: {
           message: `Your confirmation email with your bib number and start wave arrives within a few minutes. Questions: ${EVENT.supportEmail}`,

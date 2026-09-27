@@ -137,8 +137,8 @@ LETTER_BLOCKS = [
     ("p", "Gada Global Inc. produces timed road races and community events in the "
           "Washington DC metropolitan area. On Saturday, October 3, 2026 we will hold the "
           "Gada Global 5K Peace Run at the Rock Creek Park Tennis Center \u2014 a field of up "
-          "to 500 runners, a five-hour programme from packet pickup at 7:00 AM through a "
-          "cultural festival at noon, and a $1,200 prize purse. I am writing to invite "
+          "to 500 runners, a programme running from packet pickup at 6:30 AM to the close "
+          "at 10:00 AM, and a $1,200 prize purse. I am writing to invite "
           "[Organization] to partner with us."),
     ("p", "Partnership places your brand in front of runners, their families and supporters "
           "for the whole morning rather than for a moment: on the official race shirt every "
