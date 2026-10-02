@@ -461,6 +461,15 @@ reply-to set to the runner. Recipients come from `ORGANIZER_EMAILS`
 leaves organizers blind. Like the runner confirmation, a send failure is logged
 and swallowed — it must never fail the webhook and trigger a Stripe retry.
 
+**Race-day update email (`/organizers` → "Race-day update email").** Sends every
+paid runner the safety-plan times, their own wave start and bib, and "collect your
+bib and T-shirt at packet pickup from 7:00 AM". Send a test first, then two taps to
+send to all. `/api/organizers/announce` records each send in `announcements_sent`
+(created on first use, mirrored in `schema.sql`), so pressing Send again resumes
+and never emails a runner twice; a failed send releases its claim and is retried
+on the next press. A new announcement needs a new `RACE_UPDATE_ID` in
+`src/lib/race-update-email.ts`.
+
 **`/organizers`** is the standing answer to "how many have registered": paid
 count, **total revenue across registrations and merch**, merch order count,
 abandoned checkouts, breakdowns by wave, tier and **t-shirt size for ordering**,

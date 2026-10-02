@@ -129,3 +129,14 @@ create table if not exists wave_starts (
   started_by text,
   created_at timestamptz not null default now()
 );
+
+-- ── Announcements ───────────────────────────────────────────────────────────
+-- Who has received a one-off organizer email (e.g. the race-day times update),
+-- so pressing Send twice never emails a runner twice. Also created on first use
+-- by /api/organizers/announce.
+create table if not exists announcements_sent (
+  announcement    text not null,
+  registration_id uuid not null references registrations (id) on delete cascade,
+  sent_at         timestamptz not null default now(),
+  primary key (announcement, registration_id)
+);

@@ -155,6 +155,8 @@ function OrganizerDashboard() {
               />
             </div>
 
+            <RaceUpdatePanel />
+
             <h2 className="text-[12px] font-bold tracking-[2px] uppercase text-white/60 mb-3">
               Most recent
             </h2>
@@ -302,6 +304,146 @@ function Breakdown({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+interface AnnounceStatus {
+  recipients: number;
+  sent: number;
+  preview: { subject: string; text: string };
+}
+
+/**
+ * Sends the race-day times update to every paid runner. Test first, then a
+ * two-tap send. The server records who has been emailed, so pressing Send
+ * again only reaches runners not yet emailed — it resumes, never repeats.
+ */
+function RaceUpdatePanel() {
+  const [status, setStatus] = useState<AnnounceStatus | null>(null);
+  const [testTo, setTestTo] = useState("");
+  const [armed, setArmed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
+
+  const refresh = useCallback(async () => {
+    const res = await opsFetch("/api/organizers/announce");
+    const body = await res.json();
+    if (res.ok) setStatus(body);
+    else setMessage(body.error ?? "Could not load the email status.");
+  }, []);
+
+  useEffect(() => {
+    void Promise.resolve().then(refresh);
+  }, [refresh]);
+
+  async function post(payload: object) {
+    setBusy(true);
+    setMessage("");
+    try {
+      const res = await opsFetch("/api/organizers/announce", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      return { ok: res.ok, body: await res.json() };
+    } catch {
+      return { ok: false, body: { error: "Could not reach the server." } };
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function sendTest() {
+    const { ok, body } = await post({ mode: "test", to: testTo });
+    setMessage(ok ? `Test sent to ${body.to}. Check that inbox before sending to everyone.` : body.error);
+  }
+
+  async function sendAll() {
+    if (!armed) {
+      setArmed(true);
+      return;
+    }
+    setArmed(false);
+    setMessage("Sending… keep this page open. This can take a couple of minutes.");
+    const { ok, body } = await post({ mode: "send" });
+    if (!ok) {
+      setMessage(body.error);
+    } else {
+      const failed = body.failed.length
+        ? ` ${body.failed.length} failed (bibs ${body.failed.map((f: { bib: number }) => f.bib).join(", ")}) — press Send again to retry them.`
+        : "";
+      const rest = body.remaining > 0 && !body.failed.length
+        ? ` ${body.remaining} still to go — press Send again to continue.`
+        : "";
+      setMessage(`Sent ${body.sent} now; ${body.totalSent} of ${body.recipients} runners emailed in total.${failed}${rest}`);
+    }
+    await refresh();
+  }
+
+  const remaining = status ? Math.max(status.recipients - status.sent, 0) : 0;
+
+  return (
+    <div className="bg-white/5 border border-yellow/25 rounded-2xl p-5 mb-7">
+      <h2 className="text-[12px] font-bold tracking-[2px] uppercase text-yellow mb-2">
+        Race-day update email
+      </h2>
+      <p className="text-[14px] text-white/75 leading-relaxed mb-4">
+        Tells every paid runner the new start times, their own wave and bib, and to
+        collect their bib and T-shirt at packet pickup from 7:00 AM.
+        {status && (
+          <> <strong className="text-white">{status.sent} of {status.recipients}</strong> runners emailed so far.</>
+        )}
+      </p>
+
+      {status && (
+        <button
+          onClick={() => setShowPreview((v) => !v)}
+          className="text-[12px] font-bold tracking-wider uppercase text-white/60 bg-transparent border-none cursor-pointer p-0 mb-3"
+        >
+          {showPreview ? "Hide preview" : "Preview email"}
+        </button>
+      )}
+      {showPreview && status && (
+        <div className="bg-black/30 rounded-xl p-4 mb-4 text-[13px] text-white/80">
+          <div className="font-bold text-white mb-2">{status.preview.subject}</div>
+          <pre className="whitespace-pre-wrap font-[inherit] m-0">{status.preview.text}</pre>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2 mb-3">
+        <input
+          type="email"
+          value={testTo}
+          onChange={(e) => setTestTo(e.target.value)}
+          placeholder="your@email.com"
+          className="flex-1 min-w-[200px] px-3 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white text-[14px]"
+        />
+        <button
+          onClick={sendTest}
+          disabled={busy || !testTo}
+          className="rounded-xl px-4 py-2.5 font-bold text-[13px] tracking-wider uppercase bg-white/10 text-white border border-white/20 cursor-pointer disabled:opacity-40"
+        >
+          Send test
+        </button>
+      </div>
+
+      <button
+        onClick={sendAll}
+        disabled={busy || !status || remaining === 0}
+        className={`w-full rounded-xl px-5 py-3 font-bold text-[13px] tracking-wider uppercase border-none cursor-pointer disabled:opacity-40 ${
+          armed ? "bg-red-oromo text-white" : "yellow-card"
+        }`}
+      >
+        {remaining === 0 && status
+          ? "Everyone has been emailed"
+          : armed
+            ? `Tap again to email ${remaining} runners`
+            : `Send to ${remaining} runners`}
+      </button>
+
+      {message && <p className="text-[13px] text-white/85 mt-3 mb-0">{message}</p>}
     </div>
   );
 }
