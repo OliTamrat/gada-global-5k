@@ -50,7 +50,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og.png",
+        // Bump ?v= whenever the card changes: platforms cache images by URL.
+        url: "/og.png?v=3",
         width: 1200,
         height: 630,
         alt: `${EVENT.name} — ${EVENT.date}, ${EVENT.location}, Washington DC`,
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SHARE_TITLE,
     description: SHARE_DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/og.png?v=3"],
   },
 };
 
