@@ -15,6 +15,7 @@ interface RaceResult {
   netTime?: number;
   pace?: string;
   position?: number;
+  distance?: "5K" | "1K";
   timingConfidence?: "high" | "medium" | "low";
 }
 
@@ -74,6 +75,11 @@ export default function RaceResultsPage() {
   });
 
   const finished = filtered.filter((r) => r.finishTime);
+  // Kids 1K and 5K are separate races with their own places — never one list.
+  const finishedGroups = [
+    { title: "5K Finished", rows: finished.filter((r) => r.distance !== "1K") },
+    { title: "Kids 1K Finished", rows: finished.filter((r) => r.distance === "1K") },
+  ].filter((g) => g.rows.length > 0);
   const running = filtered.filter((r) => r.startTime && !r.finishTime);
   const waiting = filtered.filter((r) => !r.startTime);
 
@@ -159,13 +165,13 @@ export default function RaceResultsPage() {
         )}
 
         {/* Results table */}
-        {finished.length > 0 && (
-          <div className="mb-8">
+        {finishedGroups.map((group) => (
+          <div key={group.title} className="mb-8">
             <h3 className="text-[12px] font-bold tracking-[3px] uppercase text-yellow/60 mb-4">
-              Finished ({finished.length})
+              {group.title} ({group.rows.length})
             </h3>
             <div className="space-y-2">
-              {finished.map((r) => (
+              {group.rows.map((r) => (
                 <Link
                   key={r.bib}
                   href={`/race/${r.bib}`}
@@ -206,7 +212,7 @@ export default function RaceResultsPage() {
               ))}
             </div>
           </div>
-        )}
+        ))}
 
         {/* On course */}
         {running.length > 0 && (

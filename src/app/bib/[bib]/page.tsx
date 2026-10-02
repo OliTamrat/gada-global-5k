@@ -103,7 +103,7 @@ export default async function BibPage({
               <div className="text-[10px] font-bold tracking-[2px] uppercase text-charcoal/50 mb-1">
                 Start
               </div>
-              <div className="text-[15px] font-black text-charcoal">{EVENT.startTime}</div>
+              <div className="text-[15px] font-black text-charcoal">{wave.startTime}</div>
               <div className="text-[11px] text-charcoal/60 mt-1.5 max-w-[220px] leading-snug">
                 {EVENT.location}
               </div>
@@ -134,8 +134,8 @@ export default async function BibPage({
         <p className="print:hidden text-[13px] leading-[1.7] text-charcoal/55 text-center mt-6 max-w-[460px] mx-auto">
           Wear this on the front of your shirt so the finish-line volunteers can
           read it. Line up in the{" "}
-          <strong className="text-charcoal/75">{wave.label}</strong> corral —
-          waves start a few minutes apart.
+          <strong className="text-charcoal/75">{wave.label}</strong> corral before
+          your {wave.startTime} start.
         </p>
       </div>
     </main>

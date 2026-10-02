@@ -57,13 +57,15 @@ only alongside actual scanning code.
 |---|---|
 | Date | Saturday, October 3, 2026 |
 | Venue | Rock Creek Park Tennis Center, 5220 16th St NW, Washington, DC 20011 |
-| Setup begins | 6:00 AM (earliest the permit allows) |
-| Packet pickup | 6:30 AM |
-| Opening ceremony | 7:30 AM |
-| Race start | **7:45 AM** — waves at 7:45 elite / 7:50 open / 7:55 kids |
-| Awards | 9:15 AM |
-| Community gathering | 9:45 – 10:00 AM |
-| Program window | 6:30 AM to 10:00 AM |
+| Setup / volunteer briefing | 6:00 AM (earliest the permit allows) |
+| Packet pickup | 7:00 AM |
+| Opening ceremony | 7:30 AM (not in the safety plan — site-only, unconfirmed) |
+| Kids 1K start | **8:00 AM** |
+| 5K start | **8:30 AM** — elite race and fun run |
+| Course closes, road reopened | **9:30 AM** — the 5K has a 60-minute limit |
+| Awards | 9:30 AM |
+| Community gathering | 10:00 – 10:30 AM |
+| Program window | 7:00 AM to 10:30 AM; site clear 11:00 |
 | Prizes | $300 / $200 / $100 for top three **men** and top three **women** — $1,200 purse |
 | Registration tiers | Early Bird **$45**, Standard **$48**, Race Week **$50** (`src/lib/registration.ts` is the source of truth) |
 
@@ -82,10 +84,12 @@ They are conditions of holding the event at all, not preferences:
 | Season | Labor Day through Memorial Day (Oct 3 2026 is inside it) |
 | Races per weekend | one |
 
-The schedule beats every one of them, and the three waves at five-minute
-spacing mean the **last** wave is away before the 8:00 cap, not just the
-first. A 20-minute-per-mile walker starting at 7:55 finishes about 8:57, so
-the 9:00 course close is real rather than optimistic.
+The schedule is the one in the **Event Safety Plan filed with the NPS**
+(Kids 1K 8:00, 5K 8:30, road reopened 9:30). That plan is what the Park Service
+holds, so the site follows it. Two consequences: the 5K has a hard
+**60-minute limit** (about 19:20 per mile), and the 8:30 5K start is later than
+the permit's 8:00 start condition — the organizers are reconciling that with
+the NPS; ADR-0008 records it.
 
 The permit also carries conditions that are **not about the clock** — no prize
 distribution on park grounds, no advertising or sales on park grounds, no money
@@ -475,9 +479,15 @@ would take ~25 minutes; instead the starter sends a wave and one volunteer taps
 once at `/race/start`, which writes a single row to `wave_starts` and backfills
 `start_time` for every runner in that wave.
 
-Three waves, in `src/lib/waves.ts`: **elite → open → kids**, a few minutes apart.
-Separating them is a safety measure as much as a timing one — fast runners
-weaving through walkers and children in the first 200 m is how people get hurt.
+Three waves, in `src/lib/waves.ts`: **kids → elite → open**. The Kids 1K goes
+at 8:00 on a clear course; elite and open go at 8:30. Separating them is a
+safety measure as much as a timing one — fast runners weaving through walkers
+and children in the first 200 m is how people get hurt.
+
+**The Kids 1K is a different distance**, carried as `distance` on `WAVE_META`.
+`computeResults` ranks and paces each distance separately and the leaderboard
+shows them as separate lists. Before this, a child's six-minute 1K would have
+placed first overall on the 5K board.
 
 - Wave is chosen at registration, stored on `registrations` and `race_entries`,
   printed as a coloured band on the bib so runners self-sort into a corral, and

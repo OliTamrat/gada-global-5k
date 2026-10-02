@@ -3,6 +3,7 @@
 **Status:** accepted (2026-09, organizers)
 **Supersedes:** the 9:00 AM start, the 8:15 opening ceremony and the
 10:45–noon community gathering.
+**Source:** the Event Safety Plan filed with the NPS for October 3, 2026.
 
 ## Context
 
@@ -26,31 +27,45 @@ permitted season.
 
 ## Decision
 
+Race day follows the **Event Safety Plan** the organizers filed with the
+National Park Service (2026-10). An earlier draft of this ADR used a 7:45
+start with three waves five minutes apart; the safety plan replaced it before
+merge, and the site matches the plan because the plan is what the Park Service
+holds.
+
 ```
-6:00   Setup begins            (earliest permitted)
-6:30   Packet pickup and check-in
-7:30   Opening ceremony
-7:45   Wave 1 — elite
-7:50   Wave 2 — open
-7:55   Wave 3 — kids & family   ← every wave away before the 8:00 cap
-9:00   Course closes
-9:15   Awards
-9:30   Road cleared and reopened (hard deadline)
-9:45   Community gathering
-10:00  Site clear               (permit allows 11:00 — this is slack)
+6:00   Pre-race preparation; volunteer briefing   (earliest permitted)
+7:00   Packet pickup — bibs and T-shirts
+7:30   Opening ceremony                            (site only; not in the plan)
+8:00   Kids 1K
+8:30   5K — elite race and fun run
+9:30   All races complete; road reopened           (hard deadline)
+9:30   Awards; post-race events begin
+10:30  Post-race events conclude
+11:00  Field clean; site clear
 ```
 
-Two things make this hold rather than merely look compliant:
+What this changes in the timing system, not just the copy:
 
-- **Five-minute wave spacing puts the *last* wave away before the cap**, not
-  just the first. A single 8:00 start with waves trailing after it would breach
-  the condition on the second and third waves.
-- **A 20-minute-per-mile walker starting at 7:55 finishes about 8:57**, so the
-  9:00 course close has real margin against the 9:30 road reopening rather than
-  assuming everyone runs.
+- **Wave order is kids → elite → open.** The Kids 1K goes first, on a clear
+  course.
+- **The Kids 1K is a separate race.** `WAVE_META` carries a `distance`;
+  `computeResults` ranks and paces each distance on its own, and the
+  leaderboard and runner recap name the race. Without this a child's 1K time
+  would have placed first on the 5K board.
+- **The 5K has a 60-minute limit.** 8:30 to the 9:30 road reopening is about
+  19:20 per mile. The FAQ no longer says there is no minimum pace.
+- Each wave carries its own `startTime`, printed on the bib and in the
+  confirmation email, so a Kids 1K runner is not told 8:30.
 
-`src/lib/event.ts` holds these times and carries the reason in a comment;
-`docs-truth` keeps the briefing in step.
+### Open: the 8:30 5K start and the permit's 8:00 condition
+
+The permit conditions read "race must start no later than 8:00 AM". The safety
+plan starts the Kids 1K at 8:00 and the 5K at 8:30. If the NPS reads the 8:00
+condition as the first start of the morning, the plan satisfies it; if it
+applies to every race, the 5K is half an hour late. **The organizers must
+confirm this with the permit contact** — it is not something the site can
+settle.
 
 ## Scope of this decision
 
@@ -81,7 +96,7 @@ a future session does not mistake the silence in the copy for their absence.
   armbands, first aid kits, a communications plan, traffic cones for the
   parking lot, and a declared generator — there is no electricity on site.
 - `src/lib/race-window.ts` needs no change: it locks timing to the calendar
-  day, not to a time of day, so the earlier start does not affect it.
+  day, not to a time of day, so the start times do not affect it.
 - The brochure and letterhead carry the new times.
 
 Permit contact: Michael Brockmeier, michael_brockmeier@nps.gov, (703) 202-8513.

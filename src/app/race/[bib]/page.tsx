@@ -15,6 +15,7 @@ interface RunnerData {
     netTime?: number;
     pace?: string;
     position?: number;
+    distance?: "5K" | "1K";
     timingConfidence?: "high" | "medium" | "low";
   };
   stats: {
@@ -162,7 +163,7 @@ export default function RunnerPage({ params }: { params: Promise<{ bib: string }
           {isFinished && (
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/6 border-b border-white/6">
               {[
-                { label: "Overall", value: `${runner.position}/${stats.totalFinished}` },
+                { label: runner.distance === "1K" ? "Kids 1K" : "5K Overall", value: `${runner.position}/${stats.totalFinished}` },
                 { label: runner.gender, value: `${stats.genderPos}/${stats.genderTotal}` },
                 { label: stats.ageGroup, value: `${stats.agePos}/${stats.ageTotal}` },
                 { label: "Top", value: `${100 - percentile}%` },

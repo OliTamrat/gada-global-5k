@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRaceEntries, computeResults, formatTime, calcPace, getAgeGroup } from "@/lib/race";
+import { DISTANCE_MILES } from "@/lib/waves";
 import Anthropic from "@anthropic-ai/sdk";
 
 export const dynamic = "force-dynamic";
@@ -26,8 +27,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Runner not found" }, { status: 404 });
   }
 
-  const totalFinished = results.filter((r) => r.finishTime).length;
-  const genderResults = results.filter(
+  // Compare only against the same distance: Kids 1K and 5K are separate races.
+  const sameRace = results.filter((r) => r.distance === runner.distance);
+  const totalFinished = sameRace.filter((r) => r.finishTime).length;
+  const genderResults = sameRace.filter(
     (r) => r.gender === runner.gender && r.finishTime
   );
   const genderPos = runner.position
@@ -35,7 +38,7 @@ export async function GET(req: NextRequest) {
     : undefined;
 
   const ageGroup = getAgeGroup(runner.age);
-  const ageResults = results.filter(
+  const ageResults = sameRace.filter(
     (r) => r.finishTime && r.gender === runner.gender && getAgeGroup(r.age) === ageGroup
   );
   const agePos = runner.position
@@ -45,13 +48,14 @@ export async function GET(req: NextRequest) {
   let recap = "";
   if (runner.finishTime && runner.startTime) {
     const netMs = runner.finishTime - runner.startTime;
-    const pace = calcPace(netMs);
+    const pace = calcPace(netMs, DISTANCE_MILES[runner.distance]);
     const time = formatTime(netMs);
     const percentile = Math.round(
       ((totalFinished - (runner.position || 0) + 1) / totalFinished) * 100
     );
 
     const recapData = {
+      race: runner.distance === "1K" ? "Kids 1K" : "5K",
       name: runner.firstName,
       fullName: `${runner.firstName} ${runner.lastName}`,
       time,
@@ -87,6 +91,7 @@ export async function GET(req: NextRequest) {
 }
 
 async function generateAIRecap(d: {
+  race: string;
   name: string;
   fullName: string;
   time: string;
@@ -116,7 +121,7 @@ async function generateAIRecap(d: {
         messages: [
           {
             role: "user",
-            content: `Write a personalized, warm, and celebratory race recap for a runner at the Gada Global 5K Peace Run (a timed 5K road race open to every community, held at the Rock Creek Park Tennis Center in Washington DC). Keep it to 3-4 sentences. Be specific with their stats. Do not use emojis.
+            content: `Write a personalized, warm, and celebratory race recap for a runner in the ${d.race} at the Gada Global 5K Peace Run (a timed road race open to every community, held at the Rock Creek Park Tennis Center in Washington DC). Positions below are among ${d.race} finishers only. Keep it to 3-4 sentences. Be specific with their stats. Do not use emojis.
 
 Runner: ${d.fullName}, age ${d.age}, ${d.gender}
 Official time: ${d.time}
@@ -146,6 +151,7 @@ Write the recap now:`,
 }
 
 function generateTemplateRecap(d: {
+  race: string;
   name: string;
   time: string;
   pace: string;
@@ -173,5 +179,5 @@ function generateTemplateRecap(d: {
 
   const topPercent = 100 - d.percentile;
 
-  return `Congratulations, ${d.name}! You crossed the finish line at the Gada Global 5K Peace Run with an official time of ${d.time}, finishing ${ordinal(d.position)} overall out of ${d.total} runners. ${paceComment} at ${d.pace}/mile. You placed ${ordinal(d.genderPos)} among ${d.genderTotal} runners in your gender category, and ${ordinal(d.agePos)} out of ${d.ageTotal} in the ${d.ageGroup} age group. You finished ahead of ${d.percentile}% of all participants${topPercent <= 10 ? " \u2014 placing you in the top " + topPercent + "%!" : "."} Thank you for running with us at Rock Creek Park. See you next year!`;
+  return `Congratulations, ${d.name}! You crossed the ${d.race} finish line at the Gada Global 5K Peace Run with an official time of ${d.time}, finishing ${ordinal(d.position)} overall out of ${d.total} runners. ${paceComment} at ${d.pace}/mile. You placed ${ordinal(d.genderPos)} among ${d.genderTotal} runners in your gender category, and ${ordinal(d.agePos)} out of ${d.ageTotal} in the ${d.ageGroup} age group. You finished ahead of ${d.percentile}% of all participants${topPercent <= 10 ? " \u2014 placing you in the top " + topPercent + "%!" : "."} Thank you for running with us at Rock Creek Park. See you next year!`;
 }

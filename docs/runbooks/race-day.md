@@ -5,7 +5,9 @@
   means the starter taps "send", gets a silent success, and every runner
   in that wave is timed from weeks ago.
 - **Start:** one volunteer at `/race/start`, two taps to send each wave
-  (elite → open → kids, minutes apart).
+  (kids → elite → open). **8:00** send Kids 1K; **8:30** send Elite, then
+  Open right behind it. Every runner off the road by **9:30** — the sweep
+  follows the last 5K runner.
 - **Finish:** the bottleneck is real — expect 40–60 finishers inside a
   two-minute window. Single-file chute, 3–4 volunteers scanning in
   parallel (`recordScan` supports multiple volunteers per bib and raises

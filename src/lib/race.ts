@@ -1,5 +1,5 @@
 import { query, queryOne, transaction } from "@/lib/db";
-import { coerceWave, WAVES, type Wave } from "@/lib/waves";
+import { coerceWave, WAVES, WAVE_META, DISTANCE_MILES, type RaceDistance, type Wave } from "@/lib/waves";
 
 export interface RaceEntry {
   bib: number;
@@ -38,7 +38,9 @@ export interface Dispute {
 export interface RaceResult extends RaceEntry {
   netTime?: number;
   pace?: string;
+  /** Place among finishers of the same distance — a Kids 1K time never ranks against a 5K. */
   position?: number;
+  distance: RaceDistance;
 }
 
 // Unique violation — a volunteer scanning the same bib twice.
@@ -559,31 +561,39 @@ export function formatTime(ms: number): string {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
-export function calcPace(ms: number): string {
+export function calcPace(ms: number, miles = DISTANCE_MILES["5K"]): string {
   const totalMinutes = ms / 60000;
-  const pacePerMile = totalMinutes / 3.1;
+  const pacePerMile = totalMinutes / miles;
   const mins = Math.floor(pacePerMile);
   const secs = Math.round((pacePerMile - mins) * 60);
   return `${mins}:${String(secs).padStart(2, "0")}`;
 }
 
+export function distanceOf(e: { wave: Wave }): RaceDistance {
+  return WAVE_META[coerceWave(e.wave)].distance;
+}
+
 export function computeResults(entries: RaceEntry[]): RaceResult[] {
-  const finished: RaceResult[] = entries
+  const withDistance = entries.map((e) => ({ ...e, distance: distanceOf(e) }));
+
+  // 5K first, then the Kids 1K; each ranked only against its own distance.
+  const distanceOrder: RaceDistance[] = ["5K", "1K"];
+  const finished: RaceResult[] = withDistance
     .filter((e) => e.startTime && e.finishTime)
     .map((e) => ({ ...e, netTime: e.finishTime! - e.startTime! }))
-    .sort((a, b) => a.netTime! - b.netTime!);
+    .sort(
+      (a, b) =>
+        distanceOrder.indexOf(a.distance) - distanceOrder.indexOf(b.distance) ||
+        a.netTime! - b.netTime!
+    );
 
-  const inProgress: RaceResult[] = entries
-    .filter((e) => e.startTime && !e.finishTime)
-    .map((e) => ({ ...e }));
+  const inProgress: RaceResult[] = withDistance.filter((e) => e.startTime && !e.finishTime);
+  const notStarted: RaceResult[] = withDistance.filter((e) => !e.startTime);
 
-  const notStarted: RaceResult[] = entries
-    .filter((e) => !e.startTime)
-    .map((e) => ({ ...e }));
-
-  finished.forEach((e, i) => {
-    e.position = i + 1;
-    e.pace = calcPace(e.netTime!);
+  const placed: Record<RaceDistance, number> = { "5K": 0, "1K": 0 };
+  finished.forEach((e) => {
+    e.position = ++placed[e.distance];
+    e.pace = calcPace(e.netTime!, DISTANCE_MILES[e.distance]);
   });
 
   return [...finished, ...inProgress, ...notStarted];

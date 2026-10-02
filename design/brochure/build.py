@@ -165,11 +165,12 @@ GLANCE = f"""
     {"".join(f'''<tr>
       <td style="padding:7px 0;letter-spacing:.14em;color:var(--gold);font-weight:700;width:76px">{t}</td>
       <td style="padding:7px 0;letter-spacing:.03em">{v}</td></tr>''' for t, v in [
-      ("6:30", "Packet pickup opens"),
+      ("7:00", "Packet pickup opens"),
       ("7:30", "Opening ceremony"),
-      ("7:45", "Race start — three waves"),
-      ("9:15", "Awards and prize presentation"),
-      ("9:45", "Community gathering until 10:00"),
+      ("8:00", "Kids 1K"),
+      ("8:30", "5K — elite race and fun run"),
+      ("9:30", "Awards and prize presentation"),
+      ("10:00", "Community gathering until 10:30"),
     ])}
   </table>
 
@@ -229,7 +230,7 @@ FRONT = f"""
 
       <div style="font-size:10.5px;line-height:1.85;color:rgba(255,255,255,.92);margin-top:16px;letter-spacing:.05em">
         <div style="font-weight:700">Rock Creek Park Tennis Center</div>
-        <div style="opacity:.82">Washington, D.C. &nbsp;·&nbsp; 7:45 AM start</div>
+        <div style="opacity:.82">Washington, D.C. &nbsp;·&nbsp; 8:30 AM 5K start</div>
       </div>
       <div style="font-size:10px;letter-spacing:.16em;color:var(--gold);margin-top:22px;font-weight:700">
         PARTNERSHIP LEVELS FROM $500 TO $5,000</div>
@@ -240,8 +241,8 @@ FRONT = f"""
 # ══════════════════════════════════ INSIDE ═══════════════════════════════
 VALUE = [
     ("The whole morning, not five seconds",
-     "Runners, families and supporters are on site from packet pickup at 6:30 AM through the "
-     "close of the programme at 10:00. Sponsor signage is in front of them for all of it."),
+     "Runners, families and supporters are on site from packet pickup at 7:00 AM through the "
+     "close of the programme at 10:30. Sponsor signage is in front of them for all of it."),
     ("A shirt that leaves with 500 people",
      "Every registered runner receives the official race shirt. Logos printed on it are worn "
      "around the DC metro area long after October 3."),
@@ -350,7 +351,7 @@ LEVELS = f"""
         <b>1.</b> Email info@gadaglobalrun.com with your level. &nbsp;
         <b>2.</b> We return a one-page agreement and an invoice. &nbsp;
         <b>3.</b> Send your logo as vector or high-resolution PNG before the artwork deadline. &nbsp;
-        <b>4.</b> Your placement goes live on the site immediately and on site from 6:30 AM on race day.
+        <b>4.</b> Your placement goes live on the site immediately and on site from 7:00 AM on race day.
       </div>
     </div>
     <div style="width:92px;height:92px;padding:7px;background:#fff;flex:none">

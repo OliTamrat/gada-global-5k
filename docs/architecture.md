@@ -11,8 +11,10 @@ is unused), Resend for email, deployed on Vercel from `master` (there is no
 
 Runners are never scanned at the start. The starter sends a **wave** — one
 tap at `/race/start` writes one row to `wave_starts` and backfills
-`start_time` for the whole wave. Three waves (`src/lib/waves.ts`): elite →
-open → kids — a safety measure as much as a timing one. Sending a wave is
+`start_time` for the whole wave. Three waves (`src/lib/waves.ts`): kids → elite → open — the Kids 1K at
+8:00, then the 5K elite race and fun run at 8:30, per the NPS safety plan
+(ADR-0008). Kids run a different distance, so `computeResults` ranks and
+paces each distance separately; a 1K time never places on the 5K board. Sending a wave is
 **idempotent**: a second tap returns the original timestamp. Finish scans
 inherit their wave's start if missing; timing is gun-time per wave.
 `docs/runbooks/race-day.md` carries the operational half.

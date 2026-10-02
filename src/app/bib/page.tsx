@@ -8,7 +8,7 @@ const SITE = siteUrl();
 export const metadata: Metadata = {
   title: "Your Race Bib | Gada Global 5K Peace Run",
   description:
-    "How to get your Gada Global 5K Peace Run race bib — print it from the link in your confirmation email, or collect it at packet pickup from 6:30 AM.",
+    "How to get your Gada Global 5K Peace Run race bib — print it from the link in your confirmation email, or collect it at packet pickup from 7:00 AM.",
   alternates: { canonical: `${SITE}/bib` },
 };
 
@@ -26,7 +26,7 @@ const STEPS = [
   {
     n: "3",
     title: `Or collect it from ${EVENT.packetPickup}`,
-    body: `No printer, no problem. Packet pickup runs from ${EVENT.packetPickup} at the ${EVENT.location}, ${EVENT.address}, right up to the ${EVENT.startTime} start. Bring a photo ID.`,
+    body: `No printer, no problem. Packet pickup runs from ${EVENT.packetPickup} at the ${EVENT.location}, ${EVENT.address}, right up to the ${EVENT.kidsStartTime} Kids 1K start. Bring a photo ID.`,
   },
   {
     n: "4",
