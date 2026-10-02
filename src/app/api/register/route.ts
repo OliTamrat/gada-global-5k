@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
             currency: "usd",
             product_data: {
               name: `${EVENT.name} — Race Entry (${tier.name})`,
-              description: `${detail}. ${EVENT.date}, ${EVENT.startTime} at the ${EVENT.location}, Washington DC.`,
+              description: `${detail}. ${EVENT.date}, ${WAVE_META[wave].startTime} start at the ${EVENT.location}, Washington DC.`,
               ...(logo ? { images: [logo] } : {}),
             },
             unit_amount: tier.price,

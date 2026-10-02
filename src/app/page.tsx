@@ -135,8 +135,8 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { icon: Icons.trophy, title: "Timed 5K Run & Walk", desc: "Flat, paved course through Rock Creek Park, scored for every finisher" },
-                { icon: Icons.users, title: "Open to All Ages", desc: "Runners and walkers from age five up, with a Kids & Family wave" },
-                { icon: Icons.users, title: "A Morning, Not an Hour", desc: "Doors at 7:00 AM and the program open until noon \u2014 come for the whole thing" },
+                { icon: Icons.users, title: "Open to All Ages", desc: "Runners and walkers from age five up, with a Kids 1K" },
+                { icon: Icons.users, title: "An Early Start", desc: "Packet pickup from 7:00 AM, Kids 1K at 8:00, the 5K at 8:30" },
                 { icon: Icons.leaf, title: "Built Around Peace", desc: "Named for a tradition of consensus, dialogue and shared leadership" },
               ].map((card) => (
                 <div key={card.title} className="p-5 rounded-2xl bg-white border border-black/5 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all">

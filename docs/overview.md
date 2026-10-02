@@ -3,7 +3,7 @@
 Marketing site, registration, and race-day timing for an annual, timed 5K
 road race open to every community, run by Gada Global
 Inc. Saturday, October 3, 2026, Rock Creek Park Tennis Center, Washington
-DC — race start 9:00 AM. (The venue moved from Rock Creek Parkway in July
+DC — Kids 1K 8:00 AM and 5K 8:30 AM, per the NPS safety plan (see decisions/0008). (The venue moved from Rock Creek Parkway in July
 2026; anything describing a point-to-point parkway course is stale.)
 
 The event's name and public details live in `src/lib/event.ts` — the one

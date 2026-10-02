@@ -39,10 +39,19 @@ export const EVENT = {
   organization: "Gada Global Inc.",
 
   date: "Saturday, October 3, 2026",
-  startTime: "9:00 AM",
+  // Race-day times follow the Event Safety Plan filed with the National Park
+  // Service: Kids 1K at 8:00, the 5K at 8:30, every runner off the road and the
+  // road reopened by 9:30, post-race events done by 10:30, site clear by 11:00.
+  // See docs/decisions/0008 before moving any of these. Per-wave gun times live
+  // on WAVE_META in src/lib/waves.ts.
+  /** The 5K (elite and fun run). The Kids 1K goes first, at kidsStartTime. */
+  startTime: "8:30 AM",
+  kidsStartTime: "8:00 AM",
+  /** Every runner off the road. The 5K therefore has a 60-minute limit. */
+  courseCloses: "9:30 AM",
   packetPickup: "7:00 AM",
-  awardsTime: "10:00 AM",
-  programHours: "7:00 AM to 12:00 PM",
+  awardsTime: "9:30 AM",
+  programHours: "7:00 AM to 10:30 AM",
   location: "Rock Creek Park Tennis Center",
   address: "5220 16th St NW, Washington, DC 20011",
   /** Bare domain, for display in copy. */

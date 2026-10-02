@@ -24,7 +24,7 @@ const SITE = siteUrl();
 
 const SHARE_DESCRIPTION =
   `${EVENT.summary} ${EVENT.date}, ${EVENT.location}, Washington DC. ` +
-  `Race start ${EVENT.startTime}.`;
+  `Kids 1K ${EVENT.kidsStartTime}, 5K ${EVENT.startTime}.`;
 
 // Share surfaces get their own title, deliberately WITHOUT the pipe.
 // Several of them split a title on "|" and render only one side: the old card

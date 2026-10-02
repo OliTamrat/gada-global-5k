@@ -26,7 +26,7 @@ const STEPS = [
   {
     n: "3",
     title: `Or collect it from ${EVENT.packetPickup}`,
-    body: `No printer, no problem. Packet pickup runs from ${EVENT.packetPickup} at the ${EVENT.location}, ${EVENT.address}, right up to the ${EVENT.startTime} start. Bring a photo ID.`,
+    body: `No printer, no problem. Packet pickup runs from ${EVENT.packetPickup} at the ${EVENT.location}, ${EVENT.address}, right up to the ${EVENT.kidsStartTime} Kids 1K start. Bring a photo ID.`,
   },
   {
     n: "4",

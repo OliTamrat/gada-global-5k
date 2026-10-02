@@ -166,10 +166,11 @@ GLANCE = f"""
       <td style="padding:7px 0;letter-spacing:.14em;color:var(--gold);font-weight:700;width:76px">{t}</td>
       <td style="padding:7px 0;letter-spacing:.03em">{v}</td></tr>''' for t, v in [
       ("7:00", "Packet pickup opens"),
-      ("8:15", "Opening ceremony"),
-      ("9:00", "Race start — three waves"),
-      ("10:00", "Awards and prize presentation"),
-      ("10:45", "Cultural festival until noon"),
+      ("7:30", "Opening ceremony"),
+      ("8:00", "Kids 1K"),
+      ("8:30", "5K — elite race and fun run"),
+      ("9:30", "Awards and prize presentation"),
+      ("10:00", "Community gathering until 10:30"),
     ])}
   </table>
 
@@ -229,7 +230,7 @@ FRONT = f"""
 
       <div style="font-size:10.5px;line-height:1.85;color:rgba(255,255,255,.92);margin-top:16px;letter-spacing:.05em">
         <div style="font-weight:700">Rock Creek Park Tennis Center</div>
-        <div style="opacity:.82">Washington, D.C. &nbsp;·&nbsp; 9:00 AM start</div>
+        <div style="opacity:.82">Washington, D.C. &nbsp;·&nbsp; 8:30 AM 5K start</div>
       </div>
       <div style="font-size:10px;letter-spacing:.16em;color:var(--gold);margin-top:22px;font-weight:700">
         PARTNERSHIP LEVELS FROM $500 TO $5,000</div>
@@ -239,9 +240,9 @@ FRONT = f"""
 
 # ══════════════════════════════════ INSIDE ═══════════════════════════════
 VALUE = [
-    ("Five hours, not five seconds",
+    ("The whole morning, not five seconds",
      "Runners, families and supporters are on site from packet pickup at 7:00 AM through the "
-     "cultural festival at noon. Sponsor signage is in front of them for the entire programme."),
+     "close of the programme at 10:30. Sponsor signage is in front of them for all of it."),
     ("A shirt that leaves with 500 people",
      "Every registered runner receives the official race shirt. Logos printed on it are worn "
      "around the DC metro area long after October 3."),

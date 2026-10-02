@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 
     if (!isWave(wave)) {
       return NextResponse.json(
-        { error: "Unknown wave. Expected elite, open, or kids." },
+        { error: "Unknown wave. Expected kids, elite, or open." },
         { status: 400 }
       );
     }

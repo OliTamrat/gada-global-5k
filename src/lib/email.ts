@@ -69,7 +69,7 @@ function buildHtml(d: RegistrationConfirmation): string {
     `Print your bib from the button below — plain paper is fine, but print at 100% scale rather than "fit to page", which shrinks the number.`,
     `No printer? Collect it at packet pickup, open from ${EVENT.packetPickup} at ${EVENT.location}, ${EVENT.address}. Bring a photo ID.`,
     "Your race t-shirt is in your packet at pickup either way.",
-    `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral. Waves set off a few minutes apart so faster runners are not weaving through walkers and children.`,
+    `You are in the ${WAVE_META[coerceWave(d.wave)].label} wave, which starts at ${WAVE_META[coerceWave(d.wave)].startTime} — line up in that corral. The Kids 1K goes first at ${EVENT.kidsStartTime}; the 5K elite race and fun run start at ${EVENT.startTime}. Every runner must be off the course by ${EVENT.courseCloses}.`,
     "Wear your bib on the front of your shirt so the finish-line volunteers can scan it.",
     `The awards ceremony follows at ${EVENT.awardsTime}, with cash prizes for the top three men and top three women.`,
     `Live results will be posted at ${site}/race on race day.`,
@@ -177,7 +177,7 @@ function buildHtml(d: RegistrationConfirmation): string {
                 </tr>
                 <tr>
                   <td style="padding:2px 0 2px 14px;color:#4a453d;font-size:14px;line-height:1.6;">
-                    Race start ${esc(EVENT.startTime)} &bull; Packet pickup ${esc(EVENT.packetPickup)} &bull; Awards ${esc(EVENT.awardsTime)}
+                    Your start ${esc(WAVE_META[coerceWave(d.wave)].startTime)} &bull; Packet pickup ${esc(EVENT.packetPickup)} &bull; Awards ${esc(EVENT.awardsTime)}
                   </td>
                 </tr>
                 <tr>
@@ -303,14 +303,14 @@ function buildText(d: RegistrationConfirmation): string {
     "",
     "RACE DAY",
     EVENT.date,
-    `Race start ${EVENT.startTime} — Packet pickup ${EVENT.packetPickup} — Awards ${EVENT.awardsTime}`,
+    `Your start ${WAVE_META[coerceWave(d.wave)].startTime} — Packet pickup ${EVENT.packetPickup} — Awards ${EVENT.awardsTime}`,
     `${EVENT.location}, ${EVENT.address}`,
     "",
     "WHAT TO DO NEXT",
     `- Print your bib: ${siteUrl()}/bib/${d.bib} (print at 100% scale, not "fit to page")`,
     `- No printer? Collect it at packet pickup from ${EVENT.packetPickup}. Bring a photo ID.`,
     "- Your race t-shirt is in your packet at pickup either way.",
-    `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave — line up in that corral.`,
+    `- You are in the ${WAVE_META[coerceWave(d.wave)].label} wave, starting ${WAVE_META[coerceWave(d.wave)].startTime} — line up in that corral. Course closes ${EVENT.courseCloses}.`,
     "- Wear your bib on the front of your shirt for finish-line scans.",
     `- Awards at ${EVENT.awardsTime}: cash prizes for the top three men and top three women.`,
     `- Live results: ${siteUrl()}/race`,

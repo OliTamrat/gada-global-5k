@@ -113,7 +113,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     id: "booth",
     label: "Exhibitor space at the cultural festival",
     detail:
-      "A staffed table or tent in the festival area from the awards at 10:00 through noon, with direct access to runners and families.",
+      "A staffed table or tent in the festival area from the awards at 9:30 until the program closes at 10:30, with direct access to runners and families.",
     icon: "booth",
     tiers: ["platinum", "gold"],
   },
@@ -121,7 +121,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     id: "banner",
     label: "Banner and on-site signage",
     detail:
-      "Your banner at the Rock Creek Park Tennis Center from before 7:00 AM packet pickup through the festival at noon — a five-hour presence, not a five-second impression.",
+      "Your banner at the Rock Creek Park Tennis Center from before 7:00 AM packet pickup until the program closes at 10:30 — the whole morning, not a five-second impression.",
     icon: "banner",
     tiers: ["platinum", "gold", "silver", "bronze"],
   },
@@ -129,7 +129,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     id: "stage",
     label: "Named from the stage",
     detail:
-      "Read out at the 8:15 opening ceremony and again at the 10:00 awards, while the field and their families are gathered.",
+      "Read out at the 7:30 opening ceremony and again at the 9:30 awards, while the field and their families are gathered.",
     icon: "mic",
     tiers: ["platinum", "gold", "silver"],
   },
