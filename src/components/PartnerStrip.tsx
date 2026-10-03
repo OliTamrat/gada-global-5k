@@ -8,8 +8,8 @@ function Tile({ p, dup }: { p: Partner; dup?: boolean }) {
       <Image src={p.logo} alt={dup ? "" : p.name} fill className="object-cover" sizes="84px" />
     </div>
   ) : (
-    <div className="relative h-[60px] md:h-[84px] w-[130px] md:w-[170px]">
-      <Image src={p.logo} alt={dup ? "" : p.name} fill className="object-contain" sizes="170px" />
+    <div className={`relative h-[60px] md:h-[84px] w-[130px] md:w-[170px] rounded-xl ${p.tile === "light" ? "bg-white" : ""}`}>
+      <Image src={p.logo} alt={dup ? "" : p.name} fill className={`object-contain ${p.tile === "light" ? "p-2" : ""}`} sizes="170px" />
     </div>
   );
   return (

@@ -326,7 +326,10 @@ rendered twice and slid by half its width, so spacing must be a per-tile margin,
 not `gap`, or the loop jumps. Hover/touch pauses it; reduced motion makes it a
 static swipeable row. Logos in
 `public/partners/` are the partners' originals (OCO DMV, Olink, Kellem Coffee,
-Shalla) or, until those arrive, cuts from the press-wall artwork. Badge logos
+Shalla) or the full-resolution images embedded in the press-wall PDF
+(`pdfimages -png`, then merge each image with its smask for transparency).
+Wordmarks drawn on white set `tile: "light"`. Filenames carry `-2026`: when a
+logo changes, rename the file, because the image optimizer caches by URL. Badge logos
 set `shape: "round"` or `"square"`; wordmarks set `"wide"`. Add a `url` to make
 a logo a link. The coffee partner is **Kellem** Coffee (as on its own logo; the
 press wall reads "Kelem"). The restaurant
