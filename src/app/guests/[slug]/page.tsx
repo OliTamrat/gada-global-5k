@@ -74,9 +74,6 @@ export default async function GuestProfilePage({ params }: { params: Promise<{ s
     <main className="bg-charcoal min-h-screen text-white">
       {/* ══ HERO ══ */}
       <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28 px-6 md:px-16 lg:px-20">
-        {/* Track lanes along the bottom, finish-line checks on the right edge */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 opacity-[0.07] bg-[repeating-linear-gradient(180deg,#fff_0_2px,transparent_2px_44px)]" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 opacity-[0.12] bg-[conic-gradient(#fff_25%,transparent_0_50%,#fff_0_75%,transparent_0)] bg-[length:12px_12px]" />
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[360px_1fr] gap-14 lg:gap-20 items-center">
           {/* Photo at its native 360x480 */}

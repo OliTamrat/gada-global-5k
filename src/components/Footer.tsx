@@ -29,11 +29,13 @@ export function Footer() {
                 height={360}
                 className="h-16 w-auto"
               />
-              <span className="flex items-center gap-3 leading-none">
+              {/* The event name stacks under the wordmark. Side by side, the lockup is
+                  wider than the footer's first column (and than a phone), so "5K Peace
+                  Run" used to wrap into three lines and spill into the next column. */}
+              <span className="flex flex-col items-start gap-1.5 leading-none whitespace-nowrap">
                 <span className="font-black text-xl tracking-[2.5px] text-yellow">
                   GADA<span className="text-white font-medium ml-1.5">GLOBAL</span>
                 </span>
-                <span className="w-px h-7 bg-white/25" aria-hidden="true" />
                 <span className="font-semibold text-[12px] tracking-[2px] uppercase text-white/70">
                   5K Peace Run
                 </span>
