@@ -2,7 +2,12 @@ import Image from "next/image";
 import { PARTNERS, type Partner } from "@/lib/partners";
 
 function Tile({ p, dup }: { p: Partner; dup?: boolean }) {
-  const logo = (
+  const badge = p.shape !== "wide";
+  const logo = badge ? (
+    <div className={`relative h-[60px] w-[60px] md:h-[84px] md:w-[84px] overflow-hidden ring-2 ring-white/15 ${p.shape === "round" ? "rounded-full" : "rounded-2xl"}`}>
+      <Image src={p.logo} alt={dup ? "" : p.name} fill className="object-cover" sizes="84px" />
+    </div>
+  ) : (
     <div className="relative h-[60px] md:h-[84px] w-[130px] md:w-[170px]">
       <Image src={p.logo} alt={dup ? "" : p.name} fill className="object-contain" sizes="170px" />
     </div>
