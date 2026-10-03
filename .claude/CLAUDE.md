@@ -310,6 +310,22 @@ directly beneath them), which is why `Footer` is a client component.
 
 ---
 
+## Honorable guests and partners (2026)
+
+`src/lib/guests.ts` holds the five medalist guests from the organizers' MC brief
+(Assefa Mezgebu, Hailu Mekonnen, Tariku Bekele, Ayelech Worku, Aselefech Mergia),
+rendered by `HonorableGuests` on the homepage (below the countdown, never in the
+hero) and on `/about`. Pronunciation guides from the brief stay off the site.
+Photos in `public/guests/` came from the brief; their original photographers may
+need crediting.
+
+`src/lib/partners.ts` lists the seven press-wall partners, rendered by
+`PartnerStrip` on the homepage, `/about`, `/sponsors` and `/race`. Logos in
+`public/partners/` are cut from the press-wall artwork — swap in the partners'
+own files when they arrive, and add a `url` to make a logo a link. The restaurant
+is **Shalla Ethiopian Restaurant**: its logo's stylised "S" reads as
+"hallaethio", which is not its name.
+
 ## Sponsorship
 
 **`/sponsors`** is the page to send a business to, and `src/lib/sponsors.ts` is

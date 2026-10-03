@@ -5,6 +5,7 @@ import { SponsorTiers } from "@/components/SponsorTiers";
 import { sponsorMailto, SPONSOR_EMAIL, isSponsorTier } from "@/lib/sponsors";
 import { siteUrl } from "@/lib/site";
 import { EVENT } from "@/lib/event";
+import { PartnerStrip } from "@/components/PartnerStrip";
 
 const SITE = siteUrl();
 
@@ -95,6 +96,11 @@ export default async function SponsorsPage({
             {`Back the inaugural ${EVENT.name} on ${EVENT.date} at the ${EVENT.location} in Washington DC. Four partnership levels, $500 to $5,000.`}
           </p>
         </div>
+      </section>
+
+      {/* ══ 2026 PARTNERS ══ */}
+      <section className="bg-charcoal pb-14 px-6 md:px-16 lg:px-20">
+        <PartnerStrip title="Our 2026 partners" />
       </section>
 
       {/* ══ LEVELS ══ */}
