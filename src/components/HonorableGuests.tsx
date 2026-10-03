@@ -39,34 +39,22 @@ export function HonorableGuests({ tone = "dark" }: { tone?: "dark" | "light" }) 
             key={g.slug}
             href={`/guests/${g.slug}`}
             aria-label={`${g.name}, ${g.title}. Read full profile`}
-            className="group relative shrink-0 w-[78vw] max-w-[320px] sm:w-[44vw] lg:w-auto lg:max-w-none aspect-[2/3] snap-center rounded-2xl overflow-hidden no-underline bg-charcoal shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/10 hover:ring-yellow/60 hover:-translate-y-1.5 transition-all duration-300"
+            className="group shrink-0 w-[72vw] max-w-[300px] sm:w-[44vw] lg:w-auto lg:max-w-none snap-center rounded-2xl overflow-hidden no-underline bg-white/[0.04] ring-1 ring-white/10 hover:ring-yellow/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
           >
-            <Image
-              src={g.image}
-              alt={g.name}
-              fill
-              className="object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-[1.07]"
-              sizes="(max-width: 1024px) 78vw, 20vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-
-            <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-yellow text-charcoal text-[10px] md:text-[11px] font-black tracking-[1.5px] uppercase px-2.5 py-1.5 rounded-full shadow-lg">
-              <Medal /> {g.badge}
-            </span>
-
-            <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
-              <div className="font-[family-name:var(--font-heading)] text-white font-black tracking-tight leading-[1.02] text-[26px] lg:text-[22px]">
+            {/* The photo is shown whole at its own 3:4 ratio, with nothing laid over the athlete. */}
+            <div className="relative aspect-[3/4] bg-black">
+              <Image src={g.image} alt={g.name} fill unoptimized className="object-cover" sizes="(max-width: 1024px) 72vw, 20vw" />
+              <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-yellow text-charcoal text-[10px] md:text-[11px] font-black tracking-[1.5px] uppercase px-2.5 py-1.5 rounded-full shadow-lg">
+                <Medal /> {g.badge}
+              </span>
+            </div>
+            <div className="p-4 md:p-5 flex-1 flex flex-col border-t-2 border-yellow">
+              <div className="font-[family-name:var(--font-heading)] text-white font-black tracking-tight leading-[1.05] text-[22px] lg:text-[20px]">
                 {g.name}
               </div>
-              <div className="text-white/60 text-[13px] mt-1">{g.amharic}</div>
-              <div className="h-[2px] w-10 bg-yellow my-2.5 transition-all duration-500 group-hover:w-20" />
-              <div className="text-yellow text-[13px] font-bold leading-snug">{g.title}</div>
-              <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500">
-                <div className="overflow-hidden">
-                  <p className="text-white/80 text-[12.5px] leading-snug pt-2">{g.highlights[0]}</p>
-                </div>
-              </div>
-              <div className="inline-flex items-center gap-1.5 text-white text-[11px] font-bold tracking-[2px] uppercase mt-3 group-hover:text-yellow transition-colors">
+              <div className="font-[family-name:var(--font-ethiopic)] text-white/55 text-[13px] mt-1">{g.amharic}</div>
+              <div className="text-yellow text-[13px] font-bold leading-snug mt-2.5">{g.title}</div>
+              <div className="inline-flex items-center gap-1.5 text-white/70 text-[11px] font-bold tracking-[2px] uppercase mt-auto pt-4 group-hover:text-yellow transition-colors">
                 Read profile
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </div>

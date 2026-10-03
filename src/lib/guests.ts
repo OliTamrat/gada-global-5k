@@ -5,6 +5,9 @@
  * Pronunciation guides from the brief are deliberately not published: they are
  * for the MC, not for the page.
  */
+/** gold / silver / bronze: championship medals. win: a race victory. made: a milestone without a medal. */
+export type Milestone = { year: number; label: string; kind: "gold" | "silver" | "bronze" | "win" | "made" };
+
 export interface Guest {
   slug: string;
   name: string;
@@ -20,11 +23,22 @@ export interface Guest {
   born: string;
   /** Full biography, one string per paragraph, from the MC brief. */
   bio: string[];
+  /** Career milestones in date order, drawn from the brief. */
+  timeline: Milestone[];
 }
 
 export const GUESTS: Guest[] = [
   {
     slug: "assefa-mezgebu",
+    timeline: [
+      { year: 1996, label: "World Junior double gold, 5,000m & 10,000m", kind: "gold" },
+      { year: 1998, label: "World Cross Country bronze", kind: "bronze" },
+      { year: 1999, label: "World Championships bronze, 10,000m — Seville", kind: "bronze" },
+      { year: 1999, label: "All-Africa Games gold, 10,000m", kind: "gold" },
+      { year: 2000, label: "Olympic bronze, 10,000m — Sydney", kind: "bronze" },
+      { year: 2000, label: "World Cross Country silver", kind: "silver" },
+      { year: 2001, label: "World Championships silver, 10,000m — Edmonton", kind: "silver" },
+    ],
     born: "June 19, 1978 · Sidamo, Ethiopia",
     bio: [
       "Born in Sidamo and the younger brother of fellow international runner Ayele Mezgebu, Assefa Mezgebu rose through the Commercial Bank of Ethiopia athletics club to become one of the world's great 10,000m specialists.",
@@ -47,6 +61,16 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "hailu-mekonnen",
+    timeline: [
+      { year: 1999, label: "World Cross Country junior champion — Belfast", kind: "gold" },
+      { year: 1999, label: "All-Africa Games gold, 1,500m", kind: "gold" },
+      { year: 2000, label: "Olympian — Sydney", kind: "made" },
+      { year: 2002, label: "World Cross Country short-course bronze", kind: "bronze" },
+      { year: 2003, label: "Afro-Asian Games gold, 5,000m", kind: "gold" },
+      { year: 2011, label: "Tokyo Marathon champion — 2:07:35", kind: "win" },
+      { year: 2012, label: "Hengshui Lake Marathon champion", kind: "win" },
+      { year: 2015, label: "Tiberias Marathon champion", kind: "win" },
+    ],
     born: "April 4, 1980 · Arsi, Ethiopia",
     bio: [
       "Hailu Mekonnen came up training alongside Haile Gebrselassie himself, and it showed. He earned junior bronze, with team gold, at the 1998 World Cross Country Championships, then a medaling double at the 1999 edition in Belfast: winning the junior race and taking bronze in the senior short course.",
@@ -68,6 +92,15 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "tariku-bekele",
+    timeline: [
+      { year: 2004, label: "World Junior champion, 5,000m", kind: "gold" },
+      { year: 2006, label: "World Junior champion, 5,000m", kind: "gold" },
+      { year: 2007, label: "All-Africa Games silver, 5,000m", kind: "silver" },
+      { year: 2008, label: "World Indoor champion, 3,000m — Valencia", kind: "gold" },
+      { year: 2008, label: "Olympian, 5,000m — Beijing", kind: "made" },
+      { year: 2012, label: "Olympic bronze, 10,000m — London", kind: "bronze" },
+      { year: 2017, label: "Runner-up, Chuncheon Marathon", kind: "made" },
+    ],
     born: "February 28, 1987 · Bekoji, Ethiopia",
     bio: [
       "Born in Bekoji, the legendary highland town that produced his older brother, world-record holder and multiple Olympic champion Kenenisa Bekele, Tariku carved his own legacy rather than living in a shadow.",
@@ -90,6 +123,15 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "ayelech-worku",
+    timeline: [
+      { year: 1995, label: "All-Africa Games silver, 5,000m — age 16", kind: "silver" },
+      { year: 1996, label: "World Junior champion, 5,000m — Sydney", kind: "gold" },
+      { year: 1999, label: "World Championships bronze, 5,000m — Seville", kind: "bronze" },
+      { year: 1999, label: "All-Africa Games gold, 5,000m", kind: "gold" },
+      { year: 2000, label: "World-leading 5,000m — Crystal Palace", kind: "win" },
+      { year: 2001, label: "World Championships bronze, 5,000m — Edmonton", kind: "bronze" },
+      { year: 2007, label: "Hamburg Marathon champion", kind: "win" },
+    ],
     born: "June 12, 1979 · Arsi Province, Ethiopia",
     bio: [
       "Ayelech Worku was one of the first Ethiopian women to stand on a global podium — a pioneer who paved the way for the generations that followed.",
@@ -112,6 +154,14 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "aselefech-mergia",
+    timeline: [
+      { year: 2008, label: "World Half Marathon silver", kind: "silver" },
+      { year: 2009, label: "World Championships marathon bronze — Berlin", kind: "bronze" },
+      { year: 2010, label: "London Marathon champion", kind: "win" },
+      { year: 2011, label: "Dubai Marathon champion", kind: "win" },
+      { year: 2012, label: "Dubai Marathon champion — 2:19:31", kind: "win" },
+      { year: 2015, label: "Dubai Marathon champion", kind: "win" },
+    ],
     born: "January 23, 1985 · Ethiopia",
     bio: [
       "Aselefech Mergia began professional road racing in 2006 and rose with remarkable speed: Plymouth Half Marathon winner (2007), silver at the 2008 World Half Marathon Championships, and Delhi Half Marathon winner (2008, 2010).",

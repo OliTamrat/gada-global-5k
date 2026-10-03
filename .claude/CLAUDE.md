@@ -316,8 +316,12 @@ directly beneath them), which is why `Footer` is a client component.
 (Assefa Mezgebu, Hailu Mekonnen, Tariku Bekele, Ayelech Worku, Aselefech Mergia),
 rendered by `HonorableGuests` on the homepage (below the countdown, never in the
 hero), on `/about` and on `/guests`. Each card links to a full profile at
-`/guests/[slug]` (statically generated) with the brief's biography, highlights,
-bests and prev/next navigation. The photos' licence (CC BY-SA / GFDL) requires
+`/guests/[slug]` (statically generated): photo with a pinned race bib, medal
+tally, personal bests as race-clock tiles, a medal timeline built from each
+guest's `timeline`, the biography and prev/next navigation. The brief's photos
+are only 360x480, so they render `unoptimized` at their native 3:4 ratio and
+never larger than ~360px — upscaling or re-compressing is what made them blurry.
+Amharic uses `--font-ethiopic` (Noto Sans Ethiopic); Inter has no Ethiopic glyphs. The photos' licence (CC BY-SA / GFDL) requires
 the credit in `GUEST_PHOTO_CREDIT`, shown on both guest pages — keep it. Pronunciation guides from the brief stay off the site.
 Photos in `public/guests/` came from the brief; their original photographers may
 need crediting.
@@ -327,7 +331,10 @@ partners), rendered by `PartnerStrip` on the homepage, `/about`, `/sponsors` and
 `/race`. It is a 3D rotating spotlight: the featured logo sits large in the
 centre with its name beneath, the rest fan out angled back, and it advances every
 2.8s. Hover, focus or touch pauses it; swipe, arrows, dots or tapping a side logo
-drive it; reduced motion stops auto-advance. Logos in
+drive it, then it resumes by itself after 2.5s. It **always** auto-plays,
+reduced motion included (organizer request); the active dot fills as a progress
+bar. Hover pauses only on `(hover: hover) and (pointer: fine)` devices — on
+phones a tap fires mouseenter with no mouseleave, which once froze it for good. Logos in
 `public/partners/` are the partners' originals (OCO DMV, Olink, Kellem Coffee,
 Shalla) or the full-resolution images embedded in the press-wall PDF
 (`pdfimages -png`, then merge each image with its smask for transparency).

@@ -36,32 +36,39 @@ function Logo({ p, front }: { p: Partner; front: boolean }) {
 /**
  * "Thank you to our partners": a 3D rotating spotlight. The featured partner
  * sits large in the centre with its name beneath; the rest fan out on either
- * side, angled back. Advances on a timer, pauses on hover, focus or touch,
- * and can be driven by swipe, arrows, dots or tapping a logo. With reduced
- * motion it never auto-advances.
+ * side, angled back. Always auto-plays; the active dot fills as a progress bar.
+ * Hover pauses it on mouse devices; a touch, swipe, arrow, dot or tap jumps
+ * and pauses for 2.5s, then it carries on by itself.
  */
 export function PartnerStrip({ title = "Thank you to our partners" }: { title?: string }) {
   const n = PARTNERS.length;
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reduced, setReduced] = useState(false);
   const touchX = useRef<number | null>(null);
+  const resume = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const go = useCallback((i: number) => setActive(((i % n) + n) % n), [n]);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(mq.matches);
-    void Promise.resolve().then(update);
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+  /** Pause briefly after a touch or click, then always carry on playing. */
+  const nudge = useCallback(() => {
+    setPaused(true);
+    if (resume.current) clearTimeout(resume.current);
+    resume.current = setTimeout(() => setPaused(false), 2500);
   }, []);
 
+  // Re-armed whenever `active` changes, so a manual jump restarts the full
+  // interval instead of advancing again a moment later.
   useEffect(() => {
-    if (paused || reduced) return;
-    const t = setInterval(() => setActive((a) => (a + 1) % n), ADVANCE_MS);
-    return () => clearInterval(t);
-  }, [paused, reduced, n]);
+    if (paused) return;
+    const t = setTimeout(() => setActive((a) => (a + 1) % n), ADVANCE_MS);
+    return () => clearTimeout(t);
+  }, [paused, active, n]);
+
+  useEffect(() => () => { if (resume.current) clearTimeout(resume.current); }, []);
+
+  // Hover pauses only on devices with a real pointer. On phones a tap fires
+  // mouseenter with no matching mouseleave, which used to pause it for good.
+  const canHover = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const current = PARTNERS[active];
 
@@ -74,11 +81,9 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
         role="region"
         aria-roledescription="carousel"
         aria-label="Event partners"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-        onTouchStart={(e) => { setPaused(true); touchX.current = e.touches[0].clientX; }}
+        onMouseEnter={() => { if (canHover()) setPaused(true); }}
+        onMouseLeave={() => { if (canHover()) setPaused(false); }}
+        onTouchStart={(e) => { nudge(); touchX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           const start = touchX.current;
           touchX.current = null;
@@ -86,7 +91,7 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
             const dx = e.changedTouches[0].clientX - start;
             if (Math.abs(dx) > 40) go(active + (dx < 0 ? 1 : -1));
           }
-          setTimeout(() => setPaused(false), 4000);
+          nudge();
         }}
       >
         {/* soft spotlight behind the front logo */}
@@ -118,7 +123,7 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
                 ) : (
                   <button
                     type="button"
-                    onClick={() => go(i)}
+                    onClick={() => { go(i); nudge(); }}
                     aria-label={front ? p.name : `Show ${p.name}`}
                     aria-current={front || undefined}
                     tabIndex={hidden ? -1 : 0}
@@ -134,7 +139,7 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
       </div>
 
       <div className="flex items-center justify-center gap-4 -mt-1">
-        <button type="button" onClick={() => go(active - 1)} aria-label="Previous partner" className="w-9 h-9 rounded-full grid place-items-center bg-white/5 border border-white/15 text-white hover:border-yellow hover:text-yellow cursor-pointer transition-colors">
+        <button type="button" onClick={() => { go(active - 1); nudge(); }} aria-label="Previous partner" className="w-9 h-9 rounded-full grid place-items-center bg-white/5 border border-white/15 text-white hover:border-yellow hover:text-yellow cursor-pointer transition-colors">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
         </button>
         <div className="min-w-[220px] text-center" aria-live="polite">
@@ -142,7 +147,7 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
             {current.name}
           </div>
         </div>
-        <button type="button" onClick={() => go(active + 1)} aria-label="Next partner" className="w-9 h-9 rounded-full grid place-items-center bg-white/5 border border-white/15 text-white hover:border-yellow hover:text-yellow cursor-pointer transition-colors">
+        <button type="button" onClick={() => { go(active + 1); nudge(); }} aria-label="Next partner" className="w-9 h-9 rounded-full grid place-items-center bg-white/5 border border-white/15 text-white hover:border-yellow hover:text-yellow cursor-pointer transition-colors">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
         </button>
       </div>
@@ -155,9 +160,17 @@ export function PartnerStrip({ title = "Thank you to our partners" }: { title?: 
             role="tab"
             aria-selected={i === active}
             aria-label={p.name}
-            onClick={() => go(i)}
-            className={`h-2 rounded-full border-0 p-0 cursor-pointer transition-all duration-500 ${i === active ? "w-7 bg-yellow" : "w-2 bg-white/25 hover:bg-white/50"}`}
-          />
+            onClick={() => { go(i); nudge(); }}
+            className={`relative h-2 rounded-full border-0 p-0 cursor-pointer overflow-hidden transition-all duration-500 ${i === active ? "w-9 bg-white/20" : "w-2 bg-white/25 hover:bg-white/50"}`}
+          >
+            {i === active && (
+              <span
+                key={`${active}-${paused}`}
+                className="absolute inset-y-0 left-0 bg-yellow rounded-full"
+                style={{ width: paused ? "100%" : undefined, animation: paused ? "none" : `partnerProgress ${ADVANCE_MS}ms linear forwards` }}
+              />
+            )}
+          </button>
         ))}
       </div>
     </div>
