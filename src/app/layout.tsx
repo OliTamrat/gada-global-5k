@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter } from "next/font/google";
+import { DM_Sans, Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -18,6 +18,14 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+// Amharic names on the guest pages. Inter and DM Sans have no Ethiopic glyphs,
+// so without this the browser falls back to whatever system font it has.
+const ethiopic = Noto_Sans_Ethiopic({
+  subsets: ["ethiopic"],
+  variable: "--font-ethiopic",
+  weight: ["500", "700"],
 });
 
 const SITE = siteUrl();
@@ -72,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${inter.variable} antialiased`}>
+    <html lang="en" className={`${dmSans.variable} ${inter.variable} ${ethiopic.variable} antialiased`}>
       <body className="font-[family-name:var(--font-body)] bg-charcoal text-charcoal">
         <CartProvider>
           <Navbar />

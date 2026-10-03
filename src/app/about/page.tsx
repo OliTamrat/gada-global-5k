@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SponsorTiers } from "@/components/SponsorTiers";
+import { HonorableGuests } from "@/components/HonorableGuests";
+import { PartnerStrip } from "@/components/PartnerStrip";
 
 const values = [
   { title: "Health", desc: "Encouraging lifelong physical and mental wellness.", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> },
@@ -211,6 +213,11 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ══ HONORABLE GUESTS ══ */}
+      <section className="bg-charcoal py-14 md:py-18 px-6 md:px-16 lg:px-20">
+        <HonorableGuests />
+      </section>
+
       {/* ══ OROMO ATHLETES LEGACY ══ */}
       <section className="bg-cream py-14 md:py-18 px-6 md:px-16 lg:px-20">
         <div className="max-w-5xl mx-auto">
@@ -257,6 +264,11 @@ export default function AboutPage() {
             </div>
           </ScrollReveal>
         </div>
+      </section>
+
+      {/* ══ PARTNERS ══ */}
+      <section className="bg-charcoal pt-14 md:pt-18 px-6 md:px-16 lg:px-20">
+        <PartnerStrip />
       </section>
 
       {/* ══ BECOME A SPONSOR ══ */}

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { PartnerStrip } from "@/components/PartnerStrip";
 
 interface RaceResult {
   bib: number;
@@ -278,6 +279,9 @@ export default function RaceResultsPage() {
             &larr; Back to Home
           </Link>
         </div>
+      </div>
+      <div className="mt-16">
+        <PartnerStrip title="With thanks to our partners" />
       </div>
     </main>
   );
