@@ -316,7 +316,7 @@ directly beneath them), which is why `Footer` is a client component.
 (Assefa Mezgebu, Hailu Mekonnen, Tariku Bekele, Ayelech Worku, Aselefech Mergia),
 rendered by `HonorableGuests` on the homepage (below the countdown, never in the
 hero), on `/about` and on `/guests`. Each card links to a full profile at
-`/guests/[slug]` (statically generated): photo with a pinned race bib, medal
+`/guests/[slug]` (statically generated): the photo (no overlays — no bib, the guests have none), medal
 tally, personal bests as race-clock tiles, a medal timeline built from each
 guest's `timeline`, the biography and prev/next navigation. The brief's photos
 are only 360x480, so they render `unoptimized` at their native 3:4 ratio and

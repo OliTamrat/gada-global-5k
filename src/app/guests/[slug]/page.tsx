@@ -57,8 +57,7 @@ export default async function GuestProfilePage({ params }: { params: Promise<{ s
   if (!g) notFound();
 
   const i = GUESTS.indexOf(g);
-  const num = String(i + 1).padStart(2, "0");
-  const prev = GUESTS[(i - 1 + GUESTS.length) % GUESTS.length];
+    const prev = GUESTS[(i - 1 + GUESTS.length) % GUESTS.length];
   const next = GUESTS[(i + 1) % GUESTS.length];
 
   const tally = (["gold", "silver", "bronze", "win"] as const)
@@ -80,20 +79,10 @@ export default async function GuestProfilePage({ params }: { params: Promise<{ s
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 opacity-[0.12] bg-[conic-gradient(#fff_25%,transparent_0_50%,#fff_0_75%,transparent_0)] bg-[length:12px_12px]" />
 
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[360px_1fr] gap-14 lg:gap-20 items-center">
-          {/* Photo at its native 360x480, with a race bib pinned to it */}
+          {/* Photo at its native 360x480 */}
           <div className="relative mx-auto w-full max-w-[360px]">
             <div className="relative aspect-[3/4] rounded-md overflow-hidden bg-black shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
               <Image src={g.image} alt={g.name} fill priority unoptimized className="object-cover" sizes="360px" />
-            </div>
-            <div className="absolute -bottom-10 -right-4 sm:-right-10 w-[178px] rotate-[-4deg] rounded-lg bg-white text-charcoal shadow-[0_18px_40px_rgba(0,0,0,0.5)] overflow-hidden">
-              <div className="bg-yellow text-[10px] font-black tracking-[2.5px] uppercase text-center py-1.5">Honorable Guest</div>
-              <div className="relative px-4 pt-1 pb-3 text-center">
-                {[["left-2", "top-2"], ["right-2", "top-2"], ["left-2", "bottom-2"], ["right-2", "bottom-2"]].map(([x, y]) => (
-                  <span key={x + y} className={`absolute ${x} ${y} w-2 h-2 rounded-full bg-charcoal/15`} />
-                ))}
-                <div className="font-[family-name:var(--font-heading)] font-black text-[64px] leading-none tracking-tighter tabular-nums">{num}</div>
-                <div className="text-[9px] font-bold tracking-[2px] uppercase text-charcoal/55 mt-1">{EVENT.name}</div>
-              </div>
             </div>
           </div>
 
