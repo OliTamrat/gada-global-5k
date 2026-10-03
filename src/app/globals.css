@@ -122,6 +122,13 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
     display: none !important;
   }
 
+  /* The cart drawer is parked off-screen with a transform, which iOS Safari
+     ignores when it lays out a printout — it printed over the bib. The
+     drawer also carries print:hidden; this rule is the backstop. */
+  aside[aria-label="Your cart"] {
+    display: none !important;
+  }
+
   body {
     background: #fff !important;
   }
