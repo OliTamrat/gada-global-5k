@@ -315,16 +315,19 @@ directly beneath them), which is why `Footer` is a client component.
 `src/lib/guests.ts` holds the five medalist guests from the organizers' MC brief
 (Assefa Mezgebu, Hailu Mekonnen, Tariku Bekele, Ayelech Worku, Aselefech Mergia),
 rendered by `HonorableGuests` on the homepage (below the countdown, never in the
-hero) and on `/about`. Pronunciation guides from the brief stay off the site.
+hero), on `/about` and on `/guests`. Each card links to a full profile at
+`/guests/[slug]` (statically generated) with the brief's biography, highlights,
+bests and prev/next navigation. The photos' licence (CC BY-SA / GFDL) requires
+the credit in `GUEST_PHOTO_CREDIT`, shown on both guest pages — keep it. Pronunciation guides from the brief stay off the site.
 Photos in `public/guests/` came from the brief; their original photographers may
 need crediting.
 
-`src/lib/partners.ts` lists the seven press-wall partners, rendered by
-`PartnerStrip` on the homepage, `/about`, `/sponsors` and `/race`. It is a
-sideways-scrolling marquee (`.partner-marquee` in `globals.css`): the list is
-rendered twice and slid by half its width, so spacing must be a per-tile margin,
-not `gap`, or the loop jumps. Hover/touch pauses it; reduced motion makes it a
-static swipeable row. Logos in
+`src/lib/partners.ts` lists the eight press-wall logos (Gada Global plus seven
+partners), rendered by `PartnerStrip` on the homepage, `/about`, `/sponsors` and
+`/race`. It is a 3D rotating spotlight: the featured logo sits large in the
+centre with its name beneath, the rest fan out angled back, and it advances every
+2.8s. Hover, focus or touch pauses it; swipe, arrows, dots or tapping a side logo
+drive it; reduced motion stops auto-advance. Logos in
 `public/partners/` are the partners' originals (OCO DMV, Olink, Kellem Coffee,
 Shalla) or the full-resolution images embedded in the press-wall PDF
 (`pdfimages -png`, then merge each image with its smask for transparency).
