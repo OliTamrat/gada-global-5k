@@ -11,6 +11,8 @@ export interface Guest {
   /** Name in Ge'ez script. */
   amharic: string;
   title: string;
+  /** Short badge shown on the photo. */
+  badge: string;
   image: string;
   highlights: string[];
   bests: string;
@@ -19,6 +21,7 @@ export interface Guest {
 export const GUESTS: Guest[] = [
   {
     slug: "assefa-mezgebu",
+    badge: "Olympic Medalist",
     name: "Assefa Mezgebu",
     amharic: "አሰፋ መዝገቡ",
     title: "Olympic Bronze Medalist — 10,000m",
@@ -33,6 +36,7 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "hailu-mekonnen",
+    badge: "Marathon Champion",
     name: "Hailu Mekonnen",
     amharic: "ኃይሉ መኮንን",
     title: "Tokyo Marathon Champion",
@@ -47,6 +51,7 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "tariku-bekele",
+    badge: "Olympic Medalist",
     name: "Tariku Bekele",
     amharic: "ታሪኩ በቀለ",
     title: "Olympic Bronze Medalist — 10,000m",
@@ -61,6 +66,7 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "ayelech-worku",
+    badge: "World Medalist",
     name: "Ayelech Worku",
     amharic: "አየለች ወርቁ",
     title: "2x World Championships Medalist — 5,000m",
@@ -75,6 +81,7 @@ export const GUESTS: Guest[] = [
   },
   {
     slug: "aselefech-mergia",
+    badge: "Marathon Champion",
     name: "Aselefech Mergia",
     amharic: "አሰለፈች መርጊያ",
     title: "London Marathon Champion",
