@@ -70,8 +70,10 @@ export default async function BibPage({
 
           {/* Event band */}
           <div className="bg-charcoal text-white px-8 py-3 text-center">
+            {/* The brand already sits on the line above, so the band carries only
+                the event half of the lockup. */}
             <div className="font-[family-name:var(--font-heading)] text-[22px] font-bold tracking-tight leading-none">
-              {EVENT.name}
+              {EVENT.eventName}
             </div>
             {/* Template string rather than JSX text: JSX drops the space
                 between an expression and a following entity. */}

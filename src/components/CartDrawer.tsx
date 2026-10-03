@@ -61,7 +61,7 @@ export function CartDrawer() {
       <div
         onClick={closeCart}
         aria-hidden="true"
-        className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`print:hidden fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
@@ -74,7 +74,7 @@ export function CartDrawer() {
         // Stays mounted so it can slide; inert keeps a closed panel out of the
         // tab order instead of leaving invisible buttons focusable off-screen.
         inert={!isOpen}
-        className={`fixed top-0 right-0 bottom-0 z-[61] w-full sm:w-[420px] bg-charcoal border-l border-white/8 shadow-[-12px_0_48px_rgba(0,0,0,0.5)] flex flex-col transition-transform duration-300 ease-out ${
+        className={`print:hidden fixed top-0 right-0 bottom-0 z-[61] w-full sm:w-[420px] bg-charcoal border-l border-white/8 shadow-[-12px_0_48px_rgba(0,0,0,0.5)] flex flex-col transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
