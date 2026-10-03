@@ -140,3 +140,28 @@ body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 @page {
   margin: 0.4in;
 }
+
+/* Partner logo marquee. The track holds the list twice, so sliding it by
+   exactly half its width loops seamlessly. Hover or touch pauses it; reduced
+   motion turns it into a plain swipeable row. */
+@keyframes partnerMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.partner-marquee {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.partner-track {
+  animation: partnerMarquee 32s linear infinite;
+}
+.partner-marquee:hover .partner-track,
+.partner-marquee:active .partner-track,
+.partner-marquee:focus-within .partner-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .partner-track { animation: none; }
+  .partner-track [data-dup] { display: none; }
+}

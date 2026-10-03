@@ -320,7 +320,11 @@ Photos in `public/guests/` came from the brief; their original photographers may
 need crediting.
 
 `src/lib/partners.ts` lists the seven press-wall partners, rendered by
-`PartnerStrip` on the homepage, `/about`, `/sponsors` and `/race`. Logos in
+`PartnerStrip` on the homepage, `/about`, `/sponsors` and `/race`. It is a
+sideways-scrolling marquee (`.partner-marquee` in `globals.css`): the list is
+rendered twice and slid by half its width, so spacing must be a per-tile margin,
+not `gap`, or the loop jumps. Hover/touch pauses it; reduced motion makes it a
+static swipeable row. Logos in
 `public/partners/` are cut from the press-wall artwork — swap in the partners'
 own files when they arrive, and add a `url` to make a logo a link. The restaurant
 is **Shalla Ethiopian Restaurant**: its logo's stylised "S" reads as
