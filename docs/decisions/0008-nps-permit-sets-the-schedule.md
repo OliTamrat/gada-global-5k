@@ -99,4 +99,4 @@ a future session does not mistake the silence in the copy for their absence.
   day, not to a time of day, so the start times do not affect it.
 - The brochure and letterhead carry the new times.
 
-Permit contact: Michael Brockmeier, michael_brockmeier@nps.gov, (703) 202-8513.
+Permit contact: the NPS Rock Creek Park permit office (details held by the organizers).
