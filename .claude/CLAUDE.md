@@ -99,7 +99,7 @@ organizers handle these operationally on the day; **by their decision (2026-09)
 the site copy is not changed for them.** ADR-0008 lists them in full so nobody
 has to re-read the permit to find out what they are.
 
-Permit contact: Michael Brockmeier, michael_brockmeier@nps.gov, (703) 202-8513.
+Permit contact: the NPS Rock Creek Park permit office (details held by the organizers).
 
 The venue changed from Rock Creek Parkway in July 2026. Anything describing a
 point-to-point parkway course (Kennedy Center finish, Lincoln Memorial) is stale —
@@ -439,7 +439,7 @@ is `gada-race-ops`, and the "Lock this device" button clears it.)
 
 **Setting the value from a shell mangles it.** `vercel env add` with an
 unquoted string lets the shell eat `$word` as an undefined variable, so
-`$irn@g@d@` gets stored as `@g@d@`. Trailing whitespace from a paste does the
+`pa$word1` gets stored as `pa1`. Trailing whitespace from a paste does the
 same thing invisibly. Prefer the dashboard, and avoid `$`, backticks and `!`.
 
 ### The race clock is locked until race day
